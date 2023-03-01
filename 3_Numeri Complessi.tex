@@ -26,21 +26,20 @@
 
             \vspace{0.1cm}
             Fase: $\theta = \arg(z)$
-
         \end{center}    
         grafico forma polare-cartesiana
         
     \subsubsection{Complesso Coniugato}
         \begin{itemize}
-            \item {Forma Cartesiana
-                \begin{center}
-                    Forma Cartesiana
-                \end{center}
+            \item {Forma Cartesiana   
+                    \[
+                        z^* = a - jb
+                    \]
             }
             \item {Forma Polare
-                \begin{center}
-                    Forma Polare
-                \end{center}
+                    \[
+                        z^* = \rho \ e^{-j\theta}
+                    \]
             }           
         \end{itemize}
 
@@ -48,42 +47,43 @@
 \subsection{Relazione Tra Forma Polare e Cartesiana}
     \begin{itemize}
         \item {Modulo
-            \begin{center}
-                Modulo
-            \end{center}
+            \[
+                \rho = |z| = \sqrt{a^2+b^2}
+            \]
         }
         \item {Fase
-            \begin{center}
-                Fase\\
-                caso parte reale negativa si aggiunge pigreco
-            \end{center}
+            \[
+                 a \\> 0 \Rightarrow \theta = \arg(z) = \arctan\left(\frac{b}{a}\right)
+            \]
+            \[
+                a \\< 0 \Rightarrow \theta = \arg(z) =\pi + \arctan\left(\frac{b}{a}\right) 
+            \]
+
         }
     \end{itemize}
 
 
 \subsection{Operazioni}
+    Definiamo: $z_1 = a_1 + jb_1 = \rho_1 \ e^{j\theta_1},\hspace{0.1cm} z_2 = a_2 + jb_2 = \rho_2 \ e^{j\theta_2} $
     \begin{itemize}
         \item {Somma
-            \begin{center}
-                Somma
-            \end{center}
+            \[
+                z = z_1 + z_2 = (a_1 + a_2) + j(b_1 + b_2)
+            \]
         }
         \item {Sottrazione
-            \begin{center}
-                Sottrazione
-            \end{center}
+            \[
+                z = z_1 - z_2 = (a_1 - a_2) + j(b_1 - b_2)
+            \]
         }
         \item {Moltiplicazione
-            \begin{center}
-                Moltiplicazione
-            \end{center}
+            \[
+                z = z_1 z_2 = \rho_1\rho_2 \ e^{j(\theta_1+\theta_2)}
+            \]
         }
         \item {Divisione
-            \begin{center}
-                Divisione
-            \end{center}
+            \[
+                z = \frac{z_1}{z_2} = \frac{\rho_1}{\rho_2} \ e^{j(\theta_1-\theta_2)}
+            \]
         }
     \end{itemize}
-
-\lipsum
-
