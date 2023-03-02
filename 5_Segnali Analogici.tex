@@ -1,1 +1,59 @@
 \section{Segnali Analogici}
+    \subsection{Grandezze dei segnali Analogici}
+    
+        \subsubsection{Potenza istantanea}
+            \[
+                P_{x} \triangleq |x_{(t)}|^2   
+            \]
+        \subsubsection{Energia}
+            \[
+                E_{x} \triangleq \int_{-\infty}^{\infty} P_{x}(t) \,dt = \int_{-\infty}^{\infty} |x_{(t)}|^2 \,dt    
+            \]
+        \subsubsection{Potenza Media}
+            Definiamo il \index{Segnale Troncato}{\bf Segnale Troncato}:
+                \[
+                    x_{(t)} = X_{(t)} \triangleq 
+                    \begin{cases}
+                        x_{(t)} \hspace{1cm} -\frac{T}{2} \leq t \leq \frac{T}{2} \\
+                        0 \hspace{2cm}altrove
+                    \end{cases}
+                    \]  
+                    \begin{center}
+                        \em T = Periodo di osservazione
+                    \end{center}
+                \begin{figure}[h]
+                    \centering
+                    \includegraphics[width=4cm]{media/uwu.png}
+                    \caption{Segnale troncato}
+                    \label{fig:troncato}
+                \end{figure}
+            
+
+            % NON CAPISCO COSA É POTENZA MEDIA E COSA SIA POTENZA ISTANTANEA CHE CAVOLO DI RELAZIONE
+            % USO PER PASSARE DA PxT A Px  
+            La potenza media é:
+            \[
+                P_{x_{T}} \triangleq E_{x_{T}}   
+            \]
+            dalla quale possiamo ricavare la potenza istantanea se $T \rightarrow \infty \Rightarrow P_{x_{T}} = P_{x}$:
+            \[
+                P_{x} \triangleq \lim_{T\rightarrow\infty} \frac{E_{x_{T}}}{T} =\lim_{T\rightarrow\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}  |x_{(t)}|^2 \,dt    
+            \]  
+        \subsubsection{Valore Efficace}
+        
+        \subsubsection{Valore Medio}
+
+    \subsection{Analisi energetiche su segnali comuni}
+        \subsubsection{Costante}
+
+        \subsubsection{Sinusoide}
+        
+        \subsubsection{Gradino}
+        
+        \subsubsection{Rettangolo}
+        
+        \subsubsection{Esponenziale unilatera}
+        
+        \subsubsection{Esponenziale bilatera}
+        
+        \subsubsection{segno $\mathbf{sgn(x_{(t)})}$}
