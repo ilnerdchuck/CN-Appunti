@@ -46,6 +46,11 @@
 
 \subsection{Relazione Tra Forma Polare e Cartesiana}
     \begin{itemize}
+        \item {Parte Reale e parte Immaginaria
+            \[
+                a = \rho \cos(\theta)  \ \ b = \rho \sin(\theta)   
+            \]
+        }
         \item {Modulo
             \[
                 \rho = |z| = \sqrt{a^2+b^2}
@@ -64,7 +69,7 @@
 
 
 \subsection{Operazioni}
-    Definiamo: $z_1 = a_1 + jb_1 = \rho_1 \ e^{j\theta_1},\hspace{0.1cm} z_2 = a_2 + jb_2 = \rho_2 \ e^{j\theta_2} $
+    Dati: $z_1 = a_1 + jb_1 = \rho_1 \ e^{j\theta_1},\hspace{0.1cm} z_2 = a_2 + jb_2 = \rho_2 \ e^{j\theta_2} $
     \begin{itemize}
         \item {Somma
             \[
@@ -86,4 +91,31 @@
                 z = \frac{z_1}{z_2} = \frac{\rho_1}{\rho_2} \ e^{j(\theta_1-\theta_2)}
             \]
         }
+        \item {Modulo
+            \[
+                |z| = \sqrt{zz^*} = \sqrt{a^2+b^2}  
+            \]
+            \[
+                |z|^2 = zz^* = a^2+b^2  
+            \]
+        }
     \end{itemize}
+
+    \subsection{Funzioni Complesse a Variabile Reale}
+        \[
+           z \in \mathbb{C} \hspace{0.2cm} t \in \mathbb{R} \rightarrow z_{(t)} = a_{(t)} + jb_{(t)} = \rho_{(t)} e^{j\theta_{(t)}}
+        \]
+        \begin{itemize}
+            \item {Integrale
+            \[
+                \int_{a}^{b} z_{(t)} \ dt = \int_{a}^{b} a_{(t)} + jb_{(t)} \ dt =\int_{a}^{b} a_{(t)} \ dt+\int_{a}^{b} jb_{(t)} \ dt  
+            \]
+
+            }
+            \item {Derivata
+            \[
+                \frac{d}{dt} z_{(t)}= \frac{d}{dt} a_{(t)} + jb_{(t)} =\frac{d}{dt} a_{(t)} +\frac{d}{dt} jb_{(t)}   
+            \]
+
+            }
+        \end{itemize}
