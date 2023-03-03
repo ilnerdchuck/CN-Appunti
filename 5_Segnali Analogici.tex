@@ -33,27 +33,103 @@
             % USO PER PASSARE DA PxT A Px  
             La potenza media é:
             \[
-                P_{x_{T}} \triangleq E_{x_{T}}   
+                P_{x_{T}} \triangleq \frac{E_{x_{T}}}{T}    
             \]
-            dalla quale possiamo ricavare la potenza istantanea se $T \rightarrow \infty \Rightarrow P_{x_{T}} = P_{x}$:
+            dalla quale possiamo ricavare se $T \rightarrow \infty \Rightarrow P_{x_{T}} = P_{x}$:
             \[
                 P_{x} \triangleq \lim_{T\rightarrow\infty} \frac{E_{x_{T}}}{T} =\lim_{T\rightarrow\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}  |x_{(t)}|^2 \,dt    
             \]  
         \subsubsection{Valore Efficace}
+                \[    
+                    x_{eff} \triangleq \sqrt{P_{x}}
+                \]
         
         \subsubsection{Valore Medio}
 
+                % TO DO: rivedi qui per evitare un page break
+                    \[
+                        x_{m} \triangleq \lim_{T\rightarrow\infty} \frac{1}{T} \int_{-\infty}^{\infty}  x_{(t)_T} \,dt = \lim_{T\rightarrow\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}  x_{(t)} \,dt 
+                    \]
+                    \[
+                        x_{(t)_T}\ =\ Segnale\ troncato
+                    \]
+                    
     \subsection{Analisi energetiche su segnali comuni}
         \subsubsection{Costante}
-
+            $x_{(t)} = A\ \ \forall t$
+            \begin{figure}[h]
+                \centering
+                \includegraphics[width=4cm]{media/uwu.png}
+                \caption{Segnale costante}
+                \label{fig:segnale costante}
+            \end{figure}
+            \begin{itemize}
+                \item {Energia:
+                        \[
+                            E_{x} = \int_{-\infty}^{\infty} P_{x}(t) \,dt = \int_{-\infty}^{\infty} |x_{(t)}|^2 \,dt = \int_{-\infty}^{\infty} A^2 \,dt = \infty 
+                        \]
+                }
+                \item {Potenza Media:
+                        \[
+                            P_{x} = \lim_{T\rightarrow\infty} \frac{E_{x_{T}}}{T} = \lim_{T\rightarrow\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}  |x_{(t)}|^2 \,dt = \lim_{T\rightarrow\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} A^2 \,dt = A^2     
+                        \]
+                }
+                \item {Valore Efficace:
+                        \[
+                            x_{eff} = \sqrt{P_{x}} = \sqrt{A^2} = |A|
+                        \]
+                }
+                \item {Valore Medio:
+                        \[
+                            x_{m} = \lim_{T\rightarrow\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}  x_{(t)} \,dt = \lim_{T\rightarrow\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}  A \,dt = \lim_{T\rightarrow\infty} \frac{1}{T} AT = A 
+                        \]
+                }
+            \end{itemize}
         \subsubsection{Sinusoide}
-        
+            $x_{(t)} = A \cos(2 \pi f_0 t +\phi)$
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=4cm]{media/uwu.png}
+                \caption{Segnale sinusoidale}
+                \label{fig:segnale sinusoidale}
+            \end{figure}
         \subsubsection{Gradino}
-        
+        $x_{(t)} = A \cos(2 \pi f_0 t +\phi)$
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=4cm]{media/uwu.png}
+            \caption{Segnale gradino}
+            \label{fig:segnale gradino}
+        \end{figure}        
         \subsubsection{Rettangolo}
-        
+        $x_{(t)} = A \cos(2 \pi f_0 t +\phi)$
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=4cm]{media/uwu.png}
+            \caption{Segnale rettangolo}
+            \label{fig:segnale rettangolo}
+        \end{figure}        
         \subsubsection{Esponenziale unilatera}
-        
+        $x_{(t)} = A \cos(2 \pi f_0 t +\phi)$
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=4cm]{media/uwu.png}
+            \caption{Segnale esponenziale unilatera}
+            \label{fig:segnale esponenziale unilatera}
+        \end{figure}        
         \subsubsection{Esponenziale bilatera}
-        
+        $x_{(t)} = A \cos(2 \pi f_0 t +\phi)$
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=4cm]{media/uwu.png}
+            \caption{Segnale esponenziale bilatera}
+            \label{fig:segnale esponenziale bilatera}
+        \end{figure}        
         \subsubsection{segno $\mathbf{sgn(x_{(t)})}$}
+        $x_{(t)} = A \cos(2 \pi f_0 t +\phi)$
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=4cm]{media/uwu.png}
+            \caption{Segnale sgn(x)}
+            \label{fig:segnale sgn(x)}
+        \end{figure}
