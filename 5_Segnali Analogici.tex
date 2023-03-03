@@ -85,6 +85,7 @@
                         \]
                 }
             \end{itemize}
+        
         \subsubsection{Sinusoide}
             $x_{(t)} = A \cos(2 \pi f_0 t +\phi)$
             \begin{figure}[H]
@@ -93,6 +94,27 @@
                 \caption{Segnale sinusoidale}
                 \label{fig:segnale sinusoidale}
             \end{figure}
+            
+            \begin{itemize}
+                \item {Energia:
+                    \[
+                        E_{x} = \int_{-\infty}^{\infty} |x_{(t)}|^2 \ dt = \int_{-\infty}^{\infty} A^2 \cos^2(2\pi f_0 t + \phi) dt 
+                    \]
+                    Ricaviamo dalla $(1)$ \ref{Trigonometria} il $\sin^2(\alpha)$ e $(2.1)$ \ref{Trigonometria_Duplicazione} $\cos(2\alpha) = \frac{1+ \cos^2(\alpha)}{2}$
+                    \[
+                        E_{x} = A^2  \int_{-\infty}^{\infty} \frac{1}{2} + \frac{\cos(4\pi f_0 t + 2\phi)}{2} dt \\
+                    \]
+                }
+                \item {Potenza Media:
+                }
+                \item {Valore Efficace:
+                }
+                \item {Valore Medio:
+                }
+            \end{itemize}
+
+            %Richimo per il label del formulario $(1)$ e $(2)$ \ref{Trigonometria} 
+
         \subsubsection{Gradino}
         $x_{(t)} = A \cos(2 \pi f_0 t +\phi)$
         \begin{figure}[H]
@@ -101,6 +123,7 @@
             \caption{Segnale gradino}
             \label{fig:segnale gradino}
         \end{figure}        
+        
         \subsubsection{Rettangolo}
         $x_{(t)} = A \cos(2 \pi f_0 t +\phi)$
         \begin{figure}[H]
@@ -109,6 +132,7 @@
             \caption{Segnale rettangolo}
             \label{fig:segnale rettangolo}
         \end{figure}        
+        
         \subsubsection{Esponenziale unilatera}
         $x_{(t)} = A \cos(2 \pi f_0 t +\phi)$
         \begin{figure}[H]
@@ -117,6 +141,7 @@
             \caption{Segnale esponenziale unilatera}
             \label{fig:segnale esponenziale unilatera}
         \end{figure}        
+        
         \subsubsection{Esponenziale bilatera}
         $x_{(t)} = A \cos(2 \pi f_0 t +\phi)$
         \begin{figure}[H]
@@ -125,6 +150,7 @@
             \caption{Segnale esponenziale bilatera}
             \label{fig:segnale esponenziale bilatera}
         \end{figure}        
+        
         \subsubsection{segno $\mathbf{sgn(x_{(t)})}$}
         $x_{(t)} = A \cos(2 \pi f_0 t +\phi)$
         \begin{figure}[H]
