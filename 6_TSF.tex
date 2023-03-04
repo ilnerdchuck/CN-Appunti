@@ -1,0 +1,71 @@
+\section{Trasformata Serie Di Fourier}
+    \subsection{Segnale Periodico}
+        Si definisce segnale periodico un segnale tale che:
+        \[
+            x_{(t)} = x_{(t-kT_0)}    
+        \]
+        \[
+            T_0=Periodo\ \ \ f_0\triangleq \frac{1}{T_0} =Frequenza
+        \]
+    \subsection{Trasformata Serie Di Fourier}
+        Ogni segnale periodico di periodo $T_0$ che soddifa le condizioni di Dirichlet e la sua $E_x < \infty (C.S.)$ puó essere scritto come la somma di 
+        infinite sinusoidi di frequenze multiple di $f_0 = \frac{1}{T_0}$
+        \begin{itemize}
+            \item{Equazione di Sintesi - Antitrasformata(ATSF)\label{ATSF}
+                \[
+                    x_{(t)} = \sum_{k = -\infty}^{\infty} X_{k} e^{j2\pi kf_0t} \hspace{1cm} X_{k}\in \mathbb{C},\ f_0 = \frac{1}{T_0} 
+                \]
+                Se lo sviluppassimo sarebbe composto da:
+                \[
+                   x_{(t)} =\ldots  + X_{-1} e^{j2\pi (-1)f_0t} + X_{0} + X_{1} e^{j2\pi (1) f_0t} + \ldots 
+                \]
+                $X_0$ corrisponde al Valore medio \ref{Valore medio} del segnale
+            }
+            \item{Equazione di Analisi - Trasformata(ATSF)\label{TSF}
+                \[
+                    X_k =\frac{1}{T_0}\int_{-\frac{1}{T_0}}^{\frac{1}{T_0}} x_{(t)} e^{-j2\pi kf_0t} dt
+                \]
+            } 
+        \end{itemize}
+        La TSF gode della biunivocitá: $\forall x_{(t)} \exists! X_k$:
+        \begin{align}
+            x_{(t)} & \rightleftharpoons X_k  \nonumber\\
+            Segnale\ Analogico\ Periodico &\rightleftharpoons Sequenza\ Complessa \nonumber
+        \end{align}
+        \subsubsection{Rappresentazione di $X_k$}
+            Essendo $X_k$ un numero complesso puó essere rappresentato in forma polare: 
+            \[
+                X_k = |X_k|e^{\angle X_k}  
+            \]
+            Si possono rappresentare il modulo (Ampiezza) e la fase tramite grafici che prendono il nome di spettri:
+            \begin{figure}[H]
+                \centering
+                \subfloat[Spettro di Ampiezza]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:Spettro di Ampiezza}}
+                \hfill
+                \subfloat[Spettro di Fase]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:Spettro di Fase}}
+                \caption{Spettro del segnale}
+            \end{figure}
+            lo spettro di Ampiezza gode della \textbf{simmetria pari} rispetto alle ascisse quindi é \textbf{sempre positivo}, mentre lo spettro di fase della \textbf{simmetria dispari}.
+        \subsection{Calcolo dei coefficenti $X_k$ per segnali noti}
+            \subsubsection{$A\cos(2\pi f_0 t)$}
+                \[
+                    
+                \]
+            \subsubsection{$A\sin(2\pi f_0 t)$}
+
+            \subsubsection{Treno di rect}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
