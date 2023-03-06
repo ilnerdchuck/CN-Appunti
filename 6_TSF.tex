@@ -21,7 +21,7 @@
                 \]
                 $X_0$ corrisponde al Valore medio \ref{Valore medio} del segnale
             }
-            \item{Equazione di Analisi - Trasformata(ATSF)\label{TSF}
+            \item{Equazione di Analisi - Trasformata(TSF)\label{TSF}
                 \[
                     X_k =\frac{1}{T_0}\int_{-\frac{1}{T_0}}^{\frac{1}{T_0}} x_{(t)} e^{-j2\pi kf_0t} dt
                 \]
@@ -48,13 +48,62 @@
             lo spettro di Ampiezza gode della \textbf{simmetria pari} rispetto alle ascisse quindi é \textbf{sempre positivo}, mentre lo spettro di fase della \textbf{simmetria dispari}.
         \subsection{Calcolo dei coefficenti $X_k$ per segnali noti}
             \subsubsection{$A\cos(2\pi f_0 t)$}
-                \[
-                    
-                \]
+                $x_{(t)}A\cos(2\pi f_0 t)$
+                \begin{align}
+                    ATSF[x_{(t)}] & = ATSF[A\cos(2\pi f_0 t)] \nonumber \\
+                        & = ATSF[\frac{A}{2} (e^{j2\pi kf_0t} + e^{-j2\pi kf_0t})] \nonumber 
+                \end{align}
+                Utilizzando la composizione dei coefficenti $X_k$:
+                \begin{align}
+                    x_{(t)} & =\ldots  + X_{-1} e^{j2\pi (-1)f_0t} + X_{0} + X_{1} e^{-j2\pi (1) f_0t} + \ldots \nonumber\\
+                    Abbiamo:& \nonumber 
+                \end{align}
+                        \[X_{-1} = \frac{A}{2}\hspace{.3cm} X_{0} = 0\hspace{.3cm} X_{1} = \frac{A}{2}\] 
+                Possiamo tracciare lo spettro del segnale:
+                \begin{figure}[H]
+                    \centering
+                    \subfloat[Spettro di Ampiezza]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:sa TSF coseno}}
+                    \hfill
+                    \subfloat[Spettro di Fase]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:sf TSF coseno}}
+                    \caption{Spettro TSF del coseno}
+                \end{figure}
             \subsubsection{$A\sin(2\pi f_0 t)$}
-
+                $x_{(t)}A\sin(2\pi f_0 t)$
+                \begin{align}
+                    ATSF[x_{(t)}] & = ATSF[A\sin(2\pi f_0 t)] \nonumber \\
+                        & = ATSF[\frac{A}{2} (e^{j2\pi kf_0t} - e^{-j2\pi kf_0t})] \nonumber 
+                \end{align}
+                Utilizzando la composizione dei coefficenti $X_k$:
+                \begin{align}
+                    x_{(t)} & =\ldots  + X_{-1} e^{j2\pi (-1)f_0t} - X_{0} + X_{1} e^{-j2\pi (1) f_0t} + \ldots \nonumber\\
+                    Abbiamo:& \nonumber 
+                \end{align}
+                        \[X_{-1} = -\frac{A}{2j}\hspace{.3cm} X_{0} = 0\hspace{.3cm} X_{1} = \frac{A}{2j}\] 
+                \[
+                    |X_k|= 
+                    \begin{cases}
+                            |\frac{A}{2j}| = \frac{A}{2} \hspace{0.5cm} & k= 1\\
+                            |-\frac{A}{2j}| = \frac{A}{2} \hspace{0.5cm} & k= -1\\
+                            0 \hspace{0.5cm} & altrove  \\
+                    \end{cases}
+                    \hspace{0.5cm}
+                    \angle X_k= 
+                    \begin{cases}
+                        \angle \frac{A}{2j} = -\frac{\pi}{2} \hspace{0.5cm} & k= 1\\
+                        \angle |-\frac{A}{2j}| = \frac{\pi}{2} \hspace{0.5cm} & k= -1\\
+                        0 \hspace{0.5cm} & altrove  \\
+                    \end{cases}
+                    \]
+                Possiamo tracciare lo spettro del segnale:
+                \begin{figure}[H]
+                    \centering
+                    \subfloat[Spettro di Ampiezza]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:sa TSF seno}}
+                    \hfill
+                    \subfloat[Spettro di Fase]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:sf TSF seno}}
+                    \caption{Spettro TSF del seno}
+                \end{figure}
             \subsubsection{Treno di rect}
-
+                
 
 
 
