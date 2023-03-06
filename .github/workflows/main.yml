@@ -13,5 +13,5 @@ jobs:
       - name: Upload PDF file
         uses: actions/upload-artifact@v3
         with:
-          name: PDF
-          path: main.pdf
+          name: CN-Appunti
+          path: Appunti_Comunicazioni_Numeriche.pdf
