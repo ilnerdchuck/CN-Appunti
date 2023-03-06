@@ -48,7 +48,7 @@
             lo spettro di Ampiezza gode della \textbf{simmetria pari} rispetto alle ascisse quindi é \textbf{sempre positivo}, mentre lo spettro di fase della \textbf{simmetria dispari}.
         \subsection{Calcolo dei coefficenti $X_k$ per segnali noti}
             \subsubsection{$A\cos(2\pi f_0 t)$}
-                $x_{(t)}A\cos(2\pi f_0 t)$
+                $x_{(t)}=A\cos(2\pi f_0 t)$
                 \begin{align}
                     ATSF[x_{(t)}] & = ATSF[A\cos(2\pi f_0 t)] \nonumber \\
                         & = ATSF[\frac{A}{2} (e^{j2\pi kf_0t} + e^{-j2\pi kf_0t})] \nonumber 
@@ -68,7 +68,7 @@
                     \caption{Spettro TSF del coseno}
                 \end{figure}
             \subsubsection{$A\sin(2\pi f_0 t)$}
-                $x_{(t)}A\sin(2\pi f_0 t)$
+                $x_{(t)}=A\sin(2\pi f_0 t)$
                 \begin{align}
                     ATSF[x_{(t)}] & = ATSF[A\sin(2\pi f_0 t)] \nonumber \\
                         & = ATSF[\frac{A}{2} (e^{j2\pi kf_0t} - e^{-j2\pi kf_0t})] \nonumber 
@@ -103,9 +103,42 @@
                     \caption{Spettro TSF del seno}
                 \end{figure}
             \subsubsection{Treno di rect}
-                
-
-
+                $x_R=A\hspace{0.1cm}rect\left(\frac{t}{T}\right)\rightarrow$ Segnale periodico $\rightarrow x_{(t)} = \sum_{-\infty}^{\infty} x_R (t-nT_0)$\\
+                $T_0 = periodo$, $T = durata \rightarrow T < T_0$, se cosi non fosse avremmo una costante
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=4cm]{media/uwu.png}
+                    \caption{Treno di $A\hspace{0.1cm}rect\left(\frac{t}{T}\right)$}
+                    \label{fig:treno di rect}
+                \end{figure}                
+                $\rightarrow$ Si nota come cambiare il periodi delle funzioni possiamo renderle da aperiodiche a periodiche e viceversa
+                \begin{align}
+                    ATSF[x_{(t)}] & = ATSF[\sum_{-\infty}^{\infty} x_R (t-nT_0)] \nonumber \\
+                        & = \frac{1}{T_0} \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x_{(t)} e^{-j2\pi kf_0t} dt = \frac{1}{T_0} \int_{-\frac{T}{2}}^{\frac{T}{2}} x_{(t)} e^{-j2\pi kf_0t} dt \nonumber \\
+                        & = \frac{A}{T_0} \int_{-\frac{T}{2}}^{\frac{T}{2}} e^{-j2\pi kf_0t} dt = \eval{\frac{A}{T_0} \frac{1}{j2\pi kf_0} e^{-j2\pi kf_0t}}_{-\frac{T}{2}}^{\frac{T}{2}} \nonumber \\
+                        & = \frac{A}{T_0} \frac{e^{-j\pi kf_0T} - e^{j\pi kf_0T}}{j2\pi kf_0} = \frac{A}{T_0} \frac{e^{j\pi kf_0T}-e^{-j\pi kf_0T}}{-j2\pi kf_0} \nonumber \\
+                        & = \frac{A\color{purple}{T}}{T_0} \frac{e^{j\pi kf_0T}-e^{-j\pi kf_0T}}{-j2\pi kf_0\color{purple}{T}} = Af_0T sinc(kf_0T) \nonumber 
+                \end{align}
+                \begin{figure}[H]
+                    \centering
+                    \subfloat[Spettro di Ampiezza]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:sa TSF treno di rect}}
+                    \hfill
+                    \subfloat[Spettro di Fase]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:sf TSF treno di rect}}
+                    \caption{Spettro TSF del treno di rect}
+                \end{figure}
+                Si possono anche unire i due spettri per ottenere: 
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=4cm]{media/uwu.png}
+                    \caption{Treno di $A\hspace{0.1cm}rect\left(\frac{t}{T}\right)$}
+                    \label{fig:Spettro treno di rect}
+                \end{figure}  
+            Ora appizza matlab e fa esempi di un segnale e uno di riostruzione dello stesso(script di matlab presenti nel teams):
+            \begin{itemize}
+                \item Se un segnale varia molto rapidamente nel tempo ha componenti frequenziali piú alte $\rightarrow$ copre piú spettro(espansione spettrale) $T_0 \uparrow$
+                \item Se un segnale varia molto lentamente copre le basse fraquenze $ T_0 \downarrow$
+            \end{itemize}
+            Se non ho abbastanza passi K non posso campionare le alte frequenze e quindi non faccio ne un analisi completa del segnale né riesco a ricostruire perfettametne il segnale  
 
 
 
