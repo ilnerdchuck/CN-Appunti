@@ -128,48 +128,184 @@
             \end{itemize}
 
             %Richimo per il label del formulario $(1)$ e $(2)$ \ref{Trigonometria} 
-
+        \pagebreak
         \subsubsection{Gradino}
-        $x_{(t)} = A \cos(2 \pi f_0 t +\phi)$
+        $U_{(t)} = x_{(t)} = 
+            \begin{cases}
+                1 & t > 0 \\
+                0 & t \leq 0  
+            \end{cases}
+        $
         \begin{figure}[H]
             \centering
             \includegraphics[width=4cm]{media/uwu.png}
             \caption{Segnale gradino}
             \label{fig:segnale gradino}
+            
         \end{figure}        
+
+        \begin{itemize}
+            \item {Energia:
+                \[
+                    E_{x} = \int_{-\infty}^{\infty} |x_{(t)}|^2 \ dt = \int_{-\infty}^{\infty} 1\ dt = \infty 
+                \]
+            }
+            \item {Potenza Media:
+                \[
+                    P_{x} =\lim_{T\rightarrow\infty}  \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}  |U_{(t)}|^2 \,dt =\lim_{T\rightarrow\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} 1\ dt = \lim_{T\rightarrow\infty} \frac{1}{T} \frac{T}{2} = \frac{1}{2}
+                \]
+            }
+            \item {Valore Efficace:
+                \[
+                    x_{eff} = \sqrt{P_{x}} = \frac{1}{\sqrt{2}} 
+                \]
+            }
+            \item {Valore Medio:
+                    \[x_{m} = \lim_{T\rightarrow\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}  x_{(t)} \,dt =\lim_{T\rightarrow\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} 1\ dt = \lim_{T\rightarrow\infty} \frac{1}{T} \frac{T}{2} = \frac{1}{2} \]
+            }
+        \end{itemize}
         
         \subsubsection{Rettangolo}
-        $x_{(t)} = A \cos(2 \pi f_0 t +\phi)$
+        $x_{(t)} = A\hspace{0.1cm}rect\left(\frac{t}{T}\right) =
+            \begin{cases}
+                A & -\frac{t}{T}\leq t\leq \frac{t}{T}\\
+                0 & Altrove 
+            \end{cases}
+        $
         \begin{figure}[H]
             \centering
             \includegraphics[width=4cm]{media/uwu.png}
             \caption{Segnale rettangolo}
             \label{fig:segnale rettangolo}
         \end{figure}        
+        \begin{itemize}
+            \item {Energia:
+                \[
+                    E_{x} = \int_{-\infty}^{\infty} |x_{(t)}|^2 \ dt = \int_{-\frac{T}{2}}^{\frac{T}{2}} A^2 \hspace{0.1cm}rect^2\left(\frac{t}{T}\right)\ dt = A^2 \int_{-\frac{T}{2}}^{\frac{T}{2}}  1\ dt = A^2 T 
+                \]
+            }
+            \item {Potenza Media:
+                $T < T_0$ se non fosse cosí avrei una costante
+                \begin{align}
+                    P_{x} =\lim_{T\rightarrow\infty}  \frac{1}{T_0} \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}}  |x_{(t)}|^2 \,dt & =\lim_{T\rightarrow\infty} \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} A^2 \hspace{0.1cm}rect^2\left(\frac{t}{T}\right)\ dt \nonumber \\
+                         & =\lim_{T\rightarrow\infty} \frac{1}{T_0} A^2 T = 0 \nonumber
+                \end{align}
+            }
+            \item {Valore Efficace:
+                \[
+                    x_{eff} = \sqrt{P_{x}} = 0 
+                \]
+            }
+            \item {Valore Medio:
+                    \begin{align}
+                        x_{m} = \lim_{T\rightarrow\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}  x_{(t)} \,dt & = \lim_{T\rightarrow\infty} \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} A\hspace{0.1cm}rect\left(\frac{t}{T}\right)\ dt \nonumber \\
+                        & =\lim_{T\rightarrow\infty} \frac{1}{T_0} A T = 0 \nonumber
+                    \end{align}
+            }
+        \end{itemize}
+        
         
         \subsubsection{Esponenziale unilatera}
-        $x_{(t)} = A \cos(2 \pi f_0 t +\phi)$
+        $x_{(t)} = e^{-t}U_{(t)}$
         \begin{figure}[H]
             \centering
             \includegraphics[width=4cm]{media/uwu.png}
             \caption{Segnale esponenziale unilatera}
             \label{fig:segnale esponenziale unilatera}
         \end{figure}        
+        \begin{itemize}
+            \item {Energia:
+                \[
+                    E_{x} = \int_{-\infty}^{\infty} |x_{(t)}|^2 \ dt = \int_{0}^{\infty} e^{-2t}\ dt = \eval*{\frac{1}{2} e^{-2t}}_{0}^{\infty} = \frac{1}{2} 
+                \]
+            }
+            \item {Potenza Media:
+                \begin{align}
+                    P_{x} & =\lim_{T\rightarrow\infty}  \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}  |e^{-t}U_{(t)}|^2 \,dt =\lim_{T\rightarrow\infty} \frac{1}{T} \int_{0}^{\frac{T}{2}} e^{-2t}\ dt \nonumber \\
+                          & = \lim_{T\rightarrow\infty} \frac{1}{T} \eval*{\left(-\frac{1}{2}\right) e^{-2t}}_{0}^{\frac{T}{2}} =\lim_{T\rightarrow\infty}-\frac{1}{2T} e^{-2\frac{T}{2}} + \lim_{T\rightarrow\infty} \frac{1}{2T} = 0 \nonumber 
+                \end{align}
+            }
+            \item {Valore Efficace:
+                \[
+                    x_{eff} = \sqrt{P_{x}} = 0 
+                \]
+            }
+            \item {Valore Medio:
+                    \begin{align}
+                        x_{m} & = \lim_{T\rightarrow\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}  x_{(t)} \,dt =\lim_{T\rightarrow\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} e^{-t}U_{(t)}\,dt = \lim_{T\rightarrow\infty} \frac{1}{T} \int_{0}^{\frac{T}{2}} e^{-t}\,dt \nonumber \\
+                              & = \lim_{T\rightarrow\infty} \frac{1}{T} \eval*{(-1) e^{-t}}_{0}^{\frac{T}{2}} =  \lim_{T\rightarrow\infty}-\frac{1}{T} e^{-\frac{T}{2}} + \lim_{T\rightarrow\infty} \frac{1}{T} = 0 \nonumber
+                    \end{align}
+            }
+        \end{itemize}
         
+        \pagebreak
         \subsubsection{Esponenziale bilatera}
-        $x_{(t)} = A \cos(2 \pi f_0 t +\phi)$
+        $x_{(t)} = e^{-|t|}$
         \begin{figure}[H]
             \centering
             \includegraphics[width=4cm]{media/uwu.png}
             \caption{Segnale esponenziale bilatera}
             \label{fig:segnale esponenziale bilatera}
         \end{figure}        
-        
+        \begin{itemize}
+            \item {Energia:
+                \[
+                    E_{x} = \int_{-\infty}^{\infty} |x_{(t)}|^2 \ dt =2 \int_{0}^{\infty} e^{-2t}\ dt = \eval*{2 \left(-\frac{1}{2}\right) e^{-2t}}_{0}^{\infty} = 1 
+                \]
+            }
+            \item {Potenza Media:
+                \begin{align}
+                    P_{x} & =\lim_{T\rightarrow\infty}  \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}  |e^{-t}U_{(t)}|^2 \,dt =\lim_{T\rightarrow\infty} \frac{2}{T} \int_{0}^{\frac{T}{2}} e^{-2t}\ dt \nonumber \\
+                          & = \lim_{T\rightarrow\infty} \frac{1}{T} \eval*{e^{-2t}}_{0}^{\frac{T}{2}} =\lim_{T\rightarrow\infty}-\frac{1}{T} e^{-2\frac{T}{2}} + \lim_{T\rightarrow\infty} \frac{1}{T} = 0 \nonumber 
+                \end{align}
+            }
+            \item {Valore Efficace:
+                \[
+                    x_{eff} = \sqrt{P_{x}} = 0 
+                \]
+            }
+            \item {Valore Medio:
+                    \begin{align}
+                        x_{m} & = \lim_{T\rightarrow\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}  x_{(t)} \,dt =\lim_{T\rightarrow\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} e^{-t}U_{(t)}\,dt = \lim_{T\rightarrow\infty} \frac{1}{T} 2\int_{0}^{\frac{T}{2}} e^{-t}\,dt \nonumber \\
+                              & = \lim_{T\rightarrow\infty} \frac{1}{T} \eval*{(-2) e^{-t}}_{0}^{\frac{T}{2}} =  \lim_{T\rightarrow\infty}-\frac{2}{T} e^{-\frac{T}{2}} + \lim_{T\rightarrow\infty} \frac{2}{T} = 0 \nonumber
+                    \end{align}
+            }
+        \end{itemize}        
+
         \subsubsection{segno $\mathbf{sgn(x_{(t)})}$}
-        $x_{(t)} = A \cos(2 \pi f_0 t +\phi)$
+        $x_{(t)} = sgn(t) =
+            \begin{cases}
+                -1 & t < 0\\
+                1  & t>0 
+            \end{cases}
+        $
         \begin{figure}[H]
             \centering
             \includegraphics[width=4cm]{media/uwu.png}
             \caption{Segnale sgn(x)}
             \label{fig:segnale sgn(x)}
         \end{figure}
+        \begin{itemize}
+            \item {Energia:
+                \[
+                    E_{x} = \int_{-\infty}^{\infty} |x_{(t)}|^2 \ dt = \int_{-\infty}^{\infty} sgn^2(t)\ dt = \int_{-\infty}^{\infty} 1\ dt =\infty 
+                \]
+            }
+            \item {Potenza Media:
+                \[
+                    P_{x} =\lim_{T\rightarrow\infty}  \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}  |x_{(t)}|^2 \,dt =\lim_{T\rightarrow\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} sgn^2{t}\ dt = \lim_{T\rightarrow\infty} \frac{1}{T} T = 1
+                \]
+            }
+            \item {Valore Efficace:
+                \[
+                    x_{eff} = \sqrt{P_{x}} = 1 
+                \]
+            }
+            \item {Valore Medio:
+                \begin{align}
+                    x_{m} & = \lim_{T\rightarrow\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}  x_{(t)} \,dt =\lim_{T\rightarrow\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} sgn(t)\ dt \nonumber \\
+                          & = \lim_{T\rightarrow\infty} \frac{1}{T} \left[\int_{-\frac{T}{2}}^{0}  1\,dt + \int_{0}^{\frac{T}{2}}  1\,dt\right] = \lim_{T\rightarrow\infty} \frac{1}{T} \left(-\frac{T}{2}+\frac{T}{2}\right) = 0 \nonumber
+                \end{align}        
+            }
+        \end{itemize}
+        
