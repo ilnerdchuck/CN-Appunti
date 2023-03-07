@@ -1,2 +1,173 @@
 \section{Trasformata Continua Di Fourier}
-    \subsection{cavoletti di bruxelles}
+    \subsection{Segnali Aperiodici}
+        Nel caso di segnali come $x_{(t)}=rect\left(\frac{t}{T}\right)$ non posso usare la $TSF$ posso peró scrivere:
+        \[
+            x_{(t)} = \lim_{T_0\rightarrow\infty} x_p(t) ,\ x_p(t) = \sum_{n = -\infty}^{\infty} x_{(t-nT_0)} 
+        \]
+        Passiamo da un analisi a frequenze discrete ad un analisi su tutto lo spettro delle frequenze
+        \begin{figure}[H]
+            \centering
+            \subfloat[Spettro di Ampiezza TSF]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:Spettro di Ampiezza TSF}}
+            \hfill
+            \subfloat[Spettro di Ampiezza TCF]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:Spettro di Ampiezza TCF}}
+        \end{figure}
+
+    \subsection{Equazioni di Analisi e Sintesi}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=4cm]{media/uwu.png}
+            \caption{Insieme dei segnali per tcf}
+            \label{fig:segnali aperiodici tcf}
+        \end{figure}
+        {\subsubsection{Equazione di Analisi}
+            \[X_{(f)} = \int_{-\infty}^{\infty} x_{(t)} e^{-j2\pi ft} dt\hspace{0.3cm} Equazione\ di\ analisi \]
+            
+        \subsubsection{Equazione di Sintesi}
+            \[x_{(t)} = \int_{-\infty}^{\infty} X_{(f)} e^{j2\pi ft} df\hspace{0.3cm} Equazione\ di\ sintesi \]
+        }
+        La $TCF$ gode della biunivocitá
+        \begin{align}
+            x_{(t)} \rightleftharpoons  X_{(f)}\nonumber \hspace{0.3cm} X_{(f)} \in \mathbb{C}
+        \end{align}
+        Essendo $X_k$ un numero complesso puó essere rappresentato in forma polare: 
+        \[
+            X_{(f)} = |X_{(f)}|e^{\angle X_{(f)}}  
+        \]
+        Si possono rappresentare il modulo (Ampiezza) e la fase tramite grafici che prendono il nome di spettri:
+        \begin{figure}[H]
+            \centering
+            \subfloat[Spettro di Ampiezza]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:Spettro di Ampiezza TCF}}
+            \hfill
+            \subfloat[Spettro di Fase]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:Spettro di Fase TCF2}}
+            \caption{Spettro del segnale TCF}
+        \end{figure}
+        lo spettro di Ampiezza gode della \textbf{simmetria pari} rispetto alle ascisse quindi é \textbf{sempre positivo e continuo}, mentre lo spettro di fase della \textbf{simmetria dispari}, 
+        questa propietá é chiamata \textbf{Simmetria Hermitiana}
+
+        \subsubsection{TCF di una $Arect\left(\frac{t}{T}\right)$}
+            $x_{(t)} = A\hspace{0.1cm}rect\left(\frac{t}{T}\right)$
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=4cm]{media/uwu.png}
+                \caption{$A\hspace{0.1cm}rect\left(\frac{t}{T}\right)$}
+                \label{fig:grafo rect nella tcf}
+            \end{figure}
+            $X_{(f)} = ? :$
+            \begin{align}
+                X_{(f)} & = \int_{-\infty}^{\infty} x_{(t)} e^{-j2\pi ft} dt \nonumber = \int_{-\frac{T}{2}}^{\frac{T}{2}} A\hspace{0.1cm}rect\left(\frac{t}{T}\right) e^{-j2\pi ft} dt \nonumber\\ 
+                        & = A \int_{-\frac{T}{2}}^{\frac{T}{2}} e^{-j2\pi ft} dt = -\frac{A}{j2\pi f} \eval{e^{-j2\pi ft}}_{-\frac{T}{2}}^{\frac{T}{2}} =-\frac{A}{j2\pi f} \left(e^{-j\pi fT} - e^{j\pi fT}\right) \nonumber\\
+                        & = \frac{A\color{purple}{T}}{\pi f} \left(\frac{e^{j\pi fT} - e^{-j\pi fT}}{2j}\right) = \frac{A{\color{purple}T}\sin(\pi fT)}{\pi f\color{purple}{T}} = AT sinc(fT) =  X_{(f)} \nonumber 
+            \end{align}
+            \[
+                A\hspace{0.1cm}rect\left(\frac{t}{T}\right) \rightleftharpoons AT sinc(fT)
+            \]
+            La sinc si annulla in $\frac{k}{T},\ k\in \mathbb{Z}$. Notiamo anche come la funzione di partenza sia reale e pari la TCF rispetti \ref{Parita}(si?):
+            \begin{figure}[H]
+                \centering
+                \subfloat[Spettro di Ampiezza TCF $rect$]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:Spettro di Ampiezza TCF rect}}
+                \hfill
+                \subfloat[Spettro di Fase TCF $rect$]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:Spettro di Fase TCF rect}}
+            \end{figure}
+            
+    \subsection{Propietá}
+        Come per la TSF vale che al variare del periodo della funzione $T$:
+            \begin{itemize}
+                \item Se $T\uparrow$ aumenta $ \rightarrow f\downarrow$ diminuisce e si stringe lo spettro  
+                \item Se $T\downarrow$ diminuisce $ \rightarrow f\uparrow$ aumenta e si allarga lo spettro  
+            \end{itemize}
+        Inoltre come si puó evincere dal successivo Teorema della Dualitá \ref{Dualita}:
+            \begin{itemize}
+                \item Una funzione limitata (finita) nel tempo ha uno spettro nella frequenza illimitato $\rightarrow$ sono i segnali fisici   
+                \item Una funzione illimitata nel tempo ha uno spettro nella frequenza limitato (finito)
+            \end{itemize}
+        \subsubsection{Simmetria hermitiana}\label{Simmetria Hermitiana}
+            \begin{align}
+                Ip&: x_{(t)}\ reale \nonumber \\
+                Th&: X_{(f)}\ hermitiana \nonumber \\ 
+                X_{(-f)} &= X_{(f)}^{*} \rightarrow
+                    \begin{cases}
+                        |X_{(f)}| = |X_{(-f)}| \hspace{0.3cm} & Simmetria\ Pari \\
+                        \angle X_{(-f)} = -\angle X_{(f)}\hspace{0.3cm} & Simmetria\ Dispari
+                    \end{cases} \nonumber
+            \end{align}
+        \subsubsection{Paritá}\label{Parita}
+            \begin{align}
+                Ip&: x_{(t)}\ reale\ e\ pari  \nonumber \\
+                Th&: X_{(f)}\ reale\ e\ pari \nonumber  
+            \end{align}
+        \subsubsection{Disparitá}\label{Disparita}
+            \begin{align}
+                Ip&: x_{(t)}\ reale\ e\ dispari  \nonumber \\
+                Th&: X_{(f)}\ immaginaria\ e\ dispari \nonumber 
+            \end{align}
+    \subsection{Teoremi relativi alla TCF}
+        \subsubsection{Linearitá}\label{Linearita}
+            $Ip: x_{(t)} = \alpha x_{1(t)} + \beta x_{2(t)}$\\        
+            $Th: X_{(f)} = \alpha X_{1(f)} + \beta X_{2(f)}$\\ 
+            Dimostrazione:
+            \begin{align}
+                X_{(f)} & = \int_{-\infty}^{\infty} (\alpha x_{1(t)} + \beta x_{2(t)}) e^{-j2\pi ft} dt \nonumber \\
+                        & = \alpha \int_{-\infty}^{\infty} x_{1(t)} e^{-j2\pi ft} dt + \beta \int_{-\infty}^{\infty}  x_{2(t)} e^{-j2\pi ft} dt  \nonumber \\
+                        & = \alpha X_{1(f)} + \beta X_{2(f)} \nonumber
+            \end{align}
+
+            Esempio:
+                {
+                    esempio del martorella rect su rect
+                }
+
+        \subsubsection{Dualitá}\label{Dualita}
+            $Ip: x_{(t)} \rightleftharpoons^{TCF} X_{(f)}$\\        
+            $Th: X_{(t)} \rightleftharpoons^{TCF} x_{(-f)}$ 
+            Dimostrazione:
+            \begin{align}
+                X_{(f)} & = \int_{-\infty}^{\infty}  e^{-j2\pi ft} dt \nonumber \\
+                        & = finisci\nonumber \\
+                        & =  \nonumber
+            \end{align}
+
+        \subsubsection{Ritardo}\label{Ritardo}
+            $Ip: x_{(t)} = $\\        
+            $Th: X_{(f)} = $ 
+
+        \subsubsection{Derivazione}\label{Derivazione}
+            $Ip: x_{(t)} = $\\        
+            $Th: X_{(f)} = $ 
+            
+        \subsubsection{Integrazione}\label{Integrazione}
+            $Ip: x_{(t)} = $\\        
+            $Th: X_{(f)} = $ 
+        
+        \subsubsection{Derivazione in Frequenza}\label{Derivazione in Frequenza}
+            $Ip: x_{(t)} = $\\        
+            $Th: X_{(f)} = $ 
+            
+        \subsubsection{Integrazione in Frequenza}\label{Integrazione in Frequenza}
+            $Ip: x_{(t)} = $\\        
+            $Th: X_{(f)} = $ 
+        
+        \subsubsection{Convoluzione}\label{Convoluzione}
+            $Ip: x_{(t)} = $\\        
+            $Th: X_{(f)} = $ 
+            
+            Propietá della convoluzione:
+            \begin{itemize}
+                \item {1}
+                \item {2}
+                \item {3}
+            \end{itemize}
+        \subsubsection{Prodotto}\label{Prodotto}
+    \subsection{Modulazione di Ampiezza}\label{Modulazione di Ampiezza}
+        \subsubsection{Modulazione con $\cos(2\pi f_0t)$}\label{Modulazione con coseno}
+            $Ip: x_{(t)} = $\\        
+            $Th: X_{(f)} = $ 
+            
+        \subsubsection{Modulazione con $\sin(2\pi f_0t)$}\label{Modulazione con seno}
+            $Ip: x_{(t)} = $\\        
+            $Th: X_{(f)} = $ 
+            
+        \subsubsection{Modulazione con Esponenziale Complesso}\label{Modulazione con Esponenziale Complesso}
+            $Ip: x_{(t)} = $\\        
+            $Th: X_{(f)} = $ 
+            
+    tabellina sul procedimento di sintesi di un segnale 
