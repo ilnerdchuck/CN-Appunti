@@ -80,6 +80,7 @@
                 \item Una funzione limitata (finita) nel tempo ha uno spettro nella frequenza illimitato $\rightarrow$ sono i segnali fisici   
                 \item Una funzione illimitata nel tempo ha uno spettro nella frequenza limitato (finito)
             \end{itemize}
+
         \subsubsection{Simmetria hermitiana}\label{Simmetria Hermitiana}
             \begin{align}
                 Ip&: x_{(t)}\ reale \nonumber \\
@@ -90,16 +91,19 @@
                         \angle X_{(-f)} = -\angle X_{(f)}\hspace{0.3cm} & Simmetria\ Dispari
                     \end{cases} \nonumber
             \end{align}
+
         \subsubsection{Paritá}\label{Parita}
             \begin{align}
                 Ip&: x_{(t)}\ reale\ e\ pari  \nonumber \\
                 Th&: X_{(f)}\ reale\ e\ pari \nonumber  
             \end{align}
+
         \subsubsection{Disparitá}\label{Disparita}
             \begin{align}
                 Ip&: x_{(t)}\ reale\ e\ dispari  \nonumber \\
                 Th&: X_{(f)}\ immaginaria\ e\ dispari \nonumber 
             \end{align}
+
     \subsection{Teoremi relativi alla TCF}
         \subsubsection{Linearitá}\label{Linearita}
             $Ip: x_{(t)} = \alpha x_{1(t)} + \beta x_{2(t)}$\\        
@@ -121,14 +125,36 @@
             $Th: X_{(t)} \rightleftharpoons^{TCF} x_{(-f)}$ 
             Dimostrazione:
             \begin{align}
-                X_{(f)} & = \int_{-\infty}^{\infty}  e^{-j2\pi ft} dt \nonumber \\
-                        & = finisci\nonumber \\
-                        & =  \nonumber
+                X_{(f)} & = \int_{-\infty}^{\infty} x_{(t)} e^{-j2\pi ft} dt = Sost. \begin{cases}
+                    t \rightarrow f\\
+                    f \rightarrow t
+                \end{cases} \Rightarrow  X_{(t)} = \int_{-\infty}^{\infty} x_{(f)} e^{-j2\pi tf} df \nonumber \\
+                        & =Sost.\ (f^\prime = -f) \Rightarrow  X_{(t)} = \int_{-\infty}^{\infty} x_{(-f^\prime)} e^{-j2\pi t(-f^\prime)} df^\prime\nonumber \\
+                        & =\int_{-\infty}^{\infty} x_{(-f^\prime)} e^{j2\pi tf^\prime} df^\prime= ACTF[x_{(-f)}] = c.v.d.  \nonumber
             \end{align}
+            Esempio:
+                {
+                    esempio del martorella sinc dualitá
+                }
 
         \subsubsection{Ritardo}\label{Ritardo}
-            $Ip: x_{(t)} = $\\        
-            $Th: X_{(f)} = $ 
+            $Ip: x_{(t)} \rightleftharpoons^{TCF} X_{(f)},\ y_{(t)} = x_{(t-to)}$\\        
+            $Th: Y_{(f)} \rightleftharpoons^{TCF} y_{(t)} = X_{(f)}e^{-j2\pi ft_0}$\\ 
+            Dimostrazione:
+            \begin{align}
+                Y_{(f)} & = \int_{-\infty}^{\infty} y_{(t)} e^{-j2\pi ft} dt = \int_{-\infty}^{\infty} x_{(t-t_0)} e^{-j2\pi tf} dt \nonumber \\
+                        & =Sost.\ (t^\prime = t-t_0) \Rightarrow  Y_{(f)} = \int_{-\infty}^{\infty} x_{(t^\prime)} e^{-j2\pi f(t^\prime+t_0)} dt^\prime \nonumber \\
+                        & =\int_{-\infty}^{\infty} x_{(t^\prime)} e^{-j2\pi ft^\prime}e^{-j2\pi ft_0} dt^\prime= X_{(f)}e^{-j2\pi ft_0}\ c.v.d.  \nonumber
+            \end{align}
+            {\em Osservazione:}
+                \begin{itemize}
+                    \item Un ritardo nel tempo introduce una componente solo di fase che cresce lienarmente con la frequenza
+                    \item Un esponenziale nel tempo introduce un ritardo nel dominio della frequenza $e^{j2\pi f_0t} \rightarrowtail X_{(f-f_0)}$
+                \end{itemize}
+            Esempio:
+                {
+                    esempio del martorella rect ritardata eheh
+                }
 
         \subsubsection{Derivazione}\label{Derivazione}
             $Ip: x_{(t)} = $\\        
@@ -157,16 +183,86 @@
                 \item {3}
             \end{itemize}
         \subsubsection{Prodotto}\label{Prodotto}
+
+
     \subsection{Modulazione di Ampiezza}\label{Modulazione di Ampiezza}
-        \subsubsection{Modulazione con $\cos(2\pi f_0t)$}\label{Modulazione con coseno}
-            $Ip: x_{(t)} = $\\        
-            $Th: X_{(f)} = $ 
-            
-        \subsubsection{Modulazione con $\sin(2\pi f_0t)$}\label{Modulazione con seno}
-            $Ip: x_{(t)} = $\\        
-            $Th: X_{(f)} = $ 
-            
-        \subsubsection{Modulazione con Esponenziale Complesso}\label{Modulazione con Esponenziale Complesso}
+        \[
+            y_{(t)} = x_{(t)}\cos(2\pi f_0t)
+        \]
+        \begin{figure}[H]
+            \centering
+            \subfloat[Sistema di modulazione]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:sistema di modulazione}}
+            \hfill
+            \subfloat[{\color{blue}$x_{(t)}$}, {\color{red}$y_{(t)}$}]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:modulazione in ampiezza}}
+            \caption{Esempio sistema di modulazione di ampiezza}
+        \end{figure}
+        Nel dominio della frequenza:
+        \begin{figure}[H]
+            \centering
+            \subfloat[Senza modulazione]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:segnale senza modulazione}}
+            \hfill
+            \subfloat[Con modulazione]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:segnale con modulazione}}
+            \caption{Segnale nel dominio della frequenza modulato e non}
+        \end{figure}
+        Serve per spostare la frequenza (es. di trasmissione) del segnale in modo tale, ad esempio, da non sovrapporre due segnali che sono sulla stessa frequenza.
+        Se il segnale non fosse modulato si dice in \textbf{banda base} (BB) se il segnale é modulato si dice in \textbf{banda passante}(BP)
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=4cm]{media/uwu.png}
+            \caption{{\color{blue}BB}, {\color{red}BP}}
+            \label{fig:bb e bp}
+        \end{figure}
+
+        \subsubsection{Th. Modulazione con $\cos(2\pi f_0t)$}\label{Modulazione con coseno}
+            $Ip:\begin{cases}
+                    y_{(t)}= x_{(t)}\cos(2\pi f_0t)\\        
+                    x_{(t)}\rightleftharpoons^{TCF} X_{(f)}
+                \end{cases}$\\
+            $Th: Y_{(f)} = \frac{1}{2} X_{(f-f_0)} + \frac{1}{2} X_{(f+f_0)}$ \\
+            Dimostrazione:
+            \begin{align}
+                Y_{(f)} & = \int_{-\infty}^{\infty} y_{(t)} e^{-j2\pi ft} dt = \int_{-\infty}^{\infty} x_{(t)}\cos(2\pi f_0t) e^{-j2\pi ft} dt \nonumber \\
+                & =\int_{-\infty}^{\infty} x_{(t)} \frac{e^{j2\pi f_0t} + e^{-j2\pi f_0t}}{2} e^{-j2\pi ft} dt =  \nonumber \\
+                & = \frac{1}{2} \int_{-\infty}^{\infty} x_{(t)} e^{-j2\pi (f-f_0)t} dt + \frac{1}{2} \int_{-\infty}^{\infty} x_{(t)} e^{-j2\pi (f+f_0)t} dt \nonumber \\
+                & = \eval{TCF[x_{(t)}]}_{f-f_0} + \eval{TCF[x_{(t)}]}_{f+f_0} = \frac{1}{2} X_{(f-f_0)} + \frac{1}{2} X_{(f+f_0)}\ c.v.d \nonumber  
+            \end{align}
+            Esempio:
+            {
+                esempio modulazione di una rect
+            }
+            fai cosa ha chiesto lui a fine lezione
+        \subsubsection{Th. Modulazione con $\sin(2\pi f_0t)$}\label{Modulazione con seno}
+        $Ip:\begin{cases}
+                y_{(t)}= x_{(t)}\sin(2\pi f_0t)\\        
+                x_{(t)}\rightleftharpoons^{TCF} X_{(f)}
+            \end{cases}$\\
+        $Th: Y_{(f)} = \frac{1}{2j} X_{(f-f_0)} - \frac{1}{2j} X_{(f+f_0)} $ \\
+        Dimostrazione: FINISCI
+        \begin{align}
+            Y_{(f)} & = \int_{-\infty}^{\infty} y_{(t)} e^{-j2\pi ft} dt = \int_{-\infty}^{\infty} x_{(t)}\cos(2\pi f_0t) e^{-j2\pi ft} dt \nonumber \\
+            & =\int_{-\infty}^{\infty} x_{(t)} \frac{e^{j2\pi f_0t} + e^{-j2\pi f_0t}}{2} e^{-j2\pi ft} dt =  \nonumber \\
+            & = \frac{1}{2} \int_{-\infty}^{\infty} x_{(t)} e^{-j2\pi (f-f_0)t} dt + \frac{1}{2} \int_{-\infty}^{\infty} x_{(t)} e^{-j2\pi (f+f_0)t} dt \nonumber \\
+            & = \eval{TCF[x_{(t)}]}_{f-f_0} + \eval{TCF[x_{(t)}]}_{f+f_0} = \frac{1}{2} X_{(f-f_0)} + \frac{1}{2} X_{(f+f_0)}\ c.v.d \nonumber  
+        \end{align}
+
+        \subsubsection{Th. Modulazione con $\cos(2\pi f_0t + \phi)$}\label{Modulazione con coseno generico}
+            $Ip: \begin{cases}
+                y_{(t)}= x_{(t)}\cos(2\pi f_0t + \phi)\\        
+                x_{(t)}\rightleftharpoons^{TCF} X_{(f)}
+                \end{cases}$\\
+            $Th: Y_{(f)} = \frac{e^{j\phi}}{2} X_{(f-f_0)} + \frac{e^{-j\phi}}{2} X_{(f+f_0)} $ \\
+            Dimostrazione: FINISCI
+
+            Come cambiano i grafici
+            \begin{figure}[H]
+                \centering
+                \subfloat[Ampiezza Mod. generica]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:Ampiezza Mod. generica}}
+                \hfill
+                \subfloat[fase Mod. generica]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:fase Mod. generica}}
+                \caption{Modulazione generica}
+            \end{figure}
+
+        \subsubsection{Th. Modulazione con Esponenziale Complesso}\label{Modulazione con Esponenziale Complesso}
             $Ip: x_{(t)} = $\\        
             $Th: X_{(f)} = $ 
             
