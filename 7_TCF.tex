@@ -68,7 +68,17 @@
                 \hfill
                 \subfloat[Spettro di Fase TCF $rect$]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:Spettro di Fase TCF rect}}
             \end{figure}
-            
+
+            % \begin{center}
+            %     \begin{tikzpicture}[scale=2]
+            %         \draw[->] (-2,0) -- (2,0) node[right] {$t$};
+            %         \draw[->] (0,-0.5) -- (0,1.5) node[above] {$Arect(\frac{t}{T})$};
+            %         \draw[thick] (-1,0) -- (-1,1) -- (1,1) -- (1,0);
+            %         \draw[dashed] (-1,-0.1) node[below] {$-\frac{T}{2}$} -- (-1,1) node[pos=1,left] {$A$};
+            %         \draw[dashed] (1,-0.1) node[below] {$\frac{T}{2}$} -- (1,1);
+            %     \end{tikzpicture}
+            % \end{center}
+                
     \subsection{Propietá}
         Come per la TSF vale che al variare del periodo della funzione $T$:
             \begin{itemize}
@@ -157,25 +167,45 @@
                 }
 
         \subsubsection{Derivazione}\label{Derivazione}
-            $Ip: x_{(t)} = $\\        
-            $Th: X_{(f)} = $ 
+            $Ip:\begin{cases}
+                x_{(t)}\rightleftharpoons^{TCF} X_{(f)}
+                y_{(t)}= \derivative{x_{(t)}}{t}\\        
+            \end{cases}$\\
+            $Th: Y_{(f)} = j2\pi f X_{(f)} $ \\
+            Dimostrazione: ok per ora non l'ha fatta
             
         \subsubsection{Integrazione}\label{Integrazione}
-            $Ip: x_{(t)} = $\\        
-            $Th: X_{(f)} = $ 
-        
+            $Ip:\begin{cases}
+                x_{(t)}\rightleftharpoons^{TCF} X_{(f)}
+                y_{(t)}= \derivative{x_{(t)}}{t}\\        
+            \end{cases}$\\
+            $Th: Y_{(f)} = j2\pi f X_{(f)} $ \\
+            Dimostrazione: ok per ora non l'ha fatta
+            
         \subsubsection{Derivazione in Frequenza}\label{Derivazione in Frequenza}
-            $Ip: x_{(t)} = $\\        
-            $Th: X_{(f)} = $ 
-            
+            $Ip:\begin{cases}
+                x_{(t)}\rightleftharpoons^{TCF} X_{(f)}
+                y_{(t)}= \derivative{x_{(t)}}{t}\\        
+            \end{cases}$\\
+            $Th: Y_{(f)} = j2\pi f X_{(f)} $ \\
+            Dimostrazione: ok per ora non l'ha fatta
+                
         \subsubsection{Integrazione in Frequenza}\label{Integrazione in Frequenza}
-            $Ip: x_{(t)} = $\\        
-            $Th: X_{(f)} = $ 
-        
-        \subsubsection{Convoluzione}\label{Convoluzione}
-            $Ip: x_{(t)} = $\\        
-            $Th: X_{(f)} = $ 
+            $Ip:\begin{cases}
+                x_{(t)}\rightleftharpoons^{TCF} X_{(f)}
+                y_{(t)}= \derivative{x_{(t)}}{t}\\        
+            \end{cases}$\\
+            $Th: Y_{(f)} = j2\pi f X_{(f)} $ \\
+            Dimostrazione: ok per ora non l'ha fatta
             
+        \subsubsection{Convoluzione}\label{Convoluzione}
+            $Ip:\begin{cases}
+                x_{(t)}\rightleftharpoons^{TCF} X_{(f)}
+                y_{(t)}= \derivative{x_{(t)}}{t}\\        
+            \end{cases}$\\
+            $Th: Y_{(f)} = j2\pi f X_{(f)} $ \\
+            Dimostrazione: ok per ora non l'ha fatta
+                
             Propietá della convoluzione:
             \begin{itemize}
                 \item {1}
