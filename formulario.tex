@@ -15,7 +15,25 @@
                 É un $\sin(\alpha)$ smorzato secondo $\frac{1}{x}$ che si annulla in $k\pi: k\in\mathbb{Z}$
                 \begin{figure}[htp]
                     \centering
-                    \includegraphics[width=4cm]{media/uwu.png}
+                    \begin{tikzpicture}
+                        \begin{axis}[
+                            domain=-4*pi:4*pi,
+                            samples=200,
+                            axis lines=middle,
+                            xlabel=$x$,
+                            ylabel=$y$,
+                            ymin=-1.5,
+                            ymax=1.5,
+                            xtick={-2*pi, -3/2*pi, -pi, -1/2*pi, 0, 1/2*pi, pi, 3/2*pi, 2*pi},
+                            xticklabels={$-2\pi$, $-\frac{3}{2}\pi$, $-\pi$, $-\frac{1}{2}\pi$, $0$, $\frac{1}{2}\pi$, $\pi$, $\frac{3}{2}\pi$, $2\pi$},
+                            ytick={-1, 1},
+                            yticklabels={$-1$, $1$},
+                            width=12cm,
+                            height=6cm
+                        ]
+                        \addplot [blue, thick] {1/(pi*x)*sin(deg(pi*x))};
+                        \end{axis}
+                    \end{tikzpicture}
                     \caption{grafico $sinc(\alpha)$}
                     \label{fig:grafico sinc}
                 \end{figure}
@@ -74,10 +92,36 @@
     \subsection{Segnali Comuni}\label{Segnali Comuni}
     \begin{enumerate}
         \item {
-            $x_R=A\hspace{0.1cm}rect\left(\frac{t}{T}\right) T = durata $
+            $x_R\triangleq A\hspace{0.1cm}rect\left(\frac{t}{T}\right)\hspace{0.7cm} T = durata $
                 \begin{figure}[H]
                     \centering
-                    \includegraphics[width=4cm]{media/uwu.png}
+                    \begin{tikzpicture}
+                        \begin{axis}[
+                            xlabel=$x$,
+                            ylabel=$y$,
+                            xmin=-5,
+                            xmax=5,
+                            ymin=-0.5,
+                            ymax=4,
+                            ytick = {1.5},
+                            xtick={-3,-1.5, 0, 1.5,3},
+                            xticklabels={$-\frac{T_0}{2}$,$-\frac{T}{2}$, $0$, $\frac{T}{2}$, $\frac{T_0}{2}$},
+                            yticklabels = {$A$},
+                            yticklabel style = {yshift=5pt,xshift=4pt}, 
+                            axis lines=middle,
+                            thick,
+                            domain=-5:5,
+                            samples=100,
+                            width=10cm,
+                            height=4cm
+                        ]
+                        \addplot [const plot,red, thick] coordinates{(-1.5,1.5)(1.5,1.5)};
+                        \addplot [const plot,red, thick] coordinates{(-1.5,0)(-1.5,1.5)};
+                        \addplot [const plot,red, thick] coordinates{(1.5,0)(1.5,1.5)};
+                        \addplot [const plot,red, thick] coordinates{(5,0)(1.5,0)};
+                        \addplot [const plot,red, thick] coordinates{(-5,0)(-1.5,0)};
+                        \end{axis}
+                      \end{tikzpicture}
                     \caption{Rappresentazione di $A\hspace{0.1cm}rect\left(\frac{t}{T}\right)$}
                     \label{fig:grafico rect}
             \end{figure}                
@@ -87,7 +131,25 @@
             É un $\sin(\alpha)$ smorzato secondo $\frac{1}{x}$ che si annulla in $k\pi: k\in\mathbb{Z}$
             \begin{figure}[htp]
                 \centering
-                \includegraphics[width=4cm]{media/uwu.png}
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        domain=-4*pi:4*pi,
+                        samples=200,
+                        axis lines=middle,
+                        xlabel=$x$,
+                        ylabel=$y$,
+                        ymin=-1.5,
+                        ymax=1.5,
+                        xtick={-2*pi, -3/2*pi, -pi, -1/2*pi, 0, 1/2*pi, pi, 3/2*pi, 2*pi},
+                        xticklabels={$-2\pi$, $-\frac{3}{2}\pi$, $-\pi$, $-\frac{1}{2}\pi$, $0$, $\frac{1}{2}\pi$, $\pi$, $\frac{3}{2}\pi$, $2\pi$},
+                        ytick={-1, 1},
+                        yticklabels={$-1$, $1$},
+                        width=12cm,
+                        height=6cm
+                    ]
+                    \addplot [blue, thick] {1/(pi*x)*sin(deg(pi*x))};
+                    \end{axis}
+                \end{tikzpicture}
                 \caption{grafico $sinc(\alpha)$}
                 \label{fig:grafico sinc2}
             \end{figure}

@@ -217,7 +217,31 @@
         $
         \begin{figure}[H]
             \centering
-            \includegraphics[width=4cm]{media/uwu.png}
+            \begin{tikzpicture}
+                \begin{axis}[
+                    xlabel=$x$,
+                    ylabel=$y$,
+                    xmin=-5,
+                    xmax=5,
+                    ymin=-0.5,
+                    ymax=4,
+                    ytick = {1.5},
+                    xtick = {},
+                    xticklabels = {},
+                    yticklabels = {$A$},
+                    yticklabel style = {yshift=5pt,xshift=4pt}, 
+                    axis lines=middle,
+                    thick,
+                    domain=-5:5,
+                    samples=100,
+                    width=10cm,
+                    height=4cm
+                ]
+                \addplot [const plot,red, thick] coordinates{(0,1.5)(5,1.5)};
+                \addplot [const plot,red, thick] coordinates{(0,0)(0,1.5)};
+                \addplot [const plot,red, thick] coordinates{(-5,0)(0,0)};
+                \end{axis}
+            \end{tikzpicture}
             \caption{Segnale gradino}
             \label{fig:segnale gradino}
             
@@ -253,7 +277,33 @@
         $
         \begin{figure}[H]
             \centering
-            \includegraphics[width=4cm]{media/uwu.png}
+            \begin{tikzpicture}
+                \begin{axis}[
+                    xlabel=$x$,
+                    ylabel=$y$,
+                    xmin=-5,
+                    xmax=5,
+                    ymin=-0.5,
+                    ymax=4,
+                    ytick = {1.5},
+                    xtick={-1.5, 0, 1.5},
+                    xticklabels={$-\frac{T}{2}$, $0$, $\frac{T}{2}$},
+                    yticklabels = {$A$},
+                    yticklabel style = {yshift=5pt,xshift=4pt}, 
+                    axis lines=middle,
+                    thick,
+                    domain=-5:5,
+                    samples=100,
+                    width=10cm,
+                    height=4cm
+                ]
+                \addplot [const plot,red, thick] coordinates{(-1.5,1.5)(1.5,1.5)};
+                \addplot [const plot,red, thick] coordinates{(-1.5,0)(-1.5,1.5)};
+                \addplot [const plot,red, thick] coordinates{(1.5,0)(1.5,1.5)};
+                \addplot [const plot,red, thick] coordinates{(5,0)(1.5,0)};
+                \addplot [const plot,red, thick] coordinates{(-5,0)(-1.5,0)};
+                \end{axis}
+              \end{tikzpicture}
             \caption{Segnale rettangolo}
             \label{fig:segnale rettangolo}
         \end{figure}        
@@ -280,6 +330,40 @@
                         x_{m} = \lim_{T\rightarrow\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}  x_{(t)} \,dt & = \lim_{T\rightarrow\infty} \frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} A\hspace{0.1cm}rect\left(\frac{t}{T}\right)\ dt \nonumber \\
                         & =\lim_{T\rightarrow\infty} \frac{1}{T_0} A T = 0 \nonumber
                     \end{align}
+                    \begin{figure}[H]
+                        \centering
+                        \begin{tikzpicture}
+                            \begin{axis}[
+                                xlabel=$x$,
+                                ylabel=$y$,
+                                xmin=-5,
+                                xmax=5,
+                                ymin=-0.5,
+                                ymax=4,
+                                ytick = {1.5},
+                                xtick={-3,-1.5, 0, 1.5,3},
+                                xticklabels={$-\frac{T_0}{2}$,$-\frac{T}{2}$, $0$, $\frac{T}{2}$, $\frac{T_0}{2}$},
+                                yticklabels = {$A$},
+                                yticklabel style = {yshift=5pt,xshift=4pt}, 
+                                axis lines=middle,
+                                thick,
+                                domain=-5:5,
+                                samples=100,
+                                width=10cm,
+                                height=4cm
+                            ]
+                            \addplot [const plot,red, thick] coordinates{(-1.5,1.5)(1.5,1.5)};
+                            \addplot [const plot,red, thick] coordinates{(-1.5,0)(-1.5,1.5)};
+                            \addplot [const plot,red, thick] coordinates{(1.5,0)(1.5,1.5)};
+                            \addplot [const plot,red, thick] coordinates{(5,0)(1.5,0)};
+                            \addplot [const plot,red, thick] coordinates{(-5,0)(-1.5,0)};
+                            \addplot [const plot,dotted, black, thick] coordinates{(3,-5)(3,5)};
+                            \addplot [const plot,dotted, black, thick] coordinates{(-3,-5)(-3,5)};
+                            \end{axis}
+                          \end{tikzpicture}
+                        \caption{}
+                        \label{fig:segnale rettangolo valore medio}
+                    \end{figure}
             }
         \end{itemize}
         
@@ -288,7 +372,28 @@
         $x_{(t)} = e^{-t}U_{(t)}$
         \begin{figure}[H]
             \centering
-            \includegraphics[width=4cm]{media/uwu.png}
+            \begin{tikzpicture}
+                \begin{axis}[
+                    xlabel=$x$,
+                    ylabel=$y$,
+                    xmin=-5,
+                    xmax=5,
+                    ymin=-0.5,
+                    ymax=4,
+                    ytick = {1},
+                    xtick={},
+                    xticklabels={},
+                    yticklabels = {$1$},
+                    axis lines=middle,
+                    thick,
+                    domain=-5:5,
+                    samples=100,
+                    width=10cm,
+                    height=4cm
+                ]
+                \addplot [domain= 0:5,samples = 100,red, thick] {exp(-x)};
+                \end{axis}
+              \end{tikzpicture}
             \caption{Segnale esponenziale unilatera}
             \label{fig:segnale esponenziale unilatera}
         \end{figure}        
@@ -322,7 +427,29 @@
         $x_{(t)} = e^{-|t|}$
         \begin{figure}[H]
             \centering
-            \includegraphics[width=4cm]{media/uwu.png}
+            \begin{tikzpicture}
+                \begin{axis}[
+                    xlabel=$x$,
+                    ylabel=$y$,
+                    xmin=-5,
+                    xmax=5,
+                    ymin=-0.5,
+                    ymax=4,
+                    ytick = {1},
+                    xtick={},
+                    xticklabels={},
+                    yticklabels = {$1$},
+                    axis lines=middle,
+                    thick,
+                    domain=-5:5,
+                    samples=100,
+                    width=10cm,
+                    height=4cm
+                ]
+                \addplot [domain= 0:5,samples = 100,red, thick] {exp(-x)};
+                \addplot [domain= -5:0,samples = 100,red, thick] {exp(x)};
+                \end{axis}
+              \end{tikzpicture}
             \caption{Segnale esponenziale bilatera}
             \label{fig:segnale esponenziale bilatera}
         \end{figure}        
@@ -360,7 +487,29 @@
         $
         \begin{figure}[H]
             \centering
-            \includegraphics[width=4cm]{media/uwu.png}
+            \begin{tikzpicture}
+                \begin{axis}[
+                    xlabel=$x$,
+                    ylabel=$y$,
+                    xmin=-3,
+                    xmax=3,
+                    ymin=-3,
+                    ymax=4,
+                    ytick={-1.5, 0, 1.5},
+                    yticklabels = {$-1$,$0$,$1$},
+                    yticklabel style = {yshift=-5pt,xshift=4pt}, 
+                    axis lines=middle,
+                    thick,
+                    domain=-5:5,
+                    samples=100,
+                    width=10cm,
+                    height=4cm
+                ]
+                \addplot [const plot,red, thick] coordinates{(0,1.5)(5,1.5)};
+                \addplot [const plot,red, thick] coordinates{(0,-1.5)(0,1.5)};
+                \addplot [const plot,red, thick] coordinates{(0,-1.5)(-5,-1.5)};
+                \end{axis}
+              \end{tikzpicture}
             \caption{Segnale sgn(x)}
             \label{fig:segnale sgn(x)}
         \end{figure}

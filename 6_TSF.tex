@@ -40,10 +40,52 @@
             Si possono rappresentare il modulo (Ampiezza) e la fase tramite grafici che prendono il nome di spettri:
             \begin{figure}[H]
                 \centering
-                \subfloat[Spettro di Ampiezza]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:Spettro di Ampiezza}}
+                \subfloat[Spettro di Ampiezza]{
+                    \begin{tikzpicture}
+                        \begin{axis}[
+                            domain=-pi:pi,
+                            samples=200,
+                            axis lines=middle,
+                            xlabel=$x$,
+                            ylabel=$y$,
+                            ymin=-1.5,
+                            ymax=1.5,
+                            xtick={-2*pi, -3/2*pi, -pi, -1/2*pi, 0, 1/2*pi, pi, 3/2*pi, 2*pi},
+                            xticklabels={$-2\pi$, $-\frac{3}{2}\pi$, $-\pi$, $-\frac{1}{2}\pi$, $0$, $\frac{1}{2}\pi$, $\pi$, $\frac{3}{2}\pi$, $2\pi$},
+                            ytick={-1, 1},
+                            yticklabels={$-1$, $1$},
+                            width=12cm,
+                            height=6cm
+                        ]
+                        \addplot [red,dotted, samples = 300] {1/(pi*x)*sin(deg(pi*x))};
+                        \addplot+ [blue, thick, ycomb, samples at={-2.4,-2.1,-1.8,-1.5,-1.2,-0.9,-0.6,-0.3,0,0.3,0.6,0.9,1.2,1.5,1.8,2.1,2.4}] {abs(1/(pi*x)*sin(deg(pi*x)))};
+                        \end{axis}
+                    \end{tikzpicture}
+                }
                 \hfill
-                \subfloat[Spettro di Fase]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:Spettro di Fase}}
-                \caption{Spettro del segnale}
+                \subfloat[Spettro di Fase]{
+                    \begin{tikzpicture}
+                        \begin{axis}[
+                            domain=-pi:pi,
+                            samples=200,
+                            axis lines=middle,
+                            xlabel=$x$,
+                            ylabel=$y$,
+                            ymin=-pi,
+                            ymax=pi,
+                            xtick={-2*pi, -3/2*pi, -pi, -1/2*pi, 0, 1/2*pi, pi, 3/2*pi, 2*pi},
+                            xticklabels={$-2\pi$, $-\frac{3}{2}\pi$, $-\pi$, $-\frac{1}{2}\pi$, $0$, $\frac{1}{2}\pi$, $\pi$, $\frac{3}{2}\pi$, $2\pi$},
+                            ytick={-pi, pi},
+                            yticklabels={$-\pi$, $\pi$},
+                            width=12cm,
+                            height=6cm
+                        ]
+                        \addplot [red,dotted, samples = 300] {1/(pi*x)*sin(deg(pi*x))};
+                        \addplot+ [blue, thick, ycomb, samples at={-2.4,-2.1,-1.8,-1.5,-1.2,-0.9,-0.6,-0.3,0,0.3,0.6,0.9,1.2,1.5,1.8,2.1,2.4}] {atan(1/(pi*x)*sin(deg(pi*x)))};
+                        \end{axis}
+                    \end{tikzpicture}
+                }
+                \caption{Spettro di una $sinc(x)$}
             \end{figure}
             lo spettro di Ampiezza gode della \textbf{simmetria pari} rispetto alle ascisse quindi é \textbf{sempre positivo}, mentre lo spettro di fase della \textbf{simmetria dispari}.
         \subsection{Calcolo dei coefficenti $X_k$ per segnali noti}
