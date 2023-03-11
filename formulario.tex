@@ -17,21 +17,21 @@
                     \centering
                     \begin{tikzpicture}
                         \begin{axis}[
-                            domain=-4*pi:4*pi,
+                            domain=-6:6,
                             samples=200,
                             axis lines=middle,
                             xlabel=$x$,
                             ylabel=$y$,
                             ymin=-1.5,
                             ymax=1.5,
-                            xtick={-2*pi, -3/2*pi, -pi, -1/2*pi, 0, 1/2*pi, pi, 3/2*pi, 2*pi},
-                            xticklabels={$-2\pi$, $-\frac{3}{2}\pi$, $-\pi$, $-\frac{1}{2}\pi$, $0$, $\frac{1}{2}\pi$, $\pi$, $\frac{3}{2}\pi$, $2\pi$},
+                            xtick={-5,-4,-3,-2,-1,0,1,2,3,4,5},
+                            xticklabels={$-5$,$-4$,$-3$,$-2$,$-1$,$0$,$1$,$2$,$3$,$4$,$5$},
                             ytick={-1, 1},
                             yticklabels={$-1$, $1$},
                             width=12cm,
                             height=6cm
                         ]
-                        \addplot [blue, thick] {1/(pi*x)*sin(deg(pi*x))};
+                        \addplot [blue, thick] {sin(deg(x*pi))/(x*pi)};
                         \end{axis}
                     \end{tikzpicture}
                     \caption{grafico $sinc(\alpha)$}
@@ -133,21 +133,21 @@
                 \centering
                 \begin{tikzpicture}
                     \begin{axis}[
-                        domain=-4*pi:4*pi,
+                        domain=-6:6,
                         samples=200,
                         axis lines=middle,
                         xlabel=$x$,
                         ylabel=$y$,
                         ymin=-1.5,
                         ymax=1.5,
-                        xtick={-2*pi, -3/2*pi, -pi, -1/2*pi, 0, 1/2*pi, pi, 3/2*pi, 2*pi},
-                        xticklabels={$-2\pi$, $-\frac{3}{2}\pi$, $-\pi$, $-\frac{1}{2}\pi$, $0$, $\frac{1}{2}\pi$, $\pi$, $\frac{3}{2}\pi$, $2\pi$},
+                        xtick={-5,-4,-3,-2,-1,0,1,2,3,4,5},
+                        xticklabels={$-5$,$-4$,$-3$,$-2$,$-1$,$0$,$1$,$2$,$3$,$4$,$5$},
                         ytick={-1, 1},
                         yticklabels={$-1$, $1$},
                         width=12cm,
                         height=6cm
                     ]
-                    \addplot [blue, thick] {1/(pi*x)*sin(deg(pi*x))};
+                    \addplot [blue, thick] {sin(deg(x*pi))/(x*pi)};
                     \end{axis}
                 \end{tikzpicture}
                 \caption{grafico $sinc(\alpha)$}

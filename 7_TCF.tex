@@ -7,9 +7,51 @@
         Passiamo da un analisi a frequenze discrete ad un analisi su tutto lo spettro delle frequenze
         \begin{figure}[H]
             \centering
-            \subfloat[Spettro di Ampiezza TSF]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:Spettro di Ampiezza TSF}}
-            \hfill
-            \subfloat[Spettro di Ampiezza TCF]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:Spettro di Ampiezza TCF}}
+            \subfloat[Spettro di Ampiezza TSF]{
+                    \begin{tikzpicture}
+                        \begin{axis}[
+                            domain=-5:5,
+                            samples=200,
+                            axis lines=middle,
+                            xlabel=$k$,
+                            ylabel=$y$,
+                            ymin=-1.5,
+                            ymax=1.5,
+                            xtick={-5,-4,-3,-2,-1,0,1,2,3,4,5},
+                            xticklabels={$-5$,$-4$,$-3$,$-2$,$-1$,$0$,$1$,$2$,$3$,$4$,$5$},
+                            ytick={-1, 1},
+                            yticklabels={$-1$, $1$},
+                            width=12cm,
+                            height=6cm
+                        ]
+                        \addplot [red,dotted, samples = 300] {sin(deg(x*pi))/(x*pi)};
+                        \addplot+ [blue, thick, ycomb, samples at={-4,-3.6,-3.2,-2.8,-2.4,-2,-1.6,-1.2,-0.8,-0.4,0,0.4,0.8,1.2,1.6,2,2.4,2.8,3.2,3.6,4}] {abs(sin(deg(x*pi))/(x*pi))};
+                        \end{axis}
+                    \end{tikzpicture}
+                }
+                \hfill
+                \subfloat[Spettro di Ampiezza TCF]{
+                    \begin{tikzpicture}
+                        \begin{axis}[
+                            domain=-5:5,
+                            samples=200,
+                            axis lines=middle,
+                            xlabel=$f$,
+                            ylabel=$y$,
+                            ymin=-1.5,
+                            ymax=1.5,
+                            xtick={-5,-4,-3,-2,-1,0,1,2,3,4,5},
+                            xticklabels={$-5$,$-4$,$-3$,$-2$,$-1$,$0$,$1$,$2$,$3$,$4$,$5$},
+                            ytick={-1, 1},
+                            yticklabels={$-1$, $1$},
+                            width=12cm,
+                            height=6cm
+                        ]
+                        \addplot [red,dotted, samples = 300] {sin(deg(x*pi))/(x*pi)};
+                        \addplot [blue, thick, samples = 300] {abs(sin(deg(x*pi))/(x*pi))};
+                    \end{axis}
+                    \end{tikzpicture}
+                }
         \end{figure}
 
     \subsection{Equazioni di Analisi e Sintesi}
@@ -36,9 +78,51 @@
         Si possono rappresentare il modulo (Ampiezza) e la fase tramite grafici che prendono il nome di spettri:
         \begin{figure}[H]
             \centering
-            \subfloat[Spettro di Ampiezza]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:Spettro di Ampiezza TCF}}
+            \subfloat[Spettro di Ampiezza]{
+                    \begin{tikzpicture}
+                        \begin{axis}[
+                            domain=-5:5,
+                            samples=200,
+                            axis lines=middle,
+                            xlabel=$f$,
+                            ylabel=$y$,
+                            ymin=-1.5,
+                            ymax=1.5,
+                            xtick={-5,-4,-3,-2,-1,0,1,2,3,4,5},
+                            xticklabels={$-5$,$-4$,$-3$,$-2$,$-1$,$0$,$1$,$2$,$3$,$4$,$5$},
+                            ytick={-1, 1},
+                            yticklabels={$-1$, $1$},
+                            width=12cm,
+                            height=6cm
+                        ]
+                        \addplot [red,dotted, samples = 300] {sin(deg(x*pi))/(x*pi)};
+                        \addplot [blue, thick, samples = 300] {abs(sin(deg(x*pi))/(x*pi))};
+                    \end{axis}
+                    \end{tikzpicture}
+                }
             \hfill
-            \subfloat[Spettro di Fase]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:Spettro di Fase TCF2}}
+            \subfloat[Spettro di Fase]{
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        domain=-5:5,
+                        samples=200,
+                        axis lines=middle,
+                        xlabel=$f$,
+                        ylabel=$y$,
+                        ymin=-pi,
+                        ymax=pi,
+                        xtick={-5,-4,-3,-2,-1,0,1,2,3,4,5},
+                        xticklabels={$-5$,$-4$,$-3$,$-2$,$-1$,$0$,$1$,$2$,$3$,$4$,$5$},
+                        ytick={-pi, pi},
+                        yticklabels={$-\pi$, $\pi$},
+                        width=12cm,
+                        height=6cm
+                    ]
+                    \addplot [red,dotted, samples = 300] {sin(deg(x*pi))/(x*pi)};
+                    \addplot [blue, thick, samples = 1000] {rad(atan2(0,sin(deg(x*pi))/(x*pi)))};
+                    \end{axis}
+                \end{tikzpicture}
+            }
             \caption{Spettro del segnale TCF}
         \end{figure}
         lo spettro di Ampiezza gode della \textbf{simmetria pari} rispetto alle ascisse quindi é \textbf{sempre positivo e continuo}, mentre lo spettro di fase della \textbf{simmetria dispari}, 
@@ -48,7 +132,33 @@
             $x_{(t)} = A\hspace{0.1cm}rect\left(\frac{t}{T}\right)$
             \begin{figure}[H]
                 \centering
-                \includegraphics[width=4cm]{media/uwu.png}
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        xlabel=$x$,
+                        ylabel=$y$,
+                        xmin=-5,
+                        xmax=5,
+                        ymin=-0.5,
+                        ymax=4,
+                        ytick = {1.5},
+                        xtick={-1.5, 0, 1.5},
+                        xticklabels={$-\frac{T}{2}$, $0$, $\frac{T}{2}$},
+                        yticklabels = {$A$},
+                        yticklabel style = {yshift=5pt,xshift=4pt}, 
+                        axis lines=middle,
+                        thick,
+                        domain=-5:5,
+                        samples=100,
+                        width=8cm,
+                        height=4cm
+                    ]
+                    \addplot [const plot,red, thick] coordinates{(-1.5,1.5)(1.5,1.5)};
+                    \addplot [const plot,red, thick] coordinates{(-1.5,0)(-1.5,1.5)};
+                    \addplot [const plot,red, thick] coordinates{(1.5,0)(1.5,1.5)};
+                    \addplot [const plot,red, thick] coordinates{(5,0)(1.5,0)};
+                    \addplot [const plot,red, thick] coordinates{(-5,0)(-1.5,0)};
+                    \end{axis}
+                  \end{tikzpicture}
                 \caption{$A\hspace{0.1cm}rect\left(\frac{t}{T}\right)$}
                 \label{fig:grafo rect nella tcf}
             \end{figure}
@@ -64,21 +174,54 @@
             La sinc si annulla in $\frac{k}{T},\ k\in \mathbb{Z}$. Notiamo anche come la funzione di partenza sia reale e pari la TCF rispetti \ref{Parita}(si?):
             \begin{figure}[H]
                 \centering
-                \subfloat[Spettro di Ampiezza TCF $rect$]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:Spettro di Ampiezza TCF rect}}
-                \hfill
-                \subfloat[Spettro di Fase TCF $rect$]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:Spettro di Fase TCF rect}}
+
+            \subfloat[Spettro di Ampiezza]{
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        domain=-5:5,
+                        samples=200,
+                        axis lines=middle,
+                        xlabel=$f$,
+                        ylabel=$y$,
+                        ymin=-1.5,
+                        ymax=1.5,
+                        xtick={-5,-4,-3,-2,-1,0,1,2,3,4,5},
+                        xticklabels={$-\frac{5}{T}$,$-\frac{4}{T}$,$-\frac{3}{T}$,$-\frac{2}{T}$,$-\frac{1}{T}$,$0$,$\frac{1}{T}$,$\frac{2}{T}$,$\frac{3}{T}$,$\frac{4}{T}$,$\frac{5}{T}$},
+                        ytick={-1, 1},
+                        yticklabels={$-1$, $1$},
+                        width=12cm,
+                        height=6cm
+                    ]
+                    \addplot [red,dotted, samples = 300] {sin(deg(x*pi))/(x*pi)};
+                    \addplot [blue, thick, samples = 300] {abs(sin(deg(x*pi))/(x*pi))};
+                \end{axis}
+                \end{tikzpicture}
+                }
+            \hfill
+            \subfloat[Spettro di Fase]{
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        domain=-5:5,
+                        samples=200,
+                        axis lines=middle,
+                        xlabel=$f$,
+                        ylabel=$y$,
+                        ymin=-pi,
+                        ymax=pi,
+                        xtick={-5,-4,-3,-2,-1,0,1,2,3,4,5},
+                        xticklabels={$-\frac{5}{T}$,$-\frac{4}{T}$,$-\frac{3}{T}$,$-\frac{2}{T}$,$-\frac{1}{T}$,$0$,$\frac{1}{T}$,$\frac{2}{T}$,$\frac{3}{T}$,$\frac{4}{T}$,$\frac{5}{T}$},
+                        ytick={-pi, pi},
+                        yticklabels={$-\pi$, $\pi$},
+                        width=12cm,
+                        height=6cm
+                    ]
+                    \addplot [red,dotted, samples = 300] {sin(deg(x*pi))/(x*pi)};
+                    \addplot [blue, thick, samples = 1000] {rad(atan2(0,sin(deg(x*pi))/(x*pi)))};
+                    \end{axis}
+                \end{tikzpicture}
+            }
             \end{figure}
 
-            % \begin{center}
-            %     \begin{tikzpicture}[scale=2]
-            %         \draw[->] (-2,0) -- (2,0) node[right] {$t$};
-            %         \draw[->] (0,-0.5) -- (0,1.5) node[above] {$Arect(\frac{t}{T})$};
-            %         \draw[thick] (-1,0) -- (-1,1) -- (1,1) -- (1,0);
-            %         \draw[dashed] (-1,-0.1) node[below] {$-\frac{T}{2}$} -- (-1,1) node[pos=1,left] {$A$};
-            %         \draw[dashed] (1,-0.1) node[below] {$\frac{T}{2}$} -- (1,1);
-            %     \end{tikzpicture}
-            % \end{center}
-                
     \subsection{Propietá}
         Come per la TSF vale che al variare del periodo della funzione $T$:
             \begin{itemize}

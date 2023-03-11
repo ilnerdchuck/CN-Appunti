@@ -23,7 +23,7 @@
             }
             \item{Equazione di Analisi - Trasformata(TSF)\label{TSF}
                 \[
-                    X_k =\frac{1}{T_0}\int_{-\frac{1}{T_0}}^{\frac{1}{T_0}} x_{(t)} e^{-j2\pi kf_0t} dt
+                    X_k =\frac{1}{T_0}\int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x_{(t)} e^{-j2\pi kf_0t} dt
                 \]
             } 
         \end{itemize}
@@ -43,22 +43,22 @@
                 \subfloat[Spettro di Ampiezza]{
                     \begin{tikzpicture}
                         \begin{axis}[
-                            domain=-pi:pi,
+                            domain=-5:5,
                             samples=200,
                             axis lines=middle,
-                            xlabel=$x$,
+                            xlabel=$k$,
                             ylabel=$y$,
                             ymin=-1.5,
                             ymax=1.5,
-                            xtick={-2*pi, -3/2*pi, -pi, -1/2*pi, 0, 1/2*pi, pi, 3/2*pi, 2*pi},
-                            xticklabels={$-2\pi$, $-\frac{3}{2}\pi$, $-\pi$, $-\frac{1}{2}\pi$, $0$, $\frac{1}{2}\pi$, $\pi$, $\frac{3}{2}\pi$, $2\pi$},
+                            xtick={-5,-4,-3,-2,-1,0,1,2,3,4,5},
+                            xticklabels={$-5$,$-4$,$-3$,$-2$,$-1$,$0$,$1$,$2$,$3$,$4$,$5$},
                             ytick={-1, 1},
                             yticklabels={$-1$, $1$},
                             width=12cm,
                             height=6cm
                         ]
-                        \addplot [red,dotted, samples = 300] {1/(pi*x)*sin(deg(pi*x))};
-                        \addplot+ [blue, thick, ycomb, samples at={-2.4,-2.1,-1.8,-1.5,-1.2,-0.9,-0.6,-0.3,0,0.3,0.6,0.9,1.2,1.5,1.8,2.1,2.4}] {abs(1/(pi*x)*sin(deg(pi*x)))};
+                        \addplot [red,dotted, samples = 300] {sin(deg(x*pi))/(x*pi)};
+                        \addplot+ [blue, thick, ycomb, samples at={-4,-3.6,-3.2,-2.8,-2.4,-2,-1.6,-1.2,-0.8,-0.4,0,0.4,0.8,1.2,1.6,2,2.4,2.8,3.2,3.6,4}] {abs(sin(deg(x*pi))/(x*pi))};
                         \end{axis}
                     \end{tikzpicture}
                 }
@@ -66,31 +66,35 @@
                 \subfloat[Spettro di Fase]{
                     \begin{tikzpicture}
                         \begin{axis}[
-                            domain=-pi:pi,
+                            domain=-5:5,
                             samples=200,
                             axis lines=middle,
-                            xlabel=$x$,
+                            xlabel=$k$,
                             ylabel=$y$,
                             ymin=-pi,
                             ymax=pi,
-                            xtick={-2*pi, -3/2*pi, -pi, -1/2*pi, 0, 1/2*pi, pi, 3/2*pi, 2*pi},
-                            xticklabels={$-2\pi$, $-\frac{3}{2}\pi$, $-\pi$, $-\frac{1}{2}\pi$, $0$, $\frac{1}{2}\pi$, $\pi$, $\frac{3}{2}\pi$, $2\pi$},
+                            xtick={-5,-4,-3,-2,-1,0,1,2,3,4,5},
+                            xticklabels={$-5$,$-4$,$-3$,$-2$,$-1$,$0$,$1$,$2$,$3$,$4$,$5$},
                             ytick={-pi, pi},
                             yticklabels={$-\pi$, $\pi$},
                             width=12cm,
                             height=6cm
                         ]
-                        \addplot [red,dotted, samples = 300] {1/(pi*x)*sin(deg(pi*x))};
-                        \addplot+ [blue, thick, ycomb, samples at={-2.4,-2.1,-1.8,-1.5,-1.2,-0.9,-0.6,-0.3,0,0.3,0.6,0.9,1.2,1.5,1.8,2.1,2.4}] {atan(1/(pi*x)*sin(deg(pi*x)))};
+                        \addplot [red,dotted, samples = 300] {sin(deg(x*pi))/(x*pi)};
+                        \addplot+ [blue, thick, ycomb, samples at={-4,-3.6,-3.2,-2.8,-2.4,-2,-1.6,-1.2,-0.8,-0.4,0,0.4,0.8,1.2,1.6,2,2.4,2.8,3.2,3.6,4}] {rad(atan2(0,sin(deg(x*pi))/(x*pi)))};
                         \end{axis}
                     \end{tikzpicture}
                 }
-                \caption{Spettro di una $sinc(x)$}
+                \caption{Spettro di un treno di rect}
             \end{figure}
             lo spettro di Ampiezza gode della \textbf{simmetria pari} rispetto alle ascisse quindi é \textbf{sempre positivo}, mentre lo spettro di fase della \textbf{simmetria dispari}.
+        \subsection{Propietá della TSF}
+            \subsection{Linearitá}
+            \subsection{Simmetria Hermitiana}
+        
         \subsection{Calcolo dei coefficenti $X_k$ per segnali noti}
             \subsubsection{$A\cos(2\pi f_0 t)$}
-                $x_{(t)}=A\cos(2\pi f_0 t)$
+                $x_{(t)}=A\cos(2\pi f_0 t), \hspace{0.3cm} A>0$
                 \begin{align}
                     ATSF[x_{(t)}] & = ATSF[A\cos(2\pi f_0 t)] \nonumber \\
                         & = ATSF[\frac{A}{2} (e^{j2\pi kf_0t} + e^{-j2\pi kf_0t})] \nonumber 
@@ -104,13 +108,54 @@
                 Possiamo tracciare lo spettro del segnale:
                 \begin{figure}[H]
                     \centering
-                    \subfloat[Spettro di Ampiezza]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:sa TSF coseno}}
+                    \subfloat[Spettro di Ampiezza]{
+                    \begin{tikzpicture}
+                        \begin{axis}[
+                            domain=-4:4,
+                            samples=200,
+                            axis lines=middle,
+                            xlabel=$t$,
+                            ylabel=$y$,
+                            ymin=-1.5,
+                            ymax=1.5,
+                            xtick={-5,-4,-3,-2,-1,0,1,2,3,4,5},
+                            xticklabels={$-5$,$-4$,$-3$,$-2$,$-1$,$0$,$1$,$2$,$3$,$4$,$5$},
+                            ytick={1},
+                            yticklabels={$\frac{A}{2}$},
+                            width=6.5cm,
+                            height=5cm
+                            ]
+                            \addplot [const plot,black,dotted] coordinates{(-4,1)(4,1)};
+                            \addplot+ [blue, thick, ycomb, samples at = {-1,1}] {1};
+                            \end{axis}
+                        \end{tikzpicture}
+                    }
                     \hfill
-                    \subfloat[Spettro di Fase]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:sf TSF coseno}}
-                    \caption{Spettro TSF del coseno}
+                    \subfloat[Spettro di Fase]{
+                        \begin{tikzpicture}
+                            \begin{axis}[
+                                domain=-4:4,
+                                samples=200,
+                                axis lines=middle,
+                                xlabel=$t$,
+                                ylabel=$y$,
+                                ymin=-pi,
+                                ymax=pi,
+                                xtick={-5,-4,-3,-2,-1,0,1,2,3,4,5},
+                                xticklabels={$-5$,$-4$,$-3$,$-2$,$-1$,$0$,$1$,$2$,$3$,$4$,$5$},
+                                ytick={-pi, pi},
+                                yticklabels={$-\pi$, $\pi$},
+                                width=6.5cm,
+                                height=5cm
+                            ]
+                            \addplot+ [blue, thick, ycomb, samples at = {-4,-3,-2,-1,0,1,2,3,4}] {0};
+                            \end{axis}
+                        \end{tikzpicture}
+                    }
+                    \caption{Spettro TSF del coseno $A>0$}
                 \end{figure}
             \subsubsection{$A\sin(2\pi f_0 t)$}
-                $x_{(t)}=A\sin(2\pi f_0 t)$
+                $x_{(t)}=A\sin(2\pi f_0 t), \hspace{0.3cm} A>0$
                 \begin{align}
                     ATSF[x_{(t)}] & = ATSF[A\sin(2\pi f_0 t)] \nonumber \\
                         & = ATSF[\frac{A}{2} (e^{j2\pi kf_0t} - e^{-j2\pi kf_0t})] \nonumber 
@@ -139,17 +184,101 @@
                 Possiamo tracciare lo spettro del segnale:
                 \begin{figure}[H]
                     \centering
-                    \subfloat[Spettro di Ampiezza]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:sa TSF seno}}
+                    \subfloat[Spettro di Ampiezza]{
+                        \begin{tikzpicture}
+                            \begin{axis}[
+                                domain=-4:4,
+                                samples=200,
+                                axis lines=middle,
+                                xlabel=$t$,
+                                ylabel=$y$,
+                                ymin=-1.5,
+                                ymax=1.5,
+                                xtick={-5,-4,-3,-2,-1,0,1,2,3,4,5},
+                                xticklabels={$-5$,$-4$,$-3$,$-2$,$-1$,$0$,$1$,$2$,$3$,$4$,$5$},
+                                ytick={1},
+                                yticklabels={$\frac{A}{2}$},
+                                width=6.5cm,
+                                height=5cm
+                                ]
+                                \addplot [const plot,black,dotted] coordinates{(-4,1)(4,1)};
+                                \addplot+ [blue, thick, ycomb, samples at = {-1,1}] {1};
+                                \end{axis}
+                            \end{tikzpicture}
+                        }
                     \hfill
-                    \subfloat[Spettro di Fase]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:sf TSF seno}}
-                    \caption{Spettro TSF del seno}
+                    \subfloat[Spettro di Fase]{
+                            \begin{tikzpicture}
+                                \begin{axis}[
+                                    domain=-4:4,
+                                    samples=200,
+                                    axis lines=middle,
+                                    xlabel=$t$,
+                                    ylabel=$y$,
+                                    ymin=-pi,
+                                    ymax=pi,
+                                    xtick={-5,-4,-3,-2,-1,0,1,2,3,4,5},
+                                    xticklabels={$-5$,$-4$,$-3$,$-2$,$-1$,$0$,$1$,$2$,$3$,$4$,$5$},
+                                    ytick={-pi,-1/2*pi,1/2*pi, pi},
+                                    yticklabels={$-\pi$,$-\frac{\pi}{2}$,$\frac{\pi}{2}$ $\pi$},
+                                    yticklabel style = {xshift=3pt}, 
+                                    width=6.5cm,
+                                    height=5cm
+                                ]
+                                \addplot+ [blue, thick,const plot] coordinates{(-1,1/2*pi)(-1,0)};
+                                \addplot+ [blue, thick,const plot] coordinates{(1,-1/2*pi)(1,0)};
+
+                                \addplot [black, dotted,const plot] coordinates{(-3,-1/2*pi)(3,-1/2*pi)};
+                                \addplot [black, dotted,const plot] coordinates{(-3,1/2*pi)(3,1/2*pi)};
+                                \end{axis}
+                            \end{tikzpicture}
+                        }
+                    \caption{Spettro TSF del seno $A>0$}
                 \end{figure}
             \subsubsection{Treno di rect}
                 $x_R=A\hspace{0.1cm}rect\left(\frac{t}{T}\right)\rightarrow$ Segnale periodico $\rightarrow x_{(t)} = \sum_{-\infty}^{\infty} x_R (t-nT_0)$\\
                 $T_0 = periodo$, $T = durata \rightarrow T < T_0$, se cosi non fosse avremmo una costante
                 \begin{figure}[H]
                     \centering
-                    \includegraphics[width=4cm]{media/uwu.png}
+                    \begin{tikzpicture}
+                        \begin{axis}[
+                            xlabel=$x$,
+                            ylabel=$y$,
+                            xmin=-5,
+                            xmax=5,
+                            ymin=-0.5,
+                            ymax=4,
+                            ytick = {1.5},
+                            xtick={-3,-1, 0, 1,3},
+                            xticklabels={$-T_0$,$-\frac{T}{2}$, $0$, $\frac{T}{2}$,$T_0$},
+                            yticklabels = {$A$},
+                            yticklabel style = {yshift=5pt,xshift=4pt}, 
+                            axis lines=middle,
+                            thick,
+                            domain=-5:5,
+                            samples=100,
+                            width=10cm,
+                            height=4cm
+                        ]
+                        \addplot [const plot,red, thick] coordinates{(-1,1.5)(1,1.5)};
+                        \addplot [const plot,red, thick] coordinates{(-1,0)(-1,1.5)};
+                        \addplot [const plot,red, thick] coordinates{(1,0)(1,1.5)};
+                        
+                        \addplot [const plot,red, thick] coordinates{(-2,1.5)(-4,1.5)};
+                        \addplot [const plot,red, thick] coordinates{(-2,0)(-2,1.5)};
+                        \addplot [const plot,red, thick] coordinates{(-4,0)(-4,1.5)};
+                        
+                        \addplot [const plot,red, thick] coordinates{(2,1.5)(4,1.5)};
+                        \addplot [const plot,red, thick] coordinates{(2,0)(2,1.5)};
+                        \addplot [const plot,red, thick] coordinates{(4,0)(4,1.5)};
+                        
+                        \addplot [const plot,red, thick] coordinates{(2,0)(1,0)};
+                        \addplot [const plot,red, thick] coordinates{(-2,0)(-1,0)};
+                        \addplot [const plot,red, thick] coordinates{(-4,0)(-5,0)};
+                        \addplot [const plot,red, thick] coordinates{(4,0)(5,0)};
+                    
+                        \end{axis}
+                    \end{tikzpicture}
                     \caption{Treno di $A\hspace{0.1cm}rect\left(\frac{t}{T}\right)$}
                     \label{fig:treno di rect}
                 \end{figure}                
@@ -161,17 +290,80 @@
                         & = \frac{A}{T_0} \frac{e^{-j\pi kf_0T} - e^{j\pi kf_0T}}{j2\pi kf_0} = \frac{A}{T_0} \frac{e^{j\pi kf_0T}-e^{-j\pi kf_0T}}{-j2\pi kf_0} \nonumber \\
                         & = \frac{A\color{purple}{T}}{T_0} \frac{e^{j\pi kf_0T}-e^{-j\pi kf_0T}}{-j2\pi kf_0\color{purple}{T}} = Af_0T sinc(kf_0T) \nonumber 
                 \end{align}
+                Tracciamo lo spettro per $f_0T<1$:
                 \begin{figure}[H]
                     \centering
-                    \subfloat[Spettro di Ampiezza]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:sa TSF treno di rect}}
+                    \subfloat[Spettro di Ampiezza]{
+                        \begin{tikzpicture}
+                            \begin{axis}[
+                                domain=-5:5,
+                                samples=200,
+                                axis lines=middle,
+                                xlabel=$k$,
+                                ylabel=$y$,
+                                ymin=-1.5,
+                                ymax=1.5,
+                                xtick={-5,-4,-3,-2,-1,0,1,2,3,4,5},
+                                xticklabels={$-4$,$-3$,$-2$,$-1$,$0$,$1$,$2$,$3$,$4$},
+                                ytick={-1, 1},
+                                yticklabels={$-1$, $1$},
+                                width=12cm,
+                                height=6cm
+                            ]
+                            \addplot [red,dotted, samples = 300] {sin(deg(x*pi))/(x*pi)};
+                            \addplot+ [blue, thick, ycomb, samples at={-4,-3.6,-3.2,-2.8,-2.4,-2,-1.6,-1.2,-0.8,-0.4,0,0.4,0.8,1.2,1.6,2,2.4,2.8,3.2,3.6,4}] {abs(sin(deg(x*pi))/(x*pi))};
+                            \end{axis}
+                        \end{tikzpicture}
+                    }
                     \hfill
-                    \subfloat[Spettro di Fase]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:sf TSF treno di rect}}
-                    \caption{Spettro TSF del treno di rect}
+                    \subfloat[Spettro di Fase]{
+                        \begin{tikzpicture}
+                            \begin{axis}[
+                                domain=-5:5,
+                                samples=200,
+                                axis lines=middle,
+                                xlabel=$k$,
+                                ylabel=$y$,
+                                ymin=-pi,
+                                ymax=pi,
+                                xtick={-5,-4,-3,-2,-1,0,1,2,3,4,5},
+                                xticklabels={$-5$,$-4$,$-3$,$-2$,$-1$,$0$,$1$,$2$,$3$,$4$,$5$},
+                                ytick={-pi, pi},
+                                yticklabels={$-\pi$, $\pi$},
+                                width=12cm,
+                                height=6cm
+                            ]
+                            \addplot [red,dotted, samples = 300] {sin(deg(x*pi))/(x*pi)};
+                            \addplot+ [blue, thick, ycomb, samples at={-4,-3.6,-3.2,-2.8,-2.4,-2,-1.6,-1.2,-0.8,-0.4,0,0.4,0.8,1.2,1.6,2,2.4,2.8,3.2,3.6,4}] {rad(atan2(0,sin(deg(x*pi))/(x*pi)))};
+                            \end{axis}
+                        \end{tikzpicture}
+                    }
+                    \caption{Spettro TSF del treno di rect con $f_0T<1$}
                 \end{figure}
                 Si possono anche unire i due spettri per ottenere: 
                 \begin{figure}[H]
                     \centering
-                    \includegraphics[width=4cm]{media/uwu.png}
+                    \begin{tikzpicture}
+                        \begin{axis}[
+                            domain=-5:5,
+                            samples=200,
+                            axis lines=middle,
+                            xlabel=$k$,
+                            ylabel=$y$,
+                            ymin=-1.5,
+                            ymax=1.5,
+                            xtick={-5,-4,-3,-2,-1,0,1,2,3,4,5},
+                            xticklabels={$-5$,$-4$,$-3$,$-2$,$-1$,$0$,$1$,$2$,$3$,$4$,$5$},
+                            ytick={-1, 1},
+                            yticklabels={$-1$, $1$},
+                            xticklabel style = {yshift=-7pt}, 
+                            width=12cm,
+                            height=6cm
+                        ]
+                        \addplot [red,dotted, samples = 300] {sin(deg(x*pi))/(x*pi)};
+                        \addplot+ [blue, thick, ycomb, samples at={-4,-3.6,-3.2,-2.8,-2.4,-2,-1.6,-1.2,-0.8,-0.4,0,0.4,0.8,1.2,1.6,2,2.4,2.8,3.2,3.6,4}] {sin(deg(x*pi))/(x*pi)};
+                        \end{axis}
+                    \end{tikzpicture}
                     \caption{Spettro treno di $A\hspace{0.1cm}rect\left(\frac{t}{T}\right)$}
                     \label{fig:Spettro treno di rect}
                 \end{figure}  
@@ -181,8 +373,10 @@
                 \item Se un segnale varia molto lentamente copre le basse fraquenze $ T_0 \downarrow$
             \end{itemize}
             Se non ho abbastanza passi K non posso campionare le alte frequenze e quindi non faccio ne un analisi completa del segnale né riesco a ricostruire perfettametne il segnale  
+            Inoltre in $0$ dello spettro ho il Valor medio \ref{Valore medio} del segnale
 
 
+            Dubbi: non mi torna il campionamento nella sinc(x), se é definita sin(pi*x)/x si annulla nelle ascisse intere, quindi io campiono a frazionati?
 
 
 

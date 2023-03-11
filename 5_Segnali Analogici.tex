@@ -537,3 +537,75 @@
             }
         \end{itemize}
         
+        \subsection{Segnal Periodici}
+            Un segnale é periodico se: \\ 
+            \[x_{(t)}=x_{(t-kT_0)}\hspace{0.5cm} k\in\mathbb{Z},\ t_0\in\mathbb{R}^+,\ T_0 = Periodo\ del\ segnale\]
+            \begin{figure}[H]
+                \centering
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        xlabel=$x$,
+                        ylabel=$y$,
+                        xmin=-5,
+                        xmax=5,
+                        ymin=-0.5,
+                        ymax=4,
+                        ytick = {1.5},
+                        xtick={-3,-1, 0, 1,3},
+                        xticklabels={$-T_0$,$-\frac{T}{2}$, $0$, $\frac{T}{2}$,$T_0$},
+                        yticklabels = {$A$},
+                        yticklabel style = {yshift=5pt,xshift=4pt}, 
+                        axis lines=middle,
+                        thick,
+                        domain=-5:5,
+                        samples=100,
+                        width=10cm,
+                        height=4cm
+                    ]
+                    \addplot [const plot,red, thick] coordinates{(-1,1.5)(1,1.5)};
+                    \addplot [const plot,red, thick] coordinates{(-1,0)(-1,1.5)};
+                    \addplot [const plot,red, thick] coordinates{(1,0)(1,1.5)};
+                    
+                    \addplot [const plot,red, thick] coordinates{(-2,1.5)(-4,1.5)};
+                    \addplot [const plot,red, thick] coordinates{(-2,0)(-2,1.5)};
+                    \addplot [const plot,red, thick] coordinates{(-4,0)(-4,1.5)};
+                    
+                    \addplot [const plot,red, thick] coordinates{(2,1.5)(4,1.5)};
+                    \addplot [const plot,red, thick] coordinates{(2,0)(2,1.5)};
+                    \addplot [const plot,red, thick] coordinates{(4,0)(4,1.5)};
+                    
+                    \addplot [const plot,red, thick] coordinates{(2,0)(1,0)};
+                    \addplot [const plot,red, thick] coordinates{(-2,0)(-1,0)};
+                    \addplot [const plot,red, thick] coordinates{(-4,0)(-5,0)};
+                    \addplot [const plot,red, thick] coordinates{(4,0)(5,0)};
+                
+                    \end{axis}
+                  \end{tikzpicture}
+                \caption{Segnale periodico}
+                \label{fig:segnale periodico}
+            \end{figure}     
+            Si possono definiscono le seguenti grandezze: 
+            \begin{itemize}
+                \item {Energia di un segnale periodico
+                    \begin{align}
+                        E_{x} & = \int_{-\infty}^{\infty}  |x_{(t)}|^2 \,dt =\sum_{k=-\infty}^{\infty}\int_{-\frac{T_0}{2}+kT_0}^{\frac{T_0}{2}+kT_0} |x_{(t)}|^2 dt =\sum_{k=-\infty}^{\infty} X  \nonumber \\
+                            & = \lim_{k\rightarrow\infty} kX= \infty \nonumber
+                    \end{align}
+                    Tutti i segnal iperiodici hanno quindi $E_x = \infty$   
+                }
+                \item {Potenza media di un segnale periodico
+                    \begin{align}
+                        P_{x} & = \lim_{T\rightarrow\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}  |x_{(t)}|^2 \,dt\Rightarrow T = kT_0 \Rightarrow \lim_{k\rightarrow\infty} \frac{1}{kT_0} \int_{-\frac{kT_0}{2}}^{\frac{kT_0}{2}} |x_{(t)}|^2 dt \nonumber \\
+                            & = \lim_{k\rightarrow\infty} \frac{1}{kT_0} k \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} |x_{(t)}|^2 dt  = \frac{1}{T_0} \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} |x_{(t)}|^2 dt \nonumber
+                    \end{align}      
+                    Posso calcolare la potenza di un singolo periodo:
+                    \[
+                        P_x = \frac{1}{T_0} \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} |x_{(t)}|^2 dt  
+                    \]
+                }
+                \item {Valore medio di un segnale periodico
+                    \[
+                        x_m = \frac{1}{T_0} \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x_{(t)} dt  
+                    \]
+                }
+            \end{itemize}   
