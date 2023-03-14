@@ -359,29 +359,160 @@
 
 
     \subsection{Modulazione di Ampiezza}\label{Modulazione di Ampiezza}
-        \[
-            y_{(t)} = x_{(t)}\cos(2\pi f_0t)
-        \]
+        % \[
+        %     y_{(t)} = x_{(t)}\cos(2\pi f_0t)
+        % \]
         \begin{figure}[H]
             \centering
-            \subfloat[Sistema di modulazione]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:sistema di modulazione}}
+            \subfloat[Sistema di modulazione]{
+                \begin{tikzpicture}[
+                        node distance=3cm
+                    ]
+                    % Blocks
+                    \node [rectangle, draw] (input) {$x_{(t)}$};
+                    \node [circle, draw, right of=input] (product) {$\times$};
+                    \node [rectangle, draw, below of=product] (carrier) {Oscillazione $\cos(2\pi f_0t)$};
+                    \node [rectangle, draw, right of=product] (modulated) {$y_{(t)}$ Segnale Modulato};
+                
+                    % Connections
+                    \draw [->] (input) -- (product);
+                    \draw [->] (product) -- (modulated);
+                    \draw [->] (carrier) -- (product);
+                \end{tikzpicture}    
+                \label{fig:sistema di modulazione}
+            }
             \hfill
-            \subfloat[{\color{blue}$x_{(t)}$}, {\color{red}$y_{(t)}$}]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:modulazione in ampiezza}}
+            \subfloat[{\color{blue}$x_{(t)}$}, {\color{red}$y_{(t)}$}, {\color{purple}$\cos (2\pi t)$}]{
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        domain=-5:5,
+                        samples=200,
+                        axis lines=middle,
+                        xlabel=$t$,
+                        ylabel=$y$,
+                        ymin=-3,
+                        ymax=3,
+                        width=12cm,
+                        height=6cm
+                    ]
+                    \addplot [blue, dotted, samples = 300] {(x^2)};
+                    \addplot [blue, dotted, samples = 300] {-(x^2)};
+                    \addplot [purple,dotted, samples = 300] {cos(deg(2*pi*x))};
+                    \addplot [red, thick, samples = 300] {cos(deg(2*pi*x))*(x^2)};
+                    \end{axis}
+                \end{tikzpicture}
+                \label{fig:modulazione in ampiezza}
+            }
             \caption{Esempio sistema di modulazione di ampiezza}
         \end{figure}
+        L'oscillazione introdotta, $\cos (2\pi t)$, segue l'andamento di $x_{(t)}$
         Nel dominio della frequenza:
         \begin{figure}[H]
             \centering
-            \subfloat[Senza modulazione]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:segnale senza modulazione}}
+            \subfloat[Senza modulazione]{
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        xlabel=$f$,
+                        ylabel=$y$,
+                        xmin=-5,
+                        xmax=5,
+                        ymin=-0.5,
+                        ymax=4,
+                        ytick = {1.5},
+                        xtick={-1, 0, 1},
+                        xticklabels={$-\frac{T}{2}$, $0$, $\frac{T}{2}$},
+                        yticklabels = {$A$},
+                        yticklabel style = {yshift=5pt,xshift=4pt}, 
+                        axis lines=middle,
+                        thick,
+                        domain=-5:5,
+                        samples=100,
+                        width=6.5cm,
+                        height=4cm
+                    ]
+                    \addplot [const plot, blue, thick] coordinates{(-1,1.5)(1,1.5)};
+                    \addplot [const plot, blue, thick] coordinates{(-1,0)(-1,1.5)};
+                    \addplot [const plot, blue, thick] coordinates{(1,0)(1,1.5)};
+                
+                    \end{axis}
+                \end{tikzpicture}
+                \label{fig:segnale senza modulazione}
+            }
             \hfill
-            \subfloat[Con modulazione]{\includegraphics[width=0.4\textwidth]{media/uwu.png}\label{fig:segnale con modulazione}}
+            \subfloat[Con modulazione]{
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        xlabel=$f$,
+                        ylabel=$y$,
+                        xmin=-5,
+                        xmax=5,
+                        ymin=-0.5,
+                        ymax=4,
+                        ytick = {1.5},
+                        xtick={-3,0,3},
+                        xticklabels={$-f_0$, $0$,$f_0$},
+                        yticklabels = {$A$},
+                        yticklabel style = {yshift=5pt,xshift=4pt}, 
+                        axis lines=middle,
+                        thick,
+                        domain=-5:5,
+                        samples=100,
+                        width=6.5cm,
+                        height=4cm
+                    ]
+                    \addplot [const plot, blue, thick] coordinates{(-2,0.75)(-4,0.75)};
+                    \addplot [const plot, blue, thick] coordinates{(-2,0)(-2,0.75)};
+                    \addplot [const plot, blue, thick] coordinates{(-4,0)(-4,0.75)};
+                    
+                    \addplot [const plot, blue, thick] coordinates{(2,0.75)(4,0.75)};
+                    \addplot [const plot, blue, thick] coordinates{(2,0)(2,0.75)};
+                    \addplot [const plot, blue, thick] coordinates{(4,0)(4,0.75)};
+                    
+                    \end{axis}
+                \end{tikzpicture}
+                \label{fig:segnale con modulazione}
+            }
             \caption{Segnale nel dominio della frequenza modulato e non}
         \end{figure}
         Serve per spostare la frequenza (es. di trasmissione) del segnale in modo tale, ad esempio, da non sovrapporre due segnali che sono sulla stessa frequenza.
         Se il segnale non fosse modulato si dice in \textbf{banda base} (BB) se il segnale é modulato si dice in \textbf{banda passante}(BP)
         \begin{figure}[H]
             \centering
-            \includegraphics[width=4cm]{media/uwu.png}
+            \begin{tikzpicture}
+                \begin{axis}[
+                    xlabel=$f$,
+                    ylabel=$y$,
+                    xmin=-5,
+                    xmax=5,
+                    ymin=-0.5,
+                    ymax=4,
+                    ytick = {1.5},
+                    xtick={-3,0,3},
+                    xticklabels={$-f_0$, $0$,$f_0$},
+                    yticklabels = {$A$},
+                    yticklabel style = {yshift=5pt,xshift=4pt}, 
+                    axis lines=middle,
+                    thick,
+                    domain=-5:5,
+                    samples=100,
+                    width=6.5cm,
+                    height=4cm
+                ]
+                \addplot [const plot, red, thick] coordinates{(-2,0.75)(-4,0.75)};
+                \addplot [const plot, red, thick] coordinates{(-2,0)(-2,0.75)};
+                \addplot [const plot, red, thick] coordinates{(-4,0)(-4,0.75)};
+                
+                \addplot [const plot, red, thick] coordinates{(2,0.75)(4,0.75)};
+                \addplot [const plot, red, thick] coordinates{(2,0)(2,0.75)};
+                \addplot [const plot, red, thick] coordinates{(4,0)(4,0.75)};
+            
+                \addplot [const plot, blue, thick] coordinates{(-1,1.5)(1,1.5)};
+                \addplot [const plot, blue, thick] coordinates{(-1,0)(-1,1.5)};
+                \addplot [const plot, blue, thick] coordinates{(1,0)(1,1.5)};
+            
+                
+                \end{axis}
+            \end{tikzpicture}
             \caption{{\color{blue}BB}, {\color{red}BP}}
             \label{fig:bb e bp}
         \end{figure}
