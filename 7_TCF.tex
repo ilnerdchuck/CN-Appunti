@@ -339,17 +339,17 @@
                 {
                     $x_{(t)}=Asinc(Bt) \Rightarrow X_{(f)} = \int_{-\infty}^{\infty}A sinc(Bt)e^{-j2\pi ft}dt$ \\
                     Applico la dualitá:
-                    \begin{align}
-                        A rect\left(\frac{t}{T}\right) &\rightleftarrows ATsinc(Tf) \nonumber \\
-                        ATsinc(Tt) &\rightleftarrows A rect\left(\frac{-f}{T}\right) \nonumber
-                    \end{align}
+                    \begin{gather}
+                        A rect\left(\frac{t}{T}\right) \rightleftarrows ATsinc(Tf) \nonumber \\
+                        ATsinc(Tt) \rightleftarrows A rect\left(\frac{-f}{T}\right) \nonumber
+                    \end{gather}
                     Se voglio una durata generica(rivedere):
-                    \begin{align}
-                        Sostituisco\ &B=T \nonumber \\
-                        ABsinc(Bt) &\rightleftarrows A rect\left(\frac{f}{B}\right) \nonumber \\
-                        &\Downarrow \nonumber \\
-                        Asinc(Bt) &\rightleftarrows \frac{A}{B}rect\left(\frac{f}{B}\right) \nonumber 
-                    \end{align}
+                    \begin{gather}
+                        Sostituisco\ B=T \nonumber \\
+                        ABsinc(Bt) \rightleftarrows A rect\left(\frac{f}{B}\right) \nonumber  \\
+                        \Downarrow \nonumber \\
+                        Asinc(Bt) \rightleftarrows \frac{A}{B}rect\left(\frac{f}{B}\right) \nonumber
+                    \end{gather}
                 }
 
         \subsubsection{Ritardo}\label{Ritardo}
@@ -464,19 +464,33 @@
 
         \subsubsection{Derivazione}\label{Derivazione}
             $Ip:\begin{cases}
-                x_{(t)}\rightleftharpoons^{TCF} X_{(f)}
-                y_{(t)}= \derivative{x_{(t)}}{t}\\        
+                x_{(t)}\rightleftharpoons^{TCF} X_{(f)}\\
+                y_{(t)}= \derivative{}{t} x_{(t)}        
             \end{cases}$\\
             $Th: Y_{(f)} = j2\pi f X_{(f)} $ \\
-            Dimostrazione: ok per ora non l'ha fatta
+            Dimostrazione:\\
+            \begin{align}
+                y_{(t)} &= \derivative{}{t} x_{(t)} = \derivative{}{t} ACTF[x_{(t)}] =\derivative{}{t} \int_{-\infty}^{\infty} X_{(f)}e^{j2\pi ft} df = \nonumber\\
+                        &= \int_{-\infty}^{\infty} X_{(f)}\derivative{}{t}e^{j2\pi ft} df = \int_{-\infty}^{\infty} X_{(f)}j2\pi fe^{j2\pi ft} df \nonumber
+            \end{align}
+            Posso Scrivere $y_{(t)}$ come $ACTF[y_{(t)}] = \int_{-\infty}^{\infty} Y_{(f)}e^{j2\pi ft} df $, se quindi $Y_{(f)} = j2\pi f X_{(f)}$ l'ugaglianza é valida:
+            \[
+                y_{(t)} =\int_{-\infty}^{\infty} Y_{(f)}e^{j2\pi ft} df
+            \]
+            L'operazione di derivata nel dominio della frequenza si traduce in una semplice operazione algebrica, nel tempo avrei dovuto calcolare il 
+            rapporto incrementale. Per derivare un segnale posso quindi:
+            \begin{gather}
+                x_{(t)} \rightarrow TCF \rightarrow j2\pi fX_{(f)} \rightarrow ACTF \rightarrow y_{(t)}\nonumber
+            \end{gather}
             
         \subsubsection{Integrazione}\label{Integrazione}
             $Ip:\begin{cases}
-                x_{(t)}\rightleftharpoons^{TCF} X_{(f)}
-                y_{(t)}= \derivative{x_{(t)}}{t}\\        
+                x_{(t)}\rightleftharpoons^{TCF} X_{(f)}\\
+                y_{(t)}= \derivative{x_{(t)}}{t}        
             \end{cases}$\\
-            $Th: Y_{(f)} = j2\pi f X_{(f)} $ \\
-            Dimostrazione: ok per ora non l'ha fatta
+            $Th: Y_{(f)} =\frac{X_{(f)}}{j2\pi f}$ \\
+            Dimostrazione:\\
+
             
         \subsubsection{Derivazione in Frequenza}\label{Derivazione in Frequenza}
             $Ip:\begin{cases}
