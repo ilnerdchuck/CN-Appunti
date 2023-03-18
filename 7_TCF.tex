@@ -343,7 +343,7 @@
                         A rect\left(\frac{t}{T}\right) \rightleftarrows ATsinc(Tf) \nonumber \\
                         ATsinc(Tt) \rightleftarrows A rect\left(\frac{-f}{T}\right) \nonumber
                     \end{gather}
-                    Se voglio una durata generica(rivedere):
+                    Se voglio una durata generica:
                     \begin{gather}
                         Sostituisco\ B=T \nonumber \\
                         ABsinc(Bt) \rightleftarrows A rect\left(\frac{f}{B}\right) \nonumber  \\
@@ -485,13 +485,165 @@
             
         \subsubsection{Integrazione}\label{Integrazione}
             $Ip:\begin{cases}
-                x_{(t)}\rightleftharpoons^{TCF} X_{(f)}\\
-                y_{(t)}= \derivative{x_{(t)}}{t}        
+                x_{(t)} \rightleftharpoons^{TCF} X_{(f)}\ (1)\\
+                y_{(t)} = \int_{-\infty}^{t} x_{(\alpha)} d\alpha\ (2) \\
+                \int_{-\infty}^{\infty} x_{(t)} dt\ oppure\ \eval*{X_{(f)}}_{f=0} = 0 \ oppure\ y{(+\infty)} = 0\ (3) \\
             \end{cases}$\\
             $Th: Y_{(f)} =\frac{X_{(f)}}{j2\pi f}$ \\
             Dimostrazione:\\
+            \begin{gather}
+                y_{(t)} = \int_{-\infty}^{t} x_{(\alpha)} d\alpha \Rightarrow {\color{purple}\derivative{}{t}} x_{(t)} = {\color{purple}\derivative{}{t}} y_{(t)} \Rightarrow^{Th. \ref{Derivazione}}  X_{(f)} = j2\pi f Y_{(f)} \nonumber\\
+                         Y_{(f)} =\frac{X_{(f)}}{j2\pi f}\nonumber
+            \end{gather}
 
-            
+            L'ipotesi 3 é conseguenza della divisione per $f$ e che devo mantenere l'uguaglianza $X_{(f)} = j2\pi f Y_{(f)}$, si nota come nella dimostrazione usando il Th della Derivazione (\ref{Derivazione})
+            quando $f=0$ la funzione nella frequenza deve essere $0,\ X_{(f)} = j2\pi f Y_{(f)} = 0$ 
+        
+        Esempio: $TCF$ di una piramide\\
+        {
+            \[
+                x_{(t)} = A\left(1-\left(\frac{|t|}{T}\right)\right)rect \left(\frac{t}{2T}\right) \hspace{0.3cm} X_{(f)} = TCF[x_{(t)}] = ?
+            \]
+            \begin{figure}[H]
+                \centering
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        xlabel=$t$,
+                        ylabel=$x_{(t)}$,
+                        xmin=-5,
+                        xmax=5,
+                        ymin=-0.5,
+                        ymax=3,
+                        ytick = {2},
+                        yticklabels = {$A$},
+                        xtick={-2,0,2},
+                        xticklabels={$-T$,$0$,$T$},
+                        axis lines=middle,
+                        thick,
+                        domain=-5:5,
+                        samples=100,
+                        width=10cm,
+                        height=5cm
+                    ]
+                    
+                    \addplot [sharp plot, blue] coordinates{(-2,0)(0,2)};
+                    \addplot [sharp plot, blue] coordinates{(2,0)(0,2)};
+                    \addplot [sharp plot, blue] coordinates{(2,0)(5,0)};
+                    \addplot [sharp plot, blue] coordinates{(-2,0)(-5,0)};
+
+                    \end{axis}
+                \end{tikzpicture}
+                \caption{Funzione priamide}
+                \label{fig:funzione piramide}
+            \end{figure}
+            $TCF[x_{(t)}]:$
+            \begin{itemize}
+                \item {
+                    Utilizzando la classica $TCF$:\\     
+                        \[X_{(f)} = \int_{-\infty}^{\infty} A\left(1-\left(\frac{|t|}{T}\right)\right)rect \left(\frac{t}{2T}\right) dt\]
+                }
+                \item {
+                    Utilizzando il Th dell'Integrazione \ref{Integrazione}:\\     
+                    \begin{gather}
+                        y_{(t)} = \derivative{}{t} x_{(t)} \implies x_{(t)}= \int_{-\infty}^{t} y_{(\alpha)} d\alpha\ \ref{Integrazione}(2) \nonumber \\
+                        \int_{-\infty}^{\infty} y_{(t)} dt\ \ref{Integrazione}(3) \nonumber
+                    \end{gather}
+                    \begin{figure}[H]
+                        \centering
+                        \begin{tikzpicture}
+                            \begin{axis}[
+                                xlabel=$t$,
+                                ylabel=$x_{(t)}$,
+                                xmin=-5,
+                                xmax=5,
+                                ymin=-3,
+                                ymax=3,
+                                ytick = {-2,2},
+                                yticklabels = {$-\frac{A}{T}$,$\frac{A}{T}$},
+                                xtick={-2,-1,0,1,2},
+                                xticklabels={$-T$,$-\frac{T}{2}$,$0$,$\frac{T}{2}$,$T$},
+                                yticklabel style = {yshift=7pt}, 
+                                axis lines=middle,
+                                thick,
+                                domain=-5:5,
+                                samples=100,
+                                width=10cm,
+                                height=5cm
+                            ]
+                            
+                            \addplot [sharp plot, blue] coordinates{(-2,0)(-2,2)};
+                            \addplot [sharp plot, blue] coordinates{(-2,2)(0,2)};
+
+                            \addplot [sharp plot, blue] coordinates{(0,2)(0,-2)};
+
+                            \addplot [sharp plot, blue] coordinates{(0,-2)(2,-2)};
+                            \addplot [sharp plot, blue] coordinates{(2,0)(2,-2)};
+                            
+                            \addplot [sharp plot, blue] coordinates{(-2,0)(-5,0)};
+                            \addplot [sharp plot, blue] coordinates{(2,0)(5,0)};
+        
+                            \end{axis}
+                        \end{tikzpicture}
+                        \caption{Funzione priamide}
+                        \label{fig:derivata piramide}
+                    \end{figure}
+                    \begin{align}
+                        y_{(t)} &= \frac{A}{T}rect \left(\frac{t-\left(-\frac{T}{2}\right)}{T}\right) - \frac{A}{T}rect \left(\frac{t-\frac{T}{2}}{T}\right) = Sono\ 2\ rect\ con\ ritardo \nonumber \\
+                                &\Rightarrow y_{(t)} \rightleftharpoons Y_{(f)}\ \ref{Integrazione}(1) \Rightarrow X_{(f)}=\frac{Y_{(f)}}{j2\pi f} 
+                                \begin{cases}
+                                    x_{(t-t_0)} \rightleftharpoons X_{(f)} e^{-j2\pi ft_0}\nonumber\\
+                                    rect \left(\frac{t}{T}\right) \rightleftharpoons Tsinc(Tf) \nonumber
+                                \end{cases}\nonumber \\
+                        Y_{(f)} &= \frac{A}{T}Tsinc(Tf)e^{-j2\pi f\left(-\frac{T}{2}\right)} - \frac{A}{T}Tsinc(Tf)e^{-j2\pi f\frac{T}{2}} \nonumber\\
+                                &= {\color{purple}2j}Asinc(Tf)\frac{e^{j\pi fT}-e^{j\pi fT}}{{\color{purple}2j}} = 2jAsinc(Tf)\sin(\pi fT) \nonumber \\
+                        X_{(f)} &= \frac{Y_{(f)}}{j2\pi f} = \frac{2jAsinc(Tf)\sin(\pi fT)}{j2\pi f} = \frac{A{\color{purple}T}sinc(Tf)\sin(\pi fT)}{\pi f{\color{purple}T}}\nonumber\\
+                                &= ATsinc^2(fT) \nonumber
+                    \end{align}
+                    Abbiamo ottenuto la $TCF$ del triangolo:
+                    \begin{gather}
+                        A\left(1-\left(\frac{|t|}{T}\right)\right)rect \left(\frac{t}{2T}\right) \rightleftharpoons ATsinc^2(fT)\nonumber\\
+                        per\ la\ dualita \ref{Dualita}: \nonumber \\
+                        ABsinc^2(Bt) \rightleftharpoons A\left(1-\left(\frac{|f|}{B}\right)\right)rect \left(\frac{f}{2B}\right) \nonumber
+                    \end{gather} 
+                    I segni negativi spariscono per il valore assoluto e per la paritá della $rect$. Per verificare che i calcoli siano
+                    corretti posso colacolare la $X_{(f)}$ in $0$ e vedo quanto é l'area del segnale: 
+                    \[
+                        \eval{T^2sinc(Tf)}_{0} = T^2 \hspace{.2cm} \int_{-\infty}^{\infty} Trect(\frac{t}{T}) = T  
+                    \]
+                    {\em Osservazione}: la funzione piramidale varia meno rapidamente nel {\em tempo} rispetto alla funzione rettangolare
+                    quindi lo spetto non occupa le alte frequenze, l'andamento é di $\frac{sinc^2}{x^2}$, é molto piú contenuto. La rect avendo un gradino
+                    varia molto rapidamente nel {\em tempo} e di conseguenza il suo spettro si estende a frequenze piú alte del segnale priamidale.
+                    \begin{figure}[H]
+                        \centering
+                        \begin{tikzpicture}
+                            \begin{axis}[
+                                domain=-5:5,
+                                samples=200,
+                                axis lines=middle,
+                                xlabel=$f$,
+                                ylabel=$X_{(f)}$,
+                                ytick = {},
+                                xtick = {-4,-3,-2,-1,0,1,2,3,4},
+                                xticklabels = {$-\frac{4}{T}$,$\frac{3}{T}$,$\frac{2}{T}$,$\frac{1}{T}$,$0$,$\frac{1}{T}$,$\frac{2}{T}$,$\frac{3}{T}$,$\frac{4}{T}$},
+                                ymin=-1,
+                                ymax=1.5,
+                                width=10cm,
+                                height=6cm
+                            ]
+                            \addplot [blue, thick, samples = 100] {sin(deg(x*pi))/(x*pi)};
+                            \addplot [red, thick, samples = 100] {(sin(deg(x*pi)))^2/(x*pi)^2};
+                            \end{axis}
+                        \end{tikzpicture}
+                        \caption{{\color{blue}$\frac{sinc}{x}$}, {\color{red}$\frac{sinc^2}{x^2}$}}
+                        \label{fig:sinc vs sinc2}
+                    \end{figure}
+                    DOMANDA: ma la fase in tutto questo che ruolo ha? non avrei problemi avere anche sinc che cambiano la fase degli altri segnali?
+                    dopotutto si la sinc é brutta perché si estende all'infinito, ma proprio per questo la fase é sempre sporcata? cosa comporta 
+                    nella ricostruzione del segnale? noi abbiamo visto finora l'ampiezza dopotutto
+                }
+            \end{itemize}
+        }
+        
         \subsubsection{Derivazione in Frequenza}\label{Derivazione in Frequenza}
             $Ip:\begin{cases}
                 x_{(t)}\rightleftharpoons^{TCF} X_{(f)}
@@ -796,8 +948,8 @@
                             height=6cm
                         ]
                         \addplot [const plot, dotted,black] coordinates{(-30,0.5)(30,0.5)};
-                        \addplot [red, thick, samples = 500] {abs(sin(deg((x-20)*pi))/(2*(x-20)*pi))};
-                        \addplot [red, thick, samples = 500] {abs(sin(deg((x+20)*pi))/(2*(x+20)*pi))};
+                        \addplot [red, thick, samples = 500] {abs(sin(deg((x-20)*pi))/(2*(x-20)*pi))+abs(sin(deg((x+20)*pi))/(2*(x+20)*pi))};
+                        % \addplot [red, thick, samples = 500] {abs(sin(deg((x+20)*pi))/(2*(x+20)*pi))};
                         \end{axis}
                     \end{tikzpicture}
                     \label{fig:Ampiezza Mod. generica}
@@ -852,3 +1004,141 @@
                 \item calcolo la TCF della derivata
                 \item Applico il Th. dell'integrazione per calcolare $X_{(f)}$
             \end{itemize}
+
+            \subsubsection{Demodulazione}\label{Demodulazione}
+            Ci poniamo il problema di riportare il segnale modulato al segnale originale($g_{(t)}$), dato:\\
+            $x_{(t)} = g_{(t)} \cos(2\pi f_0t)$\\
+            Demoduliamo il segnale con $2\cos(2\pi f_0t)$
+            \begin{align}
+                y_{(t)} &= x_{(t)} {\color{purple}2}\cos(2\pi f_0t) = g_{(t)} \cos^2(2\pi f_0t) \nonumber \\
+                &= g_{(t)} \frac{1+ \cos(4\pi f_0t)}{2} = \frac{g_{(t)}}{2} + \frac{g_{(t)}\cos(4\pi f_0t)}{2}\nonumber\\
+                TCF[y_{(t)}] &\Rightarrow^{Th. \ref{Modulazione con coseno}}  \frac{2G_{(f)}}{2} + \frac{2G_{(f-2f_0)}}{2}+ \frac{2G_{(f+2f_0)}}{2} \nonumber 
+            \end{align}
+            Dall'ultima uguagliaza posso quindi usare un filtro in ({\color{blue}BB}) per rimuovere i segnali alle frequenze $\pm f_0$ e ricavare il mio segnale $G_{(f)}$.\\
+            DOMANDA: posso anche quindi demodulare con un seno tanto non mi interessa quello che succede alle frequenze spostate,
+            quindi peró ritorno sulla fase, non é importante? usando un seno la ribalto praticamente no? ricontroll cio che stai dicendo bro non so 
+            se é giusto il ribaltamento \\
+            ALTRA DOMANDA: devo anche modulare il segnale abbastanza lontano dalla BB sennó quando demodulo mi autodisturbo il segnale? da qui deriva $\frac{1}{T}<2BB$\\
+            ALTRA DOMANDA: quindi se volessi captare piú segnali mi conviene utilizzare circuiti diversi? oppure posso modulare e demodulare a piacimento i segnali tenendo conto 
+            su quali frequenze ho modulato in modo tale da sapere dove vanno a finire i segnali e recuperarli? tanto non mi interessa su quale frequenza finiscano finche non diventino 
+            non recuperabili per sovrapposizione giusto?\\
+            Riporto un po di esempi di demodulazione di una o piú $rect$:
+            Esempio di Demodulazione
+            \begin{figure}[H]
+                \centering
+                \subfloat[sinc modulata]{
+                    \begin{tikzpicture}
+                        \begin{axis}[
+                            domain=-40:40,
+                            samples=200,
+                            axis lines=middle,
+                            xlabel=$t$,
+                            ylabel=$y$,
+                            ytick = {0.5},
+                            yticklabels = {$\frac{A}{2}$},
+                            yticklabel style = {yshift=6pt},
+                            xtick = {-10,10},
+                            xticklabels = {$-f_0$,$f_0$},
+                            xticklabel style = {yshift=-6pt}, 
+                            ymin=-0.5,
+                            ymax=1,
+                            width=12cm,
+                            height=6cm
+                        ]
+                        \addplot [const plot, dotted,black] coordinates{(-30,0.5)(30,0.5)};
+                        \addplot [red, thick, samples = 500] {(sin(deg((x-10)*pi))/(2*(x-10)*pi))+(sin(deg((x+10)*pi))/(2*(x+10)*pi))};
+                        \end{axis}
+                    \end{tikzpicture}
+                    \label{fig:sinc modulata}
+                }
+                \hfill
+                \subfloat[sinc demodulata]{
+                    \begin{tikzpicture}
+                        \begin{axis}[
+                            domain=-40:40,
+                            samples=200,
+                            axis lines=middle,
+                            xlabel=$t$,
+                            ylabel=$y$,
+                            ytick = {0.5},
+                            yticklabels = {$\frac{A}{2}$},
+                            yticklabel style = {yshift=6pt,xshift=-6pt},
+                            xtick = {-20,20},
+                            xticklabels = {$-2f_0$,$2f_0$},
+                            xticklabel style = {yshift=-6pt}, 
+                            ymin=-0.5,
+                            ymax=1,
+                            width=12cm,
+                            height=6cm
+                        ]
+                        \addplot [const plot, dotted,black] coordinates{(-30,0.5)(30,0.5)};
+                        \addplot [const plot,blue] coordinates{(-2,-0.5)(-2,1)};
+                        \addplot [const plot,blue] coordinates{(2,-0.5)(2,1)};
+                        \addplot [red, thick, samples = 500] {(sin(deg((x)*pi))/(2*(x)*pi))+(sin(deg((x-20)*pi))/(2*(x-20)*pi))+(sin(deg((x+20)*pi))/(2*(x+20)*pi))};
+                        \end{axis}
+                    \end{tikzpicture}
+                    \label{fig:demodulazione di una sinc}
+                }
+                \caption{Demodulazione di una $sinc$, rincontrolla l'ampiezza dei grafi}
+            \end{figure}
+            Nel caso di piú segnali durante la demodulazione il segnale che voglio recuperare viene spostato in {\color{blue}BB}
+            mentre gli altri segnali presenti sullo spettro vengono a loro volta modulati peró con un $f_0$ diverso rispetto al loro $f_0^\prime$:
+            \begin{figure}[H]
+                \centering
+                \subfloat[sinc modulata]{
+                    \begin{tikzpicture}
+                        \begin{axis}[
+                            domain=-55:55,
+                            samples=200,
+                            axis lines=middle,
+                            xlabel=$t$,
+                            ylabel=$y$,
+                            ytick = {0.5},
+                            yticklabels = {$\frac{A}{2}$},
+                            yticklabel style = {yshift=6pt},
+                            xtick = {-40,-10,10,40},
+                            xticklabels = {$-f_0^\prime$,$-f_0$,$f_0$,$f_0^\prime$},
+                            xticklabel style = {yshift=-6pt}, 
+                            ymin=-0.5,
+                            ymax=1,
+                            width=14cm,
+                            height=6cm
+                        ]
+                        \addplot [const plot, dotted,black] coordinates{(-30,0.5)(30,0.5)};
+                        \addplot [red, thick, samples = 500] {(sin(deg((x-10)*pi))/(2*(x-10)*pi))+(sin(deg((x+10)*pi))/(2*(x+10)*pi))+(sin(deg((x-40)*pi))/((x-40)*pi))+(sin(deg((x+40)*pi))/((x+40)*pi))};
+                        \end{axis}
+                    \end{tikzpicture}
+                    \label{fig:due sinc modulate}
+                }
+                \hfill
+                \subfloat[sinc demodulata]{
+                    \begin{tikzpicture}
+                        \begin{axis}[
+                            domain=-55:55,
+                            samples=200,
+                            axis lines=middle,
+                            xlabel=$t$,
+                            ylabel=$y$,
+                            ytick = {0.5},
+                            yticklabels = {$\frac{A}{2}$},
+                            yticklabel style = {yshift=6pt,xshift=-6pt},
+                            xtick = {-50,-40,-30,-20,20,30,40,50},
+                            xticklabels = {$-f_0^\prime-f_0$,$-f_0^\prime$,$-f_0^\prime+f_0$,$-2f_0$,$2f_0$,$f_0^\prime-f_0$,$f_0^\prime$,$f_0^\prime+f_0$},
+                            xticklabel style = {yshift=-6pt,font=\tiny}, 
+                            ymin=-0.5,
+                            ymax=1,
+                            width=14cm,
+                            height=6cm
+                        ]
+                        \addplot [const plot, dotted,black] coordinates{(-30,0.5)(30,0.5)};
+                        \addplot [const plot,blue] coordinates{(-2,-0.5)(-2,1)};
+                        \addplot [const plot,blue] coordinates{(2,-0.5)(2,1)};
+                        \addplot [red, thick, samples = 500] {(sin(deg((x)*pi))/(2*(x)*pi))+(sin(deg((x-20)*pi))/(2*(x-20)*pi))+(sin(deg((x+20)*pi))/(2*(x+20)*pi))+(sin(deg((x-50)*pi))/(2*(x-50)*pi))+(sin(deg((x-30)*pi))/(2*(x-30)*pi))+(sin(deg((x+50)*pi))/(2*(x+50)*pi))+(sin(deg((x+30)*pi))/(2*(x+30)*pi))};
+                        \end{axis}
+                    \end{tikzpicture}
+                    \label{fig:demodulazione di due sinc}
+                }
+                \caption{Demodulazione di due $sinc$}
+            \end{figure}
+            esempio in cui non posso ricavare il segnale le sinc si accavallano\\
+            Esempio di esercizio occupazione dello spettro:\\

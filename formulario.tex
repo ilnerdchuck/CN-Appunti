@@ -13,7 +13,7 @@
             \item {
                 $sinc(\alpha)\triangleq\frac{\sin(\pi\alpha)}{\pi\alpha}$ 
                 É un $\sin(\alpha)$ smorzato secondo $\frac{1}{x}$ che si annulla in $k\pi: k\in\mathbb{Z}$
-                \begin{figure}[htp]
+                \begin{figure}[H]
                     \centering
                     \begin{tikzpicture}
                         \begin{axis}[
@@ -89,7 +89,7 @@
                         $
                     }
                 \end{enumerate}
-    \subsection{Segnali Comuni}\label{Segnali Comuni}
+    \subsection{Segnali Notevoli}\label{Segnali Notevoli}
     \begin{enumerate}
         \item {
             $x_R\triangleq A\hspace{0.1cm}rect\left(\frac{t}{T}\right)\hspace{0.7cm} T = durata $
@@ -129,7 +129,7 @@
         \item {
             $sinc(\alpha)\triangleq\frac{\sin(\pi\alpha)}{\pi\alpha}$\\ 
             É un $\sin(\alpha)$ smorzato secondo $\frac{1}{x}$ che si annulla in $k\pi: k\in\mathbb{Z}$
-            \begin{figure}[htp]
+            \begin{figure}[H]
                 \centering
                 \begin{tikzpicture}
                     \begin{axis}[
@@ -153,6 +153,29 @@
                 \caption{grafico $sinc(\alpha)$}
                 \label{fig:grafico sinc2}
             \end{figure}
+            La banda di una sinc é l'intervallo in cui si annulla $[-\frac{1}{T},\frac{1}{T}]$,es: se $banda\ =1\ se\ T=1$
+            \begin{figure}[H]
+                \centering
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        domain=-4:4,
+                        samples=200,
+                        axis lines=middle,
+                        xlabel=$x$,
+                        ymin=-0.2,
+                        ymax=0.2,
+                        xtick={-2,0,2},
+                        xticklabels={$-\frac{1}{T}$,$0$,$\frac{1}{T}$},
+                        ytick={},
+                        width=10cm,
+                        height=4cm
+                    ]
+                    \addplot [const plot,red, thick] coordinates{(-2,0)(2,0)};
+                    \end{axis}
+                \end{tikzpicture}
+                \caption{banda}
+                \label{fig:banda sinc}
+            \end{figure} 
         }
         \item {
         }
