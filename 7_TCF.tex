@@ -24,7 +24,7 @@
                             width=12cm,
                             height=6cm
                         ]
-                        \addplot [red,dotted, samples = 300] {sin(deg(x*pi))/(x*pi)};
+                        \addplot [red,dotted, samples = 500] {sin(deg(x*pi))/(x*pi)};
                         \addplot+ [blue, thick, ycomb, samples at={-4,-3.6,-3.2,-2.8,-2.4,-2,-1.6,-1.2,-0.8,-0.4,0,0.4,0.8,1.2,1.6,2,2.4,2.8,3.2,3.6,4}] {abs(sin(deg(x*pi))/(x*pi))};
                         \end{axis}
                     \end{tikzpicture}
@@ -1026,7 +1026,7 @@
             Esempio di Demodulazione
             \begin{figure}[H]
                 \centering
-                \subfloat[sinc modulata]{
+                \subfloat[$sinc$ modulata]{
                     \begin{tikzpicture}
                         \begin{axis}[
                             domain=-40:40,
@@ -1052,7 +1052,7 @@
                     \label{fig:sinc modulata}
                 }
                 \hfill
-                \subfloat[sinc demodulata]{
+                \subfloat[$sinc$ demodulata]{
                     \begin{tikzpicture}
                         \begin{axis}[
                             domain=-40:40,
@@ -1079,13 +1079,13 @@
                     \end{tikzpicture}
                     \label{fig:demodulazione di una sinc}
                 }
-                \caption{Demodulazione di una $sinc$, rincontrolla l'ampiezza dei grafi}
+                \caption{Demodulazione di una $sinc$}
             \end{figure}
             Nel caso di piú segnali durante la demodulazione il segnale che voglio recuperare viene spostato in {\color{blue}BB}
             mentre gli altri segnali presenti sullo spettro vengono a loro volta modulati peró con un $f_0$ diverso rispetto al loro $f_0^\prime$:
             \begin{figure}[H]
                 \centering
-                \subfloat[sinc modulata]{
+                \subfloat[Due $sinc$ modulate]{
                     \begin{tikzpicture}
                         \begin{axis}[
                             domain=-55:55,
@@ -1098,7 +1098,7 @@
                             yticklabel style = {yshift=6pt},
                             xtick = {-40,-10,10,40},
                             xticklabels = {$-f_0^\prime$,$-f_0$,$f_0$,$f_0^\prime$},
-                            xticklabel style = {yshift=-6pt}, 
+                            xticklabel style = {yshift=-7pt}, 
                             ymin=-0.5,
                             ymax=1,
                             width=14cm,
@@ -1111,7 +1111,7 @@
                     \label{fig:due sinc modulate}
                 }
                 \hfill
-                \subfloat[sinc demodulata]{
+                \subfloat[Demodulazione delle $sinc$]{
                     \begin{tikzpicture}
                         \begin{axis}[
                             domain=-55:55,
@@ -1133,7 +1133,7 @@
                         \addplot [const plot, dotted,black] coordinates{(-30,0.5)(30,0.5)};
                         \addplot [const plot,blue] coordinates{(-2,-0.5)(-2,1)};
                         \addplot [const plot,blue] coordinates{(2,-0.5)(2,1)};
-                        \addplot [red, thick, samples = 500] {(sin(deg((x)*pi))/(2*(x)*pi))+(sin(deg((x-20)*pi))/(2*(x-20)*pi))+(sin(deg((x+20)*pi))/(2*(x+20)*pi))+(sin(deg((x-50)*pi))/(2*(x-50)*pi))+(sin(deg((x-30)*pi))/(2*(x-30)*pi))+(sin(deg((x+50)*pi))/(2*(x+50)*pi))+(sin(deg((x+30)*pi))/(2*(x+30)*pi))};
+                        \addplot [red, thick, samples = 800] {(sin(deg((x)*pi))/(2*(x)*pi))+(sin(deg((x-20)*pi))/(2*(x-20)*pi))+(sin(deg((x+20)*pi))/(2*(x+20)*pi))+(sin(deg((x-50)*pi))/(2*(x-50)*pi))+(sin(deg((x-30)*pi))/(2*(x-30)*pi))+(sin(deg((x+50)*pi))/(2*(x+50)*pi))+(sin(deg((x+30)*pi))/(2*(x+30)*pi))};
                         \end{axis}
                     \end{tikzpicture}
                     \label{fig:demodulazione di due sinc}
@@ -1142,3 +1142,4 @@
             \end{figure}
             esempio in cui non posso ricavare il segnale le sinc si accavallano\\
             Esempio di esercizio occupazione dello spettro:\\
+            
