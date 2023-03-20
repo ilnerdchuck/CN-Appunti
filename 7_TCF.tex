@@ -1628,5 +1628,108 @@
                 \end{gather}
 
             come funzionano il lidarr e il sonarr? come hanno fatto a rilevare i movimenti con il wifi?
+    \subsection{Delta di Dirac}
+        Si definisce Delta di Dirac $\delta_{(t)} = \derivative{}{t}U_{(t)}$ con $U_{(t)}$ funzione gradino.
+        Piú correttamente si definisce Delta di Dirac la funzione che se integrata restituisce il gradino unitario:
+        \[
+            u_{(t)} = \int_{-\infty}^{\infty} \delta_{(t)} dt \rightarrow U_{(t)}
+        \]
 
-            
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}
+                \begin{axis}[
+                    domain=-0:10,
+                    samples=200,
+                    axis lines=middle,
+                    xlabel=$t$,
+                    ylabel=$\delta_{(t)}$,
+                    ymin=-0.2,
+                    ymax=3,
+                    xtick={0,2,2.4,4,6},
+                    xticklabels={$0$,$T$,$\tau_{min}$,$\tau_{max}$,$\tau+T$},
+                    ytick={2},
+                    yticklabels={$1$},
+                    width=10cm,
+                    height=4cm
+                ]
+                \addplot [-stealth,purple,ultra thick] coordinates{(0,0)(0,2)};
+                \end{axis}
+            \end{tikzpicture}
+            \caption{Delta di Dirac}
+            \label{fig:Grafico Delta Di DIrac}
+        \end{figure}    
+        L'ampiezza della funzione é dovuta alla costante moltiplicativa, ma alla fin fine rimane sempre una funzione impulso.\\
+
+        \textbf{boh amplia magari}
+        
+        \subsubsection{Propietá del Delta di Dirac}\label{Propietá del Delta di Dirac}
+                \begin{itemize}
+                    \item {
+                        $\int_{-\infty}^{\infty} \delta_{(t)} dt = 1$
+                    }\label{PD1}
+                    \item {
+                        Propietá Campionatrice:\\
+                        $Ip:\ x_{(t)}\ continua\ in\ t_0$
+                        \[
+                            \int_{-\infty}^{\infty}x_{(t)}\delta_{(t-t_0)} dt = x_{(t_0)}  
+                        \]
+                        \begin{figure}[H]
+                            \centering
+                            \begin{tikzpicture}
+                                \begin{axis}[
+                                    domain=-0:6,
+                                    samples=200,
+                                    axis lines=middle,
+                                    xlabel=$t$,
+                                    ylabel=$x_{(t)}$,
+                                    ymin=-0.2,
+                                    ymax=5,
+                                    xtick={2},
+                                    xticklabels={$t_0$},
+                                    ytick={3},
+                                    yticklabels={$3$},
+                                    width=10cm,
+                                    height=8cm
+                                ]
+                                \addplot [-stealth,purple,ultra thick] coordinates{(2,0)(2,2.6)};
+                                \addplot [blue,thick,samples = 300] {cos(deg(x))+3};
+                                \end{axis}
+                            \end{tikzpicture}
+                            \caption{Propietá Campionatrice}
+                            \label{fig:Grafico P. Campionatrice}
+                        \end{figure} 
+                    }\label{PD2}
+                    \item {
+                        Paritá: $\delta_{(t)} = \delta_{(-t)}$
+                    }\label{PD3}
+                    \item {
+                        $x_{(t)}\delta_{(t-t_0)} dt = x_{(t_0)}\delta_{(t-t_0)}  $
+                    }\label{PD4}
+                    \item {
+                        $x_{(t)} \otimes \delta_{(t)} = x_{(t)}$
+                        Dimostrazione:
+                        \[x_{(t)} \otimes \delta_{(t)} = \int_{-\infty}^{\infty}x_{(\tau)}\delta_{(t-\tau)} d\tau \Rightarrow^{\ref{PD3}} \int_{-\infty}^{\infty}x_{(\tau)}\delta_{(\tau-t)} d\tau = x_{(t)}\]
+                    }\label{PD5}
+                    \item {
+                        $x_{(t)} \otimes \delta_{(t-t_0)} = x_{(t-t_0)}$
+                        Dimostrazione:
+                        \[x_{(t)} \otimes \delta_{(t-t_0)} = \int_{-\infty}^{\infty}x_{(\tau)}\delta_{(t-t_0-\tau)} d\tau \Rightarrow^{\ref{PD3}} \int_{-\infty}^{\infty}x_{(\tau)}\delta_{(\tau-(t-t_0))} d\tau = x_{(t-t_0)}\]
+                    }\label{PD6}
+                \end{itemize}
+        \subsubsection{$TCF$ della Delta di Dirac}\label{TCF della Delta di Dirac}
+                $x_{(t)} = A\delta_{(t)}$
+                \[
+                    TCF[x_{(t)}] = \int_{-\infty}^{\infty}\delta_{(t)}e^{-j2\pi ft} dt \Rightarrow^{\ref{PD2} t_0=0} \eval{e^{-j2\pi ft}}_{t=0} = A
+                \]
+                \begin{gather}
+                        A\delta_{(t)} \leftrightharpoons^{TCF} A \nonumber \\
+                        Per\ la\ dualita\ \ref{Dualita}: \nonumber \\
+                        A \leftrightharpoons^{TCF} A\delta_{(-f)} = A\delta_{(f)}  \nonumber 
+                \end{gather}
+                Caso con ritardo:
+                \begin{gather}
+                    A\delta_{(t-t_0)} \leftrightharpoons^{TCF} Ae^{-j2\pi ft_0} \nonumber \\
+                    Per\ la\ dualita\ \ref{Dualita}: \nonumber \\
+                    Ae^{-j2\pi f_0t} \leftrightharpoons^{TCF} A\delta_{(-f-f_0)} {\color{red}\ oppure\ A\delta_{(f+f_0)?}} \nonumber 
+                \end{gather}
