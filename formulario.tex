@@ -182,3 +182,76 @@
         \item {
         }
     \end{enumerate}
+    \subsection{Grandezze Fisiche}\label{Grandezze Fisiche}
+        \begin{itemize}
+            \item {Hertz}
+        \end{itemize}
+
+    \subsection{Varie}\label{Varie}
+        \begin{itemize}
+            \item {
+                Calcolo della TCF su MATLAB:\\
+                $X_{(f)} = \int_{-\infty}^{\infty} x_{(t)} e^{-j2\pi ft } dt$
+
+                MATLAB calcola un'approssimazione dell'integrale della TCF con un periodo $T$:
+                \begin{figure}[H]
+                    \centering
+                    \begin{tikzpicture}
+                        \begin{axis}[
+                            domain=0:6,
+                            samples=300,
+                            axis lines=middle,
+                            xlabel=$f$,
+                            ylabel=$y$,
+                            ymin=-0.5,
+                            ymax=5,
+                            xtick={0,0.2,1,2,3,4,5},
+                            xticklabels={$0$,$T$,$1$,$2$,$3$,$4$,$5$},
+                            ytick={1},
+                            yticklabels={$1$},
+                            width=12cm,
+                            height=6cm
+                        ]
+                        \addplot [blue, thick,samples = 500] {(sin(deg(x*pi))/(x*pi))+3};
+                        \addplot+ [ycomb,blue, thick, samples at = {0.1,0.3,0.5,0.7,0.9,1.1}] {(sin(deg(x*pi))/(x*pi))+3};
+                        \end{axis}
+                    \end{tikzpicture}
+                    \caption{Campionamento MATLAB}
+                    \label{fig:campionamento MATLAB xt}
+                \end{figure}    
+                \[
+                    X_{(f)} = \sum_{n} x_{(nT)}e^{-j2\pi fnT}T
+                \]
+                Ma nella $f$ é una variabile continua, quindi a sua volta bisogna variare $f$:\\
+                \[X_{(fk)} =X_{(k\Delta f)} = \sum_{n} x_{(nT)}e^{-j2\pi \Delta fnT}T\]
+                e la condizione sul $\Delta f$ é che $\Delta f<<BB$.
+                \begin{figure}[H]
+                    \centering
+                    \begin{tikzpicture}
+                        \begin{axis}[
+                            domain=0:6,
+                            samples=300,
+                            axis lines=middle,
+                            xlabel=$f$,
+                            ylabel=$y$,
+                            ymin=-0.5,
+                            ymax=1.5,
+                            xtick={0,0.2,1,2,3,4,5},
+                            xticklabels={$0$,$\Delta f$,$1$,$2$,$3$,$4$,$5$},
+                            ytick={1},
+                            yticklabels={$1$},
+                            width=12cm,
+                            height=6cm
+                        ]
+                        \addplot [blue, thick,samples = 500] {sin(deg(x*pi))/(x*pi)};
+                        \addplot+ [ycomb,blue, thick, samples at = {0.1,0.3,0.5,0.7,0.9,1.1}] {sin(deg(x*pi))/(x*pi)};
+                        \end{axis}
+                    \end{tikzpicture}
+                    \caption{ $\Delta f$}
+                    \label{fig:campionamento MATLAB sinc}
+                \end{figure}
+            }
+
+        \end{itemize}
+
+    
