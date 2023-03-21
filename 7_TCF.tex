@@ -69,7 +69,7 @@
         }
         La $TCF$ gode della biunivocitá
         \begin{align}
-            x_{(t)} \rightleftharpoons  X_{(f)}\nonumber \hspace{0.3cm} X_{(f)} \in \mathbb{C}
+            x_{(t)} \overunderset{TCF}{ATCF}{\leftrightharpoons}  X_{(f)}\nonumber \hspace{0.3cm} X_{(f)} \in \mathbb{C}
         \end{align}
         Essendo $X_k$ un numero complesso puó essere rappresentato in forma polare: 
         \[
@@ -169,7 +169,7 @@
                         & = \frac{A\color{purple}{T}}{\pi f} \left(\frac{e^{j\pi fT} - e^{-j\pi fT}}{2j}\right) = \frac{A{\color{purple}T}\sin(\pi fT)}{\pi f\color{purple}{T}} = AT sinc(fT) =  X_{(f)} \nonumber 
             \end{align}
             \[
-                A\hspace{0.1cm}rect\left(\frac{t}{T}\right) \rightleftharpoons AT sinc(fT)
+                A\hspace{0.1cm}rect\left(\frac{t}{T}\right) \overunderset{TCF}{ATCF}{\leftrightharpoons} AT sinc(fT)
             \]
             La sinc si annulla in $\frac{k}{T},\ k\in \mathbb{Z}$. Notiamo anche come la funzione di partenza sia reale e pari la TCF rispetti \ref{Parita}(si?):
             \begin{figure}[H]
@@ -275,7 +275,7 @@
                         X_{(f)} &= A X_{1(f)} + B X_{2(f)} = 2AT sinc(2Tf) + BT sinc(Tf) \nonumber \\
                         X_{1(f)} &= 
                         \begin{cases}
-                            X_{1(f)} = A rect\left(\frac{t}{T^\prime}\right) \rightleftharpoons^{TCF} T^\prime sinc(T^\prime f) \Rightarrow X_{1(f)} =2Tsinc(2Tf) \\
+                            X_{1(f)} = A rect\left(\frac{t}{T^\prime}\right) \overset{TCF}{\leftrightharpoons} T^\prime sinc(T^\prime f) \Rightarrow X_{1(f)} =2Tsinc(2Tf) \\
                             T^\prime = 2T
                         \end{cases} \nonumber
                     \end{align}
@@ -324,8 +324,8 @@
                 
 
         \subsubsection{Dualitá}\label{Dualita}
-            $Ip: x_{(t)} \rightleftharpoons^{TCF} X_{(f)}$\\        
-            $Th: X_{(t)} \rightleftharpoons^{TCF} x_{(-f)}$ 
+            $Ip: x_{(t)} \overunderset{TCF}{ATCF}{\leftrightharpoons} X_{(f)}$\\        
+            $Th: X_{(t)} \overunderset{TCF}{ATCF}{\leftrightharpoons} x_{(-f)}$ 
             Dimostrazione:
             \begin{align}
                 X_{(f)} & = \int_{-\infty}^{\infty} x_{(t)} e^{-j2\pi ft} dt = Sost. \begin{cases}
@@ -353,8 +353,8 @@
                 }
 
         \subsubsection{Ritardo}\label{Ritardo}
-            $Ip: x_{(t)} \rightleftharpoons^{TCF} X_{(f)},\ y_{(t)} = x_{(t-to)}$\\        
-            $Th: Y_{(f)} \rightleftharpoons^{TCF} y_{(t)} = X_{(f)}e^{-j2\pi ft_0}$\\ 
+            $Ip: x_{(t)} \overunderset{TCF}{ATCF}{\leftrightharpoons} X_{(f)},\ y_{(t)} = x_{(t-to)}$\\        
+            $Th: Y_{(f)} \overunderset{TCF}{ATCF}{\leftrightharpoons} y_{(t)} = X_{(f)}e^{-j2\pi ft_0}$\\ 
             Dimostrazione:
             \begin{align}
                 Y_{(f)} & = \int_{-\infty}^{\infty} y_{(t)} e^{-j2\pi ft} dt = \int_{-\infty}^{\infty} x_{(t-t_0)} e^{-j2\pi tf} dt \nonumber \\
@@ -464,7 +464,7 @@
 
         \subsubsection{Derivazione}\label{Derivazione}
             $Ip:\begin{cases}
-                x_{(t)}\rightleftharpoons^{TCF} X_{(f)}\\
+                x_{(t)}\overunderset{TCF}{ATCF}{\leftrightharpoons} X_{(f)}\\
                 y_{(t)}= \derivative{}{t} x_{(t)}        
             \end{cases}$\\
             $Th: Y_{(f)} = j2\pi f X_{(f)} $ \\
@@ -485,14 +485,14 @@
             
         \subsubsection{Integrazione}\label{Integrazione}
             $Ip:\begin{cases}
-                x_{(t)} \rightleftharpoons^{TCF} X_{(f)}\ (1)\\
+                x_{(t)} \overunderset{TCF}{ATCF}{\leftrightharpoons} X_{(f)}\ (1)\\
                 y_{(t)} = \int_{-\infty}^{t} x_{(\alpha)} d\alpha\ (2) \\
                 \int_{-\infty}^{\infty} x_{(t)} dt\ oppure\ \eval*{X_{(f)}}_{f=0} = 0 \ oppure\ y{(+\infty)} = 0\ (3) \\
             \end{cases}$\\
             $Th: Y_{(f)} =\frac{X_{(f)}}{j2\pi f}$ \\
             Dimostrazione:\\
             \begin{gather}
-                y_{(t)} = \int_{-\infty}^{t} x_{(\alpha)} d\alpha \Rightarrow {\color{purple}\derivative{}{t}} x_{(t)} = {\color{purple}\derivative{}{t}} y_{(t)} \Rightarrow^{Th. \ref{Derivazione}}  X_{(f)} = j2\pi f Y_{(f)} \nonumber\\
+                y_{(t)} = \int_{-\infty}^{t} x_{(\alpha)} d\alpha \Rightarrow {\color{purple}\derivative{}{t}} x_{(t)} = {\color{purple}\derivative{}{t}} y_{(t)} \overset{Th. \ref{Derivazione}}{\Rightarrow}  X_{(f)} = j2\pi f Y_{(f)} \nonumber\\
                          Y_{(f)} =\frac{X_{(f)}}{j2\pi f}\nonumber
             \end{gather}
 
@@ -589,7 +589,7 @@
                     \end{figure}
                     \begin{align}
                         y_{(t)} &= \frac{A}{T}rect \left(\frac{t-\left(-\frac{T}{2}\right)}{T}\right) - \frac{A}{T}rect \left(\frac{t-\frac{T}{2}}{T}\right) = Sono\ 2\ rect\ con\ ritardo \nonumber \\
-                                &\Rightarrow y_{(t)} \rightleftharpoons Y_{(f)}\ \ref{Integrazione}(1) \Rightarrow X_{(f)}=\frac{Y_{(f)}}{j2\pi f} 
+                                &\Rightarrow y_{(t)} \rightleftharpoons Y_{(f)}\ \ref{Integrazione} (1)\Rightarrow X_{(f)}=\frac{Y_{(f)}}{j2\pi f} 
                                 \begin{cases}
                                     x_{(t-t_0)} \rightleftharpoons X_{(f)} e^{-j2\pi ft_0}\nonumber\\
                                     rect \left(\frac{t}{T}\right) \rightleftharpoons Tsinc(Tf) \nonumber
@@ -646,7 +646,7 @@
         
         \subsubsection{Derivazione in Frequenza}\label{Derivazione in Frequenza}
             $Ip:\begin{cases}
-                x_{(t)}\rightleftharpoons^{TCF} X_{(f)}
+                x_{(t)}\overunderset{TCF}{ATCF}{\leftrightharpoons} X_{(f)}
                 y_{(t)}= \derivative{x_{(t)}}{t}\\        
             \end{cases}$\\
             $Th: Y_{(f)} = j2\pi f X_{(f)} $ \\
@@ -654,7 +654,7 @@
                 
         \subsubsection{Integrazione in Frequenza}\label{Integrazione in Frequenza}
             $Ip:\begin{cases}
-                x_{(t)}\rightleftharpoons^{TCF} X_{(f)}
+                x_{(t)}\overunderset{TCF}{ATCF}{\leftrightharpoons} X_{(f)}
                 y_{(t)}= \derivative{x_{(t)}}{t}\\        
             \end{cases}$\\
             $Th: Y_{(f)} = j2\pi f X_{(f)} $ \\
@@ -666,15 +666,15 @@
                 z_{(t)} = x_{(t)} \otimes  y_{(t)} \triangleq \int_{-\infty}^{\infty} x_{(\tau)}y_{(t-\tau)} d\tau
             \] 
             $Ip:\begin{cases}
-                x_{(t)}\rightleftharpoons^{TCF} X_{(f)} \\
-                x_{(t)}\rightleftharpoons^{TCF} X_{(f)} \\
+                x_{(t)}\overunderset{TCF}{ATCF}{\leftrightharpoons} X_{(f)} \\
+                x_{(t)}\overunderset{TCF}{ATCF}{\leftrightharpoons} X_{(f)} \\
                 z_{(t)} = x_{(t)} \otimes  y_{(t)}   
             \end{cases}$\\
             $Th: Z_{(f)} = X_{(f)}Y_{(f)} $ \\
             Dimostrazione:
                 \begin{align}
                     Z_{(f)} &= \int_{-\infty}^{\infty} z_{(t)} e^{-j2\pi ft} dt = \int_{-\infty_{t}}^{\infty}\int_{-\infty_{\tau}}^{\infty} x_{(\tau)}y_{(t-\tau)} e^{-j2\pi ft} dt\ d\tau \nonumber \\
-                            &= \int_{-\infty_{t}}^{\infty}x_{(\tau)}\int_{-\infty_{\tau}}^{\infty} y_{(t-\tau)}e^{-j2\pi ft}  dt\ d\tau \Rightarrow^{Th. \ref{Ritardo}} \int_{-\infty}^{\infty}Y_{(f)}x_{(\tau)}e^{-j2\pi f\tau} d\tau  \nonumber \\
+                            &= \int_{-\infty_{t}}^{\infty}x_{(\tau)}\int_{-\infty_{\tau}}^{\infty} y_{(t-\tau)}e^{-j2\pi ft}  dt\ d\tau \overset{Th. \ref{Ritardo}}{\Rightarrow} \int_{-\infty}^{\infty}Y_{(f)}x_{(\tau)}e^{-j2\pi f\tau} d\tau  \nonumber \\
                             &= X_{(f)}Y_{(f)} \nonumber
                 \end{align}
             Propietá della convoluzione:
@@ -711,8 +711,8 @@
             Tutte le propietá sono valutate nel dominio del $tempo$ ma valgono anche per il dominio della $frequenza$.
         \subsubsection{Prodotto}\label{Prodotto}
             $Ip:\begin{cases}
-                x_{(t)}\rightleftharpoons^{TCF} X_{(f)} \\
-                x_{(t)}\rightleftharpoons^{TCF} X_{(f)} \\
+                x_{(t)}\overunderset{TCF}{ATCF}{\leftrightharpoons} X_{(f)} \\
+                x_{(t)}\overunderset{TCF}{ATCF}{\leftrightharpoons} X_{(f)} \\
                 z_{(t)} = x_{(t)}y_{(t)}   
             \end{cases}$\\
             $Th: Z_{(f)} = X_{(f)}\otimes Y_{(f)} $ \\
@@ -720,7 +720,7 @@
                 \begin{align}
                     Z_{(f)} &= \int_{-\infty}^{\infty} z_{(t)} e^{-j2\pi ft} dt = \int_{-\infty}^{\infty}x_{(t)}y_{(t)} e^{-j2\pi ft} dt \nonumber \\
                             &= \int_{-\infty_{t}}^{\infty} \int_{-\infty_{\alpha}}^{\infty}X_{(\alpha)}e^{j2\pi \alpha t} d\alpha\ y_{(t)}e^{-j2\pi ft} dt =\int_{-\infty_{\alpha}}^{\infty}X_{(\alpha)} \int_{-\infty_{t}}^{\infty}y_{(t)}e^{-j2\pi (f-\alpha)t} dt\ d\alpha\nonumber \\
-                            &\Rightarrow^{\ref{Ritardo}} \int_{-\infty}^{\infty}X_{(\alpha)}Y_{(f-\alpha)}  d\alpha = X_{(f)}\otimes Y_{(f)} \nonumber 
+                            &\overset{Th. \ref{Ritardo}}{\Rightarrow} \int_{-\infty}^{\infty}X_{(\alpha)}Y_{(f-\alpha)}  d\alpha = X_{(f)}\otimes Y_{(f)} \nonumber 
                 \end{align}
             \begin{align}
                 Tempo&\hspace{1cm} Frequenza \nonumber \\ 
@@ -962,7 +962,7 @@
         \end{figure}
         Dal Th. di Convoluzione \ref{Convoluzione} sappiamo che é il prodotto di convoluzione di 2 rect di durata uguale a $T$:
         \begin{gather}
-            z_{(t)} = x_{(t)}\otimes y_{(t)} = rect\left(\frac{t}{T}\right) \otimes rect\left(\frac{t}{T}\right) \Rightarrow^{\ref{Convoluzione}} Tsinc(fT)\dotproduct Tsinc(fT) \nonumber \\
+            z_{(t)} = x_{(t)}\otimes y_{(t)} = rect\left(\frac{t}{T}\right) \otimes rect\left(\frac{t}{T}\right) \overset{Th. \ref{Convoluzione}}{\Rightarrow} Tsinc(fT)\dotproduct Tsinc(fT) \nonumber \\
             T^2sinc(fT) \nonumber 
         \end{gather}
         Esercizio appunti martorella triangoli a sx a dx:
@@ -1128,7 +1128,7 @@
         \subsubsection{Th. Modulazione con $\cos(2\pi f_0t)$}\label{Modulazione con coseno}
             $Ip:\begin{cases}
                     y_{(t)}= x_{(t)}\cos(2\pi f_0t)\\        
-                    x_{(t)}\rightleftharpoons^{TCF} X_{(f)}
+                    x_{(t)}\overunderset{TCF}{ATCF}{\leftrightharpoons} X_{(f)}
                 \end{cases}$\\/usr/share/codium/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html
             $Th: Y_{(f)} = \frac{1}{2} X_{(f-f_0)} + \frac{1}{2} X_{(f+f_0)}$ \\
             Dimostrazione:
@@ -1190,7 +1190,7 @@
         \subsubsection{Th. Modulazione con $\sin(2\pi f_0t)$}\label{Modulazione con seno}
         $Ip:\begin{cases}
                 y_{(t)}= x_{(t)}\sin(2\pi f_0t)\\        
-                x_{(t)}\rightleftharpoons^{TCF} X_{(f)}
+                x_{(t)}\overunderset{TCF}{ATCF}{\leftrightharpoons} X_{(f)}
             \end{cases}$\\
         $Th: Y_{(f)} = \frac{1}{2j} X_{(f-f_0)} - \frac{1}{2j} X_{(f+f_0)} $ \\
         Dimostrazione: 
@@ -1204,7 +1204,7 @@
         \subsubsection{Th. Modulazione con $\cos(2\pi f_0t + \phi)$}\label{Modulazione con coseno generico}
             $Ip: \begin{cases}
                 y_{(t)}= x_{(t)}\cos(2\pi f_0t + \phi)\\        
-                x_{(t)}\rightleftharpoons^{TCF} X_{(f)}
+                x_{(t)}\overunderset{TCF}{ATCF}{\leftrightharpoons} X_{(f)}
                 \end{cases}$\\
             $Th: Y_{(f)} = \frac{e^{j\phi}}{2} X_{(f-f_0)} + \frac{e^{-j\phi}}{2} X_{(f+f_0)} $ \\
             Dimostrazione: 
@@ -1273,7 +1273,7 @@
         \subsubsection{Th. Modulazione con Esponenziale Complesso}\label{Modulazione con Esponenziale Complesso}
             $Ip: \begin{cases}
                 y_{(t)}= x_{(t)}e^{j2\pi f_0t}\\        
-                x_{(t)}\rightleftharpoons^{TCF} X_{(f)}
+                x_{(t)}\overunderset{TCF}{ATCF}{\leftrightharpoons} X_{(f)}
                 \end{cases}$\\
             $Th: Y_{(f)} = X_{(f-f_0)} $ \\
             Dimostrazione: 
@@ -1301,7 +1301,7 @@
             \begin{align}
                 y_{(t)} &= x_{(t)} {\color{purple}2}\cos(2\pi f_0t) = g_{(t)} \cos^2(2\pi f_0t) \nonumber \\
                         &= g_{(t)} \frac{1+ \cos(4\pi f_0t)}{2} = \frac{g_{(t)}}{2} + \frac{g_{(t)}\cos(4\pi f_0t)}{2}\nonumber\\
-                TCF[y_{(t)}] &\Rightarrow^{Th. \ref{Modulazione con coseno}}  \frac{2G_{(f)}}{2} + \frac{2G_{(f-2f_0)}}{2}+ \frac{2G_{(f+2f_0)}}{2} \nonumber \\
+                TCF[y_{(t)}] &\overset{Th. \ref{Modulazione con coseno}}{\Rightarrow}  \frac{2G_{(f)}}{2} + \frac{2G_{(f-2f_0)}}{2}+ \frac{2G_{(f+2f_0)}}{2} \nonumber \\
                         &= G_{(f)}+G_{(f-2f_0)}+G_{(f+2f_0)}
             \end{align}
             Dall'ultima uguagliaza posso quindi usare un filtro in ({\color{blue}BB}) per rimuovere i segnali alle frequenze $\pm 2f_0$ e ricavare il mio segnale $G_{(f)}$.\\
@@ -1709,27 +1709,27 @@
                     \item {
                         $x_{(t)} \otimes \delta_{(t)} = x_{(t)}$
                         Dimostrazione:
-                        \[x_{(t)} \otimes \delta_{(t)} = \int_{-\infty}^{\infty}x_{(\tau)}\delta_{(t-\tau)} d\tau \Rightarrow^{\ref{PD3}} \int_{-\infty}^{\infty}x_{(\tau)}\delta_{(\tau-t)} d\tau = x_{(t)}\]
+                        \[x_{(t)} \otimes \delta_{(t)} = \int_{-\infty}^{\infty}x_{(\tau)}\delta_{(t-\tau)} d\tau \overset{\ref{PD3}}{\Rightarrow} \int_{-\infty}^{\infty}x_{(\tau)}\delta_{(\tau-t)} d\tau = x_{(t)}\]
                     }\label{PD5}
                     \item {
                         $x_{(t)} \otimes \delta_{(t-t_0)} = x_{(t-t_0)}$
                         Dimostrazione:
-                        \[x_{(t)} \otimes \delta_{(t-t_0)} = \int_{-\infty}^{\infty}x_{(\tau)}\delta_{(t-t_0-\tau)} d\tau \Rightarrow^{\ref{PD3}} \int_{-\infty}^{\infty}x_{(\tau)}\delta_{(\tau-(t-t_0))} d\tau = x_{(t-t_0)}\]
+                        \[x_{(t)} \otimes \delta_{(t-t_0)} = \int_{-\infty}^{\infty}x_{(\tau)}\delta_{(t-t_0-\tau)} d\tau \overset{\ref{PD3}}{\Rightarrow} \int_{-\infty}^{\infty}x_{(\tau)}\delta_{(\tau-(t-t_0))} d\tau = x_{(t-t_0)}\]
                     }\label{PD6}
                 \end{itemize}
         \subsubsection{$TCF$ della Delta di Dirac}\label{TCF della Delta di Dirac}
                 $x_{(t)} = A\delta_{(t)}$
                 \[
-                    TCF[x_{(t)}] = \int_{-\infty}^{\infty}\delta_{(t)}e^{-j2\pi ft} dt \Rightarrow^{\ref{PD2} t_0=0} \eval{e^{-j2\pi ft}}_{t=0} = A
+                    TCF[x_{(t)}] = \int_{-\infty}^{\infty}\delta_{(t)}e^{-j2\pi ft} dt \overset{\ref{PD2} t_0=0}{\Rightarrow} \eval{e^{-j2\pi ft}}_{t=0} = A
                 \]
                 \begin{gather}
-                        A\delta_{(t)} \leftrightharpoons^{TCF} A \nonumber \\
+                        A\delta_{(t)} \overunderset{TCF}{ATCF}{\leftrightharpoons} A \nonumber \\
                         Per\ la\ dualita\ \ref{Dualita}: \nonumber \\
-                        A \leftrightharpoons^{TCF} A\delta_{(-f)} = A\delta_{(f)}  \nonumber 
+                        A \overunderset{TCF}{ATCF}{\leftrightharpoons} A\delta_{(-f)} = A\delta_{(f)}  \nonumber 
                 \end{gather}
                 Caso con ritardo:
                 \begin{gather}
-                    A\delta_{(t-t_0)} \leftrightharpoons^{TCF} Ae^{-j2\pi ft_0} \nonumber \\
+                    A\delta_{(t-t_0)} \overunderset{TCF}{ATCF}{\leftrightharpoons} Ae^{-j2\pi ft_0} \nonumber \\
                     Per\ la\ dualita\ \ref{Dualita}: \nonumber \\
-                    Ae^{-j2\pi f_0t} \leftrightharpoons^{TCF} A\delta_{(-f-f_0)} {\color{red}\ oppure\ A\delta_{(f+f_0)?}} \nonumber 
+                    Ae^{-j2\pi f_0t} \overunderset{TCF}{ATCF}{\leftrightharpoons} A\delta_{(-f-f_0)} {\color{red}\ oppure\ A\delta_{(f+f_0)?}} \nonumber 
                 \end{gather}
