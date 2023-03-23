@@ -1129,7 +1129,7 @@
             $Ip:\begin{cases}
                     y_{(t)}= x_{(t)}\cos(2\pi f_0t)\\        
                     x_{(t)}\overunderset{TCF}{ATCF}{\leftrightharpoons} X_{(f)}
-                \end{cases}$\\/usr/share/codium/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html
+                \end{cases}$\\
             $Th: Y_{(f)} = \frac{1}{2} X_{(f-f_0)} + \frac{1}{2} X_{(f+f_0)}$ \\
             Dimostrazione:
             \begin{align}
@@ -1186,7 +1186,6 @@
                     \label{fig:modulazione rect}
                 \end{figure}
             }
-            fai cosa ha chiesto lui a fine lezione
         \subsubsection{Th. Modulazione con $\sin(2\pi f_0t)$}\label{Modulazione con seno}
         $Ip:\begin{cases}
                 y_{(t)}= x_{(t)}\sin(2\pi f_0t)\\        
@@ -1669,7 +1668,7 @@
                         $\int_{-\infty}^{\infty} \delta_{(t)} dt = 1$
                     }\label{PD1}
                     \item {
-                        Propietá Campionatrice:\\
+                        Propietá Campionatrice:\label{PDD Campionatrice}\index{Propietá Campionatrice del Delta di Dirac}\\
                         $Ip:\ x_{(t)}\ continua\ in\ t_0$
                         \[
                             \int_{-\infty}^{\infty}x_{(t)}\delta_{(t-t_0)} dt = x_{(t_0)}  
@@ -1728,8 +1727,199 @@
                         A \overunderset{TCF}{ATCF}{\leftrightharpoons} A\delta_{(-f)} = A\delta_{(f)}  \nonumber 
                 \end{gather}
                 Caso con ritardo:
-                \begin{gather}
-                    A\delta_{(t-t_0)} \overunderset{TCF}{ATCF}{\leftrightharpoons} Ae^{-j2\pi ft_0} \nonumber \\
-                    Per\ la\ dualita\ \ref{Dualita}: \nonumber \\
-                    Ae^{-j2\pi f_0t} \overunderset{TCF}{ATCF}{\leftrightharpoons} A\delta_{(-f-f_0)} {\color{red}\ oppure\ A\delta_{(f+f_0)?}} \nonumber 
-                \end{gather}
+                \begin{align}
+                    A\delta_{(t-t_0)} &\overunderset{TCF}{ATCF}{\leftrightharpoons} Ae^{-j2\pi ft_0} \nonumber \\
+                    Per\ la\ &dualita\ \ref{Dualita}: \nonumber \\
+                    Ae^{-j2\pi f_0t} &\overunderset{TCF}{ATCF}{\leftrightharpoons} A\delta_{(-f-f_0)} =  A\delta_(f+f_0) \nonumber 
+                \end{align}
+        \subsubsection{$TCF$ di segnali periodici}\label{TCF di segnali periodici}\index{TCF di segnali periodici}
+                Nel caso di segnali periodci, come $x_{(t)} = \cos(2\pi f_0t)$, abbiamo definito la $TSF$, proviamo a calcolarne la $TCF$:
+                \[
+                    x_{(t)} = \cos(2\pi f_0t) \overunderset{TCF}{ATCF}{\rightleftharpoons} ?
+                \] 
+                \begin{align}
+                    X_{(f)} &= TCF[\cos(2\pi f_0t)] = TCF[\frac{e^{j2\pi f_0t}+ e^{-j2\pi f_0t}}{2}] \nonumber \\
+                            &= TCF[\frac{e^{j2\pi f_0t}}{2}] + TCF[\frac{e^{-j2\pi f_0t}}{2}] \overset{\ref{TCF della Delta di Dirac}}{\Rightarrow}  \frac{\delta_{(f-f_0)}}{2} +\frac{\delta_{(f+f_0)}}{2} \nonumber
+                \end{align}
+                \[
+                    \cos(2\pi f_0t) \overunderset{TCF}{ATCF}{\rightleftharpoons} \frac{\delta_{(f-f_0)}}{2} +\frac{\delta_{(f+f_0)}}{2}
+                \]\label{TCF di un coseno}\index{TCF di un cos}
+
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=4cm]{media/uwu.png}
+                    \caption{TCF $cos$}
+                    \label{fig:TCF cos}
+                \end{figure}
+                SINCERAMENTE QUESTA PARTE NON MI CONVINCE TANTO RIGUARDALA\\
+                Praticamente modulo una costante.\\
+                Osservazione: Non sono i coefficenti $X_{(k)}$, qui le delta sono funzioni nella $TSF$ sono numeri complessi.\\
+                \\
+                Caso con $x_{(t)} = \sin(2\pi f_0t)$
+                \[
+                    x_{(t)} = \sin(2\pi f_0t) \overunderset{TCF}{ATCF}{\rightleftharpoons} ?
+                \] 
+                \begin{align}
+                    X_{(f)} &= TCF[\sin(2\pi f_0t)] = TCF[\frac{e^{j2\pi f_0t}+ e^{-j2\pi f_0t}}{2}] \nonumber \\
+                            &= TCF[\frac{e^{j2\pi f_0t}}{2j}] - TCF[\frac{e^{-j2\pi f_0t}}{2j}] \overset{\ref{TCF della Delta di Dirac}}{\Rightarrow}  \frac{\delta_{(f-f_0)}}{2j} -\frac{\delta_{(f+f_0)}}{2j} \nonumber
+                \end{align}
+                \[
+                    \sin(2\pi f_0t) \overunderset{TCF}{ATCF}{\rightleftharpoons} \frac{\delta_{(f-f_0)}}{2j} -\frac{\delta_{(f+f_0)}}{2j}
+                \]\label{TCF di un sin}\index{TCF di un sin}
+
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=4cm]{media/uwu.png}
+                    \caption{TCF $sin$}
+                    \label{fig:TCF sin}
+                \end{figure}
+
+            \subsection{Relazione tra $TSF$ e $TCF$}
+                \subsubsection{$TCF$ di un segnale periodico generico}\label{TCF di un segnale periodico generico}\index{TCF di un segnale periodico generico}
+                    Dato un generico segnale $y_{(t)}$ posso sempre scriverlo come periodicizzazione di un segnale apreiodico $x_{(t)}$:
+                    $x_{(t)} \overunderset{TCF}{ATCF}{\rightleftharpoons} X_{(f)}$\\
+                    
+                    \[
+                        y_{(t)} = y_{(t-kT_0)} \Rightarrow 
+                        \begin{cases}
+                            TSF[y_{(t)}] = \overunderset{+\infty}{n = -\infty}{\sum} X_n e^{j2\pi nf_0t}\nonumber \\
+                            TCF[y_{(t)}] = \overunderset{+\infty}{n = -\infty}{\sum} X_n \delta_{(f-\frac{k}{T_0})} \nonumber 
+                        \end{cases}
+                    \]
+                    La TCF diventa un campionamento con la Delta di Dirac \ref{fig:Grafico Delta Di DIrac}
+
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=4cm]{media/uwu.png}
+                        \caption{TCF segnale periodico generico}
+                        \label{fig:TCF segnale periodico generico}
+                    \end{figure}
+
+                    Applichiamolo al Th. della Modulazione \ref{Modulazione con coseno}:\\
+                    \begin{align}
+                        y_{(t)} &= x_{(t)}\cos(2\pi f_0t) \overset{\ref{Prodotto}}{\Rightarrow} X_{(f)}\otimes\left(\frac{\delta_{(f-f_0)}}{2} + \frac{\delta_{(f-f_0)}}{2}\right)\nonumber \\
+                                &\overset{\ref{PDD Campionatrice}}{\Rightarrow} \frac{1}{2} X_{(f-f_0)} + \frac{1}{2} X_{(f+f_0)}\nonumber 
+                    \end{align}
+
+                    Esercizio:
+                    {
+                        \begin{figure}[H]
+                            \centering
+                            \includegraphics[width=4cm]{media/uwu.png}
+                            \caption{TCF rect meno triangolo}
+                            \label{fig:rect meno triangolo}
+                        \end{figure}
+                    }
+                \subsubsection{Relazione tra i coefficenti $X_k$ e $X_{(f)}$}
+                    \[
+                        y_{(t)} = y_{(t-kT_0)} \Rightarrow \text{Periodico in }T_0 = \overunderset{+\infty}{n = -\infty}{\sum}x_{(t-nT_0)} 
+                    \]
+                    $x_{(t)}$ Segnale aperiodico
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=4cm]{media/uwu.png}
+                        \caption{Segnale aperiodico - periodico}
+                        \label{fig:Segnale aperiodico periodico}
+                    \end{figure}
+                    \[
+                        \begin{cases}
+                            x_{(t)} \overset{TCF}{\rightleftharpoons} X_{(f)} \nonumber \\
+                            y_{(t)} \overset{TSF}{\rightleftharpoons}\overunderset{+\infty}{k = -\infty}{\sum}  Y_{k} e^{j2\pi kf_0t}\nonumber
+                        \end{cases}  
+                        \text{Che relazione intercorre tra }Y_k\ e\ X_{(f)}
+                    \]
+                    \begin{align}
+                        Y_k &= \frac{1}{T_0} \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} y_{(t)} e^{j2\pi kf_0t} dt =\frac{1}{T_0} \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} \overunderset{+\infty}{n = -\infty}{\sum}x_{(t-nT_0)} e^{j2\pi kf_0t} dt \nonumber \\
+                                &= \frac{1}{T_0} \overunderset{+\infty}{n = -\infty}{\sum} \int_{-\frac{T_0}{2}}^{\frac{T_0}{2}} x_{(t-nT_0)} e^{j2\pi kf_0t} dt \overset{t^\prime = t-nT_0}{=} \frac{1}{T_0} \overunderset{+\infty}{n = -\infty}{\sum} \int_{-\frac{T_0}{2}-nT_0}^{\frac{T_0}{2}-nT_0} x_{(t^\prime)} e^{j2\pi kf_0(t^\prime+nT_0)} dt^\prime  \nonumber \\
+                                &= \frac{1}{T_0} \overunderset{+\infty}{n = -\infty}{\sum} \int_{-\frac{T_0}{2}-nT_0}^{\frac{T_0}{2}-nT_0} x_{(t^\prime)} e^{j2\pi kf_0t^\prime} \underset{\substack{\downarrow \forall nk=1 \\\text{é la fase di un numero sempre intero nk}}\in\mathbb{N}}{e^{j2\pi nkf_0T_0}} dt^\prime\nonumber \\
+                                &= \frac{1}{T_0} \overunderset{+\infty}{n = -\infty}{\sum} \int_{-\frac{T_0}{2}-nT_0}^{\frac{T_0}{2}-nT_0} x_{(t^\prime)} e^{j2\pi kf_0t^\prime}dt^\prime \rightarrow \text{$TCF$ con intervalli disgiunti e adiacenti in $kf_0$}\nonumber 
+                    \end{align}
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=4cm]{media/uwu.png}
+                        \caption{Intervalli adiacenti e disgiunti}
+                        \label{fig:Intervalli adiacenti}
+                    \end{figure}
+                    \[
+                        Y_k = \frac{1}{T_0}\int_{-\infty}^{\infty} x_{(t^\prime)} e^{j2\pi kf_0t^\prime}dt^\prime \Rightarrow Y_k = \frac{1}{T_0} X_{(kf_0)}
+                    \]
+                    Sono campionamenti di $X_{(f)}$ a $kf_0$.\\
+                
+                \subsubsection{$I^a$ formula di Poisson}
+                    \[
+                        y_{(t)} \overset{TSF}{\rightleftharpoons}\overunderset{+\infty}{k = -\infty}{\sum} \frac{1}{T_0} X_{(kf_0)} e^{j2\pi kf_0t}    
+                    \]
+                    Evidenzia se:
+                    \begin{center}
+                        \emph{Periodicizzazione nel tempo} $\rightleftharpoons$ \emph{Campionamento nella frequenza}
+                    \end{center}
+                    
+                    Esempio:\\
+                    $x_{(t)} = rect\left(\frac{t}{T}\right) \hspace{.2cm} X_{(f)} = Tsinc(fT)$
+                    
+                \subsubsection{Teorema dell'integrazione completo}\label{Teorema integrazione completo}\index{Teorema dell'integrazione completo}
+                    $Ip:\begin{cases}
+                        x_{(t)} \overunderset{TCF}{ATCF}{\leftrightharpoons} X_{(f)}\\
+                        y_{(t)} = \int_{-\infty}^{t} x_{(\alpha)} d\alpha
+                    \end{cases}$\\
+                    $Th: Y_{(f)} =\frac{X_{(0)}}{2}\delta_{(f)} +\frac{X_{(f)}}{j2\pi f}$ \\
+                    
+                    Prende la nominazione di completo perché risolve il problema di mantenere l'uguaglianza $j2\pi fY_{(f)} = X_{(f)}$
+                    
+                    Per la dimostrazione ci serve definire prima:
+                    \begin{itemize}
+                        \item{
+                            $TCF$ di $\frac{1}{t}$ 
+                                \begin{align}
+                                    \frac{1}{t} &\overunderset{TSF}{ATSF}{\rightleftharpoons}  sgn(f) \nonumber \\
+                                    \text{Per la }&\text{Dualitá \ref{Dualita}}\nonumber \\
+                                    sgn(t) &\overunderset{TSF}{ATSF}{\rightleftharpoons} \frac{1}{j\pi f} \nonumber
+                                \end{align}
+                        }
+                        \item{
+                            $TCF$ del gradino $u_{(t)}$
+                            \[
+                              u_{(t)} = \int_{-\infty}^{\infty} \delta_{(\alpha)} d\alpha \hspace{1cm}   u_{(t)} \rightleftharpoons U_{(f)}
+                            \] 
+                            Non posso applicare il Th dell'integrazione $
+                            \begin{cases}
+                                y_{(+\infty)} = 1\nonumber \\    
+                                \int_{-\infty}^{\infty} u_{(t)} dt  = 1\nonumber \\   
+                                X_{(f)} = 1 \nonumber    
+                            \end{cases}$
+                            la terza ipotesi non é mai verificata. Scriviamo la funzione gradino in modo diverso:
+                            \[
+                                u_{(t)} = \frac{1}{2}+\frac{1}{2}sgn(t)
+                            \] 
+                            \begin{figure}[H]
+                                \centering
+                                \includegraphics[width=4cm]{media/uwu.png}
+                                \caption{$u_{(t)}$}
+                                \label{fig:gradino alternativo}
+                            \end{figure}
+                            \[
+                                U_{(f)} = TCF[u_{(t)}] = \frac{1}{2}\delta_{(f)}+\frac{1}{2j\pi f}
+                            \]
+                            \[
+                                \frac{1}{2}+\frac{1}{2}sgn(t) \overunderset{TSF}{ATSF}{\rightleftharpoons} \frac{1}{2}\delta_{(f)}+\frac{1}{2j\pi f} 
+                            \]
+                        }
+                    \end{itemize}                    
+
+                    
+                    Dimostrazione:\\
+                        \[
+                            y_{(t)} = \int_{-\infty}^{t} x_{(\alpha)} d\alpha =\int_{-\infty}^{\infty} x_{(\alpha)} u_{(t-\alpha)} d\alpha
+                        \]
+                        \begin{figure}[H]
+                            \centering
+                            \includegraphics[width=4cm]{media/uwu.png}
+                            \caption{gradino che limita la funzione alpha sta sulle ascisse}
+                            \label{fig:gradino che limite la funzione}
+                        \end{figure}
+                        Utilizziamo il gradino per cambiare gli estremi dell'integrale e mantenere l'estremo a $t$. Ci siamo ricondotti all'integrale di convoluzione \ref{Convoluzione}:
+                        \[
+                            Y_{(f)} =X_{(f)} U_{(f)} = \frac{X_{(f)}}{2}\delta_{(f)} +\frac{X_{(f)}}{j2\pi f} =\frac{X_{(0)}}{2}\delta_{(f)} +\frac{X_{(f)}}{j2\pi f}    
+                        \]
+                        Se $X_{(0)}$ fosse $0$ avrei il classico Th. dell'integrazione.
+                        DOMANDA: ma quindi nella propietá campionatrice in frequenza rimane la delta????
