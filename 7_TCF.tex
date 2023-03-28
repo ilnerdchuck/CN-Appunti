@@ -1627,7 +1627,7 @@
                 \end{gather}
 
             come funzionano il lidarr e il sonarr? come hanno fatto a rilevare i movimenti con il wifi?
-    \subsection{Delta di Dirac}
+    \subsection{Delta di Dirac}\label{Delta di Dirac}
         Si definisce Delta di Dirac $\delta_{(t)} = \derivative{}{t}U_{(t)}$ con $U_{(t)}$ funzione gradino.
         Piú correttamente si definisce Delta di Dirac la funzione che se integrata restituisce il gradino unitario:
         \[
@@ -1732,7 +1732,7 @@
                     Per\ la\ &dualita\ \ref{Dualita}: \nonumber \\
                     Ae^{-j2\pi f_0t} &\overunderset{TCF}{ATCF}{\leftrightharpoons} A\delta_{(-f-f_0)} =  A\delta_(f+f_0) \nonumber 
                 \end{align}
-        \subsubsection{$TCF$ di segnali periodici}\label{TCF di segnali periodici}\index{TCF di segnali periodici}
+        \subsubsection{$TCF$ di segnali periodici FIX?}\label{TCF di segnali periodici}\index{TCF di segnali periodici}
                 Nel caso di segnali periodci, come $x_{(t)} = \cos(2\pi f_0t)$, abbiamo definito la $TSF$, proviamo a calcolarne la $TCF$:
                 \[
                     x_{(t)} = \cos(2\pi f_0t) \overunderset{TCF}{ATCF}{\rightleftharpoons} ?
@@ -1747,11 +1747,34 @@
 
                 \begin{figure}[H]
                     \centering
-                    \includegraphics[width=4cm]{media/uwu.png}
+                    \begin{tikzpicture}
+                        \begin{axis}[
+                            domain=-5:5,
+                            samples=200,
+                            axis lines=middle,
+                            xlabel=$f$,
+                            ylabel=$X_{(f)}$,
+                            xmax=5,
+                            xmin=-5,
+                            ymin=-0.2,
+                            ymax=5,
+                            xtick={-2,2},
+                            xticklabels={$-f_0$,$f_0$},
+                            ytick={2},
+                            yticklabels={$\frac{A}{2}$},
+                            width=10cm,
+                            height=8cm
+                        ]
+                        \addplot [const plot,dotted,black] coordinates{(-5,2)(5,2)};
+                        \addplot [const plot,thick,blue] coordinates{(-2,0)(-2,2)};
+                        \addplot [const plot,thick,blue,mark = triangle*] coordinates{(-2,2)(-2,2)};
+                        \addplot [const plot,thick,blue,mark = triangle*] coordinates{(2,2)(2,2)};
+                        \addplot [const plot,thick,blue] coordinates{(2,0)(2,2)};
+                        \end{axis}
+                    \end{tikzpicture}
                     \caption{TCF $cos$}
                     \label{fig:TCF cos}
                 \end{figure}
-                SINCERAMENTE QUESTA PARTE NON MI CONVINCE TANTO RIGUARDALA\\
                 Praticamente modulo una costante.\\
                 Osservazione: Non sono i coefficenti $X_{(k)}$, qui le delta sono funzioni nella $TSF$ sono numeri complessi.\\
                 \\
@@ -1769,7 +1792,33 @@
 
                 \begin{figure}[H]
                     \centering
-                    \includegraphics[width=4cm]{media/uwu.png}
+                    \begin{tikzpicture}
+                        \begin{axis}[
+                            domain=-5:5,
+                            samples=200,
+                            axis lines=middle,
+                            xlabel=$f$,
+                            ylabel=$X_{(f)}$,
+                            xmax=5,
+                            xmin=-5,
+                            ymin=-3,
+                            ymax=3,
+                            xtick={-2,2},
+                            xticklabels={$-f_0$,$f_0$},
+                            ytick={-2,2},
+                            yticklabels={$-\frac{A}{2}$,$\frac{A}{2}$},
+                            width=10cm,
+                            height=8cm
+                        ]
+                        \addplot [const plot,dotted,black] coordinates{(-5,2)(5,2)};
+                        \addplot [const plot,thick,blue] coordinates{(-2,0)(-2,2)};
+                        \addplot [const plot,thick,blue,mark = triangle*] coordinates{(-2,2)(-2,2)};
+                        \addplot [const plot,thick,blue,mark = triangle*] coordinates{(2,-2)(2,-2)};
+                        \addplot [const plot,thick,blue] coordinates{(2,0)(2,-2)};
+                        \addplot [const plot,dotted,black] coordinates{(-5,-2)(5,-2)};
+                        
+                        \end{axis}
+                    \end{tikzpicture}
                     \caption{TCF $sin$}
                     \label{fig:TCF sin}
                 \end{figure}
@@ -1786,11 +1835,29 @@
                             TCF[y_{(t)}] = \overunderset{+\infty}{n = -\infty}{\sum} X_n \delta_{(f-\frac{k}{T_0})} \nonumber 
                         \end{cases}
                     \]
-                    La TCF diventa un campionamento con la Delta di Dirac \ref{fig:Grafico Delta Di DIrac}
+                    La TCF diventa un campionamento con la Delta di Dirac \ref{Propietá del Delta di Dirac}
 
                     \begin{figure}[H]
                         \centering
-                        \includegraphics[width=4cm]{media/uwu.png}
+                        \begin{tikzpicture}
+                            \begin{axis}[
+                                domain=-5:5,
+                                samples=200,
+                                axis lines=middle,
+                                xlabel=$f$,
+                                ylabel=$X_{(f)}$,
+                                ymin=-1.5,
+                                ymax=1.5,
+                                xtick={-4,-3,-2,-1,-0,1,2,3,4},
+                                xticklabels={$-4$,$-3$,$-2$,$-1$,$-0$,$1$,$2$,$3$,$4$},
+                                ytick={1},
+                                yticklabels={$1$},
+                                width=10cm,
+                                height=6cm
+                            ]
+                            \addplot+ [blue,ycomb, mark = triangle*,thin, samples at = {-1.2,-1,-0.8,-0.6,-0.4,-0.2,0,0.2,0.4,0.6,0.8,1,1.2}] {sin(deg(x*pi))/(x*pi)};
+                            \end{axis}
+                        \end{tikzpicture}
                         \caption{TCF segnale periodico generico}
                         \label{fig:TCF segnale periodico generico}
                     \end{figure}
@@ -1805,10 +1872,85 @@
                     {
                         \begin{figure}[H]
                             \centering
-                            \includegraphics[width=4cm]{media/uwu.png}
+                            \begin{tikzpicture}
+                                \begin{axis}[
+                                    domain=-4:4,
+                                    samples=200,
+                                    axis lines=middle,
+                                    xlabel=$t$,
+                                    ylabel=$x_{(t)}$,
+                                    ymin=-0.2,
+                                    xmax=3,
+                                    xmin=-3,
+                                    ymax=3,
+                                    xtick={-2,2},
+                                    xticklabels={$-T$,$T$},
+                                    ytick={2},
+                                    yticklabels={$1$},
+                                    width=10cm,
+                                    height=5cm
+                                ]
+                                \addplot [const plot,blue,thick] coordinates{(-2,0)(-2,2)};
+                                \addplot [sharp plot,blue,thick] coordinates{(-2,2)(0,0)};
+                                \addplot [sharp plot,blue,thick] coordinates{(2,2)(0,0)};
+                                \addplot [const plot,blue,thick] coordinates{(2,0)(2,2)};
+                                \end{axis}
+                            \end{tikzpicture}
                             \caption{TCF rect meno triangolo}
                             \label{fig:rect meno triangolo}
                         \end{figure}
+                        Deriviamo il segnale $y_{(t)}$:
+                        \begin{figure}[H]
+                            \centering
+                            \begin{tikzpicture}
+                                \begin{axis}[
+                                    domain=-4:4,
+                                    samples=200,
+                                    axis lines=middle,
+                                    xlabel=$t$,
+                                    ylabel=$x_{(t)}$,
+                                    ymin=-3,
+                                    ymax=3,
+                                    xmax=3,
+                                    xmin=-3,
+                                    xtick={-2,2},
+                                    xticklabels={$-T$,$T$},
+                                    ytick={-2,2},
+                                    yticklabels={$-\frac{1}{T}$,$\frac{1}{T}$},
+                                    width=10cm,
+                                    height=8cm
+                                ]
+                                \addplot+ [const plot,mark = triangle*,blue,thick] coordinates{(-2,2)};
+
+                                \addplot [const plot,blue,thick] coordinates{(-2,2)(-2,0)};
+                                \addplot [const plot,blue,thick] coordinates{(2,0)(2,-2)};
+                                
+                                \addplot+ [const plot,mark = triangle*,blue,thick] coordinates{(2,-2)};
+                                
+                                \addplot [const plot,blue,thick] coordinates{(-2,-2)(0,-2)};
+                                \addplot [const plot,blue,thick] coordinates{(2,2)(0,2)};
+
+                            \end{axis}
+                            \end{tikzpicture}
+                            \caption{Derivata di $y_{(t)}$}
+                            \label{fig:derivata rect meno triangolo}
+                        \end{figure}
+                        \[
+                            y_{(t)} =\delta_{(t-T)}-\delta_{(t+T)}-\frac{1}{T}rect\left(\frac{t-\left(-\frac{T_0}{2}\right)}{T}\right)+\frac{1}{T}rect\left(\frac{t-\frac{T_0}{2}}{T}\right)   
+                        \]
+                        Possiamo applicare il Th dell'integrazione \ref{Integrazione} l'ipotesi $(3)$: $y_{(\infty)}=0$
+                        \begin{align}
+                            TCF&[y_{(t)}] = e^{j2\pi fT}-e^{-j2\pi fT}-\frac{1}{T}Tsinc(fT)e^{j2\pi f\frac{T_0}{2}}+\frac{1}{T}Tsinc(fT)e^{-j2\pi f\frac{T_0}{2}}  \nonumber \\
+                               &= \frac{2j}{2j}\left(e^{j2\pi fT}-e^{-j2\pi fT}-sinc(fT)e^{j2\pi f\frac{T_0}{2}}+sinc(fT)e^{-j2\pi f\frac{T_0}{2}}\right) \nonumber \\
+                               &= 2jsin(2\pi fT)-2jsinc(fT)sin(\pi fT) \nonumber
+                        \end{align}
+                        
+                        \begin{align}
+                            X_{(f)} &= \frac{Y_{(f)}}{j2\pi f} = \frac{2jsin(2\pi fT)-2jsinc(fT)sin(\pi fT)}{j2\pi f} \nonumber \\
+                                    &= \frac{sin(2\pi fT)}{\pi f} - \frac{sinc(fT)sin(\pi fT)}{\pi f} ={\color{purple}\frac{2T}{2T}} \frac{sin(2\pi fT)}{\pi f} - {\color{purple}\frac{T}{T}}\frac{sinc(fT)sin(\pi fT)}{\pi f} \nonumber \\
+                                    &= 2Tsinc(2fT)-Tsinc^2(fT)\nonumber 
+                        \end{align}
+                        Si potrebbe fare sottraendo un triangolo a una rect?
                     }
                 \subsubsection{Relazione tra i coefficenti $X_k$ e $X_{(f)}$}
                     \[
@@ -1817,8 +1959,58 @@
                     $x_{(t)}$ Segnale aperiodico
                     \begin{figure}[H]
                         \centering
-                        \includegraphics[width=4cm]{media/uwu.png}
-                        \caption{Segnale aperiodico - periodico}
+                        \begin{tikzpicture}
+                            \begin{axis}[
+                                xlabel=$t$,
+                                ylabel=$x_{(t)}$,
+                                xmin=-10,
+                                xmax=10,
+                                ymin=-0.5,
+                                ymax=4,
+                                ytick = {1.5},
+                                xtick={-6,-3,0,3,6},
+                                xticklabels={$-2T_0$,$-T_0$, $0$,$T_0$,$2T_0$},
+                                yticklabels = {$A$},
+                                yticklabel style = {yshift=5pt,xshift=4pt}, 
+                                axis lines=middle,
+                                thick,
+                                domain=-5:5,
+                                samples=100,
+                                width=10cm,
+                                height=4cm
+                            ]
+                            %Periodico
+                            %2T0
+                            \addplot [const plot, red, thick] coordinates{(-5,1.5)(-7,1.5)};
+                            \addplot [const plot, red, thick] coordinates{(-5,0)(-5,1.5)};
+                            \addplot [const plot, red, thick] coordinates{(-7,0)(-7,1.5)};
+                            
+                            \addplot [const plot, red, thick] coordinates{(5,1.5)(7,1.5)};
+                            \addplot [const plot, red, thick] coordinates{(5,0)(5,1.5)};
+                            \addplot [const plot, red, thick] coordinates{(7,0)(7,1.5)};
+
+                            \addplot [const plot, red, thick] coordinates{(-2,1.5)(-4,1.5)};
+                            \addplot [const plot, red, thick] coordinates{(-2,0)(-2,1.5)};
+                            \addplot [const plot, red, thick] coordinates{(-4,0)(-4,1.5)};
+                            
+                            %T0
+                            \addplot [const plot, red, thick] coordinates{(2,1.5)(4,1.5)};
+                            \addplot [const plot, red, thick] coordinates{(2,0)(2,1.5)};
+                            \addplot [const plot, red, thick] coordinates{(4,0)(4,1.5)};
+                        
+                            \addplot [const plot, red, thick] coordinates{(-0.94,1.485)(0.94,1.48)};
+                            \addplot [const plot, red, thick] coordinates{(-0.94,0)(-0.94,1.48)};
+                            \addplot [const plot, red, thick] coordinates{(0.94,0)(0.94,1.48)};
+                        
+                            %Aperiodico
+                            \addplot [const plot, blue, thick] coordinates{(-1,1.5)(1,1.5)};
+                            \addplot [const plot, blue, thick] coordinates{(-1,0)(-1,1.5)};
+                            \addplot [const plot, blue, thick] coordinates{(1,0)(1,1.5)};
+                        
+                            
+                            \end{axis}
+                        \end{tikzpicture}
+                        \caption{Segnale {\color{blue}aperiodico}, Segnale {\color{red}periodico}}
                         \label{fig:Segnale aperiodico periodico}
                     \end{figure}
                     \[
@@ -1836,7 +2028,66 @@
                     \end{align}
                     \begin{figure}[H]
                         \centering
-                        \includegraphics[width=4cm]{media/uwu.png}
+                        \begin{tikzpicture}
+                            \begin{axis}[
+                                domain=-5:5,
+                                samples=200,
+                                axis lines=middle,
+                                xlabel=$t$,
+                                ylabel=$x_{(t)}$,
+                                ymin=-0.3,
+                                ymax=5,
+                                xtick={-4.5,-3.5,-2.5,-1.5,-0.5,0,0.5,1.5,2.5,3.5,4.5},
+                                xticklabels={$-5T_0$,$-4T_0$,$-3T_0$,$-2T_0$,$-T_0$,$0$,$T_0$,$2T_0$,$3T_0$,$4T_0$,$5T_0$},
+                                ytick={},
+                                width=12cm,
+                                height=5cm
+                            ]
+                            %x(t)
+                            \addplot [name path = A,const plot,black, thin] coordinates{(-5,0)(-4,0)};
+                            \addplot [name path = B,domain = -5:-4,ultra thick,blue, samples = 400] {(1/5*sin(deg(x))+2)*((x/20)+1)};
+                            
+                            \addplot [name path = C,const plot,black, thin] coordinates{(-4,0)(-3,0)};
+                            \addplot [name path = D,domain = -4:-3,ultra thick,blue, samples = 400] {(1/5*sin(deg(x))+2)*((x/20)+1)};
+                            
+                            \addplot [name path = E,const plot,black, thin] coordinates{(-3,0)(-2,0)};
+                            \addplot [name path = F,domain = -3:-2,ultra thick,blue, samples = 400] {(1/5*sin(deg(x))+2)*((x/20)+1)};
+                            
+                            \addplot [name path = G,const plot,black, thin] coordinates{(-2,0)(-1,0)};
+                            \addplot [name path = H,domain = -2:-1,ultra thick,blue, samples = 400] {(1/5*sin(deg(x))+2)*((x/20)+1)};
+                            
+                            \addplot [name path = I,const plot,black, thin] coordinates{(-1,0)(0,0)};
+                            \addplot [name path = L,domain = -1:0,ultra thick,blue, samples = 400] {(1/5*sin(deg(x))+2)*((x/20)+1)};
+                            
+                            \addplot [name path = M,const plot,black, thin] coordinates{(0,0)(1,0)};
+                            \addplot [name path = N,domain = 0:1,ultra thick,blue, samples = 400] {(1/5*sin(deg(x))+2)*((x/20)+1)};
+                            
+                            \addplot [name path = O,const plot,black, thin] coordinates{(1,0)(2,0)};
+                            \addplot [name path = P,domain = 1:2,ultra thick,blue, samples = 400] {(1/5*sin(deg(x))+2)*((x/20)+1)};
+                            
+                            \addplot [name path = Q,const plot,black, thin] coordinates{(2,0)(3,0)};
+                            \addplot [name path = R,domain = 2:3,ultra thick,blue, samples = 400] {(1/5*sin(deg(x))+2)*((x/20)+1)};
+                            
+                            \addplot [name path = S,const plot,black, thin] coordinates{(3,0)(4,0)};
+                            \addplot [name path = T,domain = 3:4,ultra thick,blue, samples = 400] {(1/5*sin(deg(x))+2)*((x/20)+1)};
+                            
+                            \addplot [name path = U,const plot,black, thin] coordinates{(4,0)(5,0)};
+                            \addplot [name path = V,domain = 4:5,ultra thick,blue, samples = 400] {(1/5*sin(deg(x))+2)*((x/20)+1)};
+                            
+                            \addplot [thin,black, samples = 400,black,thin] {(1/5*sin(deg(x))+2)*((x/20)+1)};
+                            %Colors
+                            \addplot[green,opacity = 0.3] fill between[of=A and B];
+                            \addplot[blue,opacity = 0.3] fill between[of=C and D];
+                            \addplot[red,opacity = 0.3] fill between[of=E and F];
+                            \addplot[yellow,opacity = 0.3] fill between[of=G and H];
+                            \addplot[purple,opacity = 0.3] fill between[of=I and L];
+                            \addplot[black,opacity = 0.3] fill between[of=M and N];
+                            \addplot[green,opacity = 0.3] fill between[of=O and P];
+                            \addplot[yellow,opacity = 0.3] fill between[of=Q and R];
+                            \addplot[red,opacity = 0.3] fill between[of=S and T];
+                            \addplot[blue,opacity = 0.3] fill between[of=U and V];
+                            \end{axis}
+                        \end{tikzpicture}
                         \caption{Intervalli adiacenti e disgiunti}
                         \label{fig:Intervalli adiacenti}
                     \end{figure}
@@ -1849,14 +2100,78 @@
                     \[
                         y_{(t)} \overset{TSF}{\rightleftharpoons}\overunderset{+\infty}{k = -\infty}{\sum} \frac{1}{T_0} X_{(kf_0)} e^{j2\pi kf_0t}    
                     \]
-                    Evidenzia se:
+                    Evidenzia che:
                     \begin{center}
                         \emph{Periodicizzazione nel tempo} $\rightleftharpoons$ \emph{Campionamento nella frequenza}
                     \end{center}
+                    \begin{figure}[H]
+                        \centering
+                        \begin{tikzpicture}
+                            \begin{axis}[
+                                domain=-5:5,
+                                samples=200,
+                                axis lines=middle,
+                                xlabel=$f$,
+                                ylabel=$X_{(f)}$,
+                                ymin=-1.5,
+                                ymax=1.5,
+                                xtick={-4,-3,-2,-1,-0,1,2,3,4},
+                                xticklabels={$-4$,$-3$,$-2$,$-1$,$-0$,$1$,$2$,$3$,$4$},
+                                ytick={1},
+                                yticklabels={$1$},
+                                width=10cm,
+                                height=6cm
+                            ]
+                            \addplot [red,dotted, samples = 300] {sin(deg(x*pi))/(x*pi)};
+                            \addplot+ [blue,ycomb ,thin, samples at = {-1.2,-1,-0.8,-0.6,-0.4,-0.2,0,0.2,0.4,0.6,0.8,1,1.2}] {sin(deg(x*pi))/(x*pi)};
+                            \end{axis}
+                        \end{tikzpicture}
+                        \caption{Grafico del campionamento}
+                        \label{fig:campionamento in frequenza}
+                    \end{figure}
                     
                     Esempio:\\
-                    $x_{(t)} = rect\left(\frac{t}{T}\right) \hspace{.2cm} X_{(f)} = Tsinc(fT)$
+                    $y_{(t)} = |\cos(2\pi f_0t)| \hspace{.2cm} X_k = ?$
                     
+                    \begin{figure}[H]
+                        \centering
+                        \begin{tikzpicture}
+                            \begin{axis}[
+                                domain=-6:6,
+                                samples=200,
+                                axis lines=middle,
+                                xlabel=$t$,
+                                ylabel=$x_{(t)}$,
+                                ymin=-0.2,
+                                ymax=1.5,
+                                xtick={-4,-3,-2,-1,-0,1,2,3,4},
+                                xticklabels={$-4$,$-3$,$-2$,$-1$,$-0$,$1$,$2$,$3$,$4$},
+                                ytick={1},
+                                yticklabels={$1$},
+                                width=10cm,
+                                height=4cm
+                            ]
+                            \addplot [red,thick,samples = 300] {abs(cos(deg(x)))};
+                            \addplot [domain = -pi/2:pi/2,blue,thick,samples = 300] {abs(cos(deg(x))+0.025)};
+                            \end{axis}
+                        \end{tikzpicture}
+                        \caption{$|\cos(2\pi f_0t)|$}
+                        \label{fig:cos 2pif_0t}
+                    \end{figure}
+                    ${\color{red}y_{(t)}} = |\cos(2\pi f_0t)|$ non é altro che il segnale aperiodico ${\color{blue}x_{(t)}} = \cos(2\pi f_0t) \dotproduct rect\left(\frac{t}{\frac{T_0}{2}}\right)$ con periodo $\frac{T_0}{2}$:
+                    \[
+                        \begin{cases}
+                            Y_k = \frac{2}{T_0} X_{(kf_0)} = \frac{2}{T_0} X_{(k\frac{2}{T_0})}   \nonumber \\
+                            X_{(f)} = \frac{T_0}{2}sinc(f\frac{T_0}{2}) \otimes \left(\frac{\delta_{(f-f_0)}}{2} + \frac{\delta_{(f-f_0)}}{2}\right)\nonumber
+                        \end{cases}
+                    \]
+                    Per il calcolo di $X_{(f)}$ si applica il Th della Modulazione con $cos$ \ref{Modulazione con coseno} e la propietá campionatrice della Delta di Dirac rispetto alla convoluzione \ref{PD3}.
+                    \[
+                        X_{(f)} = \frac{T_0}{4}sinc\left((f-f_0)\frac{T_0}{2}\right) + \frac{T_0}{4}sinc\left((f+f_0)\frac{T_0}{2}\right)
+                    \]
+                    \[
+                        Y_k = \frac{2}{T_0}\frac{T_0}{4}sinc\left((\frac{2k}{T_0}-f_0)\frac{T_0}{2}\right) +\frac{2}{T_0} \frac{T_0}{4}sinc\left((\frac{2k}{T_0}+f_0)\frac{T_0}{2}\right)
+                    \]
                 \subsubsection{Teorema dell'integrazione completo}\label{Teorema integrazione completo}\index{Teorema dell'integrazione completo}
                     $Ip:\begin{cases}
                         x_{(t)} \overunderset{TCF}{ATCF}{\leftrightharpoons} X_{(f)}\\
@@ -1881,7 +2196,7 @@
                             \[
                               u_{(t)} = \int_{-\infty}^{\infty} \delta_{(\alpha)} d\alpha \hspace{1cm}   u_{(t)} \rightleftharpoons U_{(f)}
                             \] 
-                            Non posso applicare il Th dell'integrazione $
+                            Non posso applicare il Th dell'integrazione \ref{Integrazione}$
                             \begin{cases}
                                 y_{(+\infty)} = 1\nonumber \\    
                                 \int_{-\infty}^{\infty} u_{(t)} dt  = 1\nonumber \\   
@@ -1893,8 +2208,37 @@
                             \] 
                             \begin{figure}[H]
                                 \centering
-                                \includegraphics[width=4cm]{media/uwu.png}
-                                \caption{$u_{(t)}$}
+                                \begin{tikzpicture}
+                                    \begin{axis}[
+                                        domain=-5:5,
+                                        samples=200,
+                                        axis lines=middle,
+                                        xlabel=$t$,
+                                        ylabel=$x_{(t)}$,
+                                        ymin=-1.5,
+                                        ymax=1.5,
+                                        xtick={-4,-3,-2,-1,-0,1,2,3,4},
+                                        xticklabels={$-4$,$-3$,$-2$,$-1$,$-0$,$1$,$2$,$3$,$4$},
+                                        ytick={-0.5,0.5},
+                                        yticklabels={$-\frac{1}{2}$,$\frac{1}{2}$},
+                                        width=10cm,
+                                        height=4cm
+                                    ]
+                                    %const
+                                    \addplot [const plot,thick,purple] coordinates{(-5,0.525)(5,0.525)};
+
+                                    %sgn
+                                    \addplot [const plot,thick,green] coordinates{(0,0.5)(5,0.5)};
+                                    \addplot [const plot,thick,green] coordinates{(0,-0.5)(-5,-0.5)};
+                                    \addplot [const plot,thick,green] coordinates{(0,-0.5)(0,0.5)};
+
+                                    %u(t)
+                                    \addplot [const plot,thick,blue] coordinates{(0,0)(-5,0)};
+                                    \addplot [const plot,thick,blue] coordinates{(0,0)(0,1)};
+                                    \addplot [const plot,thick,blue] coordinates{(0,1)(5,1)};
+                                    \end{axis}
+                                \end{tikzpicture}
+                                \caption{${\color{blue}u_{(t)}} = {\color{purple}\frac{1}{2}}+{\color{green}\frac{1}{2}sgn(t)}$}
                                 \label{fig:gradino alternativo}
                             \end{figure}
                             \[
@@ -1907,17 +2251,44 @@
                     \end{itemize}                    
 
                     
-                    Dimostrazione:\\
+                    Dimostrazione Th. Integrazione completo:\\
                         \[
                             y_{(t)} = \int_{-\infty}^{t} x_{(\alpha)} d\alpha =\int_{-\infty}^{\infty} x_{(\alpha)} u_{(t-\alpha)} d\alpha
                         \]
                         \begin{figure}[H]
                             \centering
-                            \includegraphics[width=4cm]{media/uwu.png}
-                            \caption{gradino che limita la funzione alpha sta sulle ascisse}
+                            \begin{tikzpicture}
+                                \begin{axis}[
+                                    domain=-5:5,
+                                    samples=200,
+                                    axis lines=middle,
+                                    xlabel=$t$,
+                                    ylabel=$x_{(t)}$,
+                                    ymin=-0.3,
+                                    ymax=5,
+                                    xtick={-4,-3,-2,-1,-0,1,2,3,4},
+                                    xticklabels={$-4$,$-3$,$-2$,$-1$,$-0$,$1$,$2$,$3$,$4$},
+                                    ytick={},
+                                    width=12cm,
+                                    height=5cm
+                                ]
+                                %x(t)
+                                \addplot [name path = A,const plot,black, thin] coordinates{(-5,0)(2,0)};
+                                \addplot [name path = B,domain = -5:2,ultra thick,blue, samples = 400] {(1/5*sin(deg(x))+2)*((x/20)+1)};
+                                \addplot [thin,black, samples = 400,black,thin] {(1/5*sin(deg(x))+2)*((x/20)+1)};
+                                %u(t)
+                                \addplot [const plot,red] coordinates{(-5,1)(2,1)};
+                                \addplot [const plot,red] coordinates{(2,0)(5,0)};
+                                \addplot [const plot,red] coordinates{(2,0)(2,1)};
+
+                                \addplot[green,opacity = 0.3] fill between[of=A and B];
+                                \end{axis}
+                            \end{tikzpicture}
+                            \caption{${\color{green}y_{(t)}} = \int_{-\infty}^{\infty} {\color{black}x_{(\alpha)}} {\color{red}u_{(t-\alpha)}} d\alpha, {\color{blue}x_{(\alpha)}u_{(t-\alpha)}} $}
                             \label{fig:gradino che limite la funzione}
                         \end{figure}
-                        Utilizziamo il gradino per cambiare gli estremi dell'integrale e mantenere l'estremo a $t$. Ci siamo ricondotti all'integrale di convoluzione \ref{Convoluzione}:
+                        Utilizziamo il gradino per cambiare gli estremi dell'integrale e mantenere il valore di $x_{(t)}$ dopo $t$ a $0$. Ci siamo ricondotti all'integrale di convoluzione \ref{Convoluzione} nel tempo,
+                        quindi nella frequenza diventa un prodotto:
                         \[
                             Y_{(f)} =X_{(f)} U_{(f)} = \frac{X_{(f)}}{2}\delta_{(f)} +\frac{X_{(f)}}{j2\pi f} =\frac{X_{(0)}}{2}\delta_{(f)} +\frac{X_{(f)}}{j2\pi f}    
                         \]
