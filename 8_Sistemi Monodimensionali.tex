@@ -112,16 +112,63 @@
         \[
             y_{(t)} =\int_{-\infty}^{\infty}x_{(\alpha)}h_{(t-\alpha)}d\alpha = x_{(t)}\otimes h_{(t)} 
         \]
-        La trasformata del sistema dipende solo dalla $h_{(t)}$. Passando al dominio della frequenza per la propietá della convoluzione \ref{Convoluzione}:
+        La trasformata del sistema dipende solo dalla $h_{(t)}$ (risposta impulsiva del sistema)\index{Risposta Impulsiva}. Passando al dominio della frequenza per la propietá della convoluzione \ref{Convoluzione}:
         \[
-            y_{(t)} =X_{(f)}\otimes H_{(f)} 
+            Y_{(f)} =X_{(f)}\otimes H_{(f)} 
         \]
-        Dove$H_{(f)} = TCF[h_{(t)}] = \int_{-\infty}^{\infty} h_{(t)}e^{-j2\pi ft}$ é la risposta in frequenza del sistema $SLS$. Esistono vari modi
+        Dove $H_{(f)} = TCF[h_{(t)}] = \int_{-\infty}^{\infty} h_{(t)}e^{-j2\pi ft}$ é la risposta in frequenza del sistema $SLS$. Esistono vari modi
         per calcolare $h_{(t)}$:
         \begin{itemize}
             \item {
-                
+                Utilizzando un impulso di Dirac e le sue propietá, ma l'impulso di dirac é difficile da realizzare. 
+            }
+            \item {
+                Calcolo $H_{(f)}$ mandanndo in ingresso un segnale del quale sia nota la sua risposta e calcolo il rapporto uscita/ingresso 
+                $H_{(f)} = \frac{Y_{(f)}}{X_{(f)}}$
+            }
+            \item {
+                Mandanndo in ingresso un esponenziale:
+                \[
+                    y_{(t)} = x_{(t)}\otimes h_{(t)},\ x_{(t)} = e^{j2\pi f_0t}
+                \]
+                \begin{align}
+                    y_{(t)} &= \int_{-\infty}^{\infty}x_{(t-\alpha)}h_{(t)}d\alpha = \int_{-\infty}^{\infty}h_{(\alpha)} e^{j2\pi f_0(t-\alpha)}d\alpha \nonumber \\
+                            &= e^{j2\pi f_0t}\int_{-\infty}^{\infty}h_{(\alpha)} e^{j2\pi f_0\alpha}d\alpha = x_{(t)}H_{(f_0)} \nonumber 
+                \end{align}
+                \[
+                    H_{(f_0)} = \frac{y_{(t)}}{x_{(t)}}
+                \]  
+                Posso calcolare la risposta in $f_0$, posso variare la frequenza e calcolare $H_{(f)} = \eval*{\frac{y_{(t)}}{x_{(t)}}}_{x_{(t)} = e^{j2\pi ft}}$
             }
         \end{itemize}
+        \subsubsection{Risposta in frequenza}
+            La risposta in frequenza $H_{(f)} \in \mathbb{C}$:
+            \[
+                H_{(f)} = |H_{(f)}| e^{j\angle H_{(f)} }
+            \]  
+            \begin{itemize}
+                \item$|H_{(f)}|$: Risposta in ampiezza
+                \item $\angle H_{(f)}$: Risposta in fase 
+            \end{itemize}
+            \[
+                Y_{(f)} = X_{(f)} H_{(f)} = 
+                \begin{cases}
+                    |Y_{(f)}| &= |X_{(f)}||H_{(f)}| \nonumber \\
+                    \angle Y_{(f)} &= \angle X_{(f)} + \angle H_{(f)} \nonumber
+                \end{cases} 
+            \]  
+        \subsubsection{Sistemi in cascata e in parallelo}
+            \begin{itemize}
+                \item {Sistemi in cascata}
+                \item {Sistemi in parallelo}
+            \end{itemize}
+        
     \subsection{Risposta di un sistema causale e risposta impulsiva}
-    
+        \subsubsection{Risposta in frequenza di un circuito RC}
+        \subsubsection{Risposta in frequenza di un circuito CR}
+    \subsection{Filtri Ideali}
+        \subsubsection{Filtro Passa Basso}
+        \subsubsection{Filtro Passa Alto}
+        \subsubsection{Filtro Passa Banda}
+        \subsubsection{Filtro Elimina Banda}
+            
