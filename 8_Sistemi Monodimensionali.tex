@@ -159,16 +159,90 @@
             \]  
         \subsubsection{Sistemi in cascata e in parallelo}
             \begin{itemize}
-                \item {Sistemi in cascata}
-                \item {Sistemi in parallelo}
+                \item {Sistemi in cascata:
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=4cm]{media/uwu.png}
+                        \caption{sistemi in cascata}
+                        \label{fig:sistemi in cascata}
+                    \end{figure}    
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=4cm]{media/uwu.png}
+                        \caption{equivalente sistemi in }
+                        \label{fig:equivalente sistemi in cascata}
+                    \end{figure}
+                    \begin{align}
+                        y_{(t)} &= x_{(t)}\otimes h_{1(t)} \nonumber \\
+                        z_{(t)} &= y_{(t)}\otimes h_{2(t)} = [x_{(t)}\otimes h_{1(t)}]\otimes h_{2(t)} = x_{(t)}\otimes h_{1(t)}\otimes h_{2(t)}  \nonumber \\
+                        z_{(t)} &= x_{(t)}\otimes h_{(t)}  \nonumber 
+                    \end{align}
+                    \[
+                        \text{Risposta Impulsiva}: h_{(t)} = h_{1(t)}\otimes h_{2(t)}
+                    \]
+                    \[
+                        \text{Risposta in Frequenza}: H_{(f)} = H_{1(f)} H_{2(f)}
+                    \]
+                }
+                \item {Sistemi in parallelo:
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=4cm]{media/uwu.png}
+                        \caption{sistemi in cascata}
+                        \label{fig:sistemi in parallelo}
+                    \end{figure}    
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=4cm]{media/uwu.png}
+                        \caption{equivalente sistemi in }
+                        \label{fig:equivalente sistemi in parallelo}
+                    \end{figure}
+                    \begin{align}
+                        y_{(t)} &= y_{1(t)}\otimes y_{2(t)} = x_{(t)}\otimes h_{1(t)} + x_{(t)}\otimes h_{2(t)} \nonumber \\
+                                &= x_{(t)}\otimes[h_{1(t)}+h_{2(t)}] = x_{(t)}\otimes h_{(t)}\nonumber 
+                    \end{align}
+                    \[
+                        \text{Risposta Impulsiva}: h_{(t)} = h_{1(t)}+h_{2(t)}
+                    \]
+                    \[
+                        \text{Risposta in Frequenza}: H_{(f)} = H_{1(f)} + H_{2(f)}
+                    \]
+                }
             \end{itemize}
         
     \subsection{Risposta di un sistema causale e risposta impulsiva}
         \subsubsection{Risposta in frequenza di un circuito RC}
         \subsubsection{Risposta in frequenza di un circuito CR}
     \subsection{Filtri Ideali}
-        \subsubsection{Filtro Passa Basso}
-        \subsubsection{Filtro Passa Alto}
-        \subsubsection{Filtro Passa Banda}
-        \subsubsection{Filtro Elimina Banda}
+        \subsubsection{Filtro Passa Basso di banda B - Low Pass Filter (LP)}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=4cm]{media/uwu.png}
+                \caption{Filtro passa basso ideale}
+                \label{fig:filtro passa basso ideale}
+            \end{figure} 
+        \subsubsection{Filtro Passa Alto di banda B - High Pass Filter (HP)}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=4cm]{media/uwu.png}
+            \caption{Filtro passa alto ideale}
+            \label{fig:filtro passa alto ideale}
+        \end{figure}  
+        \subsubsection{Filtro Passa Banda di banda B - Band Pass Filter (BP)}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=4cm]{media/uwu.png}
+            \caption{Filtro passa banda ideale}
+            \label{fig:filtro passa banda ideale}
+        \end{figure} 
+        \subsubsection{Filtro Elimina Banda di banda B - Band Stop Filter (BS)}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=4cm]{media/uwu.png}
+            \caption{Filtro elimina banda ideale}
+            \label{fig:filtro elimina banda ideale}
+        \end{figure} 
             
+        ma si aggiungi i circuiti che descrivono i filtri (wikipedia)
+        domanda: quindi se io voglio ascoltare e ricostruire un segnale che occupa una banda di 80 hz devo togliere il rumore della 
+        corrente alternata a 60hz? magari mi puo dare fastidio
