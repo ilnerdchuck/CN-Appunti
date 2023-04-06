@@ -162,14 +162,38 @@
                 \item {Sistemi in cascata:
                     \begin{figure}[H]
                         \centering
-                        \includegraphics[width=4cm]{media/uwu.png}
+                        \begin{tikzpicture}[
+                            node distance=3cm,
+                            >=latex
+                            ]
+            
+                            \node [coordinate] (input) {};
+                            \node [draw, rectangle,right of = input, minimum height=3em, minimum width=6em] (sis1) {$h_{1(t)}$};
+                            \node [draw, rectangle,right of = sis1, minimum height=3em, minimum width=6em] (sis2) {$h_{2(t)}$};
+                            \node [coordinate, right of = sis2] (output) {};
+                            
+                            \draw[draw,->] (input) -- node[above]{$x_{(t)}$} (sis1);
+                            \draw[draw,->] (sis1) -- node[above]{$y_{(t)}$} (sis2);
+                            \draw[->] (sis2) -- node[above]{$z_{(t)}$} (output);
+                        \end{tikzpicture}
                         \caption{sistemi in cascata}
                         \label{fig:sistemi in cascata}
                     \end{figure}    
                     \begin{figure}[H]
                         \centering
-                        \includegraphics[width=4cm]{media/uwu.png}
-                        \caption{equivalente sistemi in }
+                        \begin{tikzpicture}[
+                            node distance=2cm,
+                            >=latex
+                            ]
+            
+                            \node [coordinate] (input) {};
+                            \node [draw, rectangle,right of = input, minimum height=3em, minimum width=6em] (block) {$h_{1(t)}\otimes h_{2(t)}$};
+                            \node [coordinate, right of = block] (output) {};
+                            
+                            \draw[draw,->] (input) -- node[above]{$x_{(t)}$} (block);
+                            \draw[->] (block) -- node[above]{$z_{(t)}$} (output);
+                        \end{tikzpicture}
+                        \caption{equivalente sistemi in cascata}
                         \label{fig:equivalente sistemi in cascata}
                     \end{figure}
                     \begin{align}
@@ -187,14 +211,56 @@
                 \item {Sistemi in parallelo:
                     \begin{figure}[H]
                         \centering
-                        \includegraphics[width=4cm]{media/uwu.png}
+                        \begin{tikzpicture}[
+                            node distance=2cm,
+                            >=latex
+                            ]
+            
+                            \node [coordinate] (input) {};
+                            
+                            \node [coordinate, right of = input] (node1) {};
+                            \node [coordinate, above of = node1] (node2) {};
+                            \node [coordinate, below of = node1] (node3) {};
+                            
+                            \node [draw, rectangle,right of = node2, minimum height=3em, minimum width=6em] (sis1) {$h_{1(t)}$};
+                            \node [draw, rectangle,right of = node3, minimum height=3em, minimum width=6em] (sis2) {$h_{2(t)}$};
+                            
+                            \node [coordinate, right of = sis1] (node4) {};
+                            \node [coordinate, right of = sis2] (node5) {};
+                            \node [draw,circle, above of = node5] (node6) {$+$};
+                            
+                            \node [coordinate, right of = node6] (output) {};
+
+                            \draw[draw,->] (input) -- node[above]{$x_{(t)}$}(node1);
+                            \draw[draw,-] (node1) -- (node2);
+                            \draw[draw,-] (node1) -- (node3);
+                            \draw[draw,-] (node2) -- (sis1);
+                            \draw[draw,-] (node3) -- (sis2);
+                            \draw[draw,-] (sis1) -- node[above]{$y_{1(t)}$}(node4);
+                            \draw[draw,-] (sis2) -- node[above]{$y_{2(t)}$}(node5);
+                            \draw[draw,-] (node4) -- (node6);
+                            \draw[draw,-] (node5) -- (node6);
+                            \draw[draw,->] (node6) -- node[above]{$y_{(t)}$} (output);
+
+                        \end{tikzpicture}
                         \caption{sistemi in cascata}
                         \label{fig:sistemi in parallelo}
                     \end{figure}    
                     \begin{figure}[H]
                         \centering
-                        \includegraphics[width=4cm]{media/uwu.png}
-                        \caption{equivalente sistemi in }
+                        \begin{tikzpicture}[
+                            node distance=2cm,
+                            >=latex
+                            ]
+            
+                            \node [coordinate] (input) {};
+                            \node [draw, rectangle,right of = input, minimum height=3em, minimum width=6em] (block) {$h_{1(t)}+h_{2(t)}$};
+                            \node [coordinate, right of = block] (output) {};
+                            
+                            \draw[draw,->] (input) -- node[above]{$x_{(t)}$} (block);
+                            \draw[->] (block) -- node[above]{$y_{(t)}$} (output);
+                        \end{tikzpicture}
+                        \caption{equivalente sistemi in parallelo}
                         \label{fig:equivalente sistemi in parallelo}
                     \end{figure}
                     \begin{align}
@@ -211,38 +277,411 @@
             \end{itemize}
         
     \subsection{Risposta di un sistema causale e risposta impulsiva}
-        \subsubsection{Risposta in frequenza di un circuito RC}
-        \subsubsection{Risposta in frequenza di un circuito CR}
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}
+                \begin{axis}[
+                xlabel={$t$},
+                ylabel={$h_{(t)}$},
+                xmin=-2.5, xmax=5,
+                ymin=-2, ymax=5,
+                axis lines=middle,
+                axis line style={->},
+                width = 10cm,
+                height = 6cm
+                ]
+                \addplot[blue, domain=0:5,thick, samples=100] {1.5+sin(deg(x)) + cos(deg(2*x))};
+                \addplot[const plot,blue,thick] coordinates{(-5,0)(0,0)(0,2.5)};
+                \end{axis}
+            \end{tikzpicture}
+            \caption{Risposta impulsiva di un sistema}
+            \label{fig:Risposta impulsiva di un sistema}
+        \end{figure}
+        $h_{(t)} = h_{(t)} \dotproduct u_{(t)}$ 
+        \begin{align}
+            y_{(t)} &= x_{(t)} \otimes h_{(t)} = \int_{-\infty}^{\infty}x_{(\alpha)}h_{(t-\alpha)} d\alpha = \int_{-\infty}^{\infty}x_{(\alpha)}h_{(t-\alpha)}u_{(t-\alpha)} d\alpha \nonumber \\
+                    &= \int_{-\infty}^{t}x_{(\alpha)}h_{(t-\alpha)} d\alpha 
+        \end{align}
+        giungiamo all'integrale che definisce la Causalitá \ref{SM Causalita}: un sistema é causale se la sua risposta impulsiva 
+        é solo definita per $t>0$.
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}
+                \begin{axis}[
+                xlabel={$t$},
+                ylabel={$h_{(t)}$},
+                xmin=-2.5, xmax=5,
+                ymin=-2, ymax=5,
+                axis lines=middle,
+                axis line style={->},
+                width = 10cm,
+                height = 6cm
+                ]
+                \addplot[blue, domain=-5:3,thick, samples=100] {1.5-sin(deg(x)) - cos(deg(2*x))};
+                \addplot[const plot,blue,thick] coordinates{(5,0)(3,0)(3,0.4)};
+                \end{axis}
+            \end{tikzpicture}
+            \caption{Uscita di un sisetma causale}
+            \label{fig:Risposta impulsiva di un sistema causale}
+        \end{figure}
+        Dal valore $3$ in poi la risposta impulsiva rende il sistema causale.
+    
+        \subsubsection{Stabilitá BIBO su $h_{(t)}$}
+            \begin{align}
+                |y_{(t)}| &= \left|\int_{-\infty}^{\infty}x_{(\alpha)}h_{(t-\alpha)} d\alpha \right|\leq \int_{-\infty}^{\infty}|x_{(\alpha)}||h_{(t-\alpha)}| d\alpha \nonumber \\
+                          &\leq M\left|\int_{-\infty}^{\infty}h_{(t-\alpha)} d\alpha \right| <K\nonumber
+            \end{align}
+            Se l'ingresso $y<M$ allora lo é anche l'uscita. Ne deriva la C.S(Condizione Sufficiente): Assoluta integrabilitá della $h_{(t)}$ \index{Assoluta integrabilitá $h_{(t)}$},
+            se il sistema é bounded anche l'integrale deve esserlo.RICONTROLLA
+            TROVA L CONDIZIONE NECESSARIA SUL LIBRO.
     \subsection{Filtri Ideali}
-        \subsubsection{Filtro Passa Basso di banda B - Low Pass Filter (LP)}
+        \paragraph{Banda di un segnale} É la porzione di spettro calcolata sul semiasse positivo delle
+        frequenze dove lo spettro é diverso da zero.
+        \[
+            B = {f\dotproduct H_{(f)} \neq 0, f >0}  
+        \]
+        \subsubsection{Filtro Passa Basso di banda B - Low Pass Filter (LP)}\label{Filtro Passa Basso di banda B - Low Pass Filter (LP)}
             \begin{figure}[H]
                 \centering
-                \includegraphics[width=4cm]{media/uwu.png}
+
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        domain=-5:5,
+                        samples=200,
+                        axis lines=middle,
+                        xlabel=$f$,
+                        ylabel=$H_{LP(f)}$,
+                        xmax=5,
+                        xmin=-5,
+                        ymin=-0.3,
+                        ymax=2.5,
+                        xtick={-2,2},
+                        xticklabels={$-B$,$B$},
+                        ytick={},
+                        yticklabels={},
+                        width=9cm,
+                        height=6cm
+                    ]
+                    \addplot [const plot,thick,orange] coordinates{(-5,0)(-2,0)};
+                    \addplot [const plot,thick,orange] coordinates{(5,0)(2,0)};
+                    \addplot [const plot,thick,orange] coordinates{(-2,0)(-2,1)};
+                    \addplot [const plot,thick,orange] coordinates{(-2,1)(2,1)};
+                    \addplot [const plot,thick,orange] coordinates{(2,1)(2,0)};
+                    
+                    \end{axis}
+                \end{tikzpicture}
+
                 \caption{Filtro passa basso ideale}
                 \label{fig:filtro passa basso ideale}
             \end{figure} 
-        \subsubsection{Filtro Passa Alto di banda B - High Pass Filter (HP)}
-        \begin{figure}[H]
-            \centering
-            \includegraphics[width=4cm]{media/uwu.png}
-            \caption{Filtro passa alto ideale}
-            \label{fig:filtro passa alto ideale}
-        \end{figure}  
-        \subsubsection{Filtro Passa Banda di banda B - Band Pass Filter (BP)}
-        \begin{figure}[H]
-            \centering
-            \includegraphics[width=4cm]{media/uwu.png}
-            \caption{Filtro passa banda ideale}
-            \label{fig:filtro passa banda ideale}
-        \end{figure} 
-        \subsubsection{Filtro Elimina Banda di banda B - Band Stop Filter (BS)}
-        \begin{figure}[H]
-            \centering
-            \includegraphics[width=4cm]{media/uwu.png}
-            \caption{Filtro elimina banda ideale}
-            \label{fig:filtro elimina banda ideale}
-        \end{figure} 
             
-        ma si aggiungi i circuiti che descrivono i filtri (wikipedia)
-        domanda: quindi se io voglio ascoltare e ricostruire un segnale che occupa una banda di 80 hz devo togliere il rumore della 
-        corrente alternata a 60hz? magari mi puo dare fastidio
+            \paragraph{Risposta in frequenza:}
+            \[
+                H_{LP(f)}\triangleq rect\left(\frac{f}{2B}\right)  
+            \]
+            \paragraph{Risposta impulsiva:}
+            \[
+                h_{LP(t)}\triangleq 2Bsinc(2Bt)  
+            \]
+            La risposta impulsiva non é causale, ma posso troncarla e spostarna nel semiasse positivo per renderlo tale, ma non é piú ideale:
+            \begin{figure}[H]
+                \centering
+
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        domain=-0.3:10,
+                        samples=200,
+                        axis lines=middle,
+                        xlabel=$t$,
+                        ylabel=$h_{LP(t)}$,
+                        xmax=10,
+                        xmin=-1,
+                        ymin=-0.3,
+                        ymax=1.5,
+                        xtick={},
+                        xticklabels={},
+                        ytick={},
+                        yticklabels={},
+                        width=8cm
+                    ]
+                    \addplot [const plot,thick,orange, domain = 0:5] {(sin(deg((x-2.5)*pi))/((x-2.5)*pi))};
+                    \end{axis}
+                \end{tikzpicture}
+
+                \caption{Filtro passa basso causale: risposta impulsiva}
+                \label{fig:filtro passa basso ideale causale}
+            \end{figure} 
+
+            \paragraph{Cricuito Filtro Passa Basso}:
+            
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=4cm]{media/1st_Order_Lowpass_Filter_RC.png}
+                \caption{Circuito filtro passa basso ideale}
+                \label{fig:circuito filtro passa basso ideale}
+            \end{figure}
+            \[
+                \frac{V_{out}}{V_{in}} = H_{(f)} = \frac{1}{1+j\frac{f}{f_T}},\ f_T = \frac{1}{2\pi RC}
+            \] 
+            Possiamo rappresentare in sacala logaritmica il filtro: $\eval*{|H_{(f)}|}_{db} = 10log\left( \frac{\left|H_{(f)}\right|^2}{\left|H_{(f_0)}\right|^2} \right)$
+            \begin{figure}[H]
+                \centering
+                \begin{tikzpicture}
+                    \begin{semilogxaxis}[
+                        width=12cm,
+                        xmin=1,
+                        ymin=-20,
+                        xmajorgrids=true,
+                        ymajorgrids=true,
+                        xlabel=$Frequenza$,
+                        ylabel={Ampiezza della TCF},
+                        ytick={0,-3,-5,-10,-15,-20},
+                        yticklabels={$0$,$-3db$,$-5$,$-10$,$-15$,$-20$}
+                    ] 
+                        \addplot[domain=1:10000,samples=1000,color=blue]{20*log10(1/sqrt(1+(x/10)^2))};
+                    \end{semilogxaxis}
+                \end{tikzpicture}
+                \caption{Filtro passa basso ideale in scala logaritmica}
+                \label{fig:LP filter logartithm}
+            \end{figure} 
+            Otteniamo la Frequenza di taglio \index{Frequenza di taglio}$f_T$ all'ampiezza di $-3db$, in questo caso $f_T = 10$, alla quale
+            il filtro "taglia" o meglio riduce tutte le ampiezze in ingresso verso lo 0.
+
+            RIGUARDA SUL LIBRO FORMULA PER IL CALCOLO DI 1/2 PER IL MODULO DI Hf e le formule di risposta dei circuiti, mhh la fase?
+
+        \subsubsection{Filtro Passa Alto di banda B - High Pass Filter (HP)}\label{Filtro Passa Alto di banda B - High Pass Filter (HP)}
+            \begin{figure}[H]
+                \centering
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        domain=-5:5,
+                        samples=200,
+                        axis lines=middle,
+                        xlabel=$f$,
+                        ylabel=$H_{HP(f)}$,
+                        xmax=5,
+                        xmin=-5,
+                        ymin=-0.3,
+                        ymax=2.5,
+                        xtick={-2,2},
+                        xticklabels={$-B$,$B$},
+                        ytick={},
+                        yticklabels={},
+                        width=9cm,
+                        height=6cm
+                    ]
+                    \addplot [const plot,thick,orange] coordinates{(-5,1)(-2,1)};
+                    \addplot [const plot,thick,orange] coordinates{(5,1)(2,1)};
+                    \addplot [const plot,thick,orange] coordinates{(-2,0)(-2,1)};
+                    \addplot [const plot,thick,orange] coordinates{(-2,0)(2,0)};
+                    \addplot [const plot,thick,orange] coordinates{(2,1)(2,0)};
+                    
+                    \end{axis}
+                \end{tikzpicture}
+
+                \caption{Filtro passa alto ideale}
+                \label{fig:filtro passa alto ideale}
+            \end{figure}  
+            
+            \paragraph{Risposta in frequenza:}
+            \[
+                H_{HP(f)}\triangleq 1 - rect\left(\frac{f}{2B}\right)  
+            \]
+            \paragraph{Risposta impulsiva:}
+            \[
+                h_{HP(t)}\triangleq \delta_{(t)} - 2Bsinc(2Bt)  
+            \]
+
+        \paragraph{Cricuito Filtro Passa Alto}:
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=4cm]{media/CR_high_pass_filter.png}
+                \caption{Circuito filtro passa alto ideale}
+                \label{fig:circuito filtro passa alto ideale}
+            \end{figure}
+            \[
+                    H_{(f)} = \frac{fRC}{1+fRC}  
+            \] 
+        In scala logaritmica:
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}
+                \begin{semilogxaxis}[
+                    width=12cm,
+                    xmin=1,
+                    ymin=-20,
+                    xmajorgrids=true,
+                    ymajorgrids=true,
+                    xlabel=$Frequenza$,
+                    ylabel={Ampiezza della TCF},
+                    ytick={0,-3,-5,-10,-15,-20},
+                    yticklabels={$0$,$-3db$,$-5$,$-10$,$-15$,$-20$}
+                ] 
+                    \addplot[domain=1:10000,samples=1000,color=blue]{20*log10(sqrt((x/10)^2)/sqrt(1+(x/10)^2))};
+                \end{semilogxaxis}
+            \end{tikzpicture}
+            \caption{Filtro passa alto ideale in scala logaritmica}
+            \label{fig:HP filter logartithm}
+        \end{figure} 
+        \subsubsection{Filtro Passa Banda di banda B - Band Pass Filter (BP)}\label{Filtro Passa Banda di banda B - Band Pass Filter (BP)}
+            \begin{figure}[H]
+                \centering
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        domain=-5:5,
+                        samples=200,
+                        axis lines=middle,
+                        xlabel=$f$,
+                        ylabel=$H_{BP(f)}$,
+                        xmax=5,
+                        xmin=-5,
+                        ymin=-0.3,
+                        ymax=1.5,
+                        xtick={-4,-3,-2,2,3,4},
+                        xticklabels={$-B-f_0$,$-f_0$,$B-f_0$,$B+f_0$,$f_0$,$B+f_0$},
+                        ytick={},
+                        xticklabel style={font=\tiny},
+                        yticklabels={},
+                        width=12cm,
+                        height=6cm
+                    ]
+                    \addplot [const plot,thick,orange] coordinates{(-5,0)(-4,0)};
+                    \addplot [const plot,thick,orange] coordinates{(-2,0)(2,0)};
+                    \addplot [const plot,thick,orange] coordinates{(5,0)(4,0)};
+                    \addplot [const plot,thick,orange] coordinates{(-4,0)(-4,1)};
+
+                    \addplot [const plot,thick,orange] coordinates{(-4,1)(-2,1)};
+                    \addplot [const plot,thick,orange] coordinates{(-2,0)(-2,1)};
+                    
+                    \addplot [const plot,thick,orange] coordinates{(4,1)(2,1)};
+                    \addplot [const plot,thick,orange] coordinates{(2,0)(2,1)};
+                    \addplot [const plot,thick,orange] coordinates{(4,0)(4,1)};
+                    
+                    \end{axis}
+                \end{tikzpicture}
+                \caption{Filtro passa banda ideale}
+                \label{fig:filtro passa banda ideale}
+            \end{figure} 
+            
+            \paragraph{Risposta in frequenza:}
+            \[
+                H_{BP(f)}\triangleq H_{BP(f+f_0)} +H_{BP(f-f_0)} =  rect\left(\frac{f-f_0}{2B}\right) + rect\left(\frac{f+f_0}{2B}\right)  
+            \]
+            \paragraph{Risposta impulsiva:}
+            \[
+                h_{BP(t)}\triangleq 2Bsinc(2Bt) \cos(2\pi f_0t) = h_{LP(t)}\cos(2\pi f_0t)   
+            \]
+            \paragraph{Cricuito Filtro Passa Banda}:
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=4cm]{media/Band-Pass-Filter.png}
+                    \caption{Circuito filtro passa banda ideale}
+                    \label{fig:circuito filtro passa banda ideale}
+                \end{figure} 
+            In scala logaritmica:
+            \begin{figure}[H]
+                \centering
+                \begin{tikzpicture}
+                    \begin{semilogxaxis}[
+                        width=12cm,
+                        xmin=10^-1,
+                        xmajorgrids=true,
+                        ymajorgrids=true,
+                        xlabel=$Frequenza$,
+                        ylabel={Ampiezza della TCF},
+                        ytick={0,-3,-5,-10,-15,-20},
+                        yticklabels={$0$,$-3db$,$-5$,$-10$,$-15$,$-20$}
+                    ] 
+                        \addplot[domain=10^-1:10000,samples=1000,color=blue]{20*log10(abs(((200*x)/(x^2+100*x+2500))))};
+                    \end{semilogxaxis}
+                \end{tikzpicture}
+                \caption{Filtro passa banda ideale in scala logaritmica}
+                \label{fig:BP filter logartithm}
+            \end{figure}
+            Non riesco a fargli toccare 0 ma in matlab e wolfram lo tocca
+        \subsubsection{Filtro Elimina Banda di banda B - Band Stop Filter (BS)}\label{Filtro Elimina Banda di banda B - Band Stop Filter (BS)}
+            \begin{figure}[H]
+                \centering
+                
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        domain=-5:5,
+                        samples=200,
+                        axis lines=middle,
+                        xlabel=$f$,
+                        ylabel=$H_{BS(f)}$,
+                        xmax=5,
+                        xmin=-5,
+                        ymin=-0.3,
+                        ymax=2.5,
+                        xtick={-4,-3,-2,2,3,4},
+                        xticklabels={$-B-f_0$,$-f_0$,$B-f_0$,$B+f_0$,$f_0$,$B+f_0$},
+                        xticklabel style={font=\tiny},
+                        ytick={},
+                        yticklabels={},
+                        width=9cm,
+                        height=6cm
+                    ]
+                    \addplot [const plot,thick,orange] coordinates{(-5,1)(-4,1)};
+                    \addplot [const plot,thick,orange] coordinates{(-2,1)(2,1)};
+                    \addplot [const plot,thick,orange] coordinates{(5,1)(4,1)};
+                    \addplot [const plot,thick,orange] coordinates{(-4,0)(-4,1)};
+
+                    \addplot [const plot,thick,orange] coordinates{(-4,0)(-2,0)};
+                    \addplot [const plot,thick,orange] coordinates{(-2,0)(-2,1)};
+                    
+                    \addplot [const plot,thick,orange] coordinates{(4,0)(2,0)};
+                    \addplot [const plot,thick,orange] coordinates{(2,0)(2,1)};
+                    \addplot [const plot,thick,orange] coordinates{(4,0)(4,1)};
+                    
+                    \end{axis}
+                \end{tikzpicture}
+                \caption{Filtro elimina banda ideale}
+                \label{fig:filtro elimina banda ideale}
+            \end{figure} 
+
+            \paragraph{Risposta in frequenza:}
+            \[
+                H_{BS(f)}\triangleq 1 -(H_{BP(f+f_0)} +H_{BP(f-f_0)}) = 1- \left[ rect\left(\frac{f-f_0}{2B}\right) + rect\left(\frac{f+f_0}{2B}\right)\right]  
+            \]
+            \paragraph{Risposta impulsiva:}
+            \[
+                h_{BS(t)}\triangleq \delta_{(t)} - h_{BP(t)} = \delta_{(t)} - 2Bsinc(2Bt) \cos(2\pi f_0t)
+            \]
+
+            \paragraph{Cricuito Filtro Elimina Banda}:
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=4cm]{media/Band-Reject_Filter.png}
+                    \caption{Circuito filtro elimina banda ideale}
+                    \label{fig:circuito filtro elimina banda ideale}
+                \end{figure}
+                \[
+                    H_{(f)} = \frac{}{}  
+                \]
+            In scala logaritmica:
+            \begin{figure}[H]
+                \centering
+                \begin{tikzpicture}
+                    \begin{semilogxaxis}[
+                        width=12cm,
+                        xmin=0.1,
+                        ymin=-50,
+                        xmajorgrids=true,
+                        ymajorgrids=true,
+                        xlabel=$Frequenza$,
+                        ylabel={Ampiezza della TCF},
+                        ytick={0,-3,-5,-10,-15,-20,-25,-30,-35,-40,-45},
+                        yticklabels={$0$,$-3db$,$-5$,$-10$,$-15$,$-20$,$-25$,$-30$,$-35$,$-40$,$-45$}
+                    ] 
+                        \addplot[domain=10^-1:10000,samples=1000,color=blue]{20*log10(abs(1-((200*x)/(x^2+100*x+2500))))};
+                    \end{semilogxaxis}
+                \end{tikzpicture}
+                \caption{Filtro elimina banda ideale in scala logaritmica}
+                \label{fig:BS filter logartithm}
+            \end{figure}
+            
+            Tutti i filtri possono essere ricavati dal filtro \textbf{Low-Pass} \ref{Filtro Passa Basso di banda B - Low Pass Filter (LP)}
+            o dal filtro \textbf{High-Pass} \ref{Filtro Passa Alto di banda B - High Pass Filter (HP)}.
+
+            Sono giusti i grafici in scala logaritmica?
