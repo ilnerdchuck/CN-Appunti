@@ -220,7 +220,7 @@
                     \label{fig:campionamento MATLAB xt}
                 \end{figure}    
                 \[
-                    X_{(f)} = \sum_{n} x_{(nT)}e^{-j2\pi fnT}T
+                    X_{(f)} \cong  T\sum_{n} x_{(nT)}e^{-j2\pi fnT}
                 \]
                 Ma nella $f$ é una variabile continua, quindi a sua volta bisogna variare $f$:\\
                 \[X_{(fk)} =X_{(k\Delta f)} = \sum_{n} x_{(nT)}e^{-j2\pi \Delta fnT}T\]
@@ -250,9 +250,31 @@
                     \caption{ $\Delta f$}
                     \label{fig:campionamento MATLAB sinc}
                 \end{figure}
+                Si puó utilizzare anche la $FFT$ = Fast Fourier Transform
             }
             \item{
-                Scala Logarimica:
+                Scala Logarimica: $\eval*{x}_{db}= 10log_{10}(x)$
+                \begin{table}[H]
+                    \centering
+                    \begin{tabular}{l|l}
+                        x   & db  \\ 
+                        \hline
+                        2   & 3   \\
+                        4   & 6   \\
+                        8   & 9   \\
+                        10  & 10  \\
+                        1   & 0   \\
+                        100 & 20  \\
+                        200 & 23  \\
+                        50  & 17 
+                    \end{tabular}
+                \end{table}
+                Possiamo calcolare :
+                \begin{itemize}
+                    \item $\eval*{100}_{db} = 10log_{10}(100) =10log_{10}(10\dotproduct 10) = 10log_{10}(10)+10log_{10}(10) = 20db $
+                    \item $\eval*{200}_{db} = 10log_{10}(100\dotproduct 2) = 10log_{10}(100)+10log_{10}(2) = 23db $
+                    \item $\eval*{50}_{db} = 10log_{10}(10\dotproduct 5) = 10log_{10}(10)+10log_{10}(5) = 17db $
+                \end{itemize}
             }
         \end{itemize}
 

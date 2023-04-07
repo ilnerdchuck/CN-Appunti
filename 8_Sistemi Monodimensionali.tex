@@ -371,7 +371,7 @@
                     \end{axis}
                 \end{tikzpicture}
 
-                \caption{Filtro passa basso ideale}
+                \caption{Filtro passa basso ideale: Risposta in frequenza}
                 \label{fig:filtro passa basso ideale}
             \end{figure} 
             
@@ -404,7 +404,7 @@
                         yticklabels={},
                         width=8cm
                     ]
-                    \addplot [const plot,thick,orange, domain = 0:5] {(sin(deg((x-2.5)*pi))/((x-2.5)*pi))};
+                    \addplot [const plot,thick,orange, domain = 0:8, samples = 1000] {(sin(deg((x-4)*10*pi))/((x-4)*10*pi))};
                     \end{axis}
                 \end{tikzpicture}
 
@@ -423,32 +423,66 @@
             \[
                 \frac{V_{out}}{V_{in}} = H_{(f)} = \frac{1}{1+j\frac{f}{f_T}},\ f_T = \frac{1}{2\pi RC}
             \] 
-            Possiamo rappresentare in sacala logaritmica il filtro: $\eval*{|H_{(f)}|}_{db} = 10log\left( \frac{\left|H_{(f)}\right|^2}{\left|H_{(f_0)}\right|^2} \right)$
+            Possiamo rappresentare in sacala logaritmica il filtro: $\eval*{|H_{(f)}|}_{db} = 10log\left( \frac{\left|H_{(f)}\right|^2}{\left|H_{(f_0)}\right|^2} \right)$.
+            Prendiamo la frequenza di riferimento $f_0: H_{(f_0)} = 1$
             \begin{figure}[H]
                 \centering
                 \begin{tikzpicture}
                     \begin{semilogxaxis}[
                         width=12cm,
-                        xmin=1,
+                        xmin=0.01,
                         ymin=-20,
                         xmajorgrids=true,
                         ymajorgrids=true,
                         xlabel=$Frequenza$,
-                        ylabel={Ampiezza della TCF},
+                        ylabel={Gain (db)},
                         ytick={0,-3,-5,-10,-15,-20},
                         yticklabels={$0$,$-3db$,$-5$,$-10$,$-15$,$-20$}
                     ] 
-                        \addplot[domain=1:10000,samples=1000,color=blue]{20*log10(1/sqrt(1+(x/10)^2))};
+                        \addplot[domain=0.01:10000,samples=1000,color=blue]{20*log10(1/sqrt(1+(x/10)^2))};
                     \end{semilogxaxis}
                 \end{tikzpicture}
                 \caption{Filtro passa basso ideale in scala logaritmica}
                 \label{fig:LP filter logartithm}
             \end{figure} 
+            
             Otteniamo la Frequenza di taglio \index{Frequenza di taglio}$f_T$ all'ampiezza di $-3db$, in questo caso $f_T = 10$, alla quale
             il filtro "taglia" o meglio riduce tutte le ampiezze in ingresso verso lo 0.
 
             RIGUARDA SUL LIBRO FORMULA PER IL CALCOLO DI 1/2 PER IL MODULO DI Hf e le formule di risposta dei circuiti, mhh la fase?
+            \begin{figure}[H]
+                \centering
+                \begin{tikzpicture}
+                    \begin{semilogxaxis}[
+                        width=12cm,
+                        xmin = 0.01,
+                        xmajorgrids=true,
+                        ymajorgrids=true,
+                        xlabel={Frequency (Hz)},
+                        ylabel={Phase (degrees)},
+                        ytick={-180,-135,-90,-45,0,45,90,135,180},
+                        yticklabels={$-180$,$-135$,$-90$,$-45$,$0$,$45$,$90$,$135$,$180$}
+                    ] 
+                        \addplot[domain=0.01:10000,samples=1000,color=blue]{(atan(-x/10))};
+                    \end{semilogxaxis}
+                \end{tikzpicture}
+                \caption{Filtro passa basso ideale fase}
+                \label{fig:LP filter phase}
+            \end{figure} 
 
+            $Osservazione$: 
+            \begin{itemize}
+                \item{
+                    Al tendere di $B$ a $0$ il valore che il filtro fa passare é il valor medio del segnale, tanto da tendere
+                    a un filtro $LP$ con spettro $\delta_{(t)}$, ma é difficilmente realizzabile.
+                }
+                \item{
+                    La banda di un filtro é quanto si estende da $0 \rightarrow f^+$ fino a arrivare a $B$,$[0,B]$
+                }
+                \item{
+                    Se il filtro é un filtro $BP$ la banda é l'ampiezza della banda che lascia passare $[f_0-B,f_0+B] = B$
+                }
+            \end{itemize}
         \subsubsection{Filtro Passa Alto di banda B - High Pass Filter (HP)}\label{Filtro Passa Alto di banda B - High Pass Filter (HP)}
             \begin{figure}[H]
                 \centering
@@ -479,7 +513,7 @@
                     \end{axis}
                 \end{tikzpicture}
 
-                \caption{Filtro passa alto ideale}
+                \caption{Filtro passa alto ideale: Risposta in frequenza}
                 \label{fig:filtro passa alto ideale}
             \end{figure}  
             
@@ -508,21 +542,41 @@
             \begin{tikzpicture}
                 \begin{semilogxaxis}[
                     width=12cm,
-                    xmin=1,
-                    ymin=-20,
+                    xmin=0.01,
+                    ymin=-40,
                     xmajorgrids=true,
                     ymajorgrids=true,
                     xlabel=$Frequenza$,
-                    ylabel={Ampiezza della TCF},
-                    ytick={0,-3,-5,-10,-15,-20},
-                    yticklabels={$0$,$-3db$,$-5$,$-10$,$-15$,$-20$}
+                    ylabel={Gain (db)},
+                    ytick={0,-3,-5,-10,-15,-20,-30,-40},
+                    yticklabels={$0$,$-3db$,$-5$,$-10$,$-15$,$-20$,$-30$,$-40$}
                 ] 
-                    \addplot[domain=1:10000,samples=1000,color=blue]{20*log10(sqrt((x/10)^2)/sqrt(1+(x/10)^2))};
+                    \addplot[domain=0.01:10000,samples=1500,color=blue]{20*log10(sqrt((x/10)^2)/sqrt(1+(x/10)^2))};
                 \end{semilogxaxis}
             \end{tikzpicture}
             \caption{Filtro passa alto ideale in scala logaritmica}
             \label{fig:HP filter logartithm}
         \end{figure} 
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}
+                \begin{semilogxaxis}[
+                    width=12cm,
+                    xmin = 0.01,
+                    xmajorgrids=true,
+                    ymajorgrids=true,
+                    xlabel={Frequency (Hz)},
+                    ylabel={Phase (degrees)},
+                    ytick={-180,-135,-90,-45,0,45,90,135,180},
+                    yticklabels={$-180$,$-135$,$-90$,$-45$,$0$,$45$,$90$,$135$,$180$}
+                ] 
+                    \addplot[domain=0.01:10000,samples=1000,color=blue]{(atan(-x/10)+90)};
+                \end{semilogxaxis}
+            \end{tikzpicture}
+            \caption{Filtro passa alto ideale fase}
+            \label{fig:HP filter phase}
+        \end{figure} 
+        Si nota come avendo preso la $f_T$ corrisponde a $RC = 10$. 
         \subsubsection{Filtro Passa Banda di banda B - Band Pass Filter (BP)}\label{Filtro Passa Banda di banda B - Band Pass Filter (BP)}
             \begin{figure}[H]
                 \centering
@@ -559,19 +613,47 @@
                     
                     \end{axis}
                 \end{tikzpicture}
-                \caption{Filtro passa banda ideale}
+                \caption{Filtro passa banda ideale: Risposta in frequenza}
                 \label{fig:filtro passa banda ideale}
             \end{figure} 
             
             \paragraph{Risposta in frequenza:}
             \[
-                H_{BP(f)}\triangleq H_{BP(f+f_0)} +H_{BP(f-f_0)} =  rect\left(\frac{f-f_0}{2B}\right) + rect\left(\frac{f+f_0}{2B}\right)  
+                H_{BP(f)}\triangleq H_{LP(f+f_0)} +H_{LP(f-f_0)} =  rect\left(\frac{f-f_0}{2B}\right) + rect\left(\frac{f+f_0}{2B}\right)  
             \]
             \paragraph{Risposta impulsiva:}
             \[
                 h_{BP(t)}\triangleq 2Bsinc(2Bt) \cos(2\pi f_0t) = h_{LP(t)}\cos(2\pi f_0t)   
             \]
-            \paragraph{Cricuito Filtro Passa Banda}:
+            \begin{figure}[H]
+                \centering
+
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        domain=-5:5,
+                        samples=200,
+                        axis lines=middle,
+                        xlabel=$t$,
+                        ylabel=$h_{LP(t)}$,
+                        xmax=5,
+                        xmin=-5,
+                        ymin=-5,
+                        ymax=5,
+                        xtick={},
+                        xticklabels={},
+                        ytick={},
+                        yticklabels={},
+                        width=12cm
+                    ]
+                    \addplot [const plot,thick,orange, samples = 1000] {(2*(sin(deg((x)*pi))/((x)*pi)))*cos(deg(2*pi*10*x))};
+                    \end{axis}
+                \end{tikzpicture}
+
+                \caption{Filtro passa banda: risposta impulsiva}
+                \label{fig:filtro passa banda ideale causale}
+            \end{figure} 
+
+            \paragraph{Cricuito Filtro Passa Banda}: 
                 \begin{figure}[H]
                     \centering
                     \includegraphics[width=4cm]{media/Band-Pass-Filter.png}
@@ -588,7 +670,7 @@
                         xmajorgrids=true,
                         ymajorgrids=true,
                         xlabel=$Frequenza$,
-                        ylabel={Ampiezza della TCF},
+                        ylabel={Gain (db)},
                         ytick={0,-3,-5,-10,-15,-20},
                         yticklabels={$0$,$-3db$,$-5$,$-10$,$-15$,$-20$}
                     ] 
@@ -598,7 +680,27 @@
                 \caption{Filtro passa banda ideale in scala logaritmica}
                 \label{fig:BP filter logartithm}
             \end{figure}
-            Non riesco a fargli toccare 0 ma in matlab e wolfram lo tocca
+            Non riesco a fare un grafico con pendenza maggiore ma é per capire che le frequenze sotto il valore di $-3db$
+            vengono ridotte drasticamente.
+            \begin{figure}[H]
+                \centering
+                \begin{tikzpicture}
+                    \begin{semilogxaxis}[
+                        width=12cm,
+                        xmin = 0.01,
+                        xmajorgrids=true,
+                        ymajorgrids=true,
+                        xlabel={Frequency (Hz)},
+                        ylabel={Phase (degrees)},
+                        ytick={-180,-135,-90,-45,0,45,90,135,180},
+                        yticklabels={$-180$,$-135$,$-90$,$-45$,$0$,$45$,$90$,$135$,$180$}
+                    ] 
+                        \addplot[domain=0.01:10000,samples=1000,color=blue]{(atan((x)/70))-180};
+                    \end{semilogxaxis}
+                \end{tikzpicture}
+                \caption{Filtro passa banda ideale fase}
+                \label{fig:BP filter phase}
+            \end{figure} 
         \subsubsection{Filtro Elimina Banda di banda B - Band Stop Filter (BS)}\label{Filtro Elimina Banda di banda B - Band Stop Filter (BS)}
             \begin{figure}[H]
                 \centering
@@ -665,23 +767,215 @@
                 \begin{tikzpicture}
                     \begin{semilogxaxis}[
                         width=12cm,
-                        xmin=0.1,
+                        xmin=0.01,
                         ymin=-50,
                         xmajorgrids=true,
                         ymajorgrids=true,
                         xlabel=$Frequenza$,
-                        ylabel={Ampiezza della TCF},
+                        ylabel={Gain (db)},
                         ytick={0,-3,-5,-10,-15,-20,-25,-30,-35,-40,-45},
                         yticklabels={$0$,$-3db$,$-5$,$-10$,$-15$,$-20$,$-25$,$-30$,$-35$,$-40$,$-45$}
                     ] 
-                        \addplot[domain=10^-1:10000,samples=1000,color=blue]{20*log10(abs(1-((200*x)/(x^2+100*x+2500))))};
+                        \addplot[domain=0.01:10000,samples=1000,color=blue]{20*log10(abs(1-((200*x)/(x^2+100*x+2500))))};
                     \end{semilogxaxis}
                 \end{tikzpicture}
                 \caption{Filtro elimina banda ideale in scala logaritmica}
                 \label{fig:BS filter logartithm}
             \end{figure}
-            
+            \begin{figure}[H]
+                \centering
+                \begin{tikzpicture}
+                    \begin{semilogxaxis}[
+                        width=12cm,
+                        xmin = 0.01,
+                        xmajorgrids=true,
+                        ymajorgrids=true,
+                        xlabel={Frequency (Hz)},
+                        ylabel={Phase (degrees)},
+                        ytick={-180,-135,-90,-45,0,45,90,135,180},
+                        yticklabels={$-180$,$-135$,$-90$,$-45$,$0$,$45$,$90$,$135$,$180$}
+                    ] 
+                        \addplot[domain=0.01:10000,samples=1000,color=blue]{(atan(-(x)/70))};
+                    \end{semilogxaxis}
+                \end{tikzpicture}
+                \caption{Filtro elimina banda ideale fase}
+                \label{fig:BS filter phase}
+            \end{figure} 
             Tutti i filtri possono essere ricavati dal filtro \textbf{Low-Pass} \ref{Filtro Passa Basso di banda B - Low Pass Filter (LP)}
             o dal filtro \textbf{High-Pass} \ref{Filtro Passa Alto di banda B - High Pass Filter (HP)}.
 
-            Sono giusti i grafici in scala logaritmica?
+            I filtri sono riconducibili a funzioni di trasferimento come quelle viste per il tracciamento di Bode nel corso
+            di fondamenti di automatica.
+
+            Sono giusti i grafici di bode? ricontrollare soprattutto la fase
+        \subsubsection{Filtri non distorcenti}
+            Definiamo prima cos'é  un sengale non distorto:
+            \begin{figure}[H]
+                \centering
+                \begin{tikzpicture}[
+                    node distance=2cm,
+                    >=latex
+                    ]
+    
+                    \node [coordinate] (input) {};
+                    \node [draw, rectangle,right of = input, minimum height=3em, minimum width=6em] (block) {$T[\ ]$};
+                    \node [coordinate, right of = block] (output) {};
+                    
+                    \draw[draw,->] (input) -- node[above]{$x_{(t)}$} (block);
+                    \draw[->] (block) -- node[above]{$y_{(t)}$} (output);
+                \end{tikzpicture}
+                \label{fig:Sistema non distorcente}
+            \end{figure}
+            {\color{blue}$y_{(t)}$} é un segnale non distorto di $x$ se: $y_{(t)}\triangleq kx_{(t-t_0)}$ $k\in\mathbb{R}^+$, cioé finché esso rimane una versione
+            ritardata e/o amplificata del segnale $x_{(t)}$, in frequenza:
+            \[
+                Y_{(f)} = kX_{(f)}e^{-j2\pi ft_0}   
+            \]
+            \begin{figure}[H]
+                \centering
+                \begin{tikzpicture}
+                    \begin{axis}[
+                        domain=-0.3:15,
+                        samples=200,
+                        axis lines=middle,
+                        xlabel=$t$,
+                        ylabel=$y_{(t)}$,
+                        xmax=6,
+                        xmin=-0.3,
+                        ymin=-0.3,
+                        ymax=2.5,
+                        xtick={5},
+                        xticklabels={$t_0$},
+                        ytick={},
+                        yticklabels={},
+                        width=12cm,
+                        height=6cm
+                    ]
+                    \addplot [thick,orange, samples = 400, domain = 0:2] {-0.9*(x^2-2*x)+(0.1*cos(deg(25*x*pi)))};
+                    \addplot [thick,blue, samples = 400, domain = 4:6] {-0.6*((x-4)*(x-6))+(0.1*cos(deg(25*x*pi)))};
+                    
+                    \end{axis}
+                \end{tikzpicture}
+                \label{fig:segnale non distorto}
+            \end{figure} 
+            
+
+            \paragraph{Analisi del filtro non distorcente:}
+            Come deve essere realizzato il filtro in modo tale da non distorcere il segnale?
+            \[
+                y_{(t)}=x_{(t)}\otimes h_{(t)} {\color{blue}=kx_{(t-t_0)}} 
+            \]
+            Per non essere distorcente la risposta impulsiva del sistema deve essere $k\delta_{(t-t_0)}$ con risposta in frequenza:
+            $H_{(f)} = ke^{-j2\pi ft_0}$
+            
+            \begin{figure}[H]
+                \centering
+                \subfloat[Ampiezza con ritardo]{
+                    \begin{tikzpicture}
+                        \begin{axis}[
+                            domain=-5:5,
+                            samples=200,
+                            axis lines=middle,
+                            xlabel=$f$,
+                            ylabel=$|H_{(f)}|$,
+                            ytick = {1},
+                            yticklabels = {$k$},
+                            xtick = {},
+                            yticklabel style = {yshift=6pt}, 
+                            xticklabels = {},
+                            ymin=-0.2,
+                            ymax=1.5,
+                            width=6cm,
+                            height=4cm
+                        ]
+                        \addplot [const plot,blue, thick] coordinates{(-5,1)(5,1)};
+                        \end{axis}
+                    \end{tikzpicture}
+                    \label{fig:Ampiezza filtro non distorcente}
+                }
+                \hfill
+                \subfloat[Fase con ritardo]{
+                        \begin{tikzpicture}
+                            \begin{axis}[
+                                domain=-5:5,
+                                samples=200,
+                                axis lines=middle,
+                                xlabel=$f$,
+                                ylabel=$\angle H_{(f)}$,
+                                xmax=5,
+                                xmin=-5,
+                                xtick = {},
+                                xticklabels = {},
+                                ytick={},
+                                yticklabel style = {yshift=6pt}, 
+                                yticklabels={},
+                                width=6cm,
+                                height=5cm
+                            ]
+                            \addplot [blue, thick, samples = 300, domain = -4:4] {-x};
+                            \addplot [blue, densely dashed] coordinates{(-4,4)(-5,5)};
+                            \addplot [blue, densely dashed] coordinates{(4,-4)(5,-5)};
+                            \end{axis}
+                        \end{tikzpicture}
+                    \label{fig:fase filtro non distorcente}
+                }
+                \caption{Spettro filtro non distorcente}
+            \end{figure}
+            Avere un tale filtro per tutti i segnali é molto restringente, ci basta che il nostro filtro sia non distorcente nella banda che ci interessa.
+            
+            \begin{figure}[H]
+                \centering
+                \subfloat[Ampiezza con ritardo]{
+                    \begin{tikzpicture}
+                        \begin{axis}[
+                            domain=-5:5,
+                            samples=200,
+                            axis lines=middle,
+                            xlabel=$f$,
+                            ylabel=$|H_{(f)}|$,
+                            ytick = {1},
+                            yticklabels = {$k$},
+                            xtick = {},
+                            yticklabel style = {yshift=6pt}, 
+                            xticklabels = {},
+                            ymin=-0.2,
+                            ymax=1.5,
+                            width=6cm,
+                            height=4cm
+                        ]
+                        \addplot [const plot,blue, thick] coordinates{(-5,1)(5,1)};
+                        \end{axis}
+                    \end{tikzpicture}
+                    \label{fig:Ampiezza filtro non distorcentein banda}
+                }
+                \hfill
+                \subfloat[Fase con ritardo]{
+                        \begin{tikzpicture}
+                            \begin{axis}[
+                                domain=-5:5,
+                                samples=200,
+                                axis lines=middle,
+                                xlabel=$f$,
+                                ylabel=$\angle H_{(f)}$,
+                                xmax=5,
+                                xmin=-5,
+                                ymin=-3,
+                                ymax=3,
+                                xtick = {},
+                                xticklabels = {},
+                                ytick={},
+                                yticklabel style = {yshift=6pt}, 
+                                yticklabels={},
+                                width=6cm,
+                                height=5cm
+                            ]
+                            \addplot [blue, thick, samples = 300, domain = -2:2] {-x};
+                            \addplot [blue, thick] coordinates{(-2,2)(-5,2)};
+                            \addplot [blue, thick] coordinates{(2,-2)(5,-2)};
+                            \end{axis}
+                        \end{tikzpicture}
+                    \label{fig:fase filtro non distorcente in banda}
+                }
+                \caption{Spettro filtro non distorcente limitato alla banda $B$}
+            \end{figure}            
+            Non possiamo costruire un filtro per ogni segnlale

@@ -233,7 +233,10 @@
                 \item Una funzione limitata (finita) nel tempo ha uno spettro nella frequenza illimitato $\rightarrow$ sono i segnali fisici   
                 \item Una funzione illimitata nel tempo ha uno spettro nella frequenza limitato (finito)
             \end{itemize}
-
+        Da come vedremo piú avanti quindi effettuare troncamenti in frequenza comporta, per alcuni segnali, perdere componenti ad alte
+        frequenze, la scelta dell'intervallo di troncamento é cruciale per la ricostruzione del segnale: se tronchiamo un segnale perdendo
+        le frequenze alte perdiamo le sue variazioni rapide, ad esempio se tronchiamo una $sinc(f)$ male potremmo non ottenere una buona $rect(t)$
+        nel tempo.
         \subsubsection{Simmetria hermitiana}\label{Simmetria Hermitiana}
             \begin{align}
                 Ip&: x_{(t)}\ reale \nonumber \\
