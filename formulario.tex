@@ -177,7 +177,34 @@
                 \label{fig:banda sinc}
             \end{figure} 
         }
-        \item {
+        \item {Filtro a Coseno Rialzato \label{F. Coseno Rialzato}
+            \[
+                  H_{(f)} = 
+                  \begin{cases}
+                    T     &|f|\leq \frac{1-\beta}{2T} \nonumber \\
+                    \frac{T}{2}\left[1+cos\left(\frac{\pi T}{\beta}\left[|f|-\frac{1-\beta}{2T}\right]\right)\right],\frac{1-\beta}{2T}&<|f|\leq\frac{1+\beta}{2T}\nonumber \\
+                    0 &altrove\nonumber  
+                  \end{cases}
+            \]
+            $0\leq\beta\leq 1$
+            \[
+                  h_{(t)} = 
+                  \begin{cases}
+                    \frac{\pi}{4}sinc\left(\frac{1}{2\beta}\right)    &t=\pm \frac{T}{2\beta} \nonumber \\
+                    sinc\left(\frac{t}{T}\right)\frac{cos\left(\frac{\pi\beta t}{T}\right)}{1-\left(\frac{2\beta t}{T}\right)^2} &altrove\nonumber 
+                  \end{cases}
+            \]
+            \begin{figure}[H]
+                \centering
+                \subfloat[$H_{(f)}$]{
+                    \includegraphics[width=5.8cm]{media/Hf-Raised-cosine_filter.png}    
+                }
+                \hfill
+                \subfloat[$h_{(t)}$]{
+                    \includegraphics[width=5.8cm]{media/ht-Raised-cosine-impulse.png}    
+                }
+            \end{figure}
+
         }
         \item {
         }

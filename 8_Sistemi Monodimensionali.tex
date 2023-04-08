@@ -412,7 +412,7 @@
                 \label{fig:filtro passa basso ideale causale}
             \end{figure} 
 
-            \paragraph{Cricuito Filtro Passa Basso}:
+            \paragraph{Cricuito Filtro Passa Basso:}
             
             \begin{figure}[H]
                 \centering
@@ -526,7 +526,7 @@
                 h_{HP(t)}\triangleq \delta_{(t)} - 2Bsinc(2Bt)  
             \]
 
-        \paragraph{Cricuito Filtro Passa Alto}:
+        \paragraph{Cricuito Filtro Passa Alto:}
             \begin{figure}[H]
                 \centering
                 \includegraphics[width=4cm]{media/CR_high_pass_filter.png}
@@ -653,7 +653,7 @@
                 \label{fig:filtro passa banda ideale causale}
             \end{figure} 
 
-            \paragraph{Cricuito Filtro Passa Banda}: 
+            \paragraph{Cricuito Filtro Passa Banda:}
                 \begin{figure}[H]
                     \centering
                     \includegraphics[width=4cm]{media/Band-Pass-Filter.png}
@@ -751,7 +751,7 @@
                 h_{BS(t)}\triangleq \delta_{(t)} - h_{BP(t)} = \delta_{(t)} - 2Bsinc(2Bt) \cos(2\pi f_0t)
             \]
 
-            \paragraph{Cricuito Filtro Elimina Banda}:
+            \paragraph{Cricuito Filtro Elimina Banda:}
                 \begin{figure}[H]
                     \centering
                     \includegraphics[width=4cm]{media/Band-Reject_Filter.png}
@@ -929,21 +929,25 @@
                     \begin{tikzpicture}
                         \begin{axis}[
                             domain=-5:5,
-                            samples=200,
+                            samples=1000,
                             axis lines=middle,
                             xlabel=$f$,
                             ylabel=$|H_{(f)}|$,
                             ytick = {1},
                             yticklabels = {$k$},
-                            xtick = {},
+                            xtick = {-2,2},
                             yticklabel style = {yshift=6pt}, 
-                            xticklabels = {},
+                            xticklabels = {$-B$,$B$},
                             ymin=-0.2,
                             ymax=1.5,
                             width=6cm,
                             height=4cm
                         ]
-                        \addplot [const plot,blue, thick] coordinates{(-5,1)(5,1)};
+                        \addplot [dotted,blue, thick] coordinates{(-5,1)(5,1)};
+                        \addplot [blue, thick, samples = 1000, restrict y to domain=0:1] {-(x/2)^2+1};
+                        \addplot [dotted,orange, thick] coordinates{(-2,0)(-2,1)};
+                        \addplot [dotted,orange, thick] coordinates{(2,0)(2,1)};
+                        \addplot [dotted,orange, thick] coordinates{(-2,1)(2,1)};
                         \end{axis}
                     \end{tikzpicture}
                     \label{fig:Ampiezza filtro non distorcentein banda}
@@ -961,21 +965,103 @@
                                 xmin=-5,
                                 ymin=-3,
                                 ymax=3,
-                                xtick = {},
-                                xticklabels = {},
+                                xtick = {-2,2},
+                                xticklabels = {$-B$,$B$},
                                 ytick={},
                                 yticklabel style = {yshift=6pt}, 
                                 yticklabels={},
                                 width=6cm,
                                 height=5cm
                             ]
+                            \addplot [blue, dotted, samples = 300, domain = -5:5] {-x};
                             \addplot [blue, thick, samples = 300, domain = -2:2] {-x};
                             \addplot [blue, thick] coordinates{(-2,2)(-5,2)};
+                            \addplot [blue, dotted,thick] coordinates{(-2,2)(-2,0)};
                             \addplot [blue, thick] coordinates{(2,-2)(5,-2)};
+                            \addplot [blue, dotted,thick] coordinates{(2,-2)(2,0)};
                             \end{axis}
                         \end{tikzpicture}
                     \label{fig:fase filtro non distorcente in banda}
                 }
                 \caption{Spettro filtro non distorcente limitato alla banda $B$}
             \end{figure}            
-            Non possiamo costruire un filtro per ogni segnlale
+            Il filtro ci basta che sia qualcosa che si avvicini a una $rect$ ad esempio un coseno rialzato \ref{F. Coseno Rialzato}
+
+    \subsection{Th. di Parseval}\label{Th. di Parseval}
+        \[
+              E_{x} = \int_{-\infty}^{\infty}|x_{(t)}|^2 dt = \int_{-\infty}^{\infty}|X_{(f)}|^2 df =\int_{-\infty}^{\infty} S_{x(f)} df
+        \]
+        $S_{x(f)} = |X_{(f)}|^2$ é la densitá spettrale di energia del segnale, ci mostra come l'energia é distribuita nello spettro.
+        
+        Dimostrazione:
+        \begin{align}
+            E_{x} &= \int_{-\infty}^{\infty}|x_{(t)}|^2 dt =\int_{-\infty}^{\infty}x_{(t)}x_{(t)}^{\star} dt = \int_{-\infty}^{\infty}x_{(t)}\left[\int_{-\infty}^{\infty}X_{(f)}e^{j2\pi ft}df\right]^\star dt\nonumber \\
+                  &= \underset{(t)}{\int_{-\infty}^{\infty}}x_{(t)}\underset{(f)}{\int_{-\infty}^{\infty}}X_{(f)}^\star e^{-j2\pi ft}dfdt = \underset{(f)}{\int_{-\infty}^{\infty}}X_{(f)}^\star\underset{(t)}{\int_{-\infty}^{\infty}}x_{(t)} e^{-j2\pi ft}dtdf \nonumber \\
+                  &= \int_{-\infty}^{\infty}X_{(f)}^\star X_{(f)} df = \int_{-\infty}^{\infty}|X_{(f)}|^2 df\nonumber
+        \end{align}
+        Come capisco quanta \% del segnale sto buttando?
+
+        \begin{figure}[H]
+            \centering
+            \begin{tikzpicture}
+                \begin{axis}[
+                    domain=-3:3,
+                    samples=1000,
+                    axis lines=middle,
+                    xlabel=$f$,
+                    ylabel=$|S_{x(f)}|$,
+                    ytick = {},
+                    yticklabels = {},
+                    xtick = {-1.3,1.3},
+                    yticklabel style = {yshift=6pt}, 
+                    xticklabels = {$-B$,$B$},
+                    ymin=-0.2,
+                    ymax=1.5,
+                    width=6cm,
+                    height=4cm
+                ]
+                \addplot [blue, thick] {exp(-x^2)};
+                \addplot [name path = A,domain=-3:-1.3,blue, thick] {exp(-x^2)};
+                \addplot [name path = B,domain=1.3:3,blue, thick] {exp(-x^2)};
+                \addplot [dotted,blue,thick] coordinates{(-1.3,0)(-1.3,0.15)};
+                \addplot [dotted,blue,thick] coordinates{(1.3,0)(1.3,0.15)};
+                \addplot [const plot,name path = C,black, thin] coordinates{(-1.3,0)(-3,0)};
+                \addplot [const plot,name path = D,black, thin] coordinates{(1.3,0)(3,0)};
+
+                \addplot[green,opacity = 0.5] fill between[of=A and C];
+                \addplot[green,opacity = 0.5] fill between[of=B and D];
+
+                \end{axis}
+            \end{tikzpicture}
+            \caption{Spettro $S_{x(f)}$}
+        \end{figure}            
+        \noindent La parte {\color{green}verde} é l'energia del segnale che perdiamo troncandolo con banda $B$
+    \subsection{Funzione di Correlazione - Segnali Aperiodici}\label{Funzione di Correlazione - Segnali Aperiodici}
+        \[
+            C_{xy} = R_{xy(\tau)}=\int_{-\infty}^{\infty}x_{(t)}y_{(t-\tau)}^\star dt 
+        \]
+        {\color{red}D:} me quindi é $C$ o $R$?
+    \subsection{Funzione di Autocorrelazione}\label{Funzione di Autocorrelazione}
+        \[
+            C_x = R_{x(\tau)}=\int_{-\infty}^{\infty}x_{(t)}x_{(t-\tau)}^\star dt 
+        \]
+        \noindent Misura la correlazione del segnale con se stesso.
+        \subsubsection{Propietá Autocorrelazione}
+            \begin{itemize}
+                \item {$R_{x(0)} = E_x$
+                    \[
+                        R_{x(0)} =\int_{-\infty}^{\infty}x_{(t)}x_{(t)}^\star dt =\int_{-\infty}^{\infty}|x_{(t)}|^2 dt = E_x   
+                    \]
+                }
+                \item {Simmetria Hermitiana:
+                    \[
+                        R_{x(-\tau)} =R_{x(\tau)}^\star 
+                    \]
+                }
+                \item {$TCF$ Autocorrelazione:
+                    \[ 
+                        R_{x(\tau)} \overunderset{TCF}{ATCF}{\rightleftharpoons} S_{x(f)}
+                    \]
+                    Posso calcolare la densitá spettrale di energia dall'autocorrelazione.
+                }
+            \end{itemize}
