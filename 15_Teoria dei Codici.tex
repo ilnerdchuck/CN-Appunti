@@ -160,47 +160,421 @@
                 u=0 \rightarrow x = [000]\nonumber \\
                 u=1 \rightarrow x = [111]\nonumber
             \end{align} 
-            Il ricevitore effettua una decodifica a maggioranza: decideper il bitche comprare nella maggioranzadalle posizionidella parola ricevuta.
+            Il ricevitore effettua una decodifica a maggioranza: decide per il bit che comprare piú volte della parola ricevuta.
             \begin{align}
                 y = [000] \rightarrow \overset{\wedge}{x} = [000] \rightarrow \overset{\wedge}{u} = 0 \nonumber \\
                 y = [010] \rightarrow \overset{\wedge}{x} = [000] \rightarrow \overset{\wedge}{u} = 0 \nonumber \\
                 y = [101] \rightarrow \overset{\wedge}{x} = [111] \rightarrow \overset{\wedge}{u} = 1 \nonumber
             \end{align}
+            \paragraph{Evento errore:} l'evento errore per un codice a correzione di errore consiste nel non essere in grado di correggere
+            tutti gli errori introdotti dal canale. Se la probabilitá di errore sul bit $p_{e,b}$ é piccola, la probabilitá di errore 
+            $p_{e,W}$ per il codice puó essere approssimata dal primo evento che determina la ricezione errata (nel caso dei codici a ripetizione a $R = \frac{1}{3}$ 
+            si verifichino $2$ errori).
+            \begin{itemize}
+                \item {$R = \frac{1}{3}$
+                    \begin{itemize}
+                        \item {
+                            Se $p_{e,b} = 0.1 \Rightarrow p_{e,W} \approx 2.7\dotproduct 10^{-2} $ 
+                        }
+                        \item {
+                            Se $p_{e,b} = 0.01 \Rightarrow p_{e,W} \approx 2.97\dotproduct 10^{-4} $ 
+                        }
+                    \end{itemize}
+                }
+                \item {$R = \frac{1}{5}$
+                    \begin{itemize}
+                        \item {
+                            Se $p_{e,b} = 0.1 \Rightarrow p_{e,W} \approx 8.1\dotproduct 10^{-3} $ 
+                        }
+                        \item {
+                            Se $p_{e,b} = 0.01 \Rightarrow p_{e,W} \approx 9.8\dotproduct 10^{-6} $, Sviluppiamo i calcoli come esempio: 
+                            \[
+                                P_r \{\text{codice }R=\frac{1}{5}\text{ non riesce a correggere gli errori introdotti dal canale}\}:
+                            \]
+                            \begin{align}
+                                P_r &= \sum_{t=3}^{5} \binom{5}{t}p^t (1-p)^{5-t},\hspace{0.2cm} p=10^{-2} \nonumber \\
+                                P_r &\{\text{3 errori su 5}\}= \binom{5}{3}p^3 (1-p)^{5-3} = 10\dotproduct 10^{-6} (0.99)^2 = 9.8\dotproduct 10^{-6} \nonumber \\
+                                P_r &\{\text{3 errori su 5}\}= \binom{5}{4}p^4 (1-p)^{5-4} = 5\dotproduct 10^{-8} (0.99) = 5\dotproduct 10^{-8}\nonumber \\
+                                P_r &\{\text{3 errori su 5}\}= \binom{5}{5}p^5 (1-p)^{5-5} = 1\dotproduct 10^{-10} = 10^{-10}\nonumber 
+                            \end{align}
+                        }
+                    \end{itemize}
+                }
+            \end{itemize}
 
         \subsubsection{Esempio codici a blocco: codici a controllo di paritá}
+        Il bit di parità è un codice di controllo d'errore, utilizzato nei calcolatori per prevenire errori nella trasmissione o nella memorizzazione dei dati. 
+        Tale codice prevede l'aggiunta di un bit ridondante ai dati, calcolato a seconda che il numero di bit che valgono 1 sia pari o dispari. Ne esistono
+        quindi 2 varitá: bit di paritá pari e bit di paritá dispari. Quando si usa il bit di paritá pari si aggiunge un bit con valore $1$ se nella parola inviata
+        il numero di occorrenze di "$1$" é dispari(portando il numero di occorrenze di "$1$" a una quantitá pari).Quando si usa il bit di paritá dispari si
+        aggiunge un bit con valore $1$ se nella parola inviata il numero di occorrenze di "$1$" é pari (portando il numero di occorrenze di "$1$" a una quantitá dispari).
 
+        \noindent Il codice ha $R = \frac{k}{(k+1)}$: $k$ bit informativi piú il bit di paritá.
+        
+        \paragraph{Rilevazione dell'errore:}La rilevazione d'errore deriva dalla discordanza del numero di occorrenze di "$1$", eseguendo lo XOR bit a bit, nel caso del bit di paritá pari, se il risultato
+        é $0$ non sono avvenuti errori, viceversa se ho un risultato uguale a $1$ posso dire che cé stato uno o una quantitá dispari di errori nella trasmissione, questo lo rende
+        solo un codice a rilevazione d'errore e non un codice a correzione d'errore.
+        
+        Esempio:Trasmetto parole di $11bit$ con rate $R_b = 10Mb/s$ e probabilitá di errore sul bit trasmesso $p_{e,b} = 10^{-8}$:
+        \begin{itemize}
+            \item {
+                Senza controllo di paritá é sufficiente che sia sbagliato anche un solo bit per sbagliare tutta la parola:
+                \[
+                    p_{e,W} = \sum_{j=1}^{11} \binom{11}{j}p_{e,b}^j (1-p_{e,b})^{11-j} = 11 p_{e,b} (1-p_{e,b})^{10} \simeq 11p_{e,b}
+                \]
+                ed il rate di parole sbagliate al secondo é:
+                \[
+                    R_{e,W} = \frac{R_b}{11}\dotproduct p_{e,W} \simeq \frac{10^7}{11}\dotproduct 11p_{e,b} = 0.1_\frac{w}{s}
+                \]
+            }
+            \item {
+                Aggiungendo un bit di paritá, la parola diventa di 12 bit e sbaglio quando faccio almeno 2 errori, il singolo errore
+                viene corretto chiedendo nuovamente la trasmissione del dato:
+                \[
+                    p_{e,W} = \sum_{j=2}^{12} \binom{12}{j}p_{e,b}^j (1-p_{e,b})^{12-j} = 66 p_{e,b}^2 (1-p_{e,b})^{10} \simeq 66p_{e,b}^2
+                \]
+                ed il rate (frequenza) di parole sbagliate al secondo é:
+                \[
+                    R_{e,W} = \frac{R_b}{12}\dotproduct p_{e,W} \simeq \frac{10^7}{12}\dotproduct 66p_{e,b}^2 = 5.5\dotproduct 10^{-9} \frac{w}{s}
+                \]
+                possiamo anche calcolare il periodo $T_{e,W} = \frac{1}{R_{e,W}} =  1.82\dotproduct 10^{8} s$ che é una parola ogni sei anni circa.  
+            }
+        \end{itemize}
         \subsubsection{Esempio codici a blocco: codice ISBN}
-    \subsection{Codici a blocco}
+            Il codice International Standard Book Number (ISBN) é un codice a controllo di paritá per un alfabeto di simboli nonbinari. 
+            Ad ogni libro é assegnata una parola di codice di lunghezza $n=10$ cifre in base decimale. Le prime 9 cifre identificano il libro, 
+            la decima é quella di controllo di paritá cosí calcolata:
+            \begin{enumerate}
+                \item {
+                    Si calcola la grandezza $z = mod(S,11)$ con
+                    \[
+                        S = \sum_{j=1}^{9} (11-j)x_{(j)}
+                    \]
+                }
+                \item {
+                    La cifra di controllo di aritá é il complemento a 11 di $z$:
+                    \[
+                        x_{(10)} = mod(11-z,11)  
+                    \]
+                    E solo per la cifra di controllo di paritá se $x_{(10)} = 10$ si sostituisce con 
+                    $x_{(10)} = X$
+                }
+            \end{enumerate}
+            Quando un dispositivo legge il codice lo verifica come segue:
+            \begin{enumerate}
+                \item {
+                    Moltiplica ogni cifra per il peso della posizione della stessa cifra e calcola $mod(S^\prime,11)$ con
+                    \[
+                        S^\prime = \sum_{j=1}^{10} (11-j)y_{(j)}
+                    \]
+                }
+                \item {
+                    Assumendo che non ci siano errori su $x_{(10)} = |11-z|_{11}$, si ha:
+                    \begin{align}
+                        mod(S^\prime,11) &= mod \left( \sum_{j=1}^{9} (11-j)y_{(j)} + mod(11-z,11),11\right) \nonumber \\
+                                         &= mod \left( \sum_{j=1}^{9} (11-j)y_{(j)} + \left(11-\sum_{j=1}^{9} (11-j)x_{(j)}\right),11\right)\nonumber \\
+                                         &= mod \left(\sum_{j=1}^{9} (11-j)(y_{(j)}-x_{(j)}),11\right)
+                    \end{align}
+                }
+            \end{enumerate}
+            Se non ci sono errori si ha $y=x$ e quindi il $mod(S^\prime,11) = 0$
+            \paragraph{Rivalazione degli errori:} Il codice é in grado di rivelare tutti i singoli errori:
+            sia $e_{(k)}$ l'errore in posizione $k$,$y_{(k)} = x_{(k)}+ e_{(k)}$:
+            \[
+                mod(S^\prime,11) = mod((y_{(k)}-x_{(k)})(11-k),11)+mod(e_{(k)}(11-k),11) \neq 0
+            \]
+            Il codice é in grado di rivelare tutti i casi in cui ci sia uno scambio di 2 cifre del codice. Siano 
+            $k_1$ e $k_2$ le 2 posizioni scambiate:
+            \begin{align}
+                mod(S^\prime,11) &= mod \left((y_{(k_1)}-x_{(k_1)})(11-k_1)+(y_{(k_2)}-x_{(k_2)})(11-k_2),11\right) \nonumber \\
+                                 &= mod \left((x_{(k_2)}-x_{(k_1)})(11-k_1)+(x_{(k_1)}-x_{(k_2)})(11-k_2),11\right)\nonumber \\
+                                 &= mod \left((x_{(k_2)}-x_{(k_1)})(k_2-k_1),11\right) \neq 0 \nonumber
+            \end{align}
+            Esempi:
+            \begin{itemize}
+                \item {Senza errore:
+                    \begin{align}
+                        ISBN & = 01-333-5485-7 \nonumber \\
+                        \left| S^\prime \right|_{11} &= 0\dotproduct 10 +1\dotproduct 9+3\dotproduct 8+3\dotproduct 7+3\dotproduct 6+5\dotproduct 5+4\dotproduct 4+8\dotproduct 3+5\dotproduct 2+7\dotproduct 1\nonumber \\
+                        \left| S^\prime \right|_{11} &= \left| 154 \right|_{11} = 0 \nonumber 
+                    \end{align}
+                    Il codice é corretto 
+                }
+                \item {Con errore: Scambio le cifre
+                    \begin{align}
+                        ISBN & = 01-333-5458-7 \nonumber \\
+                        \left| S^\prime \right|_{11} &= 0\dotproduct 10 +1\dotproduct 9+3\dotproduct 8+3\dotproduct 7+3\dotproduct 6+5\dotproduct 5+4\dotproduct 4+{\color{red}5\dotproduct 3}+{\color{red}8\dotproduct 2}+7\dotproduct 1\nonumber \\
+                        \left| S^\prime \right|_{11} &= \left| 151 \right|_{11} = 8 \neq 0 \nonumber 
+                    \end{align}
+                    Il codice non é corretto 
+                }
+            \end{itemize}
+        \subsection{Codici a blocco}
         \subsubsection{Introduzione ai codici lineari}
-            {Definizione di campo}
+            \paragraph{Campo:} un campo é una struttura composta da un insieme non vuoto $F$ e da due operazioni binarie interne: $\forall \alpha,\beta,\gamma \in F$:
+                \begin{itemize}
+                    \item {
+                        Somma ($XOR$):
+                        \begin{itemize}
+                            \item {
+                                \[
+                                    \alpha + \beta = \theta, \theta \in F  
+                                \]
+                            }
+                            \item {Associativa:
+                                \[
+                                    (\alpha + \beta) + \gamma = \alpha +( \beta + \gamma)
+                                \]
+                            }
+                            \item {Commutativa:
+                                \[
+                                    \alpha + \beta = \beta + \alpha
+                                \]
+                            }
+                            \item {Elemento Neutro:
+                                \[
+                                    0\in F,\alpha + 0 = \alpha,\alpha-\alpha = 0
+                                \]
+                            }
+                        \end{itemize}
+                    }
+                    \item {
+                        Prodotto ($AND$):   
+                        \begin{itemize}
+                            \item {
+                                \[
+                                    \alpha \dotproduct \beta = \theta, \theta \in F  
+                                \]
+                            }
+                            \item {Associativa:
+                                \[
+                                    (\alpha \dotproduct \beta) \dotproduct \gamma = \alpha \dotproduct( \beta \dotproduct \gamma)
+                                \]
+                            }
+                            \item {Commutativa:
+                                \[
+                                    \alpha \dotproduct \beta = \beta \dotproduct \alpha
+                                \]
+                            }
+                            \item {Distributiva:
+                                \[
+                                    (\alpha + \beta) \dotproduct \gamma = \alpha \dotproduct \gamma + \beta \dotproduct \gamma
+                                \]
+                            }
+                            \item {Elemento Neutro:
+                                \[
+                                    1\in F,\alpha \dotproduct 1 = \alpha,\forall \alpha \neq 0\rightarrow \alpha\dotproduct\alpha^{-1} = 0
+                                \]
+                            }
+                        \end{itemize}
+                    }
+                \end{itemize}
         \subsubsection{Campi di Galois}
+            Un campo finito, detto anche campo di Galois, é un campo con un numero finito $q$ di elementi. Il numero di elementi di definisce la categoria del
+            campo: $GF(2)$ é il campo definito su $\{0,1\}$ con somma modulo 2 ($XOR$) e prodotto modulo 2 ($AND$). Definito lo spazio $GF(2)$ si puó costruire
+             lo spazio vettoriale $\mathcal{V}_n=GF(2)^2$, lo spazio di tutti i possibili $2^n$ vettori di $n$ cifre binarie su cui valgono le operazioni definite per 
+             $GF(2)$.
 
         \subsubsection{Codici a blocco lineari su $GF(2)$}
-        n>k perché nei codici io metto cose in piú che magari non mi servono amplio le cose.\\
-
+            Sia $u = [u_1, \dots, u_k]$ una generica parola di $k$ cifre binarie. Il codice a blocco lineare $\mathcal{C}(k,n)\subset \mathcal{V}_n$ é l'insieme delle
+            $2^k$ parole $x = [x_1, \dots, x_n]$ di $n$ cifre binarie ottenute con la trasformazione lineare:
+            \[
+                x = uG  
+            \]
+            Dove $G$ é la matrice generatrice del codice e ha dimensione $k \times n$ di cifre binarie con $n>k$ poiché al massimo
+            aggiungo informazioni per la trasmissione, per la correzione o rivelazione d'errore.
+            
+            Siano $g_i, i = [1, \dots, k]$, le righe di $G$, $x$ é la combinazione lineare delle righe $g_i$:
+            \[
+                x = \sum_{i=1}^{k}u_ig_i  
+            \]
+            Per avere $2^k$ parole di codice distinte  é necessario che $G$ abbia rango $k$: le righe di $G$ devono essere linearmente indipendenti e costituiscono 
+            una $base$ per il sottospazio vettoriale $\mathcal{C} \subset \mathcal{V}_n$.  
 
         \subsubsection{Propietá dei codici a blocco lineari}
+            Le propietá derivano maggiormente dalla pripietá di linearit;a dei codici:
             \begin{itemize}
-                \item {1}
-                \item {2}
-                \item {3}
-                \item {4}
-                \item {5}
+                \item {Ogni parola di codice é una combinazione lineare di righe della matrice generatrice.}
+                \item {Il codice a blocchi é costituito da tutte le possibili combinazioni delle righe della matrice generatrice.}
+                \item {La somma di due parle di codice é ancora una parola di codice.}
+                \item {La $n-upla$ di tutti zeri é sempre una parola di codice.}
+                \item {Se $x$ é una parola di codice, anche $-x$ é una parol di codice.}
             \end{itemize}
+
         \subsubsection{Distanza di Hamming}\label{Distanza di Hamming}\index{Distanza di Hamming}
-            
-
-            Peso di hamming.
-            distanza minima di un codice
-
-        \subsubsection{Codici a blocco in forma sistematica}
+            La distanza di Hamming tra due vettori, o stringhe, $d(x_1,x_2)$ di $n$ elementi é il nuemro di posizioni in cui le due parole
+            sono diverse tra loro. Esempi:
             \begin{itemize}
-                \item {1 matrici che generano codici equivalenti }
-                \item {2 qualsiasi codice lineare a blocchi é equivalente a un codice in forma sistematica}
-                \item {3}
-                \item {4}
-                \item {5}
-                \item {6 codici equivalenti}
+                \item {
+                    La distanza di Hamming tra 10{\color{red}1}1{\color{red}1}01 e 10{\color{red}0}1{\color{red}0}01 è 2.
+                }
+                \item {
+                    La distanza di Hamming tra 2{\color{red}14}3{\color{red}8}96 e 2{\color{red}23}3{\color{red}7}96 è 3.
+                }
             \end{itemize}
+            \paragraph{Peso di Hamming:}\label{Peso di Hamming}\index{Peso di Hamming} Il peso di Hamming,$w(x)$, di una stringa i lunghezza $n$ é la sua distanza di Hamming dal vettore di $n$ zeri,
+            $x_0\in \mathcal{V}_n$ é:
+            \[
+                w(x_0) = d(x_0,0_n)
+            \]
+            \paragraph{Distanza minima:}\label{Distanza minima}\index{Distanza minima}La distanza minima di un codice $\mathcal{C}$ é la minima distanza di Hamming calcolata fra tutte le possibili parole che appartengono a $\mathcal{C}$.
+            \[
+                d_{min} (\mathcal{C})= \underset{x_1,x_2 \in \mathcal{C}}{min}d(x_1,x_2)  
+            \]
+            Per i codici lineari vale che ciascuna parola di codice ha lo stesso insieme di distanze dalle altre parole di codice.
+            La distanza minima di un codice si puó calcolare a partire da qualsiasi parola di codice. 
+            La distanza di Hamming é una metrica:
+            \begin{itemize}
+                \item {}
+                \item {}
+                \item {}
+                \item {}
+            \end{itemize}
+        \subsubsection{Codici a blocco in forma sistematica}
+            Quando il codice é in forma sistematica la matrice generatrice del codice ha la seguente forma:
+            \begin{gather}
+                G = [I_k,P]\nonumber \\
+                G\in k\times n,\ I\in k\times k,\ P\in k\times (n-k)\nonumber
+            \end{gather}
+            dove la matrice $P$ é la matrice di paritá, il suo contenuto dipende da quale algoritmo di paritá viene scelto.
+            \begin{figure}[H]
+                \centering 
+                \begin{tikzpicture}[
+                    node distance=2cm,
+                    >=latex
+                    ]
 
-        se non é una parola di codice la matrice H ci informa con un vaolre 1 nel prodottod
+                    \node [coordinate] (input) {};
+                    \node [draw, rectangle,right of = input, minimum height=3em, minimum width=6em] (block) {Coder};
+                    \node [coordinate, right of = block] (output) {};
+                    
+                    \draw[draw,->] (input) -- node[midway]{$/$} node[below]{$k$} (block);
+                    \draw[->] (block) -- node[midway]{$/$} node[below]{$n$} (output);
+                \end{tikzpicture}    
+            \label{Def codice forma sistematica}
+            \end{figure}
+            \begin{figure}[H]
+                \centering 
+                \includegraphics[width = 8cm]{media/forma sistematica.png}
+            \label{matrice forma sistematica}
+            \end{figure}
+            \paragraph{Esempio Codice a ripetizione:}
+            $R = \frac{1}{3},\ k=1,\ n=3$
+            \begin{table}[H]
+                \centering
+                \begin{tabular}{|c|c|}
+                \hline
+                Bit i  ingresso & Parola codificata \\ \hline
+                0               & {[}000{]}         \\ \hline
+                1               & {[}111{]}         \\ \hline
+                \end{tabular}
+            \end{table}
+            La matrice generatirce del codice é $G = [111]$, e la distanza minima $d_{min} = 3$\\
+
+            \paragraph{Esempio Codice a controllo di paritá:}
+            $R = \frac{7}{8},\ k=7,\ n=8$, ogni 7 bit ne aggiunge uno di controllo di paritá, 1 se il numero di "1" é diapari,
+            0 se il numero di "1" é diapari.
+
+
+            \noindent La matrice generatirce del codice:
+            \[
+                G = [I_7,1_7]
+            \]
+            \noindent La distanza minima é $d_{min} = 2$, se cambio uno dei 7 bit della parola
+            cambio automaticamente il bit di paritá, quindi cambiare 1 bit in realtá ne cambia 2.\\
+
+            \noindent Il prodotto $u\dotproduct 1_7 = \sum_{i=1}^{7}u_i$, puó essere scritto come una soma modulo 2, vale 0 se il numero di 
+            occorrenze di "1" é pari e 1 altrimenti. Non facciamo altro che calcolare il bit di paritá della parola $u$.
+            
+            \paragraph{Definizione:} Due codici lineari $\mathcal{C}_1(k,n)$ e $\mathcal{C}_2(k,n)$ in $GF(2)$ sono equivalenti se uno é ottenuto dall'altro
+            attraverso una permutazione delle posizioni del codice.
+
+            \paragraph{Teorema:} Due matrici generatrici $G_1$ e $G_1$ in $GF(2)$ generano due codici equivalenti se una puó essere ottenuta dall'altra
+            da una sequenza di operazioni come:
+            \begin{itemize}
+                \item Permutazione delle righe.
+                \item Combinazione lineare delle righe.
+                \item Permutazione delle colonne.
+            \end{itemize}
+            
+            \paragraph{Teorema:} Qualsiasi codice lineare a blocchi é equivalente ad un codice in forma sistematica.
+
+            \paragraph{Propietá degli spazi:}
+            \begin{itemize}
+                \item {
+                    Dato il sottospazio $\mathcal{C} \subset \mathcal{V}_n$ di dimensione $k$, esiste un sottospazio ortogonale (null space)
+                    $\mathcal{C}^\perp \subset \mathcal{V}_n$ di dimensione $n-k$ definito da una matrice $H\in (n-k) \times n$:
+                    \[
+                        GH^T = 0_{n-k}  
+                    \]
+                }
+                \item {
+                    La base di $\mathcal{C}^\perp$ é costituita dalle $n-k$ righe della matrice $H$, per cui ogni elemento $t\in \mathcal{C}^\perp$ puó 
+                    essere rappresentato:
+                    \[
+                        t = vH = \sum_{i=1}^{n-k}v_ih_i  
+                    \]
+                }
+                \item {
+                    Per ogni $x\in \mathcal{C}$ e per ogni $t\in \mathcal{C}^\perp$ si ha:
+                    \[
+                        xt^T = uGH^Tv^T = 0
+                    \]  
+                }
+            \end{itemize}
+        \subsubsection{Matrice di controllo di paritá}
+            La matrice $H$ é la matrice di controllo di paritá del codice. Per costruzione $\forall x \in \mathcal{C}$ vale:
+            \begin{gather}
+                    xH^T = uGH^T = 0 \nonumber \\
+                    H\in (n-k) \times n\nonumber 
+            \end{gather}
+            La matrice $H$ non é unica, ma se il codice é sistematico posso ricavarla in un'altra forma:
+            \begin{gather}
+                H = [P^T,I_{n-k}] = 0 \nonumber \\
+                H\in (n-k) \times n,\ I\in (n-k)\times (n-k),\ P^T\in (n-k) \times k \nonumber
+            \end{gather}
+            Se fosse $\neq 0$ ció che é stato ricevuto non é una parola di codice.
+            
+            \paragraph{Esempio codice a ripetizione e controllo di paritá:}
+                $R = \frac{1}{3},\ k=1,\ n=3,\ n-k=2$ ho la matrice a controllo di paritá:
+                \[
+                    H= [P^T,I_2] =
+                        \begin{bmatrix}
+                        1 & 1 & 0\\
+                        1 & 0 & 1
+                        \end{bmatrix}  
+                \]  
+                Per un codice con $R = \frac{7}{8},\ k=7,\ n=8,\ n-k=1$ la matrice a controllo di paritá:
+                \[
+                    H= [P^T,I_1] = 1_8^T
+                \]
+        \subsubsection{Propietá dei codici a blocco}
+            \paragraph{Teorema:} la distanza minima del codice a blocco \dots
+            \paragraph{Capacitá di rivelare errori (Error Detection):}
+            \paragraph{Strategia di decodifica a massima verosomiglianza:}
+            \paragraph{Decisione a massima verosomiglianza:}\label{Decisione a massima verosomiglianza}\index{Decisione a massima verosomiglianza}
+            \paragraph{Capacitá di correggere errori (Error Correction):}
+    \subsection{Codici di Hamming}
+        \subsubsection{Il codice $\mathcal{C}_H(2)$}
+        \subsubsection{Il codice $\mathcal{C}_H(3)$}
+    \subsection{Decodifica per codici a blocco}
+        \subsubsection{Decodifica mediante sindrome}
+        \subsubsection{Decodifica a sindrome: Codici di Hamming $m=3$}
+        \subsubsection{Esempio di decodifica}
+            Un codice lineare a blocchi ha la seguente matrice di controllo di parità:
+            \[
+                H=
+                    \begin{bmatrix}
+                    1 & 0 & 1 & 1 & 0 & 0\\
+                    1 & 1 & 0 & 0 & 1 & 0\\
+                    0 & 1 & 1 & 0 & 0 & 1
+                    \end{bmatrix}  
+            \]  
+            \begin{enumerate}
+                \item {Determinare la matrice generatrice:
+                
+                }
+                \item {Decodificare la parola $y = [110110]$ ed identificare la parola di codice trasmessa:
+                
+                }
+            \end{enumerate}
