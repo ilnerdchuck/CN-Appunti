@@ -42,7 +42,7 @@
             m = D_{(y^\prime)}: \text{Informazione decodificata} \nonumber 
         \end{gather}
         Il canale é chiamato simmetrico perché ho la stessa probabilitá errore sulla trasmissione di uno dei due bit.
-        Se $X$ é il bit inviato e Y quello ricevutoallora il canale é caratterizzato dalle probabilitá:
+        Se $X$ é il bit inviato e Y quello ricevuto allora il canale é caratterizzato dalle probabilitá:
         \begin{align}
             P(Y=0|X=0) &= 1-p\nonumber \\
             P(Y=0|X=1) &= p\nonumber \\
@@ -522,7 +522,7 @@
                     \]  
                 }
             \end{itemize}
-        \subsubsection{Matrice di controllo di paritá}
+        \subsubsection{Matrice di controllo di paritá}\label{Matrice di controllo di parita}\index{Matrice di controllo di paritá}
             La matrice $H$ é la matrice di controllo di paritá del codice. Per costruzione $\forall x \in \mathcal{C}$ vale:
             \begin{gather}
                     xH^T = uGH^T = 0 \nonumber \\
@@ -549,17 +549,359 @@
                     H= [P^T,I_1] = 1_8^T
                 \]
         \subsubsection{Propietá dei codici a blocco}
-            \paragraph{Teorema:} la distanza minima del codice a blocco \dots
+            \paragraph{Teorema:} La distanza minima del codice a blocco $\mathcal{C}(k,n)$ si puó calcolare come il 
+            peso di Hamming minimo tra tutte le parole di codice:
+            \begin{align}
+                d_{min}(\mathcal{C}) &= \underset{x_i,x_j\in\mathcal{C}}{\min} d_H(x_i,x_j) = \underset{x_i,x_j\in\mathcal{C}}{\min} d_H(x_i+x_j,x_j+x_j)\nonumber \\
+                                     &= \underset{x_i,x_j\in\mathcal{C}}{\min} d_H(x_i+x_j,0_{1,n}) \overset{[x_i+x_j\in\mathcal{C}]}{\Rightarrow} \underset{x_i\in\mathcal{C}}{\min}\ w(x_i)\nonumber
+            \end{align}
             \paragraph{Capacitá di rivelare errori (Error Detection):}
+                Su un canale $BSC$ senza memoria (\ref{BSC system moretti}), la $n-upla\ y$ a valle del decisore puó essere rappresentata:
+                \[
+                    y=x+e  
+                \] 
+                Dove $e$ é il vettore di errori introdotto dal canale, se il canale non introduce errori: $e = 0_{1,n}$
+                Sia $x$ la parola di codice trasmessa e $y=x+e$ la corrispondente sequenza di $n$ bit ricevuta. supponiamo che il canale 
+                introduca un numero di errori:$w(e) > 0$, si dice:
+                \begin{itemize}
+                    \item {
+                        Errore Rivelabile\index{Errore Rivelabile}: se $y$ non é una parola di codice, $y\notin\mathcal{C}(k,n) $
+                    }
+                    \item {
+                        Errore Non Rivelabile\index{Errore Non Rivelabile}: se $y$ é una parola di codice ma non quella trasmessa, $w(e) \geq d_{min}$ 
+                    }
+                \end{itemize} 
+                \subparagraph{Teorema:} Il codice $\mathcal{C}(k,n)$ é in grado di rivelare con certezza fino a $d_{min}-1$ errori.
+                \begin{itemize}
+                    \item {
+                        Se $d(x,y)<d_{min}$: $y$ non puó essere una parola di codice, altrimenti vorrebbe dire cge esistono due parole di codice la cui distanza 
+                        é minore di $d_{min}$.
+                    }
+                    \item {
+                        Se $d(x,y)=d_{min}$: esiste almeno una parola di codice $c\in\mathcal{C}(k,n),\ c \neq x$ tale che $d(x,c)=d_{min}$, se $y=c$ l'errore non 
+                        puó essere rivelato. 
+                    }
+                \end{itemize}
             \paragraph{Strategia di decodifica a massima verosomiglianza:}
+                Sia $y$ il vettore ricevuto a seguito della trasmissione su $BSC$ , la strategia di decodifica a massima verosomiglianza (ML, maximum likelihood) 
+                consiste nel trovare il vettore $\hat{x}$ che, tra tutte le $2^k$ possibili parole di codice $x$, massimizza la probabilitá condizionata 
+                $P(y|x)$:
+                \[
+                    \hat{x} = \arg \underset{x\in\mathcal{C}}{\max}\ P(y|x)
+                \]
+                Poiché gli eventi di errore sono indipendenti da bit a bit, posso riscrivere la probabilitá condizionata come il prodotto delle probabilitá condizionate
+                ottenute per ciascun bit trasmesso:
+                \[
+                    P(y|x) = \prod_{\ell=1}^{n} P(y_\ell|x_\ell)
+                \]
+                Lavorando in $GF(2)$ la probabilitá $P(y_\ell|x_\ell)$ puó assumere solo 2 valori:
+                \[
+                    P(y_\ell|x_\ell) = 
+                    \begin{cases}
+                        1-p &se\ P(y_\ell =x_\ell|x_\ell)\nonumber \\    
+                        p   &se\ P(y_\ell \neq x_\ell|x_\ell)\nonumber     
+                    \end{cases}
+                \] 
+                Osservazione: La distanza di Hamming $d_H(x,y)$ misura il numero di posizione diverse tra $x$ e $y$, quindi $n-d_H(x,y)$ minura il numero di posizioni
+                uguali tra $x$ e $y$.
+
+                La probabilitá $P(y|x)$ si calcola:
+                \[
+                    P(y|x) = p^{d_H(x,y)}(1-p)^{n-d_H(x,y)} =(1-p)^{n}\left(\frac{p}{1-p}\right)^{d_H(x,y)} 
+                \]
+                Mi interessa scegliere un $x$ che massimizza $\left(\frac{p}{1-p}\right)^{d_H(x,y)}$, é un valore $<1$:
+                \begin{itemize}
+                    \item {
+                        RICONtROLLA LEIZONE
+                        Se ho la $d_H(x,y)$ piccola ho la probabilitá minore di errore.
+                    }
+                    \item {
+                        Se ho la $d_H(x,y)$ alta ho la probabilitá di errore alta.
+                    }
+                \end{itemize}
+                
             \paragraph{Decisione a massima verosomiglianza:}\label{Decisione a massima verosomiglianza}\index{Decisione a massima verosomiglianza}
+                La parola di codice decisa $\hat{x}$ é quella che minimizza la distanza dalla parola $y$ ricevuta:
+                \[
+                    \hat{x} = \arg \underset{x\in\mathcal{C}}{\max}\ P(y|x) = \arg \underset{x\in\mathcal{C}}{\min}\ d_H(y,x)
+                \]
+                Scelgo $x$ tale che mi dia la minima distanza ma RICONtROLLA LEIZONE
+                \subparagraph{Ricevitore ML ottimo:}\index{Ricevitore ML ottimo} Il ricevitore ML ottimo é il ricevitore a distanza minima, il ricevitore
+                che associa alla sequenza di $n$ bit ricevuta $y$, la parola di codice $x$ che minimizza la $d_H(y,x)$.
+                \subparagraph{Ricevitore ML error correction:}\index{Ricevitore ML error correction} Il ricevitore ML é in grado di correggere cn successo tutti quegli errori
+                $e$ per cui la parola ricevuta $y = x+e$ é comunque piú vicina alla parola trasmessa $x$ che a qualsiasi altra parola del codice.
+                
+                Per ogni vettore $v\in\mathcal{V}_n$ e un reggio $r$ esiste una "sfera" di raggio $r$ i cui elementi sono tutti quei vettori in $\mathcal{V}_n$ che hanno
+                distanza di Hamming da $v$ minore o uguale a $r$
+
+                \begin{figure}[H]
+                    \centering 
+                    \includegraphics[width = 4cm]{media/sfera di amming.png}
+                \label{sfera di Hamming}
+                \end{figure}
+                Se adottiamo un ricevitore ML, il numero massimo di errori che il codice $\mathcal{C}(k,n)$ é in grado di correggere é il massimo raggio $t$ per cui le sfere centrate nelle 
+                parole di codice di $\mathcal{C}(k,n)$ sono tutte tra loro disgiunte.
             \paragraph{Capacitá di correggere errori (Error Correction):}
+                \subparagraph{Teorema:}\begin{sloppypar}
+                   Un codice lineare a blocco puó correggere fino a ${t_{max} = \left\lfloor \frac{d_{min}-1}{2} \right\rfloor}$ errori: $2t_{max}+1 \leq d_{min} \leq 2t_{max}+2$.
+                \end{sloppypar}
+                    
+                \begin{sloppypar}
+                    La condizione per cui le sfere di raggio $t$ che circondano le parole di codice siano disgiunte é che ${2t_{max} < d_{min}\Rightarrow t_{max} < \frac{d_min}{2}}$.
+                    Altrimenti se fosse  ${2t_{max} \geq d_{min}}$ ci sarebbero almeno die parole $x_1$ e $x_2$ la cui distanza ${d_H(x_1,x_2) = d_{min} < 2t_{max} }$ e le que sfere di raggio
+                    $t$ avrebbero almno un unto in comune.
+                \end{sloppypar}
+                
+                \begin{sloppypar}
+                    Consideriamo il codice $\mathcal{C}(k,n)$ che ha una certa $d_{min}$ e $t_{max}$ tale che ${2t_{max}+1 \leq d_{min}}$. Sia $x\in\mathcal{C}(k,n)$ la parola trasmessa,
+                    ${y = x+e}$ la corrispondente sequenza di $n$ bit ricevuta e $c\in\mathcal{C}(k,n)$ un'altra generica parola di codice. Grazie alla disuguaglianza triangolare ho:
+                    \[
+                        d_H(x,y) + d_H(c,y) \geq d_H(x,c) \Rightarrow d_H(c,y) \leq d_H(x,c) - d_H(x,y)  
+                    \]
+                    per ipotesi ho anche:
+                    \[
+                        d_H(x,c) \geq d_{min} \geq 2t_{max}+1 
+                    \]
+                    Supponiamo che il canale introduca un certo numero di errori ${t\leq} t_{max}$, cosí da avere $d_H(x,y) = t$:
+                    \[
+                        d_H(c,y) \geq 2t_{max}+1 -t > t_{max} \geq t = d_H(x,y)   
+                    \]   
+                \end{sloppypar}
+                
     \subsection{Codici di Hamming}
+        I codici di Hamming $\mathcal{C}_H(m)$ sono definiti a partire da un parametro: $m \geq 2$
+        \[
+            n = 2^m-1,\ k = 2^m-m-1 = n-m
+        \]
+        \subparagraph{Matrice di controllo di paritá:} per definizione la matrice $H \in (n-k)\times n$, ma per i codici di Hamming la matrice $H$ ha dimensione:
+        $H \in m\times (2^m-1)$.
+
+        \subparagraph{Matrice di paritá:} Per un codice di Hamming sistematico la matrice di parità $P\in k \times m$ viene costruita cosí che le colonne di $H = [P^T,I_{n-k}]$
+        siano tutte le possibili $2^m-1$ combinazioni di $m$ bit (esclusa la $n-upla$ di tutti 0)
+
         \subsubsection{Il codice $\mathcal{C}_H(2)$}
+            \begin{sloppypar}
+                Il codice a ripetizione ${R=\frac{1}{3}}$ con ${m=2\Rightarrow n=3,\ k=1}$ ha come matrice di controllo di paritá $H$:
+                \[
+                    H = \begin{bmatrix}
+                            1  & 1 & 0 \\
+                            1  & 0 & 1 \\
+                        \end{bmatrix} 
+                \]
+                Che é la matrice corrispondente a un codice di Hamming $\mathcal{C}_H(2)$, poiché rappresenta tutte le possibili combinazioni di 2 bit
+            \end{sloppypar}
+
         \subsubsection{Il codice $\mathcal{C}_H(3)$}
+        \begin{gather}
+            m=3,\ n=7,\ k=4,\ R=\frac{4}{7} \nonumber \\
+            H = \begin{bmatrix}
+                1 & 0 & 1 & 0 & 1 & 0 & 1\\
+                0 & 1 & 1 & 0 & 0 & 1 & 1\\
+                0 & 0 & 0 & 1 & 1 & 1 & 1
+            \end{bmatrix}  \nonumber
+        \end{gather}
+        Posso ricavare la matrice generatrice $G$ scrivendo la matrice $H$ come se l'avessi ottenuta da una matrice $G\in k \times n$ di un codice sistematico (\ref{Matrice di controllo di parita}):
+        \[
+            H = [P^T,I_{n-k}] =\begin{bmatrix}
+                                 1  & 1 & 0 & 1 & | & 1  & 0 & 0\\
+                                 1  & 0 & 1 & 1 & | & 0  & 1 & 0\\
+                                 0  & 1 & 1 & 1 & | & 0  & 0 & 1
+                            \end{bmatrix} 
+        \]
+        La cui matrice generatrice con $I \in k \times k$ é:
+        \[
+            G = [I_{k},P] =\begin{bmatrix}
+                                 1  & 0 & 0 & 0 & | & 1  & 1 & 0\\
+                                 0  & 1 & 0 & 0 & | & 1  & 0 & 1\\
+                                 0  & 0 & 1 & 0 & | & 0  & 1 & 1\\
+                                 0  & 0 & 0 & 1 & | & 1  & 1 & 1
+                            \end{bmatrix} 
+        \]
+        Possiamo vedere come la matrice di paritá faccia conrolli su combinazioni diverse di bit in ingresso $p = uP$:
+        \begin{gather}
+            p_1 = u_1+u_2+u_4 \nonumber\\
+            p_2 = u_1+u_3+u_4 \nonumber\\
+            p_3 = u_2+u_3+u_4 \nonumber
+        \end{gather}
+        Il vettore di uscita dal codificatore sará quindi $x = uG = [u,p_1,p_2,p_3]$, tale matrice di paritá ci permette di aumentare la distanza di Hamming
+        tra le parole
+        \subparagraph{Distanza minima:} La distanza minima di un qualsiasi codice di Hamming $\mathcal{C}_H(m)$ é $d_{min}(\mathcal{C}_H(m)) = 3$.
+
+        \noindent Dimostrazione: 
+        \begin{enumerate}
+            \item {
+                $d_{min} = \underset{x\in\mathcal{C}}{\min}\ w(x)$  
+            }
+            \item {
+                $x\in\mathcal{C}\ se\ xH^T= 0$ e le colonne di $H$ sono tutte le possibili combinazioni dei bit $m$ bit
+            }
+        \end{enumerate}
+        Perché $3$ é il numero minimo di colonne che mi permette di ottenere $0$ ($2$), quindi $d_{min}(\mathcal{C}_H(m)) = 3$.
+        
+        %Ne consegue che aumentando il numero di bit trasmessi diminuisco la ridondanza, ma la mia distanza di Hamming rimane sempre la stessa.
     \subsection{Decodifica per codici a blocco}
+        Dato il vettore ricevuto:
+        \[
+            y = x+e
+        \]
+        Il decisore ottimo selezione la parola di codice $\hat{x}$:
+        \[
+            \hat{x} = \arg \underset{x\in\mathcal{C}}{\max}\ P(y|x) = \arg \underset{x\in\mathcal{C}}{\min}\ d_H(y,x)   
+        \]
+        Per ottenere $\hat{x}$ é necessario fare $2^k$ confronti tra il vettore ricevuto $y$ e tutte le parole di codice $\mathcal{C}(k,n)$, 
+        la complessitá cresce esponenzialmente con $k$.
+
+        Un approccio alternativo é quello di osservare il vettore errore e la probabilitá condizionata:
+        \begin{gather}
+            y= x+e \Rightarrow x = y+e,\ e = y-x\nonumber\\
+            P(x|y) = P(x+e|x) = P(e|y+e\in\mathcal{C})\nonumber
+        \end{gather}
+        Posso ottenera la stima di $x$ come:
+        \[
+            \hat{x} = \arg \underset{x\in\mathcal{C}}{\max}\ P(y|x) =y+ \arg \underset{e}{\max}\ P(e|y+e\in\mathcal{C})   
+        \]
+        Invece di stimare $\hat{x}$ si stima il vettore $\hat{e}$ piú probabile
+        \begin{align}
+            \hat{e} &= \arg \underset{e}{\max}\ P(e|y+e\in\mathcal{C}) = \arg \underset{e|y+e\in\mathcal{C}}{\max}\ p^{w(e)}(1-p)^{n-w(e)} \nonumber \\
+                    &= \arg \underset{e|y+e\in\mathcal{C}}{\max}\ \left(\frac{1-p}{p}\right)^{-w(e)} = \arg \underset{e|y+e\in\mathcal{C}}{\min}\ w(e)  \nonumber 
+        \end{align}
+        La decodifica sceglie tra tutti i possibili vettori errore $e$ tali che $y+e\in\mathcal{C}$ quello che ha il peso di Hamming minimo, cioé il minimo numero di 
+        errori (Massima Verosomiglianza). Una volta stimato $\hat{e}$:
+        \[
+            \hat{x} = y-\hat{e} = y+\hat{e} = x+(\hat{e}+e)=
+            \begin{cases}
+                x &se\ \hat{e} = e\nonumber\\    
+                x_1\neq x &se\ \hat{e} \neq e\nonumber    
+            \end{cases}     
+        \]
+        \subsubsection{Coset}
+            Sia $\mathcal{C}(k,n)$ un codice a blocco e sia $v\in \mathcal{V}_n$ un vettore di $n$ cifre binarie, si definisce $coset$ di
+            $\mathcal{C}(k,n)$ individuato da $v$ l'insieme:
+            \[
+                C_v = C+v=\{ x+v: x\in\mathcal{C} \}
+            \]
+        \subsubsection{Propietá dei coset}
+            \begin{enumerate}
+                \item {Qualsiasi vettore in $\mathcal{V}_n$ appartiene a un coset di $\mathcal{C}(k,n)$}
+                \item {Ciascun coset contiene $2^k$ elementi}
+                \item {Due coset o sono coincidenti o hanno intersezione nulla}
+                \item {Ci sono $2^{n-k}$ coset distinti}
+                \item {Se $v_1$ e $v_2$ appartengono all ostesso coset, $v_1 + v_2 \in \mathcal{C}(k,n)$ é una parola di codice}
+            \end{enumerate}
+            \paragraph{Esempio di coset:}
+                \begin{sloppypar}
+                    Sia ${\mathcal{C}(2,3) = \{000,101,010,111\}}$. I coset di ${\mathcal{C}(2,3)}$: 
+                \end{sloppypar}
+                \begin{align}
+                    \mathcal{C} + 000 = \{000,101,010,111\} = \mathcal{C}_0 \\
+                    \mathcal{C} + 001 = \{001,100,011,110\} = \mathcal{C}_1 \\
+                    \mathcal{C} + 010 = \{010,111,000,101\} = \mathcal{C}_0 \\
+                    \mathcal{C} + 011 = \{011,110,001,100\} = \mathcal{C}_1 \\
+                    \mathcal{C} + 100 = \{100,001,110,011\} = \mathcal{C}_1 \\
+                    \mathcal{C} + 101 = \{101,000,111,010\} = \mathcal{C}_0 \\
+                    \mathcal{C} + 110 = \{110,011,100,001\} = \mathcal{C}_1 \\
+                    \mathcal{C} + 111 = \{111,010,101,000\} = \mathcal{C}_0 
+                \end{align}
+                Il numero di coset é $2^{n-k} = 2^{3-2} =2$.
+
+            Si possono applicare i coset per la decodifica: $y=x+e$ dalla definizione di coset discende che i vettori $e$ e $y$
+            appartengono allo stesso coset $\mathcal{C}_y$ e che i coset $\mathcal{C}_e$ e $\mathcal{C}_x$ sono coincidenti. Grazie alla propietá
+            dei coset la somma di qualsiasi elemento di $\mathcal{C}_y$ con $y$ individua una parola di codice. Il vettore $e$ va scelto fre gli elementi
+            di $\mathcal{C}_y$, la regola di decisione diveta:
+            \[
+                \hat{e} = \arg \underset{e}{\max}\ P(e|y+e\in\mathcal{C}) = \arg \underset{e\in\mathcal{C}_y }{\max}\ P(e) =\arg \underset{v\in\mathcal{C}_y }{\max}\ w(v)
+            \] 
+            Tra tutti i $2^k$ possibili vettori di $\mathcal{C}_y$, il principio di massima verosomiglianza dice che devo scegliere quello di peso minimo.
+        \subsubsection{Algoritmo di decodifica}
+            \begin{enumerate}
+                \item Avendo ricevuto il vettore $y$ si trova un coset di appartenenza $\mathcal{C}_y$.
+                \item {Si identifica il coset leader, la parola di peso minimo del coset $\mathcal{C}_y$, che é anche la parola di peso minimo del 
+                coset di $\mathcal{C}_e$.}
+                \item Il coset leader é la stima del vettore di errore $\hat{e}$
+            \end{enumerate}
+            \paragraph{Esempio di decodifica utilizzando i coset:}
+                    Sia ${\mathcal{C}(2,4) = \{0000,1011,0101,1110\}}$ con $d_{min} = 2$, ho i coset: 
+                \begin{align}
+                    \mathcal{C} + 0000 = \{0000,1011,0101,1110\} \\
+                    \mathcal{C} + 0001 = \{0001,1010,0100,1111\} \\
+                    \mathcal{C} + 0010 = \{0010,1001,0111,1100\} \\
+                    \mathcal{C} + 1000 = \{1000,0011,1101,0110\} 
+                \end{align}
+                Il numero di coset é $2^{n-k} = 2^{4-2} =4$. Il coset (2) non so quale coset leader scegliere hanno lo stesso peso di Hamming, ci
+                troviamo in questo poiché la $d_{min}$ é molto bassa e ho il $50\%$ di possibilitá di sbagliare se il codice ricevuto capita in questo coset.
+                Decodifichiamo:
+                \begin{itemize}
+                    \item {$y=[1101]\Rightarrow y\in (4),\text{coset leader:} [1000]\ \hat{x}=y+1000=0101$}
+                    \item {$y=[1111]\Rightarrow y\in (2),\text{coset leader:} [0001] \vee [0100] \ \hat{x}=y+0001=1110$}
+                \end{itemize}
         \subsubsection{Decodifica mediante sindrome}
+            Si definisce sindrome di $y$ il vettore $s$ ottenuto dal prodotto di $y$ con la matrice di controllo di paritá:
+            \[
+                s = yH^T = (x+e)H^T = xH^T+eH^T = eH^T    
+            \]
+            \paragraph{Propietá:}
+                \begin{itemize}
+                    \item {
+                        Tutti i membri di uno stesso coset hanno la stessa sindrome
+                    }
+                    \item {
+                        $s \in 1 \times (n-k)$
+                    }
+                    \item {
+                        Le $2^{n-k}$ sindromi sono associate ai $2^n-k$ diversi coset del codice $\mathcal{C}(k,n)$
+                    }
+                    \item {
+                        Ciascuna sindrome é associata ai $2^k$ pattern di errore apparteenti allo stesso coset.
+                    }
+                \end{itemize}
+            \paragraph{Procedura di decodifica:}
+                \begin{enumerate}
+                    \item {Calcola la sindrome $s = yH^T$}
+                    \item {Associa la sindrome al coset leader corrispondente $s\rightarrow e_{CL}(s)$}
+                    \item {Corregge l'errore sommando il coset leader alla $n-upla\ y$}
+                \end{enumerate}
+                La parola $\hat{x}$ é una parola di codice:
+                \[
+                    \hat{x}H^T= (y+e_{CL}(s))H^T = s+s =0   
+                \]
+                e per costruzione la parola di codice $\hat{x}$ minimizza la distanza di Hamming da $y$
         \subsubsection{Decodifica a sindrome: Codici di Hamming $m=3$}
+            \begin{sloppypar}
+                Il codice ha $d_{min} = 3$ ed é in grado di correggere esattamente un errore: ${t_{max} = \left\lfloor \frac{d_{min}-1}{2}\right\rfloor = 1}$. Si sceglie la matrice $H$
+                in maniera che la tabella di decodifica associ alla sindrome il pattern di errore a peso 1 in cui il bit
+                messo a 1 sia nella posizione corrispondente alla conversione della sindrome in decimale.
+            \end{sloppypar}
+            \begin{table}[H]
+                \subfloat[Codice non sistematico]{
+                    \begin{tabular}{cc}
+                        \hline
+                        Sindrome  & Coset Leader  \\ \hline
+                        {[}000{]} & {[}0000000{]} \\
+                        {[}100{]} & {[}1000000{]} \\
+                        {[}010{]} & {[}0100000{]} \\
+                        {[}110{]} & {[}0010000{]} \\
+                        {[}001{]} & {[}0001000{]} \\
+                        {[}101{]} & {[}0000100{]} \\
+                        {[}011{]} & {[}0000010{]} \\
+                        {[}111{]} & {[}0000001{]} \\ \hline
+                        \end{tabular}
+                }
+                \hfill
+                \subfloat[Codice sistematico]{
+                    \begin{tabular}{cc}
+                        \hline
+                        Sindrome  & Coset Leader  \\ \hline
+                        {[}000{]} & {[}0000000{]} \\
+                        {[}100{]} & {[}0000100{]} \\
+                        {[}010{]} & {[}0000010{]} \\
+                        {[}110{]} & {[}1000000{]} \\
+                        {[}001{]} & {[}0000001{]} \\
+                        {[}101{]} & {[}0100000{]} \\
+                        {[}011{]} & {[}0010000{]} \\
+                        {[}111{]} & {[}0001000{]} \\ \hline
+                    \end{tabular}
+                }
+            \end{table}
         \subsubsection{Esempio di decodifica}
             Un codice lineare a blocchi ha la seguente matrice di controllo di parità:
             \[
@@ -578,3 +920,38 @@
                 
                 }
             \end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
