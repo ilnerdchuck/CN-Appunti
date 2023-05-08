@@ -914,20 +914,572 @@
             \]  
             \begin{enumerate}
                 \item {Determinare la matrice generatrice:
-                
+                    \begin{itemize}
+                        \item{ 
+                            Ci accorgiamo che il codice é in forma sistematica: abbiamo la matrice identica 
+                            \[
+                                H=
+                                    \begin{bmatrix}
+                                    1 & 0 & 1 & | & 1 & 0 & 0\\
+                                    1 & 1 & 0 & | & 0 & 1 & 0\\
+                                    0 & 1 & 1 & | & 0 & 0 & 1
+                                    \end{bmatrix}  
+                            \]  
+                            Allora la forma $H = [P^T,I_{n-k}]$, e la matrice paritá ha forma $G = [I_k,P]$:
+                            \[
+                                G=
+                                    \begin{bmatrix}
+                                    1 & 0 & 0 & | & 1 & 1 & 0 \\
+                                    0 & 1 & 0 & | & 0 & 1 & 1 \\
+                                    0 & 0 & 1 & | & 1 & 0 & 1 
+                                    \end{bmatrix}  
+                            \]
+                        }
+                    \end{itemize}
                 }
                 \item {Decodificare la parola $y = [110110]$ ed identificare la parola di codice trasmessa:
-                
+                    \begin{itemize}
+                        \item {Verifichiamo se é stato introdotto errore, calcoliamo la sindrome $s = yH^T$ e calcoliamone il prodotto in $G(2)$:
+                        \[
+                            yH^T=
+                                \begin{bmatrix}
+                                1 & 1 & 0 & 1 & 1 & 0
+                                \end{bmatrix}
+                                \begin{bmatrix}
+                                1 & 1 & 0 \\ 
+                                0 & 1 & 1 \\ 
+                                1 & 0 & 1 \\ 
+                                1 & 0 & 0 \\
+                                0 & 1 & 0 \\
+                                0 & 0 & 1 
+                                \end{bmatrix} =
+                                    \begin{bmatrix}
+                                    0 & 1 & 1 
+                                    \end{bmatrix}   
+                        \]
+                        }
+                        \item {Essendo il codice diverso da $0$ é stato introdotto un errore, devo trovare la stima dell'errore: $y=x+e$ sia una parola di codice. 
+                            La sindrome identifica un coset e di conseguenza l'errore a esso associato. Ma mi accorgo che $[011]$ (sindrome) corrisponde a una riga della matrice di controllo di paritá $H$, quindi posso solezionare la riga moltiplicandola per un vettore 
+                            riga composto da zeri tranne un uno per la riga che voglio selezionare (questo avrá peso 1):
+                            
+                            \begin{align}
+                                    \hat{x} &= y + \hat{e} =  (y + \hat{e})H^T=y H^T+ \hat{e}H^T= s+s =0 \nonumber \\
+                                    &\begin{bmatrix}
+                                        0 & 1 & 0 & 0 & 0 & 0
+                                        \end{bmatrix}
+                                        \begin{bmatrix}
+                                        1 & 1 & 0 \\ 
+                                        0 & 1 & 1 \\ 
+                                        1 & 0 & 1 \\ 
+                                        1 & 0 & 0 \\
+                                        0 & 1 & 0 \\
+                                        0 & 0 & 1 
+                                        \end{bmatrix} = 0  \nonumber
+                            \end{align}  
+                        }
+                        \item {GLI ELEMENTI DI UN COSET HANNO TUTTI LA STESSA SINDROME. Abbiamo quindi 
+                        \begin{gather}
+                            \hat{y} =\begin{bmatrix}
+                                1 & 1 & 0 & 1 & 1 & 0
+                                \end{bmatrix} \nonumber \\
+                            \hat{e} = \begin{bmatrix}
+                                0 & 1 & 0 & 0 & 0 & 0
+                                \end{bmatrix}\nonumber \\
+                            \hat{x} = \begin{bmatrix}
+                                1 & 0 & 0 & 1 & 1 & 0
+                                \end{bmatrix}\nonumber \\
+                            xH^T=
+                                \begin{bmatrix}
+                                1 & 0 & 0 & 1 & 1 & 0
+                                \end{bmatrix}
+                                \begin{bmatrix}
+                                1 & 1 & 0 \\ 
+                                0 & 1 & 1 \\ 
+                                1 & 0 & 1 \\ 
+                                1 & 0 & 0 \\
+                                0 & 1 & 0 \\
+                                0 & 0 & 1 
+                                \end{bmatrix} =
+                                    \begin{bmatrix}
+                                    0 & 0 & 0 
+                                    \end{bmatrix}\nonumber   
+                    \end{gather}
+                        }
+                        \item {Abbiamo decodificato e siamo arrivati a una parola di codice. Evviva! UwU ti meriti un bacino.}
+                    \end{itemize}
                 }
             \end{enumerate}
+            \paragraph{Esempio con codici di Hamming:} vedi lezione capsici meglio come funziona la roba sopra
 
+    \subsection{Codici Ciclici}
+        \paragraph{Shift Cicliclo:}\label{shift ciclico}
+        \begin{sloppypar}
+            Dato il vettore ${v = [v_0,\dots,v_{n-1}]\in \mathcal{V} = G(2)^n}$ indichiamo con $v^{(i)}$ il vettore ottenuto da $v$ applicando uno 
+            \emph{shift ciclico} di $i$ posizioni a destra:
+            \[
+                v^{(i)} = [v_{n-i},v_{n-i+1}, \dots, v_{n-1},v_0,v_1,\dots, v_{n-i-1}]    
+            \]     
+        \end{sloppypar}
+        \subsubsection{Definizione di Codice Cicliclo}
+            Un codice lineare $\mathcal{C}(k,n)$ si definisce \emph{ciclico} se data una generica parola di codice $x\in \mathcal{C}(k,n)$ ogni suo
+            shift ciclico $x^{(i)}\in \mathcal{C}(k,n)$. Sono codici a correzione d'errore che hanno propietá algebriche che rendono sia la rivelazione che la correzione
+            di errore efficenti.
+            \paragraph{Esempi - Codici Ciclici:}
+                \begin{itemize}
+                    \item {
+                        $\mathcal{C}(2,3) = \{000,110,101,011\}$
+                    }
+                    \item {
+                        $\mathcal{C}(2,4) = \{0000,1010,0101,1111\}$ 
+                    }
+                    \item {
+                        $\mathcal{C}(4,7)$:\label{codice 47}
+                        \begin{table}[H]
+                            \centering
+                            \begin{tabular}{ccl}
+                            \cline{1-3}
+                            Messaggio  & Vettori di Codice & Polinomi di codice \\ \cline{1-3}
+                            {[}0000{]} & {[}0000000{]}     &$0=                                    0\dotproduct g_{(D)}$\\
+                            {[}1000{]} & {[}1101000{]}     &$1+D+D^3 =1                             \dotproduct g_{(D)}$\\
+                            {[}0100{]} & {[}0110100{]}     &$D+D^2+D^4 =                           D\dotproduct g_{(D)}$\\
+                            {[}1100{]} & {[}1011100{]}     &$1+D^2+D^3+D^4 =                   (1+D)\dotproduct g_{(D)}$\\
+                            {[}0010{]} & {[}0011010{]}     &$D^2+D^3+D^5 =                       D^2\dotproduct g_{(D)}$\\
+                            {[}1010{]} & {[}1110010{]}     &$1+D+D^2+D^5 =                   (1+D^2)\dotproduct g_{(D)}$\\
+                            {[}0110{]} & {[}0101110{]}     &$D+D^3+D^4+D^5 =                 (D+D^2)\dotproduct g_{(D)}$\\
+                            {[}1110{]} & {[}1000110{]}     &$1+D^4+D^5 =                   (1+D+D^2)\dotproduct g_{(D)}$\\ 
+                            {[}0001{]} & {[}0001101{]}     &$D^3+D^4+D^6 =                       D^3\dotproduct g_{(D)}$\\
+                            {[}1001{]} & {[}1100101{]}     &$1+D+D^4+D^6 =                   (1+D^3)\dotproduct g_{(D)}$\\
+                            {[}0101{]} & {[}0111001{]}     &$D+D^2+D^3+D^6 =                 (D+D^3)\dotproduct g_{(D)}$\\
+                            {[}1101{]} & {[}1010001{]}     &$1+D^2+D^6 =                   (1+D+D^3)\dotproduct g_{(D)}$\\
+                            {[}0011{]} & {[}0010111{]}     &$D^2+D^4+D^5+D^6 =             (D^2+D^3)\dotproduct g_{(D)}$\\
+                            {[}1011{]} & {[}1111111{]}     &$1+D+D^2+D^3+D^4+D^5+D^6 =   (1+D^2+D^3)\dotproduct g_{(D)}$\\
+                            {[}1111{]} & {[}1001011{]}     &$1+D^3+D^5+D^6 =           (1+D+D^2+D^3)\dotproduct g_{(D)}$
+                            \end{tabular}
+                        \end{table}
+                    }
+                \end{itemize}
+        \subsubsection{Rappresentazione algebrica di un codice ciclico}
+            A ciascun vettore $v = [v_0,\dots,v_{n-1}]\in \mathcal{V}$ é possibile associare un polinomo definito in $GF(2)$:
+            \[
+                v_{(D)} = v_0 + v_1 D+\dots+ v_{n-1}D^{n-1}    
+            \]
+            \paragraph{Definizione:} se $x_{(D)} \leftrightharpoons x\in \mathcal{C}(k,n) \Rightarrow$ si dice
+            che $x_{(D)}$ é in $\mathcal{C}(k,n)$
+            \paragraph{Propietá:} Uno \emph{shift ciclico} \ref{shift ciclico} di $i$ posizioni del vettore $v$ é equivalente a moltiplicare
+            il polinomio $v_{(D)}$ per $D^i$ modulo $(D^n-1)$:
+            \[
+                v^{(i)} \rightleftharpoons \mod\{D^iv_{(D)},(D^n-1)\}    
+            \]
+            il modulo tra polinomi é il resto della divisione tra polinomi, il grado quindi sará sempre minore o uguale a $n$. Fissando 
+            $i=1$ il polinomio diventa:
+            \begin{align}
+                Dv_{(D)} &= v_0D+v_1D^2+ \dots +v_{n-1}D^n \nonumber \\
+                         &\overset{\pm v_{n-1}}{=} v_{n-1}+v_0D+v_1D^2+ \dots +\underset{v_{n-1}(D^n-1)}{\underbrace{v_{n-1}D^n - v_{n-1}}}\nonumber \\
+                         &= v_{n-1}+v_0D+v_1D^2+ \dots + v_{n-2}D^{n-1}+v_{n-1}(D^n-1)\nonumber 
+            \end{align}        
+            facendone il modulo:
+            \[
+                \mod\{D^iv_{(D)},(D^n-1)\}=v_{n-1}+v_0D+v_1D^2+ \dots + v_{n-2}D^{n-1} \rightleftarrows v^{(1)}
+            \]
+            ho ottenuto il codice shiftato di una posizione, analogamente si puó dimostrare che:
+            \[
+                D^iv_{(D)} = q_{(D)}(D^n-1) +v_{n-i}+v_0D+v_1D^2+ \dots +v_{n-i-1}D^{n-1}\nonumber \\
+            \]
+            quindi il modulo ci fornisce lo shift:
+            \[
+                \mod\{D^iv_{(D)},(D^n-1)\} \rightleftarrows v^{(i)}
+            \]
+            \paragraph{Teorema:} 
+                \begin{sloppypar}
+                    Sia ${g_{(D)} = g_0+ g_1D+ \dots + g_rD^r}$ il polinomio di grado minimo associato ad una parola di codice ciclico ${\mathcal{C}(k,n)}$ allora:
+                    $g_0 =1$ e $g_{(D)}$ é unico. Dimostrazione:
+                \end{sloppypar}
+                Supponiamo per assurdo che $g_0 =0$:
+                \[
+                    g_{(D)} = g_1D+ \dots + g_rD^r = D\left(g_1+ \dots + g_rD^{r-1} \right) = Dg^\prime_{(D)}\nonumber \\
+                \]
+                ma questo entra in contraddizione con le ipotesi: $\mathcal{C}(k,n)$ é ciclico e quindi $g^\prime_(D)$ é 
+                in $\mathcal{C}(k,n)$ ma il grado di $g^\prime_{(D)}$ é minore di $r$. Un ragionamento analogo simile si puó fare per 
+                $g_r =0$. Supponiamo che esistano due polinomi di grado minimo $g_{1(D)}$ e $g_{2(D)}$ in  $\mathcal{C}(k,n)$ allora:
+                $g_{3(D)} = g_{1(D)}g_{2(D)}$ é ancora in $\mathcal{C}(k,n)$ e per quanto visto il grado di $g_{3(D)}$ sarebbe minore di $r$
+                e questo é impossibile.
+        \subsubsection{Polinomio generatore di un codice ciclico}
+            Il polinomio generatore di un codice ciclico $\mathcal{C}(k,n)$ é il polinomio
+            \[
+                g_{(D)} = 1+g_1D+ \dots + D^r    
+            \]
+            non nullo e di grado minimo in $\mathcal{C}(k,n)$.
+            \paragraph{Esempi:}
+            \begin{itemize}
+                \item {
+                    \[
+                        \mathcal{C}(2,3) = \{000,\underset{1+D}{\underbrace{110}},\underset{1+D^2}{\underbrace{101}},\underset{D+D^2}{\underbrace{011}}\}\rightarrow g_{(D)} = 1+D  
+                    \]
+                }
+                \item {
+                    \[
+                        \mathcal{C}(2,4) = \{0000,\underset{1+D^2}{\underbrace{1010}},\underset{D+D^2}{\underbrace{0101}},\underset{1+D+D^2+D^3}{\underbrace{1111}}\}\rightarrow g_{(D)} = 1+D^2 
+                    \]
+                }
+                \item {
+                    Il codice $\mathcal{C}(4,7)$ dalla tabella sopra costruita (\ref{codice 47}) scegliamo il polinomio generatore:
+                    \[
+                        g_{(D)} = 1+D+D^3
+                    \]   
+                }
+            \end{itemize}
+            \paragraph{Teorema:}
+                \begin{sloppypar}
+                    Un polinomio $x_{(D)}$ é in ${\mathcal{C}(k,n)\Leftrightarrow x_{(D)}}$ é un multiplo di $g_{(D)}$. Dimostrazione:
+                    Ogni multiplo di $g_{(D)}$ é in $\mathcal{C}(k,n)$. Poiché $\mathcal{C}(k,n)$ é ciclico i polinomi ${Dg_{(D)},D^g_{(D)},\dots,D^{n-r-1}g_{(D)}}$
+                    sono in $\mathcal{C}(k,n)$ e lo é anche qualsiasi loro combinazione lineare:
+                    \[
+                        x_{D} = u_{(D)}g_{(D)}=u_0g_{(D)}+u_1Dg_{(D)}+ \dots + u_{n-r-1}D^{n-r-1}g_{(D)}
+                    \]
+                    Ogni polinomio in $\mathcal{C}(k,n)$ puó essere espresso come multiplo di $g_{(D)}$. Per assurdo assumiamo che $x_{(D)}$ sia in $\mathcal{C}(k,n)$
+                    ma non multiplo di $g_{(D)}$ allora:
+                    \[
+                        x_{(D)} =a_{(D)}g_{(D)}+b_{(D)}\Rightarrow b_{(D)} =b_{(D)}-a_{(D)}g_{(D)}  
+                    \]
+                    poiché sia $x_{(D)}$ che $a_{(D)}g_{(D)}$ appartengono a $\mathcal{C}(k,n)$, per la linearitá del codice anche $b_{(D)}$ é in $\mathcal{C}(k,n)$
+                    ma questo é impossibile perché $b_{(D)}$ essendo il resto della divisione tra $x_{(D)}$ e $g_{(D)}$ é di grado minore di $g_{(D)}$.
+                \end{sloppypar}
+            \paragraph{Corollario:} l'insieme degli $n-r$ polinomi
+            \[
+                \{g_{(D)},Dg_{(D)},\dots,D^{n-r-1}g_{(D)}\}    
+            \]
+            costituisce una base per $\mathcal{C}(k,n)$
+            
+            \paragraph{Corollario:} Se il polinomio generatore $g_{(D)}$ del codice $\mathcal{C}(k,n)$ ha grado $r$ allora
+            il numero di parole del codice é $2^{n-r}$ e $r=n-k$. Dimostrazione:
+            Tutte le possibili combinazioni in $GF(2)$ degli $n-r$ polinomi che costituiscono una base per $\mathcal{C}(k,n)$ sono $2^{n-r}$
+            e quindi le parole di codice sono $2^{n-r}\Rightarrow k=n-r$.
 
+            \paragraph{Corollario:} Il grado del polinomio generatore $g_{(D)}$ del codice $\mathcal{C}(k,n)$ é uguale al numero di bit di controllo di paritá.
 
+        \subsubsection{Teorema fondamentale generatore di un codice ciclico}
+            Un polinomio $g_{(D)}$, il cui grado é $n-k$, é un generatore di un codice ciclico $\mathcal{C}(k,n) \Leftrightarrow g_{(D)}$ é un divisore di 
+            $D^n-1$. Dimostrazione:
+            Il polinomio $g_{(D)}$ é un generatore di $\mathcal{C}(k,n)$ allora $g_{(D)}$ é un divisore di 
+            $D^n-1$, poiché $g_{(D)}$ é di grado $n-k$ si ha che:
+            \begin{gather}
+                D^kg_{(D)}=(D^n-1)+g^{(k)}_{(D)} \nonumber \\ 
+                (D^n-1)=D^kg_{(D)}-g^{(k)}_{(D)} = \left(D^k-a_{(D)}\right)g_{(D)}\nonumber
+            \end{gather}
+            Se il polinomio $g_{(D)}$ di grado $n-k$ é divosore di $D^n-1$ allora $g_{(D)}$ é generatore di un codice ciclico
+            $\mathcal{C}(k,n)$. Qualsiasi polinomio nella forma:
+            \[
+                x_{(D)} = u_0g_{(D)}+u_1Dg_{(D)}+\dots+u_{k-1}D^{k-1}g_{(D)} = u_{(D)}g_{(D)}  
+            \]
+            ha grado pari o inferiore a $n-1$ ed é multiplo di $g_{(D)}$. Poiché $u_{(D)}$ puó assumere $2^{k}$ valori
+            allora línsieme dei $2^k$ vettori forma un codice lineare $\mathcal{C}(k,n)$. Sia
+            \[
+                v_{(D)} = v_0+v_1D+\dots+v_{n-1}D^{n-1} = a_{(D)}g_{(D)} \in \mathcal{C}(k,n)  
+            \]
+            allora:
+            \begin{align}
+                Dv_{(D)}&= v_0D+v_1D^2+\dots+v_{n-1}D^{n}\nonumber \\
+                        &= v_{n-1}(D^{n}-1)+(v_{n-1}+v_0D+v_1D^2+\dots+v_{n-2}D^{n-1})\nonumber \\
+                        &= v_{n-1}(D^{n}-1)+v^{(1)}_{(D)}\nonumber
+            \end{align}
+            Poiché $g{(D)}$ é divisore di $D^n-1$ per ipotesi e di $Dv_{(D)}=Da_{(D)}g_{(D)}$ anche 
+            $v^{(1)}_{(D)}$ é multiplo di $g{(D)}$ allora $\mathcal{C}(k,n)$ é ciclico.
+            \paragraph{Esempi di divisione tra polinomi in $GF(2)$}
+                Ricordiamoci in $GF(2)$ aggiungere o togliere é la stessa cosa il risulatto non varia
+                \begin{itemize}
+                    \item {
+                        $\mathcal{C}(2,3) = \{000,110,101,011\} \Rightarrow g_{(D)} = 1+D$
+                        \[
+                            \frac{D^3-1}{1+D} = D^2+D+1
+                        \]
+                        \polylongdiv[style=D]{x^3+1}{x+1}
+                    }
+                    \item {
+                        $\mathcal{C}(2,4) = \{0000,1010,0101,1111\} \Rightarrow g_{(D)} = 1+D^2$
+                        \[
+                            \frac{D^4-1}{1+D^2} = D^2+1
+                        \]
+                        \polylongdiv[style=D]{x^4+1}{x^2+1}
+                    }
+                    \item {
+                        $\mathcal{C}(2,4) \Rightarrow g_{(D)} = 1+D+D^3$
+                        \[
+                            \frac{D^7-1}{1+D+D^3} = D^4+D^2+D+1
+                        \]
+                        \polylongdiv[style=D]{x^7+1}{x^3+x+1}
+                    }
+                    \item {
+                        Il polinomio $D^6-1$ puó essere fattorizzato in molte maniere diverse. Ad ogni fattore corrisponde un polinomio
+                        generatore $g_{(D)}$ diverso e quindi un codice ciclico diverso.
+                        \[
+                            D^6-1 = (1+D^2)^2(1+D+D^2)^2s
+                        \]
+                    }
+                \end{itemize}
+        \subsubsection{Matrice generatrice di un codice ciclico}
+            Dato il codice ciclico $\mathcal{C}(k,n)$ con polinomio genratore $g_{(D)}$ dal momento che l'insieme dei polinomi
+            \[
+                \{g_{(D)},Dg_{(D)},\dots,D^{k-1}g_{(D)}\}  
+            \]
+            costituisce una base per il codice, la matrice generatrice del codice é 
+            \[
+                G = 
+                \begin{bmatrix}
+                g_0 & g_1 & \dots & g_{n-k} & 0 & \dots & 0\\ 
+                0 & g_0 & g_1 & \dots & g_{n-k} & \dots & 0\\ 
+                \vdots &  &  &  &  &  & \vdots\\ 
+                0 & \dots & 0 & g_{n-k} & \dots & g_1 & g_0
+                \end{bmatrix}
+            \]
+            considerato che $g_0 = 1$ le righe possono essere sommate tra loro per ottenere la matrice generatrice del codice 
+            equivalente in forma sistematica $G = [I_k,P]$.
+        \subsubsection{Controllo di paritá per un codice ciclico}
+            Dato il codice cilclico $\mathcal{C}(k,n)$ con polinomio generatore $g_{(D)}$ esiste sempre un polinomio 
+            $h_{(D)} = h_0+h_1D+\dots+h_{(k)}D^k$ tale che 
+            \[
+                h_{(D)} = \frac{(D^n-1)}{g_{(D)}} \Rightarrow g_{(D)}h_{(D)} = D^n-1    
+            \]
+            Sia $x_{(D)} = u_{(D)}g_{(D)}\in \mathcal{C}(k,n)$ allora:
+            \begin{align}
+                v_{(D)} &= x_{(D)}h_{(D)} = u_{(D)}g_{(D)}h_{(D)}\nonumber \\
+                        &= u_{(D)}(D^n-1) = D^nu_{(D)}-u_{(D)}\nonumber
+            \end{align}
+            Poiché $u_{(D)}$ é un polinomio di grado massimo $k-1$ e $D^nu_{(D)}$ é d igrado minimo $n$,
+            sappiamo per certo che, se $x_{(D)}$ é in $\mathcal{C}(k,n)$, gli $n-k$ coefficenti con indici
+            $k,k+1,\dots,n-1$ del polinomio $v_{(D)}$ devono essere $0$.
 
-
-
-
-
+            Poiché é $v_{(D)} = x_{(D)}h_{(D)}$ il coefficente m-esimo del polinomio $v_{(D)}$ si 
+            ottiene come la somma di tutti i coefficenti che moltiplicano $D^m$
+            \[
+                D^m = v_m = x_0h_m+x_1h{m-1}+\dots+x_mh_0 = \sum_{j=0}^{n-1}x_{(j)}h_{(m-j)}  
+            \] 
+            Abbiamo un set di $n-k$ equazioni del tipo 
+            \[
+                v_m =  \sum_{j=0}^{n-1}x_{(j)}h_{(m-j)} = 0\ m=k,k+1,\dots,n-1  
+            \]
+            le equazioni possono essere riassunte nella forma matriciale
+            \[
+                xH^T=0_{n-k}  
+            \]
+            dove la matrice $H$ di dimensioni $(n-k)\times n$ é la matrice controllo di paritá del codice ciclico $\mathcal{C}(k,n)$ 
+            \[
+                H = 
+                \begin{bmatrix}
+                h_k & h_{k-1} & \dots & h_{0} & 0 & \dots & 0\\ 
+                0 & h_k & h_{k-1} & \dots & h_{0} & \dots & 0\\ 
+                \vdots &  &  &  &  &  & \vdots\\ 
+                0 & \dots & 0 & h_{k}& h_{k-1} & \dots  & h_0
+                \end{bmatrix}
+            \]
+            il calcolo della sindrome puó essere effettuato mediante:
+            \[
+                s = yH^T    
+            \]
+            \paragraph{Esempio calcolo di matrice generatrice e controllo di paritá}
+                Dato il codice ciclico $\mathcal{C}(k=4,n=7)$ con polinomio generatore $g_{(D)} = 1+D+D^3$
+                con coefficenti
+                \[
+                    g_0=1,\ g_1=1,\ g_2=0,\ g_3=1,\
+                \]
+                la matrice generatrice é
+                \[
+                    G = 
+                    \begin{bmatrix}
+                    1 & 1 & 0 & 1 & 0 & 0 & 0\\ 
+                    0 & 1 & 1 & 0 & 1 & 0 & 0\\ 
+                    0 & 0 & 1 & 1 & 0 & 1 & 0\\ 
+                    0 & 0 & 0 & 1 & 1 & 0 & 1
+                    \end{bmatrix}
+                \] 
+                in forma sistematica\[
+                    G = [I_k,P] =
+                    \begin{bmatrix}
+                    1 & 0 & 0 & 0 & 1 & 1 & 0\\ 
+                    0 & 1 & 0 & 0 & 0 & 1 & 1\\ 
+                    0 & 0 & 1 & 0 & 0 & 1 & 0\\ 
+                    0 & 0 & 0 & 1 & 1 & 0 & 1
+                    \end{bmatrix}
+                \] 
+                calcoliamo la matrice di controllo paritá, il vettore 
+                \[
+                    h_{(D)} = \frac{D^n-1}{g_{(D)}} = 1+D+D^2+D^4
+                \]
+                i coefficenti del polinomio sono 
+                \[
+                    h_0=1,\ h_1=1,\ h_2=1,\ h_3=0,\ h_4=1,\
+                \]
+                da cui la matrice di controllo di paritá
+                \[
+                    H = 
+                    \begin{bmatrix}
+                    1 & 0 & 1 & 1 & 1 & 0 & 0\\ 
+                    0 & 1 & 0 & 1 & 1 & 1 & 0\\ 
+                    0 & 0 & 1 & 0 & 1 & 1 & 1
+                    \end{bmatrix}
+                \]
+                in forma sistematica
+                \[
+                    H =[P^T,I_{n-k}]= 
+                    \begin{bmatrix}
+                    1 & 0 & 0 & 1 & 0 & 1 & 1\\ 
+                    0 & 1 & 0 & 1 & 1 & 1 & 0\\ 
+                    0 & 0 & 1 & 0 & 1 & 1 & 1
+                    \end{bmatrix}
+                \]
+        \subsubsection{Metodo alternativo per il calcolo della sindrome}
+            La sindrome associara alla matrice di controllo di paritá sistematica si puó calcolare
+            usando un metodo alternativo. Al ricevitore si ha 
+            \[
+                y=x+e\Rightarrow y_{(D)} = x_{(D)}+e_{(D)}
+            \]
+            la sindrome puó essere calcolata come il resto della divisione tra polinomi
+            \[
+                \frac{y_{(D)}}{g_{(D)}}\Rightarrow y_{(D)} = a_{(D)}g_{(D)} + s_{(D)} 
+            \]
+            poiché il grado di $s_{(D)}$ é \emph{minore} del grado di $g_{(D)}$, il grado massimo di $s_{(D)}$ é $n-k-1$
+            \begin{itemize}
+                \item {
+                    Se $e_{(D)} = 0$ il canale non introduce errori ed é 
+                    \[
+                        s_{(D)} = mod\{x_{(D)},g_{(D)}\} =mod\{u_{(D)}g_{(D)},g_{(D)}\} = 0
+                    \]
+                }
+                \item {
+                    Se $e_{(D)} \neq 0$ la sindrome diventa
+                    \begin{align}
+                        s_{(D)} &= mod\{x_{(D)}+e_{(D)},g_{(D)}\} = mod\{x_{(D)},g_{(D)}\}+mod\{e_{(D)},g_{(D)}\} \nonumber \\
+                                &= mod\{e_{(D)},g_{(D)}\} \overset{deg(e_{(D)})<deg(g_{(D)})}{=} e_{(D)}\nonumber 
+                    \end{align}
+                }
+            \end{itemize}
+            $s_{(D)}$ corrisponde alla sindrome ottenuta con la matrice di controllo paritá in forma sistematica.
+        \subsubsection{Decodifica a sindrome per codici ciclici}
+            Esistono due metodi possibili per effettuare la decodifica dei codici ciclici:
+            \begin{itemize}
+                \item {Utilizzando l'approccio classico dei codici a blocco: la sindrome $s_{(D)}$ mappa un polinomio di
+                    grado $n-1$ su uno di grad $n-k-1$. Una volta calcolata la sindrome, si identifica un coset ed il pattern di errore 
+                    dal coset leader. É svantaggioso la complessitá di associare tutti i vettori in $\mathcal{V}$ ad uno specifico
+                    coset
+                }
+                \item {Posso sfruttare le propietá dei codici ciclici per derivare un metodo alternativo}
+            \end{itemize}
+            \paragraph{Teorema:} Dato il codice ciclico $\mathcal{C}(k,n)$ con polinomio generatore $g_{(D)}$ e distanza minima 
+            $d_{min}$, sia $s_{(D)}$ la sindrome associata al vettore ricevuto $y$, se 
+            \[
+                w_{(s_{(D)})}\leq \left\lfloor \frac{d_{min}-1}{2}\right\rfloor \Rightarrow \hat{e}_{(D)} = s_{(D)} 
+            \]
+            Dimostrazione: 
+            Per costruzione $s_{(D)}$ e $y_{(D)}$ sono nello stesso coset $C_y= C_s = \{\mathcal{C}+s_{(D)}\}$ poiché si ha
+            \[
+                w_{(s)}\leq \left\lfloor \frac{d_{min}-1}{2}\right\rfloor \Rightarrow s_{(D)} \rightleftharpoons [s,0 \dots,0]   
+            \]
+            é il coset leader e quindi la stima dell'errore. In altre parole poiché $s_{(D)} = mod\{e_{(D)},g_{(D)}\}$, se il grado di
+            $deg(e_{(D)})<n-k\Rightarrow s_{(D)} = e_{(D)}$ 
+            \paragraph{Esempio decodifica di codici ciclici}
+                Sia $x = [0110100]$ una parola del codice ciclico $\mathcal{C}(4,7)$ con polinomio generatore 
+                $g_{(D)} = 1+D+D^3$. Sia $e = [0100000]$ l'errore introdotto dal canale. Il vettore ricevuto é 
+                \[
+                    y= x+e = [0010100]\rightleftharpoons y_{(D)} = D^2+D^4 
+                \]
+                da cui calcoliamo la sindrome 
+                \[
+                    s_{(D)} = mod\{y_{(D)},g_{(D)}\}=D
+                \]
+                ho quindi 
+                \[
+                    w_{(s_{(D)})} = 1\Rightarrow s_{(D)} =e_{(D)} = \hat{e} = [0100000]  
+                \]
+                Sia ora $e = [0000010]$ l'errore introdotto dal canale. il vettore ricevuto é 
+                \[
+                    y= x+e = [0110110]\rightleftharpoons y_{(D)} = D+D^2+D^4+D^5 
+                \]
+                da cui calcoliamo la sindrome 
+                \[
+                    s_{(D)} = mod\{y_{(D)},g_{(D)}\}=D^2+D+1
+                \]
+                ho quindi 
+                \[
+                    w_{(s_{(D)})} = 3\Rightarrow s_{(D)} \neq \hat{e}_{(D)}
+                \]
+                per trovare l'errore bisogna trovare un'altro metodo.
+            \paragraph{Teorema:} Dato il codice ciclico $\mathcal{C}(k,n)$ sia $s_{(D)}$ la sindrome del vettore ricevuto
+                $y$ allora la sindrome $s_{1(D)}$ della parola $y^{(1)}$ ottenuta dallo shift ciclico di $y$ di una posizione 
+                si calcola:
+                \[
+                    s_{1(D)} = mod\left\{y^{(1)}_{(D)},g_{(D)}\right\} = Ds_{(D)}-s_{n-k-1}g_{(D)}    
+                \]
+                Dimostrazione: Poiché vale la relazione $y_{(D)} = u_{(D)}g_{(D)} + s_{(D)}$ la relazione relativa a $y^{(1)}_{(D)}$ é \
+                \begin{align}
+                    Dy_{(D)} &= Du_{(D)}g_{(D)} + Ds_{(D)}\nonumber \\
+                            &= (Du_{(D)}g_{(D)} +s_{n-k-1})g_{(D)} + Ds_{(D)}-s_{n-k-1}g_{(D)}\nonumber
+                \end{align}
+                poiché il grado massimo di $Ds_{(D)}-s_{n-k-1}g_{(D)}$ é $n-k-1$ allora $s_{1(D)} = Ds_{(D)}-s_{n-k-1}g_{(D)}$ é il 
+                resto della divisione di $Dy_{(D)}$ per $g_{(D)}$ ed é quindi la sindrome di $y^{(1)}_{(D)}$.
+            \paragraph{Esempio decodifica a sindrome di codici ciclici}
+                Sia $x=[0110100]$ una parola del codice ciclico $\mathcal{C}(4,7)$ con polinomio generatore $g_{(D)} = 1 + D + D^3$
+                ed $e=[0000010]$ l'errore introdotto dal canale. Il vettore ricevuto é 
+                \[
+                    y= x+e = [0110110]\rightleftharpoons y_{(D)} = D+D^2+D^4+D^5 
+                \]
+                da cui calcoliamo la sindrome 
+                \[
+                    s_{(D)} = mod\{y_{(D)},g_{(D)}\}=D^2+D+1
+                \]
+                Lo shift ciclico di $y$:
+                \[
+                    y^{(1)} = [001011] \rightleftharpoons y^{(1)}_{(D)} = D^2+D^3+D^5+D^6   
+                \]
+                \begin{align}
+                    s_{1(D)} &= mod\left\{y^{(1)}_{(D)},g_{(D)}\right\}= D^2+1  \nonumber \\
+                             &= D(D^2+D+1)-D^3+D+1 \nonumber
+                \end{align}
+                Lo shift ciclico di $y^{(1)}$:
+                \[
+                    y^{(2)} = [100101] \rightleftharpoons y^{(2)}_{(D)} = 1+D^3+D^4+D^6   
+                \]
+                \begin{align}
+                    s_{2(D)} &= mod\left\{y^{(2)}_{(D)},g_{(D)}\right\}= 1 = D^2+1  \nonumber \\
+                             &= D(D^2+D+1)-D^3+D+1 \nonumber
+                \end{align}
+                OK MA COME ABBIAMO DECODIFICATO QUINDI?
+            \paragraph{Definizione:} Dato un vettore $v$ di $n$ componenti, una sequenza ciclica \label{sequenza ciclica}\index{Sequenza ciclica}
+             di zeri di lunghezza $\ell$ é una successione di $\ell$ zeri consecutivi in senso ciclico.
+                \subparagraph{Esempi:}
+                    \begin{itemize}
+                        \item {$n=7,\ {\color{red}\ell}=3,\ v=[1{\color{red}000}101]$}
+                        \item {$n=7,\ {\color{red}\ell}=4,\ v=[{\color{red}00}101{\color{red}00}]$}
+                        \item {$n=15,\ {\color{red}\ell}=9,\ v=[{\color{red}000000}110001{\color{red}000}]$}
+                    \end{itemize}
+            \paragraph{Teorema:} Dato il codice ciclico $\mathcal{C}(k,n)$, con polinomio generatore $g_{(D)}$ e distanza 
+                minima $d_{min}$, tale che tutti i pattern di errore correggibili abbiano sequanza ciclica di almeno $k$ zeri,
+                ricevuto il vettore $y=x+e$ con $w_{(e)}\leq\left\lfloor \frac{d_{min}-1}{2}\right\rfloor$, l'algoritmo di decodifica a massima
+                verosomiglianza ;e composto dai seguenti passi:
+                \begin{itemize}
+                    \item {Calcolo iterativamente le sindromi $s_{i(D)}$ per tutti gli shift ciclici di $y_{(D)}$ e computo $w_{s_{i(D)}}$}
+                    \item {trovo $m$ per cui $w_{s_{m(D)}}\leq \left\lfloor \frac{d_{min}-1}{2}\right\rfloor $}
+                    \item {stimo $\hat{e}_{(D)} = mod\left\{D^{n-m}s_{m(D)},D^{n-1}\right\} $}
+                \end{itemize}
+                Dimostrazione:
+                \begin{itemize}
+                    \item {
+                        Esistenza di $m$: Poiché $w_{(e)}\leq\left\lfloor \frac{d_{min}-1}{2}\right\rfloor$ e tutti i pattern di errore
+                        correggibili hanno una sequenza ci ciclica di almeno $k$ zeri, esiste uno shift ciclico di $m$ posizioni di $y$
+                        tale che tutti gli $1$ di $e$ siano compresi nelle prime $n-k$ posiioni di
+                        \[
+                            y^m\Rightarrow s_{m(D)} = e_{(D)}^{(m)}    
+                        \]
+                    }
+                    \item {
+                        Stima dell'errore
+                        \begin{align}
+                            D^m &(y_{(D)}+D^{n-m}s_{m(D)}) = \nonumber \\
+                                &= D^my_{(D)}+D^ns_{m(D)} = y^{(m)}_{(D)}+ D^ns_{m(D)}\nonumber \\
+                                &= u_{(D)}g_{(D)}+s_{m(D)}+D^ns_{m(D)} = u_{(D)}g_{(D)}+(D^n-1)s_{m(D)}\nonumber \\
+                                &= (u_{(D)}+h_{(D)}s_{m(D)})g_{(D)}\nonumber
+                        \end{align}
+                    }
+                \end{itemize}
+                
 
 
 

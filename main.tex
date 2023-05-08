@@ -19,6 +19,7 @@
 \usepackage{imakeidx}
 \usepackage{cleveref}
 \usepackage{subfig}
+\usepackage{polynom}
 \makeindex[columns=2, title=Indice Alfabetico, intoc]
 \pgfplotsset{compat=1.18}
 \hypersetup{
@@ -32,6 +33,9 @@
 \usetikzlibrary{arrows.meta}
 \restylefloat{table}
 \tikzexternalize[prefix=media/cache/]
+%Funzioni standard
+\pgfmathdeclarefunction{gauss}{2}{\pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
+}
 \begin{document}
     \include{0_Cover.tex}
     \include{1_indice.tex}
@@ -44,6 +48,7 @@
     \include{8_Sistemi Monodimensionali.tex}
     \include{9_TDF.tex}
     \include{10_Teoria della Probabilitá.tex}
+    \include{11_Processi Stocastici.tex}
     \include{15_Teoria dei Codici.tex}
     \include{formulario.tex}
     \include{index.tex}
