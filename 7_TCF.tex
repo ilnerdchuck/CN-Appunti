@@ -640,9 +640,6 @@
                         \caption{{\color{blue}$\frac{sinc}{x}$}, {\color{red}$\frac{sinc^2}{x^2}$}}
                         \label{fig:sinc vs sinc2}
                     \end{figure}
-                    DOMANDA: ma la fase in tutto questo che ruolo ha? non avrei problemi avere anche sinc che cambiano la fase degli altri segnali?
-                    dopotutto si la sinc é brutta perché si estende all'infinito, ma proprio per questo la fase é sempre sporcata? cosa comporta 
-                    nella ricostruzione del segnale? noi abbiamo visto finora l'ampiezza dopotutto
                 }
             \end{itemize}
         }
@@ -1307,13 +1304,6 @@
                         &= G_{(f)}+G_{(f-2f_0)}+G_{(f+2f_0)}
             \end{align}
             Dall'ultima uguagliaza posso quindi usare un filtro in ({\color{blue}BB}) per rimuovere i segnali alle frequenze $\pm 2f_0$ e ricavare il mio segnale $G_{(f)}$.\\
-            DOMANDA: posso anche quindi demodulare con un seno tanto non mi interessa quello che succede alle frequenze spostate,
-            quindi peró ritorno sulla fase, non é importante? usando un seno la ribalto praticamente no? ricontroll cio che stai dicendo bro non so 
-            se é giusto il ribaltamento \\
-            ALTRA DOMANDA: devo anche modulare il segnale abbastanza lontano dalla BB sennó quando demodulo mi autodisturbo il segnale? da qui deriva $\frac{1}{T}<2BB$\\
-            ALTRA DOMANDA: quindi se volessi captare piú segnali mi conviene utilizzare circuiti diversi? oppure posso modulare e demodulare a piacimento i segnali tenendo conto 
-            su quali frequenze ho modulato in modo tale da sapere dove vanno a finire i segnali e recuperarli? tanto non mi interessa su quale frequenza finiscano finche non diventino 
-            non recuperabili per sovrapposizione giusto?\\
             Riporto un po di esempi di demodulazione di una o piú $rect$:
             Esempio di Demodulazione
             \begin{figure}[H]
@@ -2296,4 +2286,3 @@
                             Y_{(f)} =X_{(f)} U_{(f)} = \frac{X_{(f)}}{2}\delta_{(f)} +\frac{X_{(f)}}{j2\pi f} =\frac{X_{(0)}}{2}\delta_{(f)} +\frac{X_{(f)}}{j2\pi f}    
                         \]
                         Se $X_{(0)}$ fosse $0$ avrei il classico Th. dell'integrazione.
-                        DOMANDA: ma quindi nella propietá campionatrice in frequenza rimane la delta????

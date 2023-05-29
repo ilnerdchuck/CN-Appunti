@@ -1479,9 +1479,72 @@
                         \end{align}
                     }
                 \end{itemize}
-                
-
-
+    \subsection{Codici Convoluzionali}
+        Rispetto ai codici visti fino ad ora i codici convoluzionali sono in generale in forma non sistematica.
+        In un codice convoluzionale viene trasmesso solo il bit di paritá. Ad ogni tempo di bit il codificatore combina i bit
+        all'interno di una finestra mobile di lunghezza $L$, chiamata \emph{constraint length} del codice, per generare gli $n$ 
+        bit in uscita. Il processo di codifica puó essere interpretato come una convoluzione in $GF(2)$ ed il codificatore di
+        un codice convoluzionale $(n,k,L)$ si puó rappresentare come $n$ filtri lineari in $GF(2)$ in parallelo.
+        \subsubsection{Codificatore codice convoluzionale}
+            Un codificatore convoluzionale é costituito da uno shift register e da sommatori: 
+            \begin{itemize}
+                \item {
+                    \begin{sloppypar}
+                        Ad ogni periodo di clock (definito dall'intero $i$) nel codificatore entrano $k$ (tipicamente $1$) cifre binarie 
+                        rappresentate dal vettore ${u^{i} = [u^{i}_1,u^{i}_2,\dots,u^{i}_k]}$ ed escono $n$ bit raccolti nel vettore di uscita
+                        ${x^{i} = [x^{i}_1,x^{i}_2,\dots,x^{i}_n]}$
+                    \end{sloppypar}
+                }
+                \item {
+                    All'interno del codificatore $u^{(i)}$ é combinato con i precedenti $L-1$ vettori di ingresso $u^{(i-1)},u^{(i-2)},\dots,u^{(i-L+1)}$
+                    per formare l'uscita $x^{(i)}$
+                }
+            \end{itemize}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width = 4cm]{media/uwu.png}
+                \caption{Esempio codificatore}
+            \end{figure}
+            La principale differenza rispetto ai codici a blocco é costituita dal fatto che l'uscita attuale non dipende solo dalla parola attuale ma anche dalla 
+            storia passata contenuta nelle $L-1$ parole precedenti. La storia é composta da $L-1$ parole perché rimuoviamo quella in ingresso, il numero $L$ di parole
+            che contribuiscono all'uscita attuale é la \emph{constraint length} del codice. Il numero complessivo di celle di memoria del codificatore é $kL-1:(L-1)\times k$
+            per memorizzare la memoria del sistema piú $k-1$ per memorizzare i bit della parola attuale.
+        \subsubsection{Generatori di un codice convoluzionale}
+            I generatori definiscono completamente un codice convoluzionale, cosí come la matrice generatrice o il polinomio generatore definiscono
+            definiscono i codici a blocco e i codici ciclici. Per i codici convoluzionali 
+            \begin{itemize}
+                \item {
+                    A ciascuna delle $n$ uscite corrisponde generatore e a ciascun generatore corrisponde un sommatore in $GF(2)$.
+                }
+                \item {
+                    Ciascun generatore ha $kL$ elementi uno per ciascun ingresso che contribuisce all'uscita del codificatore.
+                }
+                \item {
+                    Quando un elemento é $1$ significa che il corrispondente ingresso é connesso al sommatore altrimenti se é $0$
+                    non cé connessione.
+                }
+            \end{itemize}
+            I vettori generatori rapresentano la risposta impulsiva degli $n$ filtri lineari in $GF(2)$. Assumendo che $k=1$ il 
+            generatore per il bit $m-esimo$ é $g_m = [g^{(0)}_m,g^{(1)}_m,\dots,g^{(L-1)}_m]$ e l'$m-esimo$ bit di uscita $x^{(i)}_m$ 
+            si ottiene con 
+            \[
+                x_m^{(i)} = \sum_{\ell = 0}^{L-1} g_m^{(\ell)}u^{(i-\ell)}  
+            \]
+            \begin{sloppypar}
+                l'uscita $m-esima$ é la convoluzione discreta in $GF(2)$ tra i vettori ${[u^{(i)},u^{(i-1)},\dots,u^{(i-L+1)}]}$ e 
+                $g_m$ da cui il nome di \emph{codice convoluzionale}.
+            \end{sloppypar}
+            \paragraph{Esempio generatore:}
+            \paragraph{Esempio generatore - Diagramma a Blocchi:}
+        \subsubsection{Rappresentazione come macchina a stati}
+        \subsubsection{Diagramma di Stato}
+            metti le cose che sono nella slide dopo l'esempio e gli apppunti 
+            \paragraph{Esempio generatore - Diagramma di stato:}
+        \subsubsection{Diagramma a traliccio}
+            \paragraph{Esempio generatore - Diagramma di stato:}
+        \subsubsection{Distanza colonna}
+        \subsubsection{Distanza libera}
+        
 
 
 

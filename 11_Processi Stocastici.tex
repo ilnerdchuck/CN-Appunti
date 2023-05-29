@@ -45,7 +45,7 @@
                 \centering
                 \includegraphics[width = 8cm]{media/autocorrelazione stocastica.png}
             \end{figure}
-    \subsection{Sitemi Stazionari in Senso Lato (SSL)}
+    \subsection{Sitemi Stazionari in Senso Lato (SSL)}\label{Sitemi Stazionari in Senso Lato (SSL)}
         Un processo stocastico $X_{(t)}$ si dice Stazionario in Senso Lato (SSL) se:
         \begin{itemize}
             \item {Il valore medio del processo $X_{(t)}$ é costante $\forall t$:
@@ -120,7 +120,7 @@
                     R_{Y(t_1,t_2)} &= R_{X(\tau)}\otimes h_{(\tau)} \otimes h_{(-\tau)} \nonumber \\
                                     &= \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} h_{(\tau_1)}h_{(\tau_2)} R_{XX(\tau+\tau_1-\tau_2)} d\tau_1d\tau_2\nonumber
                 \end{align}    
-        \subsubsection{Densitá di potenza spettrale}
+        \subsubsection{Densitá di potenza spettrale}\label{Densita di potenza spettrale}
             Supponiamo di voler caratterizzare l'output di $Y_{(t)}$ usando il dominio della frequenza:
             \[
                 \mathbb{E}[Y_{(t)}^2] = \int_{-\infty}^{\infty} \left|H_{(f)}\right|^2 S_{XX(f)} df  
@@ -384,7 +384,7 @@
             \[
                 x_{[k]} = x_{(t=kT)} = s_{[k]}+w_{[k]}    
             \]
-            Cosa succede al rumore? MA POSSO CAMBIARE SPETTRO E TCF NE GRAFO?
+            Cosa succede al rumore?
             Nel dominio della frequenza lo spettro di rumore filtrato,$w_{[k]}$, é  una somma di delta di dirac ho quindi $S_{w(f)} = rect\left(\frac{f}{2B}\right)$
             trasformadola nel dominio del tempo, cio;e calcolando la sua autocorrelazione per $ATCF[S_{w(f)}] = R_{w(\tau)}$ ottengo $R_{w(\tau)} = 2B\tau sinc(2B\tau)$,
             campionandola conrispetto alla banda del filtro $B$ in $\frac{k}{2B}$ la $sinc$ é sempre $0$ rendendo le variabili del rumore Gaussiano statisticamente 
@@ -418,10 +418,12 @@
                 \end{axis}
                 \end{tikzpicture}
             \end{figure}
-            per questo il modello $Y = S + n \sim \mathcal{N} (0,\sigma^2)$ é giusto per approssimare il rumore.
-
-
-
+            per questo il modello $Y = S + n \sim \mathcal{N} (0,\sigma^2)$ é giusto per approssimare il rumore. Calcoliamone il valor medio e varianza:
+            \begin{gather}
+                w_{(t)} \sim \mathcal{N}(0,\sigma^2_w)  \nonumber \\
+                \sigma^2_w = \mathbb{E}[X^2]-\mu_w = \mathbb{E}[X^2] = R_{w(0)} = N_0B\nonumber
+            \end{gather}
+            Ne segue che piú la banda é elevata piú rumore entra nel sistema.            
 
 
 
