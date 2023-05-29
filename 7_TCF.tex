@@ -71,7 +71,7 @@
         \begin{align}
             x_{(t)} \overunderset{TCF}{ATCF}{\leftrightharpoons}  X_{(f)}\nonumber \hspace{0.3cm} X_{(f)} \in \mathbb{C}
         \end{align}
-        Essendo $X_k$ un numero complesso puó essere rappresentato in forma polare: 
+        Essendo $X_{(f)}$ un numero complesso puó essere rappresentato in forma polare: 
         \[
             X_{(f)} = |X_{(f)}|e^{\angle X_{(f)}}  
         \]
@@ -328,7 +328,7 @@
 
         \subsubsection{Dualitá}\label{Dualita}
             $Ip: x_{(t)} \overunderset{TCF}{ATCF}{\leftrightharpoons} X_{(f)}$\\        
-            $Th: X_{(t)} \overunderset{TCF}{ATCF}{\leftrightharpoons} x_{(-f)}$ 
+            $Th: X_{(t)} \overunderset{TCF}{ATCF}{\leftrightharpoons} x_{(-f)}$ \\
             Dimostrazione:
             \begin{align}
                 X_{(f)} & = \int_{-\infty}^{\infty} x_{(t)} e^{-j2\pi ft} dt = Sost. \begin{cases}
@@ -356,7 +356,10 @@
                 }
 
         \subsubsection{Ritardo}\label{Ritardo}
-            $Ip: x_{(t)} \overunderset{TCF}{ATCF}{\leftrightharpoons} X_{(f)},\ y_{(t)} = x_{(t-to)}$\\        
+            $Ip: \begin{cases}
+                x_{(t)} \overunderset{TCF}{ATCF}{\leftrightharpoons} X_{(f)} \nonumber \\
+                y_{(t)} = x_{(t-to)} \nonumber
+            \end{cases}$\\
             $Th: Y_{(f)} \overunderset{TCF}{ATCF}{\leftrightharpoons} y_{(t)} = X_{(f)}e^{-j2\pi ft_0}$\\ 
             Dimostrazione:
             \begin{align}
@@ -729,7 +732,7 @@
             \end{align}
         \subsubsection{Calcolo del prodotto di convoluzione}\label{Calcolo del prodotto di convoluzione}
         \[
-            x_{(t)} \otimes  y_{(t)} = \int_{-\infty}^{\infty} x_{(\tau)}y_{(t-\tau)} d\tau \hspace{1cm} y_{(-\alpha)}\ e^\prime\ y_{(\alpha)}\ ruotato 
+            x_{(t)} \otimes  y_{(t)} = \int_{-\infty}^{\infty} x_{(\tau)}y_{(t-\tau)} d\tau \hspace{1cm} y_{(-\tau)}\ e^\prime\ y_{(\tau)}\ ruotato 
         \]
         Facciamo un esempio con 2 $rect$:\\
 
@@ -1699,12 +1702,12 @@
                         $x_{(t)}\delta_{(t-t_0)} dt = x_{(t_0)}\delta_{(t-t_0)}  $
                     }\label{PD4}
                     \item {
-                        $x_{(t)} \otimes \delta_{(t)} = x_{(t)}$
+                        $x_{(t)} \otimes \delta_{(t)} = x_{(t)}$\\
                         Dimostrazione:
                         \[x_{(t)} \otimes \delta_{(t)} = \int_{-\infty}^{\infty}x_{(\tau)}\delta_{(t-\tau)} d\tau \overset{\ref{PD3}}{\Rightarrow} \int_{-\infty}^{\infty}x_{(\tau)}\delta_{(\tau-t)} d\tau = x_{(t)}\]
                     }\label{PD5}
                     \item {
-                        $x_{(t)} \otimes \delta_{(t-t_0)} = x_{(t-t_0)}$
+                        $x_{(t)} \otimes \delta_{(t-t_0)} = x_{(t-t_0)}$\\
                         Dimostrazione:
                         \[x_{(t)} \otimes \delta_{(t-t_0)} = \int_{-\infty}^{\infty}x_{(\tau)}\delta_{(t-t_0-\tau)} d\tau \overset{\ref{PD3}}{\Rightarrow} \int_{-\infty}^{\infty}x_{(\tau)}\delta_{(\tau-(t-t_0))} d\tau = x_{(t-t_0)}\]
                     }\label{PD6}

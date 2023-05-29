@@ -250,7 +250,7 @@
                 }
                 \item {
                     \begin{sloppypar}
-                        Se due eventi $A$ e $B$ non sono disgiunti allora: ${P[A \cup B]= P[A] + P[B] -  P[A\cap B]}$
+                        Se due eventi $A$ e $B$ non sono disgiunti allora: ${P[A \cup B]= P[A] + P[B] -  P[A\cap B]}$\\
                         Dimostrazione:
                     \end{sloppypar}
                 }
@@ -706,7 +706,7 @@
                 f_{Z (z)} = \int_{-\infty}^{\infty}f_{X (x)}f_{Y (z-y)} dx =  f_{X (x)} \otimes f_{Y (y)}
             \]
             La somma di due variabili aleatoria indipendeti e continue é la convoluzione delle funzioni di densitá di probabilitá.    
-            Dimostrazione: TO DO, guarda il libro bro
+            Dimostrazione: (To DO: sul libro)
             \begin{figure}[H]
                 \centering
                 \subfloat[$f_{X(x)}$]{
@@ -809,7 +809,8 @@
                 \begin{itemize}
                     \item {\label{linearita expectation} Linearitá - Linearity: $\mathbb{E}[Z] = \mathbb{E}[X+Y]  = \mathbb{E}[X] +\mathbb{E}[Y]$.}
                     \item {\label{Indipendenza statistica}Indipendenza Statistica - Statistical Indipendence:$\mathbb{E}[Z] = \mathbb{E}[XY] = \mathbb{E}[X] \mathbb{E}[Y]$ 
-                    se $X$ e $Y$ sono statisticamente indipendenti.Dimostrazione:
+                    se $X$ e $Y$ sono statisticamente indipendenti.\\
+                    Dimostrazione:
                     \begin{align}
                         \mathbb{E}[XY] &= \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} xy f_{X,Y (x,y)} dxdy \overset{Indipendenza}{=} \int_{-\infty}^{\infty}\int_{-\infty}^{\infty} xy f_{X (x)}f_{Y (y)} dxdy \nonumber \\
                                        &= E[X]E[Y] \nonumber
@@ -877,7 +878,6 @@
             \[
                 P[|X-\mu_X|\geq \mathcal{E}]\leq \frac{\sigma^2_X}{\mathcal{E}^2}
             \]
-            cosa é sto robo
             \paragraph{Deviazione Standard:} $\sigma_X = \sqrt[2]{\sigma^2_X}$ si dice Deviazione Standard
         \subsubsection{Covarianza - Covariance}
             Siano $X$ e $Y$ due variabili aleatorie, si definisce covarianza:
@@ -929,15 +929,17 @@
             \paragraph{Propietá:}\label{propieta distr gaussiana}
             \begin{itemize}
                 \item {Definita unicamente da valore medio di $X$ e la varianza $\mathcal{N}(\mu_X,\sigma_X^2)$.}
-                \item {La propietá di Gaussianitá é preservata dalle trasformazioni lineari. $X \sim \mathcal{N}(\mu_X,\sigma_X^2): Y = \alpha X+\beta$, calcoliamo come variano 
+                \item {\begin{sloppypar}
+                    La propietá di Gaussianitá é preservata dalle trasformazioni lineari. ${X \sim \mathcal{N}(\mu_X,\sigma_X^2): Y = \alpha X+\beta}$, calcoliamo come variano 
                     valor medio e varianza:
+                \end{sloppypar}
                     \begin{itemize}
-                        \item {
+                        \item {Valor medio:
                             \[
                                 \mathbb{E}[Y] = \mu_Y = \mathbb{E}[\alpha X+\beta]  \overset{\ref{linearita expectation}}{=} \alpha \mathbb{E}[X] + \beta
                             \]
                         }
-                        \item {
+                        \item {Varianza:
                             \begin{align}
                                 \sigma_Y^2  &= \mathbb{E}[Y^2] -\mathbb{E}[Y]^2 =\mathbb{E}[(\alpha X + \beta)^2] -(\alpha \mathbb{E}[X] + \beta)^2 \nonumber \\
                                             &= \mathbb{E}[\alpha^2 X^2 + \beta^2 +2\alpha\beta X] -(\alpha^2 \mathbb{E}[X]^2 + \beta^2 +2\alpha\beta\mathbb{E}[X])\nonumber \\
@@ -952,7 +954,7 @@
                     Gaussiana, con:
                         \begin{itemize}
                             \item {$\mathbb{E}[Z] = \mathbb{E}[X] +\mathbb{E}[Y] $}
-                            \item {$var[Z] = var[X] +var[Y] $ check se é giusto}
+                            \item {$var[Z] = var[X] +var[Y] $}
                         \end{itemize}}
             \end{itemize}
             \paragraph{Distribuzione Gaussiana Standard}
@@ -1086,9 +1088,11 @@
                 \item {$Q_{(-\infty)} = 1$}
                 \item {$Q_{(0)} = \frac{1}{2}$}
             \end{itemize}
+            utilizziamo la tavola della funzione $Q$
             \begin{figure}[H]
                 \centering
                 \includegraphics[width = 8cm]{media/grafo funzione q.png}
+                \caption{Grafico $Q_{(x)}$}
             \end{figure}
         \subsubsection{Teorema del Limite Centrale - Central Limit Theorem}\label{Teorema del Limite Centrale - Central Limit Theorem}
             Siano $X_1,\dots,X_n$ una sequenza di variabili aleatorie indipendenti e identicamente distribuite con valore medio $\mu$ e varianza $\sigma$:

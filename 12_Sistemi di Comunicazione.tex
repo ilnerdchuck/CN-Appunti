@@ -2098,11 +2098,173 @@
                 Q_{(t)} = \sum_{i}b_ig_{T(t-iT)}\nonumber
             \end{gather}
             in cui $g_{T(t)}$ é l'impulso di trasmissione, $T$ é l'intervallo di segnalazione,
-            $\{a_i\}$ e $\{b_i\}$
+            $\{a_i\}$ e $\{b_i\}$ sono i simboli di modulazione, ottenuti dal mappaggio di bit del codice $\{d_n\}$.
+            La mappa ha cardinalitá $M$ ed é di tipo bidimensionale, nel senso che ad ogni stringa di $log_2(M)$ bit di codice
+            fa corrispondere una coppia $(a_i,b_i)$ disponibili nell'alafabeto impiegato. $M$ é il numero possibile di coppie $(a_i,b_i)$ 
+            disponibili nell'alfabeto. Nel caso di mappe bidimensionali l'alfabeto é costituito da punti $(a_i,b_i)$ nel iano cartesiano,
+            ed é detto \emph{costellazione}. Un esempio di costellazione quaternaria é mostrata nella figura seguente
+            \begin{figure}[H]
+                \centering
+                \includegraphics*[width = 8cm]{media/uwu.png}
+                \caption{Costellazione quaternaria}
+            \end{figure}
         \subsubsection{Trasmettitore - QUAM}
-            \paragraph{Inviluppo complesso}{
-
-            }
+            Il trasmettitore usa un modulatore $I/Q$ come illustrato di seguito, dove $g_{T(t)}$ é un impulso a radice di coseno rialzato 
+            come quello impiegato in un sistema PAM.
+            \begin{figure}[H]
+                \centering
+                \includegraphics*[width = 8cm]{media/uwu.png}
+                \caption{Trasmettitore QUAM}
+            \end{figure}
+            L'inviluppo complesso del segnale trasmesso é espresso da
+            \[
+                \tilde{s}_{(t)} = I_{(t)} +jQ_{(t)} = \sum_{i}c_ig_{T(t-iT)}
+            \]
+            avendo definito i simboli complessi come 
+            \[
+                c_i = a_i+jb_i    
+            \]
+            e si vede che $\tilde{s}_{(t)}$ é in pratica un segnale PAM con simboli complessi. L'equivalente in banda base del trasmettitore é 
+            \begin{figure}[H]
+                \centering
+                \includegraphics*[width = 8cm]{media/uwu.png}
+                \caption{Equivalente in Banda Base}
+            \end{figure}
+        \subsubsection{Densitá spettrale di potenza - QUAM}
+            Per il calcolo della densitá spettrale di potenza del segnale $s_{T(t)}$, si ricorda che essa é legata a quella dell'inviluppo
+            complesso $\tilde{s}_{(t)}$ dalla relazione
+            \[
+                S_{s(f)} = \frac{1}{4}\left[S_{\tilde{s}{(f-f_0)}}+ S_{\tilde{s}{(-f-f_0)}}\right]    
+            \]
+            per cui é sufficiente calcolare la densitá spettrale di potenza $S_{\tilde{s}(f)}$. Ammettiamo che la sequenza dei 
+            simboli $\{c_i\}$ sia stazionaria in senso lato con valore medio 
+            \[
+                \eta_c=\mathbb{E}[c_i]    
+            \] 
+            e funzione di autocorrelazione
+            \[
+                R_{c(m)} = \mathbb{E}[c_{i+m}c^\ast_i]    
+            \]
+            la densitá spettrale di potenza di $\tilde{s}_{T(t)}$ é la trasformata di Fourier di $R_{\tilde{s}{(f-f_0)}}$ ed é espressa da
+            \[
+                S_{\tilde{s}{(f)}} = \frac{1}{T} f_{c(f)}\left|G_{T(f)}\right|^2    
+            \]
+            dove 
+            \[
+                f_{c(f)} = \sum_{m}R_{c(m)}e^{-j2\pi fmT}
+            \]
+            é la densitá spettrale di potenza dei simboli complessi $\{c_i\}$. La potenza di $s_{T(t)}$ é quindi esprimibile come
+            \[
+                P_s=\frac{1}{2T} \int_{-\infty}^{\infty} f_{c(f)} \left|G_{T(f)}\right|^2 df
+            \]
+            Poiché $g_{T(t)}$ é un impulso tipicamente a radice di coseno rialzato, la banda di $\tilde{s}_{T(t)}$ é 
+            \[
+                B_{\tilde{s}}=\frac{1+\alpha}{2T}    
+            \]
+            la banda del segnale trasmesso $s_{T(t)}$ 
+            \[
+                B_{T}=2B_{\tilde{s}} =\frac{1+\alpha}{T}
+            \]
+            e l'efficenza spettrale del sistema risulta 
+            \[
+                \eta_{sp} = \frac{R_d}{B_T} = \frac{log_2(M)}{1+\alpha} 
+            \]
+            avendo tenuto conto che $R_d = \frac{log_2(M)}{T}$. Si osservi come l'efficenza spettrale del sistema aumenti all'aumentare 
+            della cardinalitá $M$ della costellazione.
         \subsubsection{Ricevitore - QUAM}
-            
-
+            Supponiamo che il canale sia non distorcente ed aggiunga solo rumore termico. In tale ipotesi, il segnale ricevuto 
+            é espresso da
+            \[
+                r_{(t)} = s_{T(t)}+w_{(t)}    
+            \]
+            con $w_{(t)}$ rumore Gaussiano bianco avente densitá spettrale di potenza $\frac{N_0}{2}$. Il ricevitore ha la
+            struttura mostrata in figura seguente 
+            \begin{figure}[H]
+                \centering
+                \includegraphics*[width = 8cm]{media/uwu.png}
+                \caption{Ricevitore QUAM}
+            \end{figure}            
+            Il segnale ricevuto viene inviato a un filtro passa-banda(\ref{Filtro Passa Banda di banda B - Band Pass Filter (BP)})
+            con frequenza centrale $f_0$ e tale da non distorcere il segnale utile. Esso serve a selezionare il segnale utile e ad 
+            eleminare il rumore fuori banda. Dopo la demodulazione $I/Q$, il segnale passa attraverso il filtro di ricezione $g_{R(t)}$,
+            tipicamente a radice di coseno rialzato, che sostituisce il passa-basso presente nel demodulatore di $I/Q$. I segnali 
+            $x_{c(t)}$ e $x_{s(t)}$ in uscita dal filtro di ricezione sono espressi da 
+            \begin{gather}
+                x_{c(t)} = \sum_{i}a_ig_{(t-iT)}+n_{c(t)}\nonumber \\
+                x_{s(t)} = \sum_{i}b_ig_{(t-iT)}+n_{s(t)}\nonumber
+            \end{gather}
+            dove $g_{(t)} = g_{(T(t))}\otimes g_{(R(t))}$ é un impulso a coseno rialzato, mentre $n_{c(t)}$ e $n_{s(t)}$ sono 
+            processi di rumore Gaussiano, a media nulla e a densitá spettrale di potenza
+            \[
+                S_{n_c(f)} = S_{n_s(f)} = N_0\left|G_{R(f)}\right|^2   
+            \]
+            Qualora il filtro passa-banda sia simmetrico intorno a $f_0$ i processi $n_{c(t)}$ e $n_{s(t)}$ sono anche incorrelati, e quindi 
+            indipendenti essendo congiuntamente Gaussiani. Dopo il campionatore abbimo i campioni $x_{c[k]}$ e $x_{s[k]}$ espressi da 
+            \begin{gather}
+                x_{c[k]} = a_[k]+n_{c[k]}\nonumber \\
+                x_{s[k]} = b_[k]+n_{s[k]}\nonumber
+            \end{gather}
+            dove si é tenuto conto che $g_{(t)}$ sia un impulso di Nyquist. Le variabili aleatorie $n_{c[k]}$ e $n_{s[k]}$ sono 
+            Gaussiane, a media nulla con varianza 
+            \[
+                \sigma^2 = N_0\int_{-\infty}^{\infty}\left|G_{R(f)}\right|^2df= N_0g_{RCR(0)} = N_0
+            \]
+            l'equivalente in banda base del ricevitore é 
+            \begin{figure}[H]
+                \centering
+                \includegraphics*[width = 8cm]{media/uwu.png}
+                \caption{Equivalente ricevitore in banda base}
+            \end{figure}
+            dove
+            \begin{gather}
+                \tilde{x}_{[k]} = c_{[k]}+\tilde{n}_{[k]} \nonumber \\
+                \tilde{n}_{[k]} = n_{c[k]}+jn_{s[k]} \nonumber 
+            \end{gather}
+    \subsection{Modulazione Amplitude Shift Keyring - ASK}
+        In questo tipo di modulazione, i simboli $b_i$ sono posti a zero, risolta quindi $Q_{(t)} = 0$. 
+        Il segnale trasmesso risulta 
+        \[
+            s_{T(t)} = I_{(t)}\cos(\omega_0 t)
+        \]
+        dove $I_{(t)}$ é un segnale PAM
+        \[
+            I_{(t)} = \sum_{i}a_ig_{T(t-iT)}    
+        \]
+        con simboli $\{a_i\}$ appartenenti all'alfabeto M-ario $\mathcal{A} = \{\pm 1, \pm 3,\dots,\pm (M-1)\}$. Pertanto 
+        il segnale ASK non é altro che un segnale PAM traslato in frequenza mediante modulazione classica. Lo schema trasmettitore 
+        é riportato in figura 
+        \begin{figure}[H]
+            \centering
+            \includegraphics*[width = 8cm]{media/uwu.png}
+            \caption{Trasmettitore ASK}
+        \end{figure}        
+        e si vede che é composto solo dal ramo relativo a $I_{(t)}$. Nel caso di simboli indipendenti ed equiprobabili, la densitá 
+        spettrale di potenza dell'impulso complesso é 
+        \[
+            S_{\tilde{s}(f)} = \frac{M^2-1}{3T}\left|G_{T(f)}\right|^2
+        \]
+        e l'energia media per simbolo trasmesso é 
+        \begin{align}
+            E_s &= \frac{1}{2}T\int_{-\infty}^{\infty}S_{\tilde{s}(f)}df\nonumber \\
+                &= \frac{M^2-1}{6}E_{g_T}\nonumber
+        \end{align}
+        essendo $E_{g_T}$ l'energia di $g_{T(t)}$. Qualora $g_{T(t)}$ sia un impulso a radice di coseno rialzato, l'efficenza spettrale
+        del sistema ASK é 
+        \[
+            \eta_{sp} = \frac{log_2(M)}{1+\alpha}    
+        \]
+        ed é la metá di quella del corrispondente segnale PAM trasmesso in banda base. Il ricevitore é costituito da un demodulatore seguito da 
+        un ricevitore per segnali PAM, secondo quanto riportato nella figura seguente
+        \begin{figure}[H]
+            \centering
+            \includegraphics*[width = 8cm]{media/uwu.png}
+            \caption{Ricevitore ASK}
+        \end{figure}
+        Ricordando che il guadagno di demodulazione é pari a $1$, é facile capire che le prestazioni in termini di SER e BER per un sistema ASK
+        M-ario coincidono con quelle di un sistema PAM. In particolare continua a valere che aumentando la cardinalitá $M$ dell'alfabeto 
+        si ha una diminuzione dell'efficenza energetica a favore di un aumento in quella spettrale, a paritá di $M$ l'efficenza 
+        spettrale del sistema ASK é la metá di quella del corrispondente sistema PAM. 
+    \subsection{Modulazione Quadrature Amplitude Modulation - QUAM}
+    \subsection{Modulazione Phase Shift Keyring - PSK}
+        \subsubsection{Prestazioni di un sistema PSK}
+    

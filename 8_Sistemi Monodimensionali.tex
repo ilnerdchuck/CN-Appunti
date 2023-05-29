@@ -67,7 +67,7 @@
             }\label{SM Memoria}
         \end{itemize}
     \subsection{Propietá dei Sistemi Lineari Stazionari (SLS)}
-        Sono sistemi che godono delle propietá di Linearitá \ref{SM Linearita} e di Stazionarietá \ref*{SM Stazionarieta}:
+        Sono sistemi LTI che godono delle propietá di Linearitá \ref{SM Linearita} e di Stazionarietá \ref*{SM Stazionarieta}:
         \begin{figure}[H]
             \centering 
             \begin{tikzpicture}[
@@ -123,7 +123,7 @@
                 Utilizzando un impulso di Dirac e le sue propietá, ma l'impulso di dirac é difficile da realizzare. 
             }
             \item {
-                Calcolo $H_{(f)}$ mandanndo in ingresso un segnale del quale sia nota la sua risposta e calcolo il rapporto uscita/ingresso 
+                Calcolo $H_{(f)}$ mandando in ingresso un segnale del quale sia nota la sua risposta e calcolo il rapporto uscita/ingresso 
                 $H_{(f)} = \frac{Y_{(f)}}{X_{(f)}}$
             }
             \item {
@@ -332,8 +332,7 @@
                           &\leq M\left|\int_{-\infty}^{\infty}h_{(t-\alpha)} d\alpha \right| <K\nonumber
             \end{align}
             Se l'ingresso $y<M$ allora lo é anche l'uscita. Ne deriva la C.S(Condizione Sufficiente): Assoluta integrabilitá della $h_{(t)}$ \index{Assoluta integrabilitá $h_{(t)}$},
-            se il sistema é bounded anche l'integrale deve esserlo.RICONTROLLA
-            TROVA L CONDIZIONE NECESSARIA SUL LIBRO.
+            se il sistema é bounded anche l'integrale deve esserlo.(To DO: cercare la condizione necessara sul libro)
     \subsection{Filtri Ideali}
         \paragraph{Banda di un segnale} É la porzione di spettro calcolata sul semiasse positivo delle
         frequenze dove lo spettro é diverso da zero.
@@ -448,8 +447,7 @@
             
             Otteniamo la Frequenza di taglio \index{Frequenza di taglio}$f_T$ all'ampiezza di $-3db$, in questo caso $f_T = 10$, alla quale
             il filtro "taglia" o meglio riduce tutte le ampiezze in ingresso verso lo 0.
-
-            RIGUARDA SUL LIBRO FORMULA PER IL CALCOLO DI 1/2 PER IL MODULO DI Hf e le formule di risposta dei circuiti, mhh la fase?
+            (To DO: controllare sul libro la formula per il calcolo di Hf)
             \begin{figure}[H]
                 \centering
                 \begin{tikzpicture}

@@ -202,7 +202,7 @@
                                 height=5cm
                                 ]
                                 \addplot [const plot,black,dotted] coordinates{(-4,1)(4,1)};
-                                \addplot+ [blue, thick, ycomb, samples at = {-1,1}] {1};
+                                \addplot+ [blue, thick,mark = triangle*, ycomb, samples at = {-1,1}] {1};
                                 \end{axis}
                             \end{tikzpicture}
                         }
@@ -225,8 +225,8 @@
                                     width=6.5cm,
                                     height=5cm
                                 ]
-                                \addplot+ [blue, thick,const plot] coordinates{(-1,1/2*pi)(-1,0)};
-                                \addplot+ [blue, thick,const plot] coordinates{(1,-1/2*pi)(1,0)};
+                                \addplot+ [blue, thick,mark = square*,const plot] coordinates{(-1,1/2*pi)(-1,0)};
+                                \addplot+ [blue, thick,mark = square*,const plot] coordinates{(1,-1/2*pi)(1,0)};
 
                                 \addplot [black, dotted,const plot] coordinates{(-3,-1/2*pi)(3,-1/2*pi)};
                                 \addplot [black, dotted,const plot] coordinates{(-3,1/2*pi)(3,1/2*pi)};
@@ -367,10 +367,10 @@
                     \caption{Spettro treno di $A\hspace{0.1cm}rect\left(\frac{t}{T}\right)$}
                     \label{fig:Spettro treno di rect}
                 \end{figure}  
-            Ora appizza matlab e fa esempi di un segnale e uno di riostruzione dello stesso(script di matlab presenti nel teams):
+            Ora appizza matlab e fa esempi di un segnale e uno di ricostruzione dello stesso(script di matlab presenti nel teams):
             \begin{itemize}
-                \item Se un segnale varia molto rapidamente nel tempo ha componenti frequenziali piú alte $\rightarrow$ copre piú spettro(espansione spettrale) $T_0 \uparrow$
-                \item Se un segnale varia molto lentamente copre le basse fraquenze $ T_0 \downarrow$
+                \item Se un segnale varia molto rapidamente nel tempo ha componenti frequenziali piú alte $\rightarrow$ copre piú spettro(espansione spettrale) $T_0 \Downarrow$
+                \item Se un segnale varia molto lentamente copre le basse fraquenze $ T_0 \Uparrow$
             \end{itemize}
             Se non ho abbastanza passi K non posso campionare le alte frequenze e quindi non faccio ne un analisi completa del segnale né riesco a ricostruire perfettametne il segnale  
             Inoltre in $0$ dello spettro ho il Valor medio \ref{Valore medio} del segnale
