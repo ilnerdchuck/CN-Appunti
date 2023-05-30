@@ -1451,7 +1451,7 @@
                         \item {$n=15,\ {\color{red}\ell}=9,\ v=[{\color{red}000000}110001{\color{red}000}]$}
                     \end{itemize}
             \paragraph{Teorema:} Dato il codice ciclico $\mathcal{C}(k,n)$, con polinomio generatore $g_{(D)}$ e distanza 
-                minima $d_{min}$, tale che tutti i pattern di errore correggibili abbiano sequanza ciclica di almeno $k$ zeri,
+                minima $d_{min}$, tale che tutti i pattern di errore correggibili abbiano sequenza ciclica di almeno $k$ zeri,
                 ricevuto il vettore $y=x+e$ con $w_{(e)}\leq\left\lfloor \frac{d_{min}-1}{2}\right\rfloor$, l'algoritmo di decodifica a massima
                 verosomiglianza ;e composto dai seguenti passi:
                 \begin{itemize}
@@ -1535,38 +1535,289 @@
                 $g_m$ da cui il nome di \emph{codice convoluzionale}.
             \end{sloppypar}
             \paragraph{Esempio generatore:}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width = 8cm]{media/uwu.png}
+                \caption{Immagini generatori slide}
+            \end{figure}
+
             \paragraph{Esempio generatore - Diagramma a Blocchi:}
+            Consideriamo il codice con $k=1$ e $R=\frac{1}{2}$ con generatori $g_1 = [1,1,1] = 7_8$ e $g_2 = [1,0,1] = 5_8$.
+            La constraint length é $L=3$.
+            Le due uscite sono 
+            \begin{gather}
+                x_1^{(i)} = u_1^{(i)} + u_1^{(i-1)}+u_1^{(i-2)}\nonumber \\
+                x_2^{(i)} = u_1^{(i)} + u_1^{(i-2)}\nonumber
+            \end{gather}
+            il diagramma a blocchi del codificatore é 
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width = 8cm]{media/uwu.png}
+                \caption{Codificatore a blocchi}
+            \end{figure}
+            
         \subsubsection{Rappresentazione come macchina a stati}
+            Ad ogni istante di segnalazione l'uscita dal codificatore convoluzoinale dipende 
+            dall'ingresso attuale e dalla memoria. Le ultime $k(L-1)$ celle dello shift register memorizzano la 
+            storia passata del codificatore che é riassunta nel vettore di stato 
+            \[
+                \sigma = \left(u^{(i-1)},u^{(i-2),\dots, u^{(i-L+1)}}\right)  
+            \]
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width = 8cm]{media/uwu.png}
+                \caption{Status register}
+            \end{figure}
+            Il codificatore puó presentarsi come una macchina a stati finiti la cui evoluzione nel tempo
+            é descritta da equazioni di stato 
+            \begin{gather}
+                x^{(i)} = \delta\left(u^{(i)},\sigma^{(i)}\right)\nonumber \\
+                \sigma^{(i+1)} = \lambda\left(u^{(i)},\sigma^{(i)}\right)\nonumber 
+            \end{gather}
+            La prima é detta \emph{equazione di uscita}, la seconda equazione é detta \emph{equazione di transizione di stato}. 
+            Il numero di stati complessivo é $2^{k(L-1)}$ con celle di memoria pari a $k(L-1)$. Il funzionamento del
+            codificatore si puó esprimere come un diagramma di stato nel quale sono indicate le transizioni da uno stato all'atro sotto effetto dei 
+            diversi ingressi.
         \subsubsection{Diagramma di Stato}
+            Consideriamo il codice con $k=1$ e $R=\frac{1}{2}$ con generatori $g_1 = [1,1,1] = 7_8$ e $g_2 = [1,0,1] = 5_8$.
+            La constraint length é $L=3$. Il numero di stati é pari a $2^{3-1}=4$ ed il relativo diagramma di stato 
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width = 8cm]{media/uwu.png}
+                \caption{Diagramma di stato}
+            \end{figure}
+            Il diagramma di stato non ha un indicatore temporale. Introducendo un indicatore temporale il diagramma di stato si trasforma
+            nel \emph{diagramma a traliccio}, su cui é possibile seguire l'evoluzione degli stati e delle uscite del codificatore in seguito ad una 
+            determinata sequenza di vettori di ingresso. Partendo da un qualsiasi stato si puó raggiungere qualsiasi altro
+            stato del traliccio in un numero massimo di $L-1$ passi
+
             metti le cose che sono nella slide dopo l'esempio e gli apppunti 
-            \paragraph{Esempio generatore - Diagramma di stato:}
         \subsubsection{Diagramma a traliccio}
-            \paragraph{Esempio generatore - Diagramma di stato:}
+            Il diagramam a traliccio per il codice con $k=1$ e $R=\frac{1}{2}$ con generatori $g_1 = [1,1,1] = 7_8$ e $g_2 = [1,0,1] = 5_8$ é 
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width = 6cm]{media/uwu.png}
+                \caption{Diagramma a traliccio}
+            \end{figure}
+            Il diagramma a traliccio permette di osservare l'evoluzione del codificatore in risposta ad una determinata sequenza di ingresso.
+            Per esempio per il codice con $k=1$ e generatori $g_1 = 7_8$ e $g_2 = 5_8$ se $\sigma^{(0)} = 00$ e in ingresso si ha la 
+            sequenza $u^{(0)} = 0,u^{(1)} = 1,u^{(2)} = 1,u^{(3)} = 1$ il percorso sul traliccio sará  
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width = 6cm]{media/uwu.png}
+                \caption{Percorso con ingresso $u^{(0)} = 0,u^{(1)} = 1,u^{(2)} = 1,u^{(3)} = 1$}
+            \end{figure}
         \subsubsection{Distanza colonna}
+            Sia dato un codice convoluzionale $\mathcal{C}(n,k,L)$. Consideriamo $\mathcal{X}_\mathcal{C}(\ell,\sigma)$, l'insieme
+            di tutte le possibili sequenze che originano dallo stato $\sigma$ e hanno lunghezza pari a $\ell n$, ottenute cioé dopo 
+            $\ell$ passi sul traliccio. La \emph{distanza colonna} del codice $\mathcal{C}$ al passo $\ell$ é la minima distanza di Hamming
+            fra due sequenze $x$ e $x^\prime$ in $\mathcal{X}_\mathcal{C}(\ell,\sigma)$ che siano differenti nei primi $n$ bit, in corrispondenza
+            quindi della prima parola di uscita del codificatore 
+            \[
+                d_{c(\ell)} = \underset{\substack{x,x^\prime \in \mathcal{X}_\mathcal{C}(\ell,\sigma) \\ x^{(1)}\neq x^{\prime(1)} }}{min} d(x,x^\prime)  
+            \]
+            come nel caso del calcolo della $d_{min(\mathcal{C})}$ dei codici a blocco lineari, non fa nessuna differenza la particolare
+            sequenza di riferimento e quindi il calcolo della $d_{c(\ell)}$ si sceglie lo stato $\sigma$ in modo che una delle due 
+            sequenze sia il vettore di tutti zeri
         \subsubsection{Distanza libera}
-        
+            La distanza libera di un codice convoluzionale $\mathcal{C},d_{free}$ é il limite della distanza colonna per $\ell$ che tende 
+            all'infinito
+            \[
+                d_{free} = \lim_{x\rightarrow \infty} d_{c(\ell)}  
+            \]
+            In pratica la distanza libera coincide con la distanza colonna quando i due percorsi sul traliccio a massima distanza confluiscono.
+            La distanza libera, come la $d_{min}$ nei codici a blocco, é una misura della bontá del codice: tanto maggiore é la distanza libera 
+            tanto piú é difficile confondere due sequenze che originano dallo stesso stato.
+        \subsubsection{Strategia di decodifica a massima verosomiglianza}
+            Si consideri una trasmissione su $N$ intervalli di segnalazione. La trasmissione é codificata con il codice convoluzionale 
+            $\mathcal{X}_\mathcal{C}(\ell,\sigma)$, che ad ogni segnalazione associa $k$ bit di informazione a $n$ bit codificati. Sia 
+            $y$ la sequenza ricevuta di lunghezza $nN$ bit, la strategia di decodifica a massima verosomiglianza consiste nel trovare 
+            la sequenza $\hat{x}$ che, fra tutte le $2^{kN}$ possibili sequenze di tentativo $\tilde{x}$, massimizza la probabilitá 
+            condizionata $P[y|\tilde{x}]$
+            \[
+                \hat{x} = arg\ \underset{\tilde{x}}{max}P[y|\tilde{x}]   
+            \]
+            Poiché gli eventi di errore sono indipendenti da bit a bit é conveniente riscrivere la probabilitá condizionata come il 
+            prodotto delle probabilitá condizionata ottenute per ciascuna parola di codice trasmessa
+            \[
+                P[y|\tilde{x}] = \prod_{\ell=1}^{N}P\left[y^{(\ell)}|\tilde{x}\right] = \prod_{\ell=1}^{N}P\left[y^{(\ell)}|\tilde{x}^{(\ell)}\right]  
+            \]\label{eventi indipendenti}
+            Assumiamo che la probabilitá di ricevere un bit errato sia $p$
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width = 6cm]{media/uwu.png}
+                \caption{Sistema BSC}
+            \end{figure}
+            la probabilitá condizionata $P\left[y^{(\ell)}|\tilde{x}^{(\ell)}\right]$ si ottiene a partire dal calcolo della distanza di Hamming 
+            $\lambda^{(\ell)}_{\tilde{x}} = d_H(y^{(\ell)},\tilde{x}^{(\ell)})$, infatti per ogni bit diverso tra le due parole di assume che ci sia stato errore e quindi 
+            \[
+                P\left[y^{(\ell)}|\tilde{x}^{(\ell)}\right] = p^{\lambda^{(\ell)}_{\tilde{x}}}(1-p)^{n-\lambda^{(\ell)}_{\tilde{x}}} = (1-p)^n\left(\frac{p}{1-p}\right)^{\lambda^{(\ell)}_{\tilde{x}}}
+            \]
+            Poiché la funzione logaritmo é crescente la sequenza di tentativi che massimizza $P[y|\tilde{x}]$ che massimizza anche $log\left(\lambda^{(\ell)}_{\tilde{x}}\right)$.
+            Sostituendo la funzione \ref{eventi indipendenti} in quella appena calcolata e prendendone il logaritmo
+            \[
+                log\left(P\left[y^{(\ell)}|\tilde{x}^{(\ell)}\right]\right) =nNlog \left((1-p)^n\right) + log\left(\frac{p}{1-p}\right)\sum_{\ell=1}^{N}\lambda^{(\ell)}_{\tilde{x}}
+            \]
+            trascurando i termini ininfluenti e considerando che é lecito assumere $log\left(\frac{p}{1-p}\right)<0$ si ottiene la regola di decisione 
+            \[
+                \hat{x} = arg\ \underset{\tilde{x}}{max}P[y|\tilde{x}] = arg\ \underset{\tilde{x}}{min}\sum_{\ell=1}^{N}\lambda^{(\ell)}_{\tilde{x}}
+            \]
+            La strategia a massima verosomiglianza consiste nello scegliere la sequenza $\hat{x}$ che minimizza la distanza di Hamming dalla sequenza 
+            ricevuta 
+            \[
+                d_H(y,\hat{x}) = \sum_{\ell=1}^{N}\lambda^{(\ell)}_{\tilde{x}}
+            \]
+            osserviamo che la trasmissione dura $N$ intervalli di segnalazione, in cui ogni volta vengono inviati al codificatore $k$ bit, 
+            il numero di sequenza da considerare é $2^{kN}$. !! La complessitá della decodifica cresce esponenzialmente con $k$ e $N$.
+        \subsubsection{Algoritmo di Viterbi}
+            Consideriamo il codice  $\mathcal{C}(n,k,L)$ e assumiamo che si effettui uan trasmissione di $N$ parole di codice ciascuna composta da $n$
+            bit e che lo stato iniziale $\sigma^{(0)}$ e quello finale sia $\sigma^{(N)}$ del codificatore siano conosciuti anche al ricevitore.
+            Data la sequenza ricevuta $y$ di $nN$ bit, l'obbiettivo del decodificatore é individuare sul traliccio il percorso $\hat{x}$ piú breve
+            (a minima distanza di Hamming) che partendo da $\sigma^{(0)}$ arrivi a $\sigma^{(N)}$. La sequenza $\hat{x}$ deve minimizzare la metrica 
+            \[
+                d_H(y,\hat{x}) = \wedge(y,\hat{x}) = \sum_{\ell=1}^{N}\lambda^{(\ell)}_{\tilde{x}}    
+            \]
+            l'algoritmodi Viterbi permette di trovare il percorso piú breve su di un traliccio a bassa complessitá.
+            Definiamo:
+            \begin{itemize}
+                \item {Metrica di Ramo:$\sigma_j\rightarrow\sigma_k$ al passo $\ell$, a distanza di Hamming
+                    $\lambda^{(\ell)}= d_H(y^{(\ell)},\tilde{x}_{\sigma_j\rightarrow\sigma_k})$. La metrica é 
+                    calcolata come distanza tra la sequenza ricevuta al passo $\ell$ e l'uscita corrispondente
+                    alla transizione sul traliccio dallo stato $\sigma_j$e lo stato $\sigma_k$.
+                }
+                \item {Metrica Cumulata: al passo $f$ allo stato $\sigma_k$, la grandezza $\wedge_{x(\sigma_k)}^{(f)}$ ottenuta 
+                    sommando tutte le $f$ metriche di ramo calcolate su gli $f$ rami sul traliccio di un percorso $x$ che si fermi allo stato 
+                    $\sigma_k$ al passo $f$.
+                }
+            \end{itemize}
+            L'algoritmo di viterbi si basa sulla seguente intuizione:
+            \begin{itemize}
+                \item {Supponiamo che due diversi percorsi $x_1$ e $x_2$ confluiscano al passo $f$ nello stesso nodo $\sigma_k$
+                    sul traliccio e siano $\wedge_{x_1 (\sigma_k)}^{(f)}<\wedge_{x_2 (\sigma_k)}^{(f)}$ le metriche cumulate dei due
+                    percorsi calcolate al passo $f$.
+                }
+                \item {Supponiamo che al passo successivo $f+1$, i percorsi $x_1$ e $x_2$ seguano lo stesso
+                    ramo sul traliccio, ad esempio $\sigma_k\rightarrow\sigma_q$, in questo caso la metrica di ramo é la stessa per i due 
+                    percorsi $\lambda^{(f+1)}_{(\sigma_k,\sigma_q)}$. 
+                }
+                \item {Per le nuove metriche sará ancora $\wedge_{x_1 (\sigma_q)}^{(f+1)}<\wedge_{x_2 (\sigma_q)}^{(f+1)}$
+                    infatti si ha 
+                    \begin{align}
+                        \wedge_{x_1 (\sigma_q)}^{(f+1)} &= \wedge_{x_1 (\sigma_k)}^{(f)}+\lambda^{(f+1)}_{(\sigma_k,\sigma_q)} < \wedge_{x_2 (\sigma_k)}^{(f)}+\lambda^{(f+1)}_{(\sigma_k,\sigma_q)} \nonumber\\
+                                                        &= \wedge_{x_2 (\sigma_q)}^{(f+1)}\nonumber
+                    \end{align}
+                }
+            \end{itemize}
+            Generlizzando questa intuizione possiamo dire che:
+            \begin{enumerate}
+                \item {In un traliccio arrivto alla sua piena espansione ad ogni nuovo istante di segnalazione arrivano $2^k$ percorsi a ciascun nodo.}
+                \item {I valori delle metriche di ramo in uscita da un nodo sono uguali per tutti i percorsi che arrivano a quel nodo.}
+                \item {A paritá di percorso futuro, il percorso in ingresso al nodo con la metrica cumulata minore continuerá ad avere metrica cumulata piú bassa di tutti gli altri}
+                \item {Ai fini della minimizzazione della metrica cumulata complessiva ad ogni nodo si possono scartare i $2^{k-1}$ percorsi con la metrica cumulata 
+                    piú alta e conservare quello con la metrica cumulata minima
+                }
+                \item {l'unico percorso rimasto viene definito sopravvissuto}
+            \end{enumerate}
+            \paragraph{Esempio applicativo}
+            Consideriamo il codice convoluzionale con rate $R=\frac{1}{2}$ constraint length $L=3$ e generatori $g_1=7_8$ e $g_2=5_8$.
+            Assumiamo che la sequenza di $N=6$ bit informativi sia $u = [0,1,0,0,0,0]$ a cui corrisponde la sequenza codificata 
+            $x = [00,11,10,11,00,00]$ e supponiamo che la sequenza ricevura sia $y = [00,1{\color{red}1},10,11,00,00]$ in cui ho il secondo bit 
+            della seconda parola di codice errato. In un sistema reale, $N\gg 6, N= 6$ é solo a scopo illustrativo.
+            Le metriche di ramo sono indicate in rosso e quelle cumulate in nero. la trasmissione inizia nello stato $\sigma^{(0)}=[0,0]$ e
+            dopo $N=6$ segnalazioni torna nello stato $\sigma^{(N)}=[0,0]$.
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width = 6cm]{media/uwu.png}
+                \caption{Passi di Viterbi}
+            \end{figure}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width = 6cm]{media/uwu.png}
+                \caption{Passi di Viterbi}
+            \end{figure}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width = 6cm]{media/uwu.png}
+                \caption{Passi di Viterbi}
+            \end{figure}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width = 6cm]{media/uwu.png}
+                \caption{Passi di Viterbi}
+            \end{figure}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width = 6cm]{media/uwu.png}
+                \caption{Passi di Viterbi}
+            \end{figure}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width = 6cm]{media/uwu.png}
+                \caption{Passi di Viterbi}
+            \end{figure}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width = 6cm]{media/uwu.png}
+                \caption{Passi di Viterbi}
+            \end{figure}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width = 6cm]{media/uwu.png}
+                \caption{Passi di Viterbi}
+            \end{figure}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width = 6cm]{media/uwu.png}
+                \caption{Passi di Viterbi}
+            \end{figure}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width = 6cm]{media/uwu.png}
+                \caption{Passi di Viterbi}
+            \end{figure}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width = 6cm]{media/uwu.png}
+                \caption{Passi di Viterbi}
+            \end{figure}
+            La trasmissione inizia nello stato $[0,0]$ e dopo $N = 6$ segnalazioni torna nello stato $[0,0]$
+            Una volta identificato il percorso a distanza minima sul traliccio, identificare la sequenza $\hat{u}$
+            informativa é semplice: é sufficiente associare ad ogni transizione sul traliccio la sequenza di bit in ingresso corrispondente.
+            Nel nostro caso di ha $\hat{u} = [0,1,0,0,0,0]$, ció vuol dire che il decodificatore ha corretto l'errore introdotto dal canale.
+            \paragraph{Considerazioni}
+                A partire del momento in cui il traliccio ha raggiunto il suo pieno sviluppo, ad ogni passo l'algoritmo deve:
+                \begin{enumerate}
+                    \item {Calcolare le metriche di ramo per tutte le transizioni possibili}
+                    \item {Calcolare per ogni nodo le metriche cumulate dai percorsi in ingresso}
+                    \item {Per ogni nodo trovare il percorso sopravvissuto assoiato alla metrica cumulata minima}
+                \end{enumerate}
+                La complessitá dell'algoritmo di Viterbi cresce linearmente con la lunghezza della sequenza da 
+                decodificare e non esponenzialmente, come avviene con la ricerca esaustiva.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width = 6cm]{media/uwu.png}
+                    \caption{considerazione Passi di Viterbi}
+                \end{figure}
+                Osservando il traliccio al passo $\ell$, si trova che andando a ritroso di $D$ passi, i sopravvissuti
+                tendono a fondersi in un unico percorso. Poiché si é visto empiricamente che $D$ é una quantitá fissa
+                dell'ordine di $kL$ possiamo trarre le seguenti conclusioni:
+                \begin{enumerate}
+                    \item {Il decodificatore di Viterbi non deve necessariamente attendere di essere arrivato
+                        alla fine della segnalazione per produrre decisioni ma é sufficiente introdurre un ritardo di decodifica
+                        pari a $D$ e poi prendere decisioni di decodifica ad ogni nuovo istante di segnalazione   
+                    }
+                    \item {La parte comune dei sopravvissuti (quella su cui sono giá state prese le decisioni)
+                        non ha bisogno di essere memorizzata. É sufficiente memorizzare i sopravvissuti nell'ultimo tratto da 
+                        $\ell -D$ a $\ell$, questo riduce enormemente l'esigenza di memoria dell'algoritmo
+                    }
+                \end{enumerate}
+    \subsection{Prestazioni sistemi codificati}
+        \subsection{Codici a blocco}
+            \paragraph{Calcolo della probabilitá di errore sulle parole di codice}
+            \paragraph{Confronto delle prestazioni su sistemi codificati e non codificati}
+            \paragraph{Confronto delle prestazioni su sistemi codificati e non codificati}
+        \subsection{Codici convoluzionali}
+            \paragraph{Generatori per codici convoluzionali}
+            \paragraph{Puncturing per codici convoluzionali}
+            \paragraph{Bound per le prestazioni dei codici convoluzionali}
