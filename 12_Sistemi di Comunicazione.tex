@@ -2333,8 +2333,15 @@
             x_c\nonumber \\
             x_s\nonumber
         \end{gather}
-	    come si vede sul campione x_{c[k]} é presente l'interferenza del simbolo 
-        
+	    come si vede sul campione $x_{c[k]}$ é presente l'interferenza dovuta al simbolo $b_k$, mentre su $x_{x[k]}$ 
+        é presente l'interferenza dovuta al simbolo $a_k$. É quindi necessario effettuare una buona sincronizzazione,  
+        perché altrimenti sui campioni $x_{c[k]}$ e $x_{s[k]}$ avremo interferenza nonostante sia rispettata la condizione 
+        di Nyquist per l'annullamento dell'ISI. L'errore di fase $\phi$ ha l'effetto di ruotare il campione ricevuto 
+        $\tilde{x}_{[k]}$, con il rischio di portare $\tilde{x}_{[k]}$ fuori dalla zona di decisione relativa al simbolo 
+        trasmesso. In figura mostra le zone di decisione per una 4-QAM e 16-QAM
+
+
     \subsection{Modulazione Phase Shift Keyring - PSK}
+
         \subsubsection{Prestazioni di un sistema PSK}
     
