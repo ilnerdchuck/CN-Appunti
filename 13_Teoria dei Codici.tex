@@ -1815,9 +1815,115 @@
     \subsection{Prestazioni sistemi codificati}
         \subsection{Codici a blocco}
             \paragraph{Calcolo della probabilitá di errore sulle parole di codice}
+                Un codice a blocco $\mathcal{C}(k,n)$ con $d_{min}=2t+1$ é in grado di correggere fino a $t$ errori.
+                Una parola ricevuta $y=x+e$ é errata quando il canale introduce un numero di errori maggiore di $t$.
+                La probabilitá di errore si calcola
+                \[
+                    P_w(e)= P_r[w_{(e)}>t] = \sum_{j=t+1}^{n}\binom{n}{j}p^j(1-p)^{n-j}
+                \]
+                $P_w(e)$ puó essere limitato inferiormente dalla probabilitá dell'evento piu probabile: aver commesso $t+1$
+                errori
+                \[
+                    P_w(e) \simeq \binom{n}{t+1}p^{t+1}(1-p)^{n-(t+1)}
+                \]
+                mentre la $P_w(e)$ si riesce a calcolare con precisione, nel caso del calcolo della probabiltiá di errore 
+                su bit codificato si deve per forza ricorrere ad approssimazioni. Il numero di bit errati in $\hat{x}$ dopo la 
+                decodifica dipende dal vettore di errore $e$ e da come agisce la decodifica a sindrome, che in presenza di un numero 
+                di errori maggiore di $t$ aggiunge altri errori a quelli introdotti dal canale. La decodifca a sindrome restituisce
+                sempre una parola di codice, quindi ogni volta che al ricevitore c'é un errore nella decodifica i bit errati sono almeno
+                $d_{min}$ negli $n$ trasmessi. in questo caso la $P_b(e)$ si approssima a
+                \[
+                    P_b(e) \simeq\frac{d_{min}}{n}P_w(e)\simeq\frac{d_{min}}{n}\binom{n}{t+1}p^{t+1}(1-p)^{n-(t+1)}  
+                \] 
             \paragraph{Confronto delle prestazioni su sistemi codificati e non codificati}
-            \paragraph{Confronto delle prestazioni su sistemi codificati e non codificati}
+                La ridondanza introdotta dal codice comporta una maggiore spesa energetica, infatti si utilizzano $n$ bit codificati 
+                per trasmettere $k$ bit di informazione. Il budget energetico di $k$ bit viene distribuito su $n$ bit 
+                \[
+                    kE_b = nE_{b,c}\Rightarrow E_{b,c} = \frac{k}{n}E_b 
+                \]
+                la probabilitá di errore sul bit per una BPSK non codificata é 
+                \[
+                    p_b^{(BPSK)}(e) = Q_{\left(\sqrt{\frac{2E_b}{N_0}}\right)}  
+                \]
+                nel caso codificato bisogna considerare che la probabilitá di errrore $p$ dipende dal valore di SNR dei bit codificati
+                \[
+                    \frac{E_{b,c}}{N_0} = \frac{k}{n} \frac{E_b}{N_0}    
+                \]
+                la probabilitá $P_b(e)$ del codice va calcolata 
+                \[
+                    p = Q_{\left(\sqrt{\frac{2E_{b,c}}{N_0}}\right)} = Q_{\left(\sqrt{2\frac{k}{n}\frac{E_{b,c}}{N_0}}\right)} 
+                \]
+                In figura viene rappresentato il confronto delle prestazioni su canale Gaussiano di un sistema BPSK senza codifica
+                con le prestazioni di un sistema codificato con codice di Hamming con $m=3$ e $m=4$.
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width = 5cm]{media/uwu.png}
+                    \caption{Confronto dei sistemi}
+                \end{figure}
         \subsection{Codici convoluzionali}
             \paragraph{Generatori per codici convoluzionali}
+                La bontá di un codice convoluzionale dipende dalla sua $d_{free}$. La $d_{free}$ dipende
+                dai codici generatori, dal rate $R= \frac{k}{n}$ e dalla constraint length $L$. Tipicamente i 
+                codici convoluzionali hanno $k=1$ per limitare la complessitá di codificatore e decodificatore. 
+                Fissato $R$ e $L$ i generatori ottimi sono quelli che massimizzano la $d_{free}$ e possono essere trovati 
+                tramite una ricerca esaustiva fra tutte le possibili $\left(2^L\right)^n = 2^{nL}$ combinazioni.
+                \subparagraph*{Generatori ottimi per $R = \frac{1}{2}$}
+                    Generatori ottimi (in ottale) per codici convoluzionali a rate $R=\frac{1}{2}$ al variare 
+                    della constraint length $L$ e $d_{free}$ corrispondente.
+                    \begin{table}[H]
+                        \centering
+                        \begin{tabular}{cccc}
+                        \cline{1-4}
+                        Constraint length & \multicolumn{2}{l}{Generatori ottimi}& Distanza libera \\ \cline{1-4}
+                        $L$        & $g_1$ &  $g_2$  &$d_{free}$\\\cline{1-4}
+                        $3$ & $7$ &  $5$  &$5$\\
+                        $4$ & $17$ &  $15$  &$6$\\
+                        $5$ & $35$ &  $23$  &$7$\\
+                        $6$ & $75$ &  $53$  &$8$\\
+                        $7$ & $171$ &  $133$  &$10$\\
+                        $8$ & $371$ &  $247$  &$10$\\
+                        $9$ & $763$ &  $561$  &$12$\\ 
+                        $10$ & $1537$ &  $1131$  &$12$
+                        \end{tabular}
+                    \end{table}
             \paragraph{Puncturing per codici convoluzionali}
+                In teoria non c'é flessibilitá nella scelta del rate dei codici convoluzionali
+                che assume sempre valori del ripo $R=\frac{1}{n}$. In realtá la tecnica chiamata 
+                \emph{Puncturing} permette di costruire con codici con rate maggiori partendo da un codice
+                a rate $R=\frac{1}{n}$. Il puncturing consiste nel cancellare alcuni bit all'uscita del codificatore.
+                I bit vengono cancellati secondo un pattern preciso, espresso da una \emph{puncturing table}, condiviso
+                con il ricevitore, che quindi conosce esattamente la posizione dei bit cancellati. \\
+                Il trasmettitore e il ricevitore si accordano sui bit codificati da omettere attraverso la 
+                puncturing table, che contiene $n$ righe (una per bit in uscita) e $M$ colonne. La matrice 
+                contiene un certo numero $P$ di $1$ e un numero $P-nM$ di $0$. Dopo il puncturing il rate del codice
+                diventa
+                \[
+                    R^\prime = \frac{1}{n} \frac{nM}{P}=\frac{M}{P}  
+                \]
+                \subparagraph{Esempio:} $n=2,\ M=2,\ P=3,\ R=\frac{1}{3}$
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width = 4cm]{media/uwu.png}
+                        \caption{Esempio rate}
+                    \end{figure}
+                Tabella di puncturing per il codice convoluzionale a rate $R=\frac{1}{2}$, $L=7$ al variare della 
+                constraint length del rate $R=\frac{M}{P}$ in uscita e $d_{free}$ corrispondente.
+                Il puncturing ottimo é stato trovato con una ricerca esaustiva su tutti i possibili pattern 
+                \begin{table}[H]
+                    \centering
+                    \begin{tabular}{ccl}
+                    \cline{1-3}
+                    Rate $\frac{M}{P}$ & Puncturing matrix & $d_{free}$ \\ \cline{1-3}
+                    $\frac{1}{2}$ &  $\begin{bmatrix}1\\1\end{bmatrix}$ &$10$\\
+                    $\frac{2}{3}$ &  $\begin{bmatrix}11\\10\end{bmatrix}$ &$6$\\
+                    $\frac{3}{4}$ &  $\begin{bmatrix}101\\110\end{bmatrix}$ &$5$\\
+                    $\frac{5}{6}$ &  $\begin{bmatrix}10101\\11010\end{bmatrix}$ &$4$\\
+                    $\frac{7}{8}$ &  $\begin{bmatrix}1000101\\1111010\end{bmatrix}$ &$3$
+                    \end{tabular}
+                \end{table}
             \paragraph{Bound per le prestazioni dei codici convoluzionali}
+                Ad alti rapporti segnale/rumore si trova la seguente approssimazione: BPSK codificata con 
+                decodifica hard
+                \[
+                    P_e^{(b)} \simeq Q_{\left(\sqrt{2\frac{E_b}{N_0}\frac{R^\prime}{2}}\right)}  
+                \] 
