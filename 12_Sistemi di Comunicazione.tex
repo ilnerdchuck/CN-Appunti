@@ -2339,7 +2339,32 @@
         di Nyquist per l'annullamento dell'ISI. L'errore di fase $\phi$ ha l'effetto di ruotare il campione ricevuto 
         $\tilde{x}_{[k]}$, con il rischio di portare $\tilde{x}_{[k]}$ fuori dalla zona di decisione relativa al simbolo 
         trasmesso. In figura mostra le zone di decisione per una 4-QAM e 16-QAM
+        \begin{figure}[H]
+            \centering
+            \subfloat[4-QAM]{
+                \includegraphics*[width = 4cm]{media/uwu.png}
+            }
+            \hfill
+            \subfloat[16-QAM]{
+                \includegraphics*[width = 4cm]{media/uwu.png}
+            }
+        \end{figure}
+        per quanto riguarda la costellazione 4-QAM, le zone di decisione sono i 4 quadranti del piano complesso, mentre
+        la costellazione 16-QAM si ha una griglia di quadranti 4x4. La costellazione 16-QAM é piu sensibile all'errore 
+        di fase rispetto alla costellazione 4-QAM. Per portare un simbolo fuori dalla propria zona di decisione 
+        (in assenza di rumore) occorre una rotazione di $45^\circ$ per un sistema 4-QAM, mentre basta una rotazione di 
+        meno di $20^\circ$ per un sistema 16-QAM.
 
+        Nell'ipotesi di assenza di ISI e di perfetto sincronismo, le prestazioni di un sistema QAM in termini di BER 
+        sono perfettamente analoghe a quelli di un sistema PAM a $\sqrt{M}$ livelli che costituiscono il segnale QAM.
+        In presenza di codifica di GRAY, la BER é espressa approsimativamente da 
+        \[
+            BER \simeq \frac{4(\sqrt{M}-1)}{\sqrt{M}log_2(M)}Q_{\displaystyle \left(\sqrt{\frac{3log_2(M)}{M-1}\frac{E_d}{N_0}}\right)}  
+        \]
+        Possiamo pertanto concludere che il sistema QAM ha stessa efficenza energetica e stessa efficenza spettrale di due segnali PAM
+        a $\sqrt{M}$ livelli che siano trasmessi sul ramo $I_{(t)}$ e $Q_{(t)}$. Rispetto al sistema ASK, ha la stessa efficenza energetica,
+        ma efficenza spettrale doppia in quanto il segnale QAM é costituito da due segnali ASK modulati con frequenze portanti in 
+        quadratura e trasmessi sulla stessa banda.
 
     \subsection{Modulazione Phase Shift Keyring - PSK}
 
