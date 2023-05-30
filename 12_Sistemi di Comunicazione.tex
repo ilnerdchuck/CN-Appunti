@@ -2265,6 +2265,76 @@
         si ha una diminuzione dell'efficenza energetica a favore di un aumento in quella spettrale, a paritá di $M$ l'efficenza 
         spettrale del sistema ASK é la metá di quella del corrispondente sistema PAM. 
     \subsection{Modulazione Quadrature Amplitude Modulation - QAM}
+        In questo tipo di modulazione, la cardinalitá $M$ della costellazione é una potenza di $4$, e i simboli $\{a_i\}$ e $\{b_i\}$
+        vengono generati da due mappe PAM a $\sqrt{M}$ livelli che operano indipendentemente su bit diversi.
+        \begin{figure}[H]
+            \centering
+            \includegraphics*[width = 8cm]{media/uwu.png}
+            \caption{Modulatore QAM}
+        \end{figure}
+        \begin{sloppypar}
+            come possiamo vedere in figura i bit $\{d_n\}$ entrano in un convertitore Serie/Parallelo ($S/P$) che divide il flusso in 
+            due sottoflussi distinti. Ciascun sottoflusso entra in un mappatore PAM a $\sqrt{M}$ livelli con alfabeto
+            ${\mathcal{A} = \{\pm 1, \pm 3,\dots, \pm(\sqrt{M}-1)\}}$ da cui escono i simboli $\{a_i\}$ e $\{b_i\}$, che vengono poi usati per generare 
+            i segnali PAM $I_{(t)}$ e $Q_{(t)}$. Il segnale QUAM equivale a una coppia di segnali PAM con simboli indipendenti trasmessi 
+            contemporaneamente sul canale mediante due oscillazioni in quadratura. Nel caso di mappe PAM bianrie si ha un segnale 4-QUAM aventi
+            seguente costellazione
+        \end{sloppypar}
+        \begin{figure}[H]
+            \centering
+            \includegraphics*[width = 8cm]{media/uwu.png}
+            \caption{Costellazione QUAM}
+        \end{figure}
+        in cui a ciascun simbolo $c_i = a_i +jb_i$ é associata una coppia di bit. Se le mappe PAM sono quaternarie si ha un sistema 
+        16-QAM in cui 4 bit vengono mappati su di un simbolo complesso $c_i$, in tal caso la costellazione diventa la seguente
+        \begin{figure}[H]
+            \centering
+            \includegraphics*[width = 8cm]{media/uwu.png}
+            \caption{Costellazione 16-QAM}
+        \end{figure}
+        in caso di simboli indipendenti ed equiprobabili, la densitá spettrale di potenza dell'inviluppo complesso é 
+        \[
+            S_{\tilde{s}(f)} = \frac{C_2}{T}\left|G_{T(f)}\right|^2    
+        \]
+        dove 
+        \[
+            C_2 = \mathbb{E}[\left|c_i\right|^2] = \frac{2}{3}(M-1)    
+        \]
+        é la potenza media dei simboli trasmessi. Possiamo calcolare l'energia media per simbolo trasmesso
+        \[
+            E_s = \frac{1}{2}T\int_{-\infty}^{\infty}S_{\tilde{s}(f)} df = \frac{M-1}{3}E_{g_T}
+        \]
+        con $E_{g_T}$ energia di $g_{T(t)}$. Qualora $g_{T(t)}$ sia un impulso a radice di coseno rialzato, l'efficenza spettrale del 
+        sistema QAM diventa 
+        \[
+            \eta_{sp} = \frac{log_2(M)}{1+\alpha}  
+        \]
+        ed é uguale a quella di ciascuno dei segnali PAM presenti sul ramo $I_{(t)}$ e sul ramo $Q_{(t)}$ del trasmettitore.
+        Il ricevitore é costituito da un demodulatore $I/Q$ seguito da due ricevitori per segnali PAM
+        \begin{figure}[H]
+            \centering
+            \includegraphics*[width = 8cm]{media/uwu.png}
+            \caption{Ricevitore QAM}
+        \end{figure}
+        Come possiamo vedere la decisione non é presa sul simbolo complesso $c_k$, ma sui simboli $a_k$ e $b_k$ in modo 
+        indipendente mediante un decisore PAM a $\sqrt{M}$ livelli. Possiamo anche rappresentare il sistema nel suo
+        equivalente in banda base nel caso sia presente un errore di fase $\phi$ durante la demodulazione $I/Q$
+        \begin{figure}[H]
+            \centering
+            \includegraphics*[width = 8cm]{media/uwu.png}
+            \caption{Equivalente in banda base ricevitore QAM}
+        \end{figure}
+        In tal caso, assumendo l'assenza di ISI, il campione in uscita dal filtro di ricezione é 
+        \[
+            formula  
+        \]
+        con le componenti 
+        \begin{gather}
+            x_c\nonumber \\
+            x_s\nonumber
+        \end{gather}
+	    come si vede sul campione x_{c[k]} é presente l'interferenza del simbolo 
+        
     \subsection{Modulazione Phase Shift Keyring - PSK}
         \subsubsection{Prestazioni di un sistema PSK}
     
