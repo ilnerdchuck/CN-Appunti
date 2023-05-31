@@ -2074,7 +2074,7 @@
             \[
                 BER \simeq \frac{2(M-1)}{Mlog_2(M)}Q_{\displaystyle \left(\sqrt{\frac{6log_2(M)}{M^2-1}}\frac{E_d}{N_0}\right)}    
             \] 
-    \subsection{QUAM}
+    \subsection{QAM}
         É un sistema di comunicazione in {\color{red}banda passante} in cui il segnale trasmesso $s_{T(t)}$ ha densitá 
         spettrale di potenza di tipo passa-banda, centrate su una frequenza $f_0$ detta frequenza portante.
         \subsubsection{Inviluppo complessso}
@@ -2108,13 +2108,13 @@
                 \includegraphics*[width = 8cm]{media/uwu.png}
                 \caption{Costellazione quaternaria}
             \end{figure}
-        \subsubsection{Trasmettitore - QUAM}
+        \subsubsection{Trasmettitore - QAM}
             Il trasmettitore usa un modulatore $I/Q$ come illustrato di seguito, dove $g_{T(t)}$ é un impulso a radice di coseno rialzato 
             come quello impiegato in un sistema PAM.
             \begin{figure}[H]
                 \centering
                 \includegraphics*[width = 8cm]{media/uwu.png}
-                \caption{Trasmettitore QUAM}
+                \caption{Trasmettitore QAM}
             \end{figure}
             L'inviluppo complesso del segnale trasmesso é espresso da
             \[
@@ -2130,7 +2130,7 @@
                 \includegraphics*[width = 8cm]{media/uwu.png}
                 \caption{Equivalente in Banda Base}
             \end{figure}
-        \subsubsection{Densitá spettrale di potenza - QUAM}
+        \subsubsection{Densitá spettrale di potenza - QAM}
             Per il calcolo della densitá spettrale di potenza del segnale $s_{T(t)}$, si ricorda che essa é legata a quella dell'inviluppo
             complesso $\tilde{s}_{(t)}$ dalla relazione
             \[
@@ -2171,7 +2171,7 @@
             \]
             avendo tenuto conto che $R_d = \frac{log_2(M)}{T}$. Si osservi come l'efficenza spettrale del sistema aumenti all'aumentare 
             della cardinalitá $M$ della costellazione.
-        \subsubsection{Ricevitore - QUAM}
+        \subsubsection{Ricevitore - QAM}
             Supponiamo che il canale sia non distorcente ed aggiunga solo rumore termico. In tale ipotesi, il segnale ricevuto 
             é espresso da
             \[
@@ -2182,7 +2182,7 @@
             \begin{figure}[H]
                 \centering
                 \includegraphics*[width = 8cm]{media/uwu.png}
-                \caption{Ricevitore QUAM}
+                \caption{Ricevitore QAM}
             \end{figure}            
             Il segnale ricevuto viene inviato a un filtro passa-banda(\ref{Filtro Passa Banda di banda B - Band Pass Filter (BP)})
             con frequenza centrale $f_0$ e tale da non distorcere il segnale utile. Esso serve a selezionare il segnale utile e ad 
@@ -2276,14 +2276,14 @@
             come possiamo vedere in figura i bit $\{d_n\}$ entrano in un convertitore Serie/Parallelo ($S/P$) che divide il flusso in 
             due sottoflussi distinti. Ciascun sottoflusso entra in un mappatore PAM a $\sqrt{M}$ livelli con alfabeto
             ${\mathcal{A} = \{\pm 1, \pm 3,\dots, \pm(\sqrt{M}-1)\}}$ da cui escono i simboli $\{a_i\}$ e $\{b_i\}$, che vengono poi usati per generare 
-            i segnali PAM $I_{(t)}$ e $Q_{(t)}$. Il segnale QUAM equivale a una coppia di segnali PAM con simboli indipendenti trasmessi 
-            contemporaneamente sul canale mediante due oscillazioni in quadratura. Nel caso di mappe PAM bianrie si ha un segnale 4-QUAM aventi
+            i segnali PAM $I_{(t)}$ e $Q_{(t)}$. Il segnale QAM equivale a una coppia di segnali PAM con simboli indipendenti trasmessi 
+            contemporaneamente sul canale mediante due oscillazioni in quadratura. Nel caso di mappe PAM bianrie si ha un segnale 4-QAM aventi
             seguente costellazione
         \end{sloppypar}
         \begin{figure}[H]
             \centering
             \includegraphics*[width = 8cm]{media/uwu.png}
-            \caption{Costellazione QUAM}
+            \caption{Costellazione QAM}
         \end{figure}
         in cui a ciascun simbolo $c_i = a_i +jb_i$ é associata una coppia di bit. Se le mappe PAM sono quaternarie si ha un sistema 
         16-QAM in cui 4 bit vengono mappati su di un simbolo complesso $c_i$, in tal caso la costellazione diventa la seguente
