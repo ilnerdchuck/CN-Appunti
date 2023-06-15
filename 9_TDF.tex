@@ -7,11 +7,11 @@
             \angle \overline{X}_{(f)} \nonumber
         \end{cases} \text{é una funzione periodica di periodo }\frac{1}{T}\nonumber  
     \end{gather}
-    \subsubsection{Equazione di Analisi - $TDF$}
+    \subsubsection{Equazione di Analisi - $TDF$} \label{TDF}
         \[
             \overline{X}_{(f)} = \sum_{n=-\infty}^{\infty} x_{[nT]}e^{-j2\pi fnT}
         \]
-    \subsubsection{Equazione di Sintesi - $ATDF$}
+    \subsubsection{Equazione di Sintesi - $ATDF$} \label{ATDF}
         \[
             x_{[nT]} = \frac{1}{2\pi} \int_{2\pi} \overline{X}_{(f)}e^{-j2\pi fnT} df
         \]
@@ -180,7 +180,7 @@
             \caption{${\color{black} X_{(f)}}$,${\color{blue} X_{(f-\frac{k}{T})}}$,${\color{green} \overline{X}_{(f)} = \frac{1}{T}\sum_{k=-\infty}^{\infty}X_{(f-\frac{k}{T})}}$}
             \label{fig:relazione tdf tcf campionamento f sbagliata}
         \end{figure}
-        ho sovrepposizione delle copie di $X_{(f)}$ é il fenomeno di Aliasing: ho sovrapposizione di segnali che alterano il segnale originale. 
+        ho sovrapposizione delle copie di $X_{(f)}$ é il fenomeno di Aliasing: ho sovrapposizione di segnali che alterano il segnale originale. 
         In entrambi i casi ci troviamo in condizione di un segnale a banda limitata, nel tempo rappresenta un segnale illimitato.
         \paragraph{Dimensioniamo il $D/A$:}
         Partiamo dalla relazione di $\hat{x}$:
@@ -417,7 +417,7 @@
             \end{figure}
             l'interpolatore a seno cardinale non é causale: essendo delle $sinc$ a ogni campionamento, non posso conoscere il peso delle $sinc$ 
             dei valori della sequenza successivi. Se opero non Real Time (Virtuale), invece ho infiniti campioni a cui posso attingere: Risolvo entrambi i 
-            problemi troncando la $sinc$ e spostandola a dx, ma per troncarla sto moltiplicando una $sinc$ per una $rect$ nel tempo, passsando alla frequenza 
+            problemi troncando la $sinc$ e spostandola a dx, ma per troncarla sto moltiplicando una $sinc$ per una $rect$ nel tempo, passando alla frequenza 
             la funzione limitata nel tempo diventa illimitata in frequenza andando a influenzare anche le repliche successive.
 
 
@@ -433,8 +433,8 @@
             \item {Segnale a banda limitata}
             \item {Interpolatore dimensionato}
         \end{itemize}
-        Osservazioni: Se utilizzassi una filtro con durata $\frac{1}{T}>>2B$ prenderei tantissimi campioni che
-        non servono per ricostruire meglio il segnale: degli esempi di matlab possiamo vedere che ci basta anche solo un periodo uguale a $2B$.\\
+        Osservazioni: Se utilizzassi un filtro con durata $\frac{1}{T}>>2B$ prenderei tantissimi campioni che
+        non servono per ricostruire meglio il segnale: dagli esempi di matlab possiamo vedere che ci basta anche solo un periodo uguale a $2B$.\\
         Esempio:
         \[
             B = 10KHz,\ 2B = 20KHz,\ \text{Durata filtro} = 25KHz\ ho\ 5KHz\text{ di margine}

@@ -38,7 +38,7 @@
                 }
             \end{itemize}
         \subsubsection{Sigificato fisico dell'autocorrelazione}
-            La funzione di autocorrelazione ci fornisce la possibilitá di descrivere l'indipendenza di deu variabili aleatorie ottenute dal campionamento
+            La funzione di autocorrelazione ci fornisce la possibilitá di descrivere l'indipendenza di due variabili aleatorie ottenute dal campionamento
             del processo stocastico $X_{(t)}$ a tempi divesti. Piú il processo stocastico $X_{(t)}$ cambia nel tempo, piú rapidamente la funzione di autocorrelazione 
             scenderá dal suo massimo $R_{XX(0)}$
             \begin{figure}[H]
@@ -84,7 +84,7 @@
             \[
                 Y_{(t)} = X_{(t)} \otimes h_{(t)} = \int_{-\infty}^{\infty} X_{(\alpha)} h_{(t-\alpha)} d\alpha
             \]
-            Calcolaimone gli indici:
+            Calcoliamone gli indici:
             \begin{itemize}
                 \item {
                     Valore medio:
@@ -155,7 +155,7 @@
                 S_{Y(f)} &= TCF[R_X] =TCF[ R_{X(\tau)}\otimes h_{(\tau)} \otimes h_{(-\tau)}] \overset{\ref{Conv. Distributiva}}{=}  S_{X(f)}H_{(f)} H_{(-f)}    \nonumber \\
                          &\overset{\ref{Simmetria Hermitiana}}{=} S_{X(f)}H_{(f)} H^\ast_{(f)} =  S_{X(f)}|H_{(f)}|^2\nonumber
             \end{align}
-            trovo che la denitá spettrale di potenza di $Y_{(t)}$ é la densitá spettrale di potenza di $X_{(t)}$ per il modulo quadro della
+            trovo che la densitá spettrale di potenza di $Y_{(t)}$ é la densitá spettrale di potenza di $X_{(t)}$ per il modulo quadro della
             risposta del filtro e la sua misura é in watt per hertz ($W/Hz$).
     \subsection{Processo Gaussiano}
         Un processo $Y_{(t)}$ é detto processo Gaussiano se la variabile aleatoria $Y$ é una variabile aleatoria a distribuzione Gaussiana:
@@ -386,8 +386,8 @@
             \]
             Cosa succede al rumore?
             Nel dominio della frequenza lo spettro di rumore filtrato,$w_{[k]}$, é  una somma di delta di dirac ho quindi $S_{w(f)} = rect\left(\frac{f}{2B}\right)$
-            trasformadola nel dominio del tempo, cio;e calcolando la sua autocorrelazione per $ATCF[S_{w(f)}] = R_{w(\tau)}$ ottengo $R_{w(\tau)} = 2B\tau sinc(2B\tau)$,
-            campionandola conrispetto alla banda del filtro $B$ in $\frac{k}{2B}$ la $sinc$ é sempre $0$ rendendo le variabili del rumore Gaussiano statisticamente 
+            trasformadola nel dominio del tempo, cioé calcolando la sua autocorrelazione per $ATCF[S_{w(f)}] = R_{w(\tau)}$ ottengo $R_{w(\tau)} = 2B\tau sinc(2B\tau)$,
+            campionandola rispetto alla banda del filtro $B$ in $\frac{k}{2B}$ la $sinc$ é sempre $0$ rendendo le variabili del rumore Gaussiano statisticamente 
             indipendenti a valore medio nullo e varianza $N_0B$. 
             \[
                 \eval*{R_{w(\tau)}}_{\tau=kT} =\eval*{\mathbb{E}[w_{(t)}w_{(t-\tau)}]}_{\tau=kT} \overset{T=\frac{1}{2B}}{=} 0  

@@ -138,14 +138,14 @@
             Esistono vari tipi di modelli matematici:
             \begin{itemize}
                 \item {Deterministico: se esiste certezza e ne possiamo calcolare il valore a ogni istante del tempo (Es. sistemi lineari tempo invarianti)}
-                \item {Probabilistico (Aleatorio): se non conosciamo la certezza con cui l'evento puó verificaris ma ne possiamo dare una valutazione probabilistica.}
+                \item {Probabilistico (Aleatorio): se non conosciamo la certezza con cui l'evento puó verificarsi ma ne possiamo dare una valutazione probabilistica.}
             \end{itemize}
-            Introduciam oquind i
+            Introduciamo quindi
     \subsection{Algebra dei Set (insiemi)}
         Un set é una collezione di elementi che condividono un criterio oggettivo per decidere se appartengono al set o no. Prendiamo come set $A$ e come 
         elemento del set $A$ $x$:
         \begin{itemize}
-            \item {Se l'elemento appartiene al set: $x\in A$, veceversa se non appartiene:$x\notin A$}
+            \item {Se l'elemento appartiene al set: $x\in A$, viceversa se non appartiene:$x\notin A$}
             \item {Se un set é vuoto: $A=\{\emptyset\}=\emptyset$}
             \item {Se $x_1, \dots, x_n$ sono elementi di $A$ allora:
                 \[
@@ -317,7 +317,7 @@
                              &= 0.99\dotproduct 0.02 + 0.01 \dotproduct 0.098 = 0.0296 \cong 0.03  \nonumber       
                 \end{align}
 
-                Ricordiamo che $P[A^c] = 1-P[A]$, nel nostro caso il problema ri risolve facilmente applicando il Th della probabilitá totale su due set disgiunti 
+                Ricordiamo che $P[A^c] = 1-P[A]$, nel nostro caso il problema si risolve facilmente applicando il Th della probabilitá totale su due set disgiunti 
                 $A$ e $A^c$. Possiamo quindi calcolare la probabilitá condizionata:
                 \[
                     P[A|B] = \frac{P[A]P[B|A]}{P[B]} = \frac{0.02 \dotproduct 0.99}{0.03} = 0.66    
@@ -337,7 +337,7 @@
                 \[
                     \overset{\ref{Regola di Bayes}}{\Rightarrow} P[A|B] = \frac{P[A]P[B|A]}{P[B]}    
                 \]                           
-                $P[B|A]$ non é altro che il probabilitá di corretta ricezione ($P[c]$), posso calcolarla dalla probabilitá di errore:
+                $P[B|A]$ non é altro che la probabilitá di corretta ricezione ($P[c]$), posso calcolarla dalla probabilitá di errore:
                 \begin{gather}
                     P[e] = P[B^c|A] = P[B|A^c] = 0.01, \text{ probabilitá di errore} \nonumber \\
                     P[c] = P[B|A] = P[B^c|A^c] = 1-P[e]= 0.99, \text{ probabilitá di corretta ricezione}\nonumber 
@@ -361,9 +361,9 @@
                 \end{figure}
                 Definiamo per prima cosa i set del problema:
                 \begin{itemize}
-                    \item {$A = \{ pesco una pallina bianca da pluto\}$}
-                    \item {$B = \{ pesco una pallina bianca da pippo\}$}
-                    \item {$B^c = C = \{ pesco una pallina nera da pippo\}$}
+                    \item {$A = \{ \text{pesco una pallina bianca da pluto}\}$}
+                    \item {$B = \{ \text{pesco una pallina bianca da pippo}\}$}
+                    \item {$B^c = C = \{ \text{pesco una pallina nera da pippo}\}$}
                 \end{itemize}
                 Calcoliamo $P[A]$:
                 \begin{align}
@@ -496,7 +496,7 @@
             \includegraphics[width = 5cm]{media/insieme variabili aleatorie.png}
             \caption{Esperimento $\rightarrow$ Intervallo $\rightarrow$ Probabilitá dell'Intervallo}
         \end{figure}
-        Una variabile aleatoria puó essere continua o discreta. Le variabil ialeatorie si indicano con le lettere
+        Una variabile aleatoria puó essere continua o discreta. Le variabili aleatorie si indicano con le lettere
         maiuscole
         \subsubsection{Funzioni di Distribuzione - Distribution Functions}
             Considera la variabile aleatoria $X$ e la probabilitá dell'evento $X\leq x$, per convenzione si indica con $P[X\leq x]$,
@@ -627,7 +627,7 @@
                     \label{Distribuzione Uniforme}
                 \end{figure}
         \subsubsection{Funzione Probabilitá di massa - Probability Mass Function (pmf)}
-            Consideriamo il caso di una variabile aleatoria discreta $X$, la quale puó assumere un numero rinito o infinito di valori. La funzione 
+            Consideriamo il caso di una variabile aleatoria discreta $X$, la quale puó assumere un numero finito o infinito di valori. La funzione 
             distribuzione $F_{X(x)}$ si applica anche alle variabili discrete, ma non é differenziabile per come l'abbiamo definita. Definiamo 
             la funzione probabilitá di massa $p_{X(x)}$:
             \[
@@ -676,7 +676,7 @@
             Consideriamo due variabili aleatorie $X$ e $Y$:
             \begin{itemize}
                 \item {
-                    La funzione distribuzione $F_{X,Y (x,y)}$ é la probabilitá che $X$ sia minore o uguae a un valore specifico $x$ e che $Y$
+                    La funzione distribuzione $F_{X,Y (x,y)}$ é la probabilitá che $X$ sia minore o uguale a un valore specifico $x$ e che $Y$
                     sia minore o uguale a un'altro valore specifico $y$:
                     \[
                         F_{X,Y (x,y)} = P[X\leq x,Y\leq y]    
@@ -705,7 +705,7 @@
             \[
                 f_{Z (z)} = \int_{-\infty}^{\infty}f_{X (x)}f_{Y (z-y)} dx =  f_{X (x)} \otimes f_{Y (y)}
             \]
-            La somma di due variabili aleatoria indipendeti e continue é la convoluzione delle funzioni di densitá di probabilitá.    
+            La somma di due variabili aleatorie indipendenti e continue é la convoluzione delle funzioni di densitá di probabilitá.    
             Dimostrazione: (To DO: sul libro)
             \begin{figure}[H]
                 \centering
@@ -928,7 +928,7 @@
             \]
             \paragraph{Propietá:}\label{propieta distr gaussiana}
             \begin{itemize}
-                \item {Definita unicamente da valore medio di $X$ e la varianza $\mathcal{N}(\mu_X,\sigma_X^2)$.}
+                \item {Definita unicamente dal valore medio di $X$ e la varianza $\mathcal{N}(\mu_X,\sigma_X^2)$.}
                 \item {\begin{sloppypar}
                     La propietá di Gaussianitá é preservata dalle trasformazioni lineari. ${X \sim \mathcal{N}(\mu_X,\sigma_X^2): Y = \alpha X+\beta}$, calcoliamo come variano 
                     valor medio e varianza:
@@ -950,7 +950,7 @@
                             la costante $\beta$ non influisce la varianza.  
                         }
                     \end{itemize}}
-                \item {La somma $Z = X+Y$ di variabili aleatorie Gaussiane indipendenti é anche essa na variabile aleatoria
+                \item {La somma $Z = X+Y$ di variabili aleatorie Gaussiane indipendenti é anche essa una variabile aleatoria
                     Gaussiana, con:
                         \begin{itemize}
                             \item {$\mathbb{E}[Z] = \mathbb{E}[X] +\mathbb{E}[Y] $}
@@ -994,7 +994,7 @@
                     }
                     \caption{Distribuzione Gaussiana Standard}
                 \end{figure}
-                Osservazioni: la varianza permette di modificare la spanciatura della gaussiana, mentre il valor medio shifta sull'asse x la gaussiana.
+                Osservazioni: la varianza permette di modificare la spanciatura della gaussiana, mentre il valor medio shifta sull'asse $x$ la gaussiana.
 
                 Posso utilizzare la forma standard della gaussiana e le trasformazioni lineari per rappresentare qualsiasi altro tipo di gaussiana:
                 \[
@@ -1347,8 +1347,8 @@
                         \end{tikzpicture}
                     \caption{Simboli complessi}
                 \end{figure}
-                basiamo la decisione del simbolo ricevuto rispetto al quadrante in cui cade, la probabiltiá di errore del 
-                sistema $P_e$ é costituita dalla probabiltiá di scegliere un quadrante del simbolo diverso da quello inviato:
+                basiamo la decisione del simbolo ricevuto rispetto al quadrante in cui cade, la probabilitá di errore del 
+                sistema $P_e$ é costituita dalla probabilitá di scegliere un quadrante del simbolo diverso da quello inviato:
                 \[
                     P_e = \sum_{k=1}^{4} P_r[\hat{S} \neq S_k | S_k]P[S_k]
                 \]

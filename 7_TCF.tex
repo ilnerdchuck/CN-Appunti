@@ -171,7 +171,7 @@
             \[
                 A\hspace{0.1cm}rect\left(\frac{t}{T}\right) \overunderset{TCF}{ATCF}{\leftrightharpoons} AT sinc(fT)
             \]
-            La sinc si annulla in $\frac{k}{T},\ k\in \mathbb{Z}$. Notiamo anche come la funzione di partenza sia reale e pari la TCF rispetti \ref{Parita}(si?):
+            La sinc si annulla in $\frac{k}{T},\ k\in \mathbb{Z}$. Notiamo anche come la funzione di partenza sia reale e pari la TCF rispetti \ref{Parita}:
             \begin{figure}[H]
                 \centering
 
@@ -1609,7 +1609,7 @@
                 Nel nostro caso potremmo scegliere un $T\backsimeq 1ns \backsimeq 10^{-9}$ per rispettare i limiti imposti dall'esercizio.
                 Ma analizzando l'intervallo frequenziale della $TCF$ della funzione rettangolo, una $sinc(x)$, il nostro segnale ha componenti
                 frequenziali significative nell'ordine dei GHz, $\frac{1}{T}= \frac{1}{10^{-9}} = 1GHz$. I segnali nell'ordine dei GHz oltrepassano con facilitá
-                gli ostacoli, basti vedere le bande di funzionamento dei cellulari e il Wi-Fi. Si utilizzano segnali con l'ordine di cetinaia se non igliaia di Hz, 
+                gli ostacoli, basti vedere le bande di funzionamento dei cellulari e il Wi-Fi. Si utilizzano segnali con l'ordine di cetinaia se non migliaia di Hz, 
                 possiamo vedere come la lunghezza d'onda del segnale giochi un ruolo fondamentale:
                 
                 \begin{gather}
@@ -1772,7 +1772,7 @@
                     \label{fig:TCF cos}
                 \end{figure}
                 Praticamente modulo una costante.\\
-                Osservazione: Non sono i coefficenti $X_{(k)}$, qui le delta sono funzioni nella $TSF$ sono numeri complessi.\\
+                Osservazione: Non sono i coefficienti $X_{(k)}$, qui le delta sono funzioni nella $TSF$ sono numeri complessi.\\
                 \\
                 Caso con $x_{(t)} = \sin(2\pi f_0t)$
                 \[
@@ -1821,7 +1821,7 @@
 
             \subsection{Relazione tra $TSF$ e $TCF$}
                 \subsubsection{$TCF$ di un segnale periodico generico}\label{TCF di un segnale periodico generico}\index{TCF di un segnale periodico generico}
-                    Dato un generico segnale $y_{(t)}$ posso sempre scriverlo come periodicizzazione di un segnale apreiodico $x_{(t)}$:
+                    Dato un generico segnale $y_{(t)}$ posso sempre scriverlo come periodicizzazione di un segnale aperiodico $x_{(t)}$:
                     $x_{(t)} \overunderset{TCF}{ATCF}{\rightleftharpoons} X_{(f)}$\\
                     
                     \[
@@ -1948,7 +1948,7 @@
                         \end{align}
                         Si potrebbe fare sottraendo un triangolo a una rect?
                     }
-                \subsubsection{Relazione tra i coefficenti $X_k$ e $X_{(f)}$}
+                \subsubsection{Relazione tra i coefficienti $X_k$ e $X_{(f)}$}
                     \[
                         y_{(t)} = y_{(t-kT_0)} \Rightarrow \text{Periodico in }T_0 = \overunderset{+\infty}{n = -\infty}{\sum}x_{(t-nT_0)} 
                     \]

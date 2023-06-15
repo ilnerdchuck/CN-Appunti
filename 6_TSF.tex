@@ -92,14 +92,14 @@
             \subsection{Linearitá}
             \subsection{Simmetria Hermitiana}
         
-        \subsection{Calcolo dei coefficenti $X_k$ per segnali noti}
+        \subsection{Calcolo dei coefficienti $X_k$ per segnali noti}
             \subsubsection{$A\cos(2\pi f_0 t)$}
                 $x_{(t)}=A\cos(2\pi f_0 t), \hspace{0.3cm} A>0$
                 \begin{align}
                     ATSF[x_{(t)}] & = ATSF[A\cos(2\pi f_0 t)] \nonumber \\
                         & = ATSF[\frac{A}{2} (e^{j2\pi kf_0t} + e^{-j2\pi kf_0t})] \nonumber 
                 \end{align}
-                Utilizzando la composizione dei coefficenti $X_k$:
+                Utilizzando la composizione dei coefficienti $X_k$:
                 \begin{align}
                     x_{(t)} & =\ldots  + X_{-1} e^{j2\pi (-1)f_0t} + X_{0} + X_{1} e^{-j2\pi (1) f_0t} + \ldots \nonumber\\
                     Abbiamo:& \nonumber 
@@ -160,7 +160,7 @@
                     ATSF[x_{(t)}] & = ATSF[A\sin(2\pi f_0 t)] \nonumber \\
                         & = ATSF[\frac{A}{2} (e^{j2\pi kf_0t} - e^{-j2\pi kf_0t})] \nonumber 
                 \end{align}
-                Utilizzando la composizione dei coefficenti $X_k$:
+                Utilizzando la composizione dei coefficienti $X_k$:
                 \begin{align}
                     x_{(t)} & =\ldots  + X_{-1} e^{j2\pi (-1)f_0t} - X_{0} + X_{1} e^{-j2\pi (1) f_0t} + \ldots \nonumber\\
                     Abbiamo:& \nonumber 
@@ -372,5 +372,5 @@
                 \item Se un segnale varia molto rapidamente nel tempo ha componenti frequenziali piú alte $\rightarrow$ copre piú spettro(espansione spettrale) $T_0 \Downarrow$
                 \item Se un segnale varia molto lentamente copre le basse fraquenze $ T_0 \Uparrow$
             \end{itemize}
-            Se non ho abbastanza passi K non posso campionare le alte frequenze e quindi non faccio ne un analisi completa del segnale né riesco a ricostruire perfettametne il segnale  
-            Inoltre in $0$ dello spettro ho il Valor medio \ref{Valore medio} del segnale
+            Se non ho abbastanza passi K non posso campionare le alte frequenze e quindi non faccio ne un analisi completa del segnale né riesco a ricostruire perfettamente il segnale  
+            Inoltre in $0$ dello spettro ho il Valor medio \ref{Valore medio} del segnale.

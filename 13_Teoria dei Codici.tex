@@ -1244,11 +1244,11 @@
                         &= u_{(D)}(D^n-1) = D^nu_{(D)}-u_{(D)}\nonumber
             \end{align}
             Poiché $u_{(D)}$ é un polinomio di grado massimo $k-1$ e $D^nu_{(D)}$ é d igrado minimo $n$,
-            sappiamo per certo che, se $x_{(D)}$ é in $\mathcal{C}(k,n)$, gli $n-k$ coefficenti con indici
+            sappiamo per certo che, se $x_{(D)}$ é in $\mathcal{C}(k,n)$, gli $n-k$ coefficienti con indici
             $k,k+1,\dots,n-1$ del polinomio $v_{(D)}$ devono essere $0$.
 
             Poiché é $v_{(D)} = x_{(D)}h_{(D)}$ il coefficente m-esimo del polinomio $v_{(D)}$ si 
-            ottiene come la somma di tutti i coefficenti che moltiplicano $D^m$
+            ottiene come la somma di tutti i coefficienti che moltiplicano $D^m$
             \[
                 D^m = v_m = x_0h_m+x_1h{m-1}+\dots+x_mh_0 = \sum_{j=0}^{n-1}x_{(j)}h_{(m-j)}  
             \] 
@@ -1276,7 +1276,7 @@
             \]
             \paragraph{Esempio calcolo di matrice generatrice e controllo di paritá}
                 Dato il codice ciclico $\mathcal{C}(k=4,n=7)$ con polinomio generatore $g_{(D)} = 1+D+D^3$
-                con coefficenti
+                con coefficienti
                 \[
                     g_0=1,\ g_1=1,\ g_2=0,\ g_3=1,\
                 \]
@@ -1303,7 +1303,7 @@
                 \[
                     h_{(D)} = \frac{D^n-1}{g_{(D)}} = 1+D+D^2+D^4
                 \]
-                i coefficenti del polinomio sono 
+                i coefficienti del polinomio sono 
                 \[
                     h_0=1,\ h_1=1,\ h_2=1,\ h_3=0,\ h_4=1,\
                 \]
@@ -1522,7 +1522,7 @@
                     non cé connessione.
                 }
             \end{itemize}
-            I vettori generatori rapresentano la risposta impulsiva degli $n$ filtri lineari in $GF(2)$. Assumendo che $k=1$ il 
+            I vettori generatori rappresentano la risposta impulsiva degli $n$ filtri lineari in $GF(2)$. Assumendo che $k=1$ il 
             generatore per il bit $m-esimo$ é $g_m = [g^{(0)}_m,g^{(1)}_m,\dots,g^{(L-1)}_m]$ e l'$m-esimo$ bit di uscita $x^{(i)}_m$ 
             si ottiene con 
             \[
@@ -1824,7 +1824,7 @@
                 \[
                     P_w(e) \simeq \binom{n}{t+1}p^{t+1}(1-p)^{n-(t+1)}
                 \]
-                mentre la $P_w(e)$ si riesce a calcolare con precisione, nel caso del calcolo della probabiltiá di errore 
+                mentre la $P_w(e)$ si riesce a calcolare con precisione, nel caso del calcolo della probabilitá di errore 
                 su bit codificato si deve per forza ricorrere ad approssimazioni. Il numero di bit errati in $\hat{x}$ dopo la 
                 decodifica dipende dal vettore di errore $e$ e da come agisce la decodifica a sindrome, che in presenza di un numero 
                 di errori maggiore di $t$ aggiunge altri errori a quelli introdotti dal canale. La decodifca a sindrome restituisce

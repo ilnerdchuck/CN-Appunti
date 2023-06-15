@@ -17,7 +17,7 @@
     \label{sistema di comunicazione numerico}
     \end{figure}
     Dove all'interno del sistema sono racchiusi il Trasmettitore ($Tx$), il canale di trasmissione ($c$) e il Ricevitore ($Rx$).
-    il sistema prende in ingresso dei bit, o un segnale analogico opportunamente nuemrizzato, e li trasmette su di un canale numerico inviandoli ad un ricevitore.
+    il sistema prende in ingresso dei bit, o un segnale analogico opportunamente numerizzato, e li trasmette su di un canale numerico inviandoli ad un ricevitore.
     Analizziamo la parte di trasmissione:
     \begin{figure}[H]
         \centering
@@ -63,7 +63,7 @@
                     \draw[->] (block) --node[above]{$\{d_n$\}} node[midway]{\tiny$/$} node[below]{\scriptsize$n,R_d$} (output);
                 \end{tikzpicture}    
             \end{figure}
-            $R_b = \frac{1}{T_b}$ é il Bit Rate a cui i bit sono generati in ingresso mentre, $R_d = \frac{1}{T_d}$ é il Bit Rate di uscita. Volendo trvare la relazione tra ingresso e uscita:
+            $R_b = \frac{1}{T_b}$ é il Bit Rate a cui i bit sono generati in ingresso mentre, $R_d = \frac{1}{T_d}$ é il Bit Rate di uscita. Volendo trovare la relazione tra ingresso e uscita:
             \[
                 kT_b = nT_d \Rightarrow \frac{R_b}{R_d} = \frac{k}{n}     
             \] 
@@ -159,7 +159,7 @@
             \[
                 f_s = \frac{R_d}{Q} = \frac{R_d}{log_{2}(M)} 
             \] 
-            devo caricare velocemente i simboli in ingresso al mappatore per poter completare la sequenza da mappare. Si nota anhe come
+            devo caricare velocemente i simboli in ingresso al mappatore per poter completare la sequenza da mappare. Si nota anche come
             all'aumentare della cardinalitá $M$ la velocitá diminuisca, la sua misura é fatta in $BAUD = \frac{simboli}{sec}$
         }
         \item {Mod: Modulatore converte la sequenza dei simboli $\{a_i\}$ in un segnale analogico $s_{T(t)}$ in modo tale da poter essere trasmesso  
@@ -580,7 +580,7 @@
                     E_{g_T} = \int_{-\infty}^{\infty} \left|G_{T(f)}\right|^2 df 
                 \]
                 Possiamo osservare come una parte della potenza dipenda da una parte continua, $\frac{\sigma_a^2}{T} E_{g_T}$, e una parte discreta
-                composta da un pettine di Delta di Dirac, $\frac{\eta_a^2 }{T^2}\sum_{k} \left|G_{T(\frac{k}{T})}\right|^2$. nel caso di simboli incorrelati ($\eta_a = 0$),
+                composta da un pettine di Delta di Dirac, $\frac{\eta_a^2 }{T^2}\sum_{k} \left|G_{T(\frac{k}{T})}\right|^2$. Nel caso di simboli incorrelati ($\eta_a = 0$)
                 e la parte continua dipende dal filtro con banda dimensionata rispetto a $\frac{1}{T}$, la banda del segnale trasmesso sará quindi $B_T \simeq \frac{1}{T}$. 
                 La densitá spettrale di potenza in caso $\eta_a = 0$ diventa
                 \[
@@ -774,7 +774,7 @@
                     \[
                         a_Kg_{(0)}
                     \]\label{ISI}
-                    il secondo termine che appare é il cntributo di tutti i simboli di modulazione diversi da $a_k$ e rappresenta un disturbo che si 
+                    il secondo termine che appare é il contributo di tutti i simboli di modulazione diversi da $a_k$ e rappresenta un disturbo che si 
                     sovrappone al termine utile. Il disturbo descritto prende il nome di \emph{Interferenza Intersimbolica} (ISI)
                     \[
                         ISI =  \sum_{m\neq 0}a_{k-m}g_{[mT]}
@@ -1203,7 +1203,7 @@
                 (\ref{Errore Sincronizzazione}) introduce ISI}
             \end{itemize}
             Le ipotesi che abbiamo fatto fino ad ora implicano che il riceviore riesca a campionare a istanti
-            di tempo $T$, ma il $T$ é un parametro che sceglie il trasmettitore, di conseguenza \label{Errore Sincronizzazione}
+            di tempo $T$, ma $T$ é un parametro che sceglie il trasmettitore, di conseguenza\label{Errore Sincronizzazione}
             i due dispositivi si devono sincronizzare e decidere un $T$. Il ricevitore comunque non riesce a campionare
             precisamente a $T$, per motivi di trasmissione o non si sincronizza perfettamente, avró un leggero delta di campionamento
             \[
@@ -1361,9 +1361,13 @@
         cioé una versione del segnale $p_{(t)}$ ribaltata e traslata di $t_{0}$ come ad esempio 
         \begin{figure}[H]
             \centering
-            \subfloat[$p_{(t)}$]{body}
+            \subfloat[$p_{(t)}$]{
+                \includegraphics[width=5.5cm]{media/uwu.png}
+            }
             \hfill
-            \subfloat[$p_{(t_0-t)}$]{body}
+            \subfloat[$p_{(t_0-t)}$]{
+                \includegraphics[width=5.5cm]{media/uwu.png}
+            }
         \end{figure}
         Si puó ricavare la componente utile del segnale in uscita dal sistema
         \[
@@ -1455,12 +1459,12 @@
                 \draw [->] (RX) --node[above]{$\hat{a}_{k}$} (output);
             \end{tikzpicture}
         \end{figure}        
-        il decisore riceve al suo ingresso il campione $x_{[k]}$ e lo utilizza per prendere una decisioe sul simbolo trasmesso
+        il decisore riceve al suo ingresso il campione $x_{[k]}$ e lo utilizza per prendere una decisione sul simbolo trasmesso
         $a_k$ usando il criterio di ottimalitá.
         \paragraph{Criterio MAP}
             Il criterio che minimizza la probabilitá di errore sul simbolo $a_k$ é detto criterio MAP (Maximum A-posterior Probability),
             secondo tale criterio il simbolo da scegliere all'interno dell'alfabeto $\mathcal{A} = \{a^{(1)},a^{(2)},\dots,a^{(M)}\}$
-            é quello che ha la massimo probabiltá a posteriori di essere stato trasmesso, cioé dopo aver osservato il campione $x_{[k]}$.
+            é quello che ha il massimo probabiltá a posteriori di essere stato trasmesso, cioé dopo aver osservato il campione $x_{[k]}$.
             Il criterio MAP sancisce quindi 
             \[
                 P_r[a_k = a^{(i)}|x_{[k]}]    
@@ -1500,13 +1504,13 @@
             \[
                 \sigma_n^2 = \int_{-\infty}^{\infty}S_{n(f)}df = \frac{N_0}{2} \int_{-\infty}^{\infty}\underset{\ref{propieta coseno rialzato}}{\left| G_{R(f)} \right|} df = \frac{N_0}{2}  
             \]
-            e la funzione densitá di probabiltiá 
+            e la funzione densitá di probabilitá 
             \begin{gather}
                 f_x[x_{[k]}|a_k = a^{(i)}] = \frac{1}{\sqrt{2\pi}\sigma_n}e^{\left(\displaystyle -\frac{(x_{[k]}-a^{(i)})^2}{2\sigma_n^2}\right)} \nonumber \\
                 x_{[k]} | a_k = a^{(i)} \sim \mathcal{N}(a^{(i)},\sigma_n^2)\nonumber \\
                 f_x[x_{[k]}|a_k = a^{(i)}] = \Gamma_{(a^{(i)},x_{[k]})} \nonumber
             \end{gather}
-            massimizziamo adesso $\gamma_{(a^{(i)},x_{[k]})}$ con l'ipotesi che i simboli siano equiprobabili $P_r[a^{(i)}] = \frac{1}{M}$. Allora nache il termine
+            massimizziamo adesso $\gamma_{(a^{(i)},x_{[k]})}$ con l'ipotesi che i simboli siano equiprobabili $P_r[a^{(i)}] = \frac{1}{M}$. Allora anche il termine
             $P_r[a_k = a^{(i)}]$ diventa trascurabile per la massimizzazione, ne rimane quindi solo da massimizzare
             \[
                 \Gamma_{(a^{(i)},x_{[k]})} > \Gamma_{(a^{(\ell)},x_{[k]})}    
@@ -1582,7 +1586,7 @@
                     \caption{Zone di decisione PAM $\mathcal{A} = \{-1,+1\}$}
                 \end{figure}
                 l'asse é stato suddiviso in due zone di decisione e la soglia $\lambda$ dipende da $\sigma^2$ e $p$.
-                Possiamo anche analizza l'andamento di $\lambda$ al variare di $p$ fissato un valore di $\sigma$
+                Possiamo anche analizzare l'andamento di $\lambda$ al variare di $p$ fissato un valore di $\sigma$
                 \begin{figure}[H]
                     \centering
                     \begin{tikzpicture}
@@ -1668,7 +1672,7 @@
             di simboli equiprobabili e a discapito della conoscenza di $\sigma$ e la probabilitá dei simboli,
             possiamo anche utilizzarlo in caso di simboli non equiprobabili fornendoci una soluzione sub-ottima. 
         \subsubsection{Calcolo della SER per un sistema PAM M-ario}
-            Consideriamo un sistema PAM con alfabelt M-ario
+            Consideriamo un sistema PAM con alfabeto M-ario
             \[
                 \mathcal{A} = \{\pm 1,\pm 3,\dots, \pm(M-1)\}  
             \]
@@ -1779,9 +1783,9 @@
             \[
                 SER = \frac{1}{M} \sum_{m=1}^{M}P[e|a^{(m)}]  
             \]
-            restan quidi da calcolare le $M$ probabilitá condizionate $P[r|a^{(m)}]$ per $m = 1,\dots,M$.
+            restano quindi da calcolare le $M$ probabilitá condizionate $P[r|a^{(m)}]$ per $m = 1,\dots,M$.
             L'analisi dell'alfabeto $\mathcal{A}$ e le zone di decisione si puó eveincere come i simboli 
-            nelle zone di decisioni esterne ($\pm(M-1)$) abbiano la stessa probabilitá, come anche i 
+            nelle zone di decisione esterne ($\pm(M-1)$) abbiano la stessa probabilitá, come anche i 
             simboli interni $\{\pm 1,\dots,\pm (M-3)\}$ abbiano tra di loro la stessa probabilitá. Ne segue che 
             possiamo calcolare solo due probabilitá, ad esempio
             \begin{gather}
@@ -1792,7 +1796,7 @@
             \[
                 SER =  \frac{M-2}{M}P[e|a_k = 1]+ \frac{2}{M}P[e|a_k = M-1]
             \]
-            dove i coefficenti moltiplicativi sono quanti simboli hanno la relativa probabilitá, ricordiamoci
+            dove i coefficienti moltiplicativi sono quanti simboli hanno la relativa probabilitá, ricordiamoci
             che possiamo fare cosí solo perché la costellazione lo permette, magari in casi diversi potrei
             avere piú termini. Il nostro simbolo trasmesso é quindi caratterizzato da
             \[
@@ -1998,7 +2002,7 @@
                 Concludiamo che la scelta dell'alfabeto $\mathcal{A}$ é vincolata da due esigenze contrastanti:
                 da un lato sarebbe bene scegliere una carinalitá $M$ elevata per aumentarne l'efficenza spettrale, dall'altro
                 lato la scelta di un valore $M$ elevato peggiora l'efficenza energetica del sistema.
-            \paragraph{Perdita Energetica: } Si definisce perdica energetica di un sistema di comunicazione numerico $A$ rispetto
+            \paragraph{Perdita Energetica: } Si definisce perdita energetica di un sistema di comunicazione numerico $A$ rispetto
                 ad un sistema $B$ l'aumento (in $db$) del rapporto $\frac{E_{simboli}}{N_0}$ necessario al sistema $A$ per 
                 raggiungere la stessa SER del sistema $B$. Un esempio mostrato in figura evince la perdita del sistema 
                 4-PAM rispetto al sistema 2-PAM.
@@ -2012,7 +2016,7 @@
                 \[
                     \frac{3}{2}Q_{\displaystyle\left(\sqrt{\frac{4}{5}\left(\frac{E_s}{N_0}\right)_{M=4}}\right)} =Q_{\displaystyle\left(\sqrt{2\left(\frac{E_s}{N_0}\right)_{M=2}}\right)}      
                 \]
-                solitamente si tende a trascurare eventuali coefficenti moltiplicativi, potendo cosí confrontare direttamente
+                solitamente si tende a trascurare eventuali coefficienti moltiplicativi, potendo cosí confrontare direttamente
                 l'argomento della funzione $Q$
                 \[
                     \frac{4}{5}\left(\frac{E_s}{N_0}\right)_{M=4} =2\left(\frac{E_s}{N_0}\right)_{M=2}          
@@ -2065,7 +2069,7 @@
             da cui si vede che la BER non puó mai superare la SER. A seconda della legge di mappatura impiegata,
             la BER puó assumere valori piú vicini a $\frac{SER}{log_2(M)}$ o a SER. Vale la pena notare che la BER 
             coinciderebbe con il valore $\frac{SER}{log_2(M)}$ solo se, ogni volta che un simbolo ricevuto contiene 
-            un errore, sol uno dei bit corrispondenti a quel simbolo é sbagliato. Questa osservazione é utile 
+            un errore, solo uno dei bit corrispondenti a quel simbolo é sbagliato. Questa osservazione é utile 
             per individuare quale sia la mappa ottima. Infatti, tenendo conto che quando un simbolo é ricevuto con errore
             molto probabilmente viene frainteso con un simbolo adiacente nell'alfabeto $\mathcal{A}$, la mappa ottima é 
             quella che associa a simboli adiacenti di $\mathcal{A}$ blocchi di $log_2(M)$ bit che differiscono per un solo bit. 
@@ -2077,7 +2081,7 @@
     \subsection{QAM}
         É un sistema di comunicazione in {\color{red}banda passante} in cui il segnale trasmesso $s_{T(t)}$ ha densitá 
         spettrale di potenza di tipo passa-banda, centrate su una frequenza $f_0$ detta frequenza portante.
-        \subsubsection{Inviluppo complessso}
+        \subsubsection{Inviluppo complesso}
             l'inviluppo complesso del segnale trasmesso é 
             \[
                 \tilde{s}_{(t)} = I_{(t)} +j Q_{(t)}      
