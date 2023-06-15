@@ -2330,12 +2330,12 @@
         \end{figure}
         In tal caso, assumendo l'assenza di ISI, il campione in uscita dal filtro di ricezione é 
         \[
-            formula  
+            \tilde{x}_{[k]} = x_{c[k]}+ jx_{s[k]} = e^{j\phi}c_k+\tilde{n}_{[k]}  
         \]
         con le componenti 
         \begin{gather}
-            x_c\nonumber \\
-            x_s\nonumber
+            x_{c[k]} = a_k cos(\phi) - b_k sin(\phi) + n_{c[k]}\nonumber \\
+            x_{s[k]} = b_k cos(\phi) + a_k sin(\phi) + n_{s[k]}\nonumber
         \end{gather}
 	    come si vede sul campione $x_{c[k]}$ é presente l'interferenza dovuta al simbolo $b_k$, mentre su $x_{x[k]}$ 
         é presente l'interferenza dovuta al simbolo $a_k$. É quindi necessario effettuare una buona sincronizzazione,  
