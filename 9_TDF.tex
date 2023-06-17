@@ -356,14 +356,14 @@
             \caption{${\color{black} X_{(f)}}$,${\color{blue} X_{(f-\frac{k}{T})}}$,${\color{orange} P_{(f)}}$}
             \label{fig:tdf tcf dimansionamento interpolatore}
         \end{figure}
-        Utilizziamo un filtro passa basso che abbia una durata in banda maggiore di $2B$ ma minore di $\frac{1}{2T}$  per lasciarci un pochino di margine e evitare  di prendere 
+        Utilizziamo un filtro passa basso che abbia una durata in banda maggiore di $2B$ ma minore di $\frac{1}{2T}$  per lasciarci un pochino di margine e evitare di prendere 
         la copia del segnale successivo/precedente ($2B<T_r\leq\frac{1}{2T_s}$): prendiamo una durata $\frac{1}{2T_s}>2B$
         \[
             P_{(f)} = T rect\left(\frac{f}{2\frac{1}{2T}}\right)= T rect\left(fT\right) \overset{TCF}{\leftrightharpoons} p_{(t)} = \frac{T}{T}sinc\left(\frac{t}{T}\right)
         \]
         
         \paragraph{Interpolatore a seno cardinale:} Si utilizza un interpolatore a seno cardinale
-            \begin{figure}[H] $he$
+            \begin{figure}[H] 
                 \centering
                 \begin{tikzpicture}
                     \begin{axis}[
@@ -441,8 +441,8 @@
         \]
         Esempio:$f_s = \frac{1}{T} = 2B,\ p_{(t)}=sinc(2Bt)$
         \begin{gather}
-                \hat{x}_{(t)} = \sum_{n=-\infty}^{\infty} x_{[nT]}sinc\left(2Bt_0 -n\right) \nonumber \\
-                \hat{x}_{(t_0)} = \sum_{n=-\infty}^{\infty} x_{[nT]}sinc\left(2Bt_0 -n\right) \nonumber
+                \hat{x}_{(t)} = \sum_{n=-\infty}^{\infty} x_{[nT]}sinc\left(2Bt-n\right) \nonumber \\
+                \hat{x}_{(t_0)} = \sum_{n=-\infty}^{\infty} x_{[nT]}sinc\left(2Bt_0-n\right) \nonumber
         \end{gather}
         $\hat{x}_{(t_0)}$ dipende dal contributo di tutte le $sinc$ anche dei valori successivi, per questo si pone il problema del filtro causale. 
         \begin{figure}[H]
