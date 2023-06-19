@@ -703,7 +703,7 @@
             Consideriamo due variabili aleatorie $X$ e $Y$ statisticamente indipendenti e continue con funzioni di densitá di probabilitá $f_{X (x)}$ e $f_{Y (y)}$ si 
             definisce $Z = X+Y$ la cui $pdf$ $f_{Z (z)}$ é:
             \[
-                f_{Z (z)} = \int_{-\infty}^{\infty}f_{X (x)}f_{Y (z-y)} dx =  f_{X (x)} \otimes f_{Y (y)}
+                f_{Z (z)} = \int_{-\infty}^{\infty}f_{X (x)}f_{Y (z-x)} dx =  f_{X (x)} \otimes f_{Y (y)}
             \]
             La somma di due variabili aleatorie indipendenti e continue é la convoluzione delle funzioni di densitá di probabilitá.    
             Dimostrazione: (To DO: sul libro)
@@ -1101,7 +1101,7 @@
             \]
             al tendere di $n$ all'infinito, $Y_n$ converge alla variabile aleatoria Gaussiana standard:
             \[
-                F_{Y(y)} =P[Y\leq y] = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{y}e^{\left(-\frac{x^2}{2}dx\right)}    
+                F_{Y(y)} =P[Y\leq y] = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{y}e^{\left(-\frac{x^2}{2}\right)}dx    
             \]
         \subsubsection{Calcolo probabilitá di errore di un sistema} 
             Dato un sistema binario di comunicazione ($S\in\{0,1\}$), dopo il campionamento ho: $Y = \sqrt{p}S+n$. $p$ é la potenza e $n$ é il rumore

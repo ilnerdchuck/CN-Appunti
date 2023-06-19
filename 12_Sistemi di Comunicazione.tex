@@ -1327,7 +1327,7 @@
         Volgiamo quindi determinare $h_{(t)}$ in modo che sia massimo il rapporto segnale/rumore (SNR) sul campione $x_{t_0}$. Abbiamo 
         nel sistema
         \begin{gather}
-            x_{(t)} = p_{(t)}\otimes h_{(t)}+w_{(t)}\otimes h_{(t)} = s_{(t)}\otimes n_{(t)}\nonumber \\
+            x_{(t)} = p_{(t)}\otimes h_{(t)}+w_{(t)}\otimes h_{(t)} = s_{(t)}+ n_{(t)}\nonumber \\
             \eval*{x_{(t)}}_{t=t_0} = s_{(t_0)} + n_{(t_0)}\nonumber
         \end{gather}
         esplicitando i valori
@@ -1421,7 +1421,7 @@
             \end{enumerate}
             unendo le due condizioni 
             \[
-                G_{RCR(f)} = G_{T(f)}G_{T(f)}^\ast = \left|G_{T(f)}\right|^\ast  
+                G_{RCR(f)} = G_{T(f)}G_{T(f)}^\ast = \left|G_{T(f)}\right|^2  
             \]
             dato che la funzione coseno rialzato é reale e non negativa posso esprimere la $G_{T(f)}$ come
             \[
