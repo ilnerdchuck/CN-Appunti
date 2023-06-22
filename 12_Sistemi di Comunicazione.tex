@@ -1371,7 +1371,7 @@
         \end{figure}
         Si puó ricavare la componente utile del segnale in uscita dal sistema
         \[
-            s_{(t_0)} = \int_{-\infty}^{\infty} p{(t_0-t}dt = E_p  
+            s_{(t_0)} = \int_{-\infty}^{\infty} p{(t_0-t)}dt = E_p  
         \]
         e la risposta in frequenza del filtro adattato
         \[
@@ -1404,7 +1404,7 @@
                     Annullamento dell'ISI: Dobbiamo fare in modo che $g_{(t)}$ sia un impulso che soddisfi le condizioni di Nyquist,
                     tipicamente un impulso a coseno rialzato
                     \[
-                        G_{(f)} = G_{T(f)} \otimes G_{R(f)} = G_{RCR(f)} 
+                        G_{(f)} = G_{T(f)} G_{R(f)} = G_{RCR(f)} 
                     \]
                 }
                 \item {
@@ -2205,8 +2205,8 @@
             Qualora il filtro passa-banda sia simmetrico intorno a $f_0$ i processi $n_{c(t)}$ e $n_{s(t)}$ sono anche incorrelati, e quindi 
             indipendenti essendo congiuntamente Gaussiani. Dopo il campionatore abbimo i campioni $x_{c[k]}$ e $x_{s[k]}$ espressi da 
             \begin{gather}
-                x_{c[k]} = a_[k]+n_{c[k]}\nonumber \\
-                x_{s[k]} = b_[k]+n_{s[k]}\nonumber
+                x_{c[k]} = a_{[k]}+n_{c[k]}\nonumber \\
+                x_{s[k]} = b_{[k]}+n_{s[k]}\nonumber
             \end{gather}
             dove si é tenuto conto che $g_{(t)}$ sia un impulso di Nyquist. Le variabili aleatorie $n_{c[k]}$ e $n_{s[k]}$ sono 
             Gaussiane, a media nulla con varianza 
