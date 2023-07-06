@@ -527,11 +527,11 @@
                 \[
                     R_{a(m)} = 
                     \begin{cases}
-                        \mathbb{E}\{a_i\} = \sigma_a^2 + \eta_a^2           & se\ m=0\nonumber\\    
+                        \mathbb{E}\{a^2_i\} = \sigma_a^2 + \eta_a^2           & se\ m=0\nonumber\\    
                         \mathbb{E}\{a_i\}\mathbb{E}\{a_{i+m}\} = \eta_a^2   & se\ m\neq0\nonumber    
                     \end{cases}  
                 \]
-                semplificando la notazione della funzioe autocorrelazione diventa banalmente
+                semplificando la notazione della funzione autocorrelazione diventa banalmente
                 \[
                     R_{a(m)} =\eta_a^2 + \sigma_a^2\delta_{(m)} 
                 \]
@@ -711,7 +711,7 @@
                 \item {$w_{(t)}$: rimore gaussiano bianco con densitá spettrale di potenza\[
                     S_{w(f)} = \frac{N_0}{2}  
                 \]}
-                \item {$g_{T(t)}$: filtro di ricezione}
+                \item {$g_{R(t)}$: filtro di ricezione}
                 \item {$\{\hat{a}_k\}$: stima dei simboli}
             \end{itemize}
             Analizziamo come varia il segnale al passaggio dei vari stadi:
@@ -754,7 +754,7 @@
                 }
                 \item {Componente ricevuta:
                     \[
-                        x_{[kT]} = \sum_{i}a_ig_{[(n-i)T]}+n_{[k]}  
+                        x_{[kT]} = \sum_{i}a_ig_{[(k-i)T]}+n_{[k]}  
                     \]
                     dove $n_{[k]}$ é una variabile aleatoria Gaussiana a media nulla e varianza 
                     \[
