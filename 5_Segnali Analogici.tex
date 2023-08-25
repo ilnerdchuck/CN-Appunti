@@ -250,12 +250,12 @@
         \begin{itemize}
             \item {Energia:
                 \[
-                    E_{x} = \int_{-\infty}^{\infty} |x_{(t)}|^2 \ dt = \int_{-\infty}^{\infty} 1\ dt = \infty 
+                    E_{x} = \int_{-\infty}^{\infty} |x_{(t)}|^2 \ dt = \int_{0}^{\infty} 1\ dt = \infty 
                 \]
             }
             \item {Potenza Media:
                 \[
-                    P_{x} =\lim_{T\rightarrow\infty}  \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}  |U_{(t)}|^2 \,dt =\lim_{T\rightarrow\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} 1\ dt = \lim_{T\rightarrow\infty} \frac{1}{T} \frac{T}{2} = \frac{1}{2}
+                    P_{x} =\lim_{T\rightarrow\infty}  \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}  |U_{(t)}|^2 \,dt =\lim_{T\rightarrow\infty} \frac{1}{T} \int_{0}^{\frac{T}{2}} 1\ dt = \lim_{T\rightarrow\infty} \frac{1}{T} \frac{T}{2} = \frac{1}{2}
                 \]
             }
             \item {Valore Efficace:
@@ -264,7 +264,7 @@
                 \]
             }
             \item {Valore Medio:
-                    \[x_{m} = \lim_{T\rightarrow\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}  x_{(t)} \,dt =\lim_{T\rightarrow\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} 1\ dt = \lim_{T\rightarrow\infty} \frac{1}{T} \frac{T}{2} = \frac{1}{2} \]
+                    \[x_{m} = \lim_{T\rightarrow\infty} \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}}  x_{(t)} \,dt =\lim_{T\rightarrow\infty} \frac{1}{T} \int_{0}^{\frac{T}{2}} 1\ dt = \lim_{T\rightarrow\infty} \frac{1}{T} \frac{T}{2} = \frac{1}{2} \]
             }
         \end{itemize}
         
@@ -400,7 +400,7 @@
         \begin{itemize}
             \item {Energia:
                 \[
-                    E_{x} = \int_{-\infty}^{\infty} |x_{(t)}|^2 \ dt = \int_{0}^{\infty} e^{-2t}\ dt = \eval*{\frac{1}{2} e^{-2t}}_{0}^{\infty} = \frac{1}{2} 
+                    E_{x} = \int_{-\infty}^{\infty} |x_{(t)}|^2 \ dt = \int_{0}^{\infty} e^{-2t}\ dt = \eval*{-\frac{1}{2} e^{-2t}}_{0}^{\infty} = \frac{1}{2} 
                 \]
             }
             \item {Potenza Media:
@@ -584,14 +584,14 @@
                 \caption{Segnale periodico}
                 \label{fig:segnale periodico}
             \end{figure}     
-            Si possono definiscono le seguenti grandezze: 
+            Si definiscono le seguenti grandezze: 
             \begin{itemize}
                 \item {Energia di un segnale periodico
                     \begin{align}
                         E_{x} & = \int_{-\infty}^{\infty}  |x_{(t)}|^2 \,dt =\sum_{k=-\infty}^{\infty}\int_{-\frac{T_0}{2}+kT_0}^{\frac{T_0}{2}+kT_0} |x_{(t)}|^2 dt =\sum_{k=-\infty}^{\infty} X  \nonumber \\
                             & = \lim_{k\rightarrow\infty} kX= \infty \nonumber
                     \end{align}
-                    Tutti i segnal iperiodici hanno quindi $E_x = \infty$   
+                    Tutti i segnali periodici hanno quindi $E_x = \infty$   
                 }
                 \item {Potenza media di un segnale periodico
                     \begin{align}
